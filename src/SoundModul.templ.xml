@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <ApplicationPrograms>
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SOM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+          <Static>
+            <Parameters>
+              <Parameter Id="%AID%_P-%T%%CCC%000" Name="p%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
+              <Parameter Id="%AID%_P-%T%%CCC%010" Name="p%C%VolumeDivergent" ParameterType="%AID%_PT-SOMStatus" Text="Abweichende Lautstärke" Value="0" />
+              <!-- Bitfield settings (once per channel) -->
+              <Union SizeInBit="16">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Tri%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMStatus" Text="Status" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%005" Name="Tri%C%Repeat" Offset="0" BitOffset="1" ParameterType="%AID%_PT-SOMStatus" Text="Repeat" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Tri%C%Lock" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMLock" Text="Sperrobjekt" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Tri%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht Objekt" Value="0" />
+
+                <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Tri%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
+              </Union>
+              <Union SizeInBit="16">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="2" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%091" Name="Tri%C%DurationBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%092" Name="Tri%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
+              </Union>
+              <Union SizeInBit="16">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%101" Name="Tri%C%FileDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
+                <Parameter Id="%AID%_UP-%T%%CCC%102" Name="Tri%C%FileNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
+              </Union>
+              <Union SizeInBit="16">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%201" Name="Tri%C%VolumeDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="25" />
+                <Parameter Id="%AID%_UP-%T%%CCC%211" Name="Tri%C%VolumeDayInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="0" Access="None" DefaultUnionParameter="true"/>
+                <Parameter Id="%AID%_UP-%T%%CCC%202" Name="Tri%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="20" />
+                <Parameter Id="%AID%_UP-%T%%CCC%212" Name="Tri%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="0" Access="None" DefaultUnionParameter="true"/>
+              </Union>
+            </Parameters>
+            <ParameterRefs>
+              <ParameterRef Id="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_P-%T%%CCC%000" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" RefId="%AID%_P-%T%%CCC%010" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_UP-%T%%CCC%001" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_UP-%T%%CCC%002" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_UP-%T%%CCC%003" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_UP-%T%%CCC%004" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_UP-%T%%CCC%005" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" RefId="%AID%_UP-%T%%CCC%091" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" RefId="%AID%_UP-%T%%CCC%092" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="%AID%_UP-%T%%CCC%101" Text="Datei" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10102" RefId="%AID%_UP-%T%%CCC%101" Text="Datei (Tag)" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" RefId="%AID%_UP-%T%%CCC%102" Text="Datei (Nacht)" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" RefId="%AID%_UP-%T%%CCC%201" Text="Lautstärke" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20102" RefId="%AID%_UP-%T%%CCC%201" Text="Lautstärke (Tag)" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" RefId="%AID%_UP-%T%%CCC%202" Text="Lautstärke (Nacht)" />
+            </ParameterRefs>
+            <ComObjectTable>
+              <ComObject Id="%AID%_O-%T%%CCC%000" Name="Tri%C%Trigger" Number="%K000%" Text="" ObjectSize="1 Bit" FunctionText="Auslöser %C%, Trigger" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%001" Name="Tri%C%Status" Number="%K001%" Text="" ObjectSize="1 Bit" FunctionText="Auslöser %C%, Status" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
+              <ComObject Id="%AID%_O-%T%%CCC%002" Name="Tri%C%Lock" Number="%K002%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%003" Name="Tri%C%DayNight" Number="%K003%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-24" />
+            </ComObjectTable>
+            <ComObjectRefs>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_O-%T%%CCC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_O-%T%%CCC%001" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_O-%T%%CCC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=1 / Entsperre=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" RefId="%AID%_O-%T%%CCC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=0 / Entsperre=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_O-%T%%CCC%003" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%003_R-%T%%CCC%00302" RefId="%AID%_O-%T%%CCC%003" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+            </ComObjectRefs>
+          </Static>
+          <Dynamic>
+            <ChannelIndependentBlock> 
+              <!-- START INCLUDE HERE -->
+              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+                <Channel Id="%AID%_CH-PM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+                  <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="SOM%C%Wrapper" Inline="true">
+                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslösekonfiguration" UIHint="Headline" />
+                    <!-- Name -->
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+                    <!-- Status -->
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" />
+                    <choose ParamRefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101">
+                      <when test="1">
+                        <!-- Aktiv -->
+                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                        <!-- Prio -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" />
+                        <!-- Repeat -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501" />
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501">
+                          <when test="1">
+                            <ParameterBlock Id="%AID%_PB-nnn" Name="Tri%C%Duration" Inline="true" Layout="Grid">
+                              <Rows>
+                                <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                              </Rows>
+                              <Columns>
+                                <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                              </Columns>
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Maximale Abspieldauer" Cell="1,1" />
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" Cell="1,2" />
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" Cell="1,3" />
+                            </ParameterBlock>
+                          </when>
+                        </choose>
+                        <!-- Tag/Nacht -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" /> 
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
+                          <when test="1">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" />
+                          </when>
+                          <when test="2">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00302" />
+                          </when>
+                        </choose>
+
+                        <!-- Datai -->
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
+                            <when test="0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" />
+                            </when>
+                            <when test=">0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10102" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" />
+                            </when>
+                        </choose>
+
+                        <!-- Laustärke -->
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" />
+                        <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000">
+                          <when test=">0">
+                            <!-- Abweichend -->
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
+                              <when test="0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" />
+                              </when>
+                              <when test=">0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20102" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" />
+                              </when>
+                              <when test="1">
+                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" />
+                              </when>
+                              <when test="2">
+                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00302" />
+                              </when>
+                            </choose>
+
+                            </when>
+                        </choose>
+                        
+                        <!-- Sperre -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" />
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201">
+                          <when test="1">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                          </when>
+                          <when test="2">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" />
+                          </when>
+                        </choose>
+                      </when>
+                    </choose>
+                  </ParameterBlock>
+                </Channel>
+              </ParameterBlock>
+            </ChannelIndependentBlock>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>
