@@ -297,9 +297,27 @@
           <Dynamic>
             <Channel Id="%AID%_CH-SM1" Name="NumTriggers" Number="1" Text="Auslöser">
               <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation">
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="H1" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="H2" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="H3" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Sounddatei" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Sounddatei wird über eine Zahl gesteuert. Dazu müssen die Sounddateien auf dem Speicher im Format 00001.MP3 (5stellig) und im MP3-Format gespeichert werden." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 1: Um den Überblick zu behalten, legt eine weitere Datei wie folgt an: „00001 Klingel 1.txt“ oder „00002 Innensierene.txt“." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 2: Optimiert die Datei zuvor in Audacity. Hier kann man die Lautstärke aufs Maximum verstärken, den Ton auf Mono runtermischen sowie unnötige MP3 Tags entfernen." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslöser" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Es gibt 10 verschiede Auslöser, um diverse Sounds abzuspielen. Dabei wird über ein Schaltobjekt (EIN) das Soundfile abgespielt und kann aber auch frühzeitig beendet werden (AUS)." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Je Auslöser können mittels „Tag/Nacht“-Objekt auch unterschiedliche Sounds in unterschiedlichen Lautstärken abgespielt werden." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Außerdem gibt es einen Repeatmodus, womit eine Sounddatei für eine eingestellte Zeit im Loop abgespielt werden kann (z.B. Innensiere einer Alarmanlage, welche 3 Minuten laufen soll). Dabei wird aber der Sound leider nicht „gapless“ abgespielt wird." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Lautstärke" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Lautstärke kann Global oder pro Auslöser eingestellt werden. Darüber hinaus wird auf Wunsch auch zwischen Tag und Nacht unterschieden." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Man beachte aber, dass ein zu lautes Abspielen (abhängig der Sounddatei) zum Absturz des Moduls führen kann, da der verfügbare Strom begrenzt ist." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Sollte ein Soundfile hingegen zu leise sein, empfiehlt sich eine Bearbeitung im Audioprogramm (z.B. Audacity), um die Lautstärke zu optimieren. " />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Prioritäten" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Mittels Prioritäten kann verhindert werden, dass wichtige Sounds nicht von unwichtigeren Sounds übersteuert werden. (Beispiel die Sierene eine Alarmanlage)" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Hierbei gilt, dass die gleiche Priorität wie eine höhere Priorität gewertet wird. Hierdurch kann eine Hausklingel mehrfach gedrückt werden kann, selbst wenn der Sound aufgrund eines Nachklingen noch läuft." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Externe Logik" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Es besteht die Möglichkeit einer direkten Ansteuerung durch eine externe Logik. Hierfür stehen drei Eingänge für Lautstärke, Priorität sowie das Soundfile zur Verfügung." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Der Eingang für das Soundfile triggert gleichzeitig den Abspielvorgang, der ebenfalls mittels 0 vorzeitig beendet werden kann." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Beispiel: Du betreibst eine zentrale Visu/Logik-Engine wo mittels HomeConnect die Waschmaschine oder der Trockner angebunden ist." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Jetzt kannst du direkt diverse Meldungen wie „Wäsche ist fertig“ auslösen. Somit brauchst du keinen Umweg über die begrenzen 1bit-Auslöser zu gehen." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp: Auf der Seite ttsmp3.com kannst du dir schnell passende Statusmeldungen als MP3 erstellen lassen." />
               </ParameterBlock>
               <ParameterBlock Id="%AID%_PB-6" Name="SOMBasic" Text="Basiseinstellung">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
@@ -343,7 +361,6 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Externe Logik" UIHint="Headline" />
                 <!-- Externe Steuerung -->
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Es besteht die Möglichkeit einer direkten Ansteuerung, zum Beispiel durch eine externe Logik. Hierfür stehen drei externe Eingänge (Lautstärke, Priorität sowie Datei) zur Verfügung." />
                 <ParameterRefRef RefId="%AID%_UP-%T%000008_R-%T%00000801" />
 
                 <ComObjectRefRef RefId="%AID%_O-%T%000021_R-%T%00002101" />

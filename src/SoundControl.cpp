@@ -139,7 +139,7 @@ void SoundControl::lock()
 void SoundControl::unlock()
 {
   if (paramLock == 0 || !currentLocked)
-  return;
+    return;
 
   currentLocked = false;
   getKo(SOM_KoLock)->value(currentLocked, getDPT(VAL_DPT_1));

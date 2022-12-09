@@ -20,7 +20,7 @@ void SoundTrigger::setup()
   paramVolumeNight = (knx.paramByte(calcParamIndex(SOM_TriVolumeNight)));
   paramFileDay = (knx.paramByte(calcParamIndex(SOM_TriFileDay)));
   paramFileNight = (knx.paramByte(calcParamIndex(SOM_TriFileNight)));
-  paramDuration = (getDelayPattern(calcParamIndex(SOM_TriDurationBase), false));
+  paramDuration = (getDelayPattern(calcParamIndex(SOM_TriDurationBase)));
 
   // Default
   currentVolume = paramVolumeDay;

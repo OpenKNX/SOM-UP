@@ -12,14 +12,14 @@
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="1" ReplacesVersions="" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="2" ReplacesVersions="1" ApplicationRevision="0" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="TRX-Sound-Modul-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
             <op:define prefix="SOM" header="SoundModul.h" NumChannels="10" KoOffset="200" ModuleType="2" />
-            <op:define prefix="LOG" header="SoundModul.h" NumChannels="1" KoOffset="450" ModuleType="1" />
+            <op:define prefix="LOG" header="SoundModul.h" NumChannels="10" KoOffset="450" ModuleType="1" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />

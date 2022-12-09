@@ -264,7 +264,7 @@
 #define SOM_KoExternalVolume 31
 #define SOM_KoExternalPriority 32
 
-#define LOG_ChannelCount 1
+#define LOG_ChannelCount 10
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 111
@@ -940,7 +940,7 @@
 #define SOM_ChannelCount 10
 
 // Parameter per channel
-#define SOM_ParamBlockOffset 197
+#define SOM_ParamBlockOffset 971
 #define SOM_ParamBlockSize 8
 #define SOM_TriState                   0      // 1 Bit, Bit 7
 #define     SOM_TriStateMask 0x80
@@ -978,5 +978,5 @@
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 1
+#define MAIN_ApplicationVersion 2
 #define MAIN_OrderNumber "SOM-UP1"
