@@ -1,9 +1,7 @@
 #include <OpenKNX.h>
-#include <Logic.h>
-#include "HardwareDevices.h"
 #include "SoundModul.h"
-// #include "hardware.h"
-#include "SoundModulHardware.h"
+#include "hardware.h"
+#include "HardwareDevices.h"
 
 void appSetup();
 void appLoop();
