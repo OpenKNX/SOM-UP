@@ -24,13 +24,13 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%091" Name="Tri%C%DurationBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%092" Name="Tri%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
               </Union>
-              <Union SizeInBit="16">
+              <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%101" Name="Tri%C%FileDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
-                <Parameter Id="%AID%_UP-%T%%CCC%102" Name="Tri%C%FileNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
+                <Parameter Id="%AID%_UP-%T%%CCC%102" Name="Tri%C%FileNight" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
               </Union>
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%201" Name="Tri%C%VolumeDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="25" />
                 <Parameter Id="%AID%_UP-%T%%CCC%211" Name="Tri%C%VolumeDayInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="0" Access="None" DefaultUnionParameter="true"/>
                 <Parameter Id="%AID%_UP-%T%%CCC%202" Name="Tri%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="20" />
@@ -73,7 +73,7 @@
             <ChannelIndependentBlock> 
               <!-- START INCLUDE HERE -->
               <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
-                <Channel Id="%AID%_CH-PM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+                <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
                   <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="SOM%C%Wrapper" Inline="true">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslösekonfiguration" UIHint="Headline" />
                     <!-- Name -->

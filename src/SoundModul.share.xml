@@ -14,7 +14,7 @@
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="30" UIHint="Slider" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMFile" Name="SOMFile">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="255" />
+                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="1" maxInclusive="65535" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMStatus" Name="SOMStatus">
                 <TypeRestriction Base="Value" SizeInBit="1">

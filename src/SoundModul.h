@@ -264,10 +264,12 @@
 #define SOM_KoExternalVolume 31
 #define SOM_KoExternalPriority 32
 
+#define BM_NumBinary                 111      // uint8_t
+
 #define LOG_ChannelCount 10
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 111
+#define LOG_ParamBlockOffset 112
 #define LOG_ParamBlockSize 86
 #define LOG_fChannelDelayBase          0      // 2 Bits, Bit 7-6
 #define     LOG_fChannelDelayBaseMask 0xC0
@@ -931,7 +933,7 @@
 #define LOG_fE2OtherKO                84      // uint15_t
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoOffset 450
+#define LOG_KoOffset 600
 #define LOG_KoBlockSize 3
 #define LOG_KoKOfE1 0
 #define LOG_KoKOfE2 1
@@ -940,8 +942,8 @@
 #define SOM_ChannelCount 10
 
 // Parameter per channel
-#define SOM_ParamBlockOffset 971
-#define SOM_ParamBlockSize 8
+#define SOM_ParamBlockOffset 972
+#define SOM_ParamBlockSize 10
 #define SOM_TriState                   0      // 1 Bit, Bit 7
 #define     SOM_TriStateMask 0x80
 #define     SOM_TriStateShift 7
@@ -961,12 +963,12 @@
 #define     SOM_TriDurationBaseMask 0xC0
 #define     SOM_TriDurationBaseShift 6
 #define SOM_TriDurationTime            2      // uint14_t
-#define SOM_TriFileDay                 4      // uint8_t
-#define SOM_TriFileNight               5      // uint8_t
-#define SOM_TriVolumeDay               6      // uint8_t
-#define SOM_TriVolumeDayInactive       6      // uint8_t
-#define SOM_TriVolumeNight             7      // uint8_t
-#define SOM_TriVolumeNightInactive     7      // uint8_t
+#define SOM_TriFileDay                 4      // uint16_t
+#define SOM_TriFileNight               6      // uint16_t
+#define SOM_TriVolumeDay               8      // uint8_t
+#define SOM_TriVolumeDayInactive       8      // uint8_t
+#define SOM_TriVolumeNight             9      // uint8_t
+#define SOM_TriVolumeNightInactive     9      // uint8_t
 
 // Communication objects per channel (multiple occurrence)
 #define SOM_KoOffset 200
@@ -976,7 +978,68 @@
 #define SOM_KoTriLock 2
 #define SOM_KoTriDayNight 3
 
+#define BM_ChannelCount 20
+
+// Parameter per channel
+#define BM_ParamBlockOffset 1072
+#define BM_ParamBlockSize 4
+#define BM_BMMode                     0      // 8 Bits, Bit 7-0
+#define BM_BMLock                     0      // 2 Bits, Bit 6-5
+#define     BM_BMLockMask 0x60
+#define     BM_BMLockShift 5
+#define BM_BMOutputDim                0      // 1 Bit, Bit 5
+#define     BM_BMOutputDimMask 0x20
+#define     BM_BMOutputDimShift 5
+#define BM_BMOutputDirection          0      // 1 Bit, Bit 4
+#define     BM_BMOutputDirectionMask 0x10
+#define     BM_BMOutputDirectionShift 4
+#define BM_BMOutputJalousie           0      // 1 Bit, Bit 3
+#define     BM_BMOutputJalousieMask 0x08
+#define     BM_BMOutputJalousieShift 3
+#define BM_BMPeriodic                 0      // 1 Bit, Bit 2
+#define     BM_BMPeriodicMask 0x04
+#define     BM_BMPeriodicShift 2
+#define BM_BMPeriodicBase             0      // 2 Bits, Bit 7-6
+#define     BM_BMPeriodicBaseMask 0xC0
+#define     BM_BMPeriodicBaseShift 6
+#define BM_BMPeriodicTime             0      // uint14_t
+#define BM_BMInputA                   1      // char*, 2 Byte
+#define BM_BMInputB                   2      // char*, 2 Byte
+#define BM_BMOutputShort              0      // 8 Bits, Bit 7-0
+#define BM_BMOutputShortMultiple      0      // 8 Bits, Bit 7-0
+#define BM_BMOutput1ShortBool         1      // 4 Bits, Bit 7-4
+#define     BM_BMOutput1ShortBoolMask 0xF0
+#define     BM_BMOutput1ShortBoolShift 4
+#define BM_BMOutput1Open              1      // 2 Bits, Bit 7-6
+#define     BM_BMOutput1OpenMask 0xC0
+#define     BM_BMOutput1OpenShift 6
+#define BM_BMOutput2ShortBool         2      // 4 Bits, Bit 7-4
+#define     BM_BMOutput2ShortBoolMask 0xF0
+#define     BM_BMOutput2ShortBoolShift 4
+#define BM_BMOutput2Closed            2      // 2 Bits, Bit 7-6
+#define     BM_BMOutput2ClosedMask 0xC0
+#define     BM_BMOutput2ClosedShift 6
+#define BM_BMOutputShortInteraction   3      // 1 Bit, Bit 7
+#define     BM_BMOutputShortInteractionMask 0x80
+#define     BM_BMOutputShortInteractionShift 7
+#define BM_BMOutputLong               0      // 8 Bits, Bit 7-0
+#define BM_BMOutput1LongBool          1      // 4 Bits, Bit 7-4
+#define     BM_BMOutput1LongBoolMask 0xF0
+#define     BM_BMOutput1LongBoolShift 4
+#define BM_BMOutput2LongBool          2      // 4 Bits, Bit 7-4
+#define     BM_BMOutput2LongBoolMask 0xF0
+#define     BM_BMOutput2LongBoolShift 4
+#define BM_BMOutputLongInteraction    3      // 1 Bit, Bit 7
+#define     BM_BMOutputLongInteractionMask 0x80
+#define     BM_BMOutputLongInteractionShift 7
+#define BM_BMM1Dpt5                   0      // uint8_t
+#define BM_BMM1Dpt5001                0      // uint8_t
+#define BM_BMM2Dpt5                   1      // uint8_t
+#define BM_BMM2Dpt5001                1      // uint8_t
+#define BM_BMM3Dpt5                   2      // uint8_t
+#define BM_BMM3Dpt5001                2      // uint8_t
+
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 2
+#define MAIN_ApplicationVersion 9
 #define MAIN_OrderNumber "SOM-UP1"

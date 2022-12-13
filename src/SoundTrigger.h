@@ -16,15 +16,15 @@ private:
   void processDuration();
 
   uint8_t index = 0;
-  uint8_t currentFile;
+  uint16_t currentFile;
   uint8_t currentVolume;
   uint8_t paramPriority;
   uint8_t paramLock;
   uint8_t paramDayNight;
   uint8_t paramVolumeDay;
   uint8_t paramVolumeNight;
-  uint8_t paramFileDay;
-  uint8_t paramFileNight;
+  uint16_t paramFileDay;
+  uint16_t paramFileNight;
   uint32_t paramDuration;
   
   bool paramActive = false;

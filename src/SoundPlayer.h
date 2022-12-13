@@ -29,7 +29,7 @@ public:
   ~SoundPlayer();
 
   void setup();
-  void play(uint8_t sound, uint8_t volume, bool repeat);
+  void play(uint16_t sound, uint8_t volume, bool repeat);
   void stop();
   void loop();
   void setVolume(uint8_t volume);

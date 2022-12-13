@@ -23,7 +23,7 @@ void SoundPlayer::setup()
   SERIAL_DEBUG.println("SoundPlayer::setup ready");
 }
 
-void SoundPlayer::play(uint8_t file, uint8_t volume, bool repeat)
+void SoundPlayer::play(uint16_t file, uint8_t volume, bool repeat)
 {
   SERIAL_DEBUG.printf("SoundPlayer::play %i - %i\n\r", file, volume);
   status = true;

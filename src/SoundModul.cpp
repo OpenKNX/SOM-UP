@@ -80,6 +80,7 @@ void processInputKoCallback(GroupObject &iKo)
   }
 }
 
+bool pressed = false;
 void appLoop()
 {
   if (!gCommon.loop())
@@ -88,6 +89,19 @@ void appLoop()
   ProcessReadRequests();
   gSoundControl.loop();
   gLogic.loop();
+
+  bool buttonState = digitalRead(2);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == LOW && !pressed) {
+    SERIAL_DEBUG.println("Pressed");
+    pressed = true;
+  }
+
+if (buttonState == HIGH && pressed) {
+    SERIAL_DEBUG.println("Released");
+    pressed = false;
+  }
 }
 
 void appSetup()
@@ -99,6 +113,7 @@ void appSetup()
     GroupObject::classCallback(processInputKoCallback);
 
   gSoundControl.setup();
-  gLogic.setup(false);
+  gLogic.setup(true);
 
+  pinMode(2, INPUT);
 }

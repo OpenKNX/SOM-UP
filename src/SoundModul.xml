@@ -12,44 +12,54 @@
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="2" ReplacesVersions="1" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="TRX-Sound-Modul-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="9" ReplacesVersions="" ApplicationRevision="0" />
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModul-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
             <op:define prefix="SOM" header="SoundModul.h" NumChannels="10" KoOffset="200" ModuleType="2" />
-            <op:define prefix="LOG" header="SoundModul.h" NumChannels="10" KoOffset="450" ModuleType="1" />
+            <op:define prefix="BM" header="SoundModul.h" NumChannels="20" KoOffset="400" ModuleType="3" />
+            <op:define prefix="LOG" header="SoundModul.h" NumChannels="10" KoOffset="600" ModuleType="1" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />
+              <op:include href="ButtonModul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BM" />
               <op:include href="SoundModul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="SOM" />
             </ParameterTypes>
             <Parameters>
               <!-- Standard parameter in any of our devices -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="LOG" />
               <op:include href="SoundModul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="SOM" />
+              <op:include href="ButtonModul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BM" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="LOG" />
               <op:include href="SoundModul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="SOM" />
+              <op:include href="ButtonModul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BM" />
             </Parameters>
             <ParameterRefs>
               <!-- General -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="LOG" />
               <op:include href="SoundModul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="SOM" />
+              <op:include href="ButtonModul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BM" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="LOG" />
               <op:include href="SoundModul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="SOM" />
+              <op:include href="ButtonModul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BM" />
             </ParameterRefs>
             <ComObjectTable>
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectTable/ComObject" prefix="LOG" />
               <op:include href="SoundModul.share.xml" xpath="//ComObjectTable/ComObject" prefix="SOM" />
+              <op:include href="ButtonModul.share.xml" xpath="//ComObjectTable/ComObject" prefix="BM" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="LOG" />
               <op:include href="SoundModul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="SOM" />
+              <op:include href="ButtonModul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BM" />
             </ComObjectTable>
             <ComObjectRefs>
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="LOG" />
               <op:include href="SoundModul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="SOM" />
+              <op:include href="ButtonModul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BM" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
               <op:include href="SoundModul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="SOM" />
+              <op:include href="ButtonModul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BM" />
             </ComObjectRefs>
             <AddressTable MaxEntries="2047" />
             <AssociationTable MaxEntries="2047" />
@@ -89,10 +99,14 @@
               </ParameterBlock>
             </ChannelIndependentBlock>
             <Channel Id="%AID%_CH-4" Name="SOMSound" Number="4" Text="Sound">
-              <!-- PM channel independent settings -->
+              <!-- SOM channel independent settings -->
               <op:include href="SoundModul.share.xml" xpath="//Dynamic/Channel/*" prefix="SOM" />
-              <!-- PM channel settings -->
+              <!-- SOM channel settings -->
               <op:include href="SoundModul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" />
+            </Channel>
+            <Channel Name="ButtonChannels" Text="Taster" Number="6" Id="%AID%_CH-6">
+              <op:include href="ButtonModul.share.xml" xpath="//Dynamic/Channel/*" prefix="BM" />
+              <op:include href="ButtonModul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BM" />
             </Channel>
             <Channel Name="Logikkanaele" Text="Logikkanäle" Number="5" Id="%AID%_CH-5">
               <!-- compose logicmodule channel from some static blocks... -->
