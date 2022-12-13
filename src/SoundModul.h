@@ -264,7 +264,7 @@
 #define SOM_KoExternalVolume 31
 #define SOM_KoExternalPriority 32
 
-#define BM_NumBinary                 111      // uint8_t
+#define BTN_NumBinary                 111      // uint8_t
 
 #define LOG_ChannelCount 10
 
@@ -978,68 +978,99 @@
 #define SOM_KoTriLock 2
 #define SOM_KoTriDayNight 3
 
-#define BM_ChannelCount 20
+#define BTN_ChannelCount 20
 
 // Parameter per channel
-#define BM_ParamBlockOffset 1072
-#define BM_ParamBlockSize 4
-#define BM_BMMode                     0      // 8 Bits, Bit 7-0
-#define BM_BMLock                     0      // 2 Bits, Bit 6-5
-#define     BM_BMLockMask 0x60
-#define     BM_BMLockShift 5
-#define BM_BMOutputDim                0      // 1 Bit, Bit 5
-#define     BM_BMOutputDimMask 0x20
-#define     BM_BMOutputDimShift 5
-#define BM_BMOutputDirection          0      // 1 Bit, Bit 4
-#define     BM_BMOutputDirectionMask 0x10
-#define     BM_BMOutputDirectionShift 4
-#define BM_BMOutputJalousie           0      // 1 Bit, Bit 3
-#define     BM_BMOutputJalousieMask 0x08
-#define     BM_BMOutputJalousieShift 3
-#define BM_BMPeriodic                 0      // 1 Bit, Bit 2
-#define     BM_BMPeriodicMask 0x04
-#define     BM_BMPeriodicShift 2
-#define BM_BMPeriodicBase             0      // 2 Bits, Bit 7-6
-#define     BM_BMPeriodicBaseMask 0xC0
-#define     BM_BMPeriodicBaseShift 6
-#define BM_BMPeriodicTime             0      // uint14_t
-#define BM_BMInputA                   1      // char*, 2 Byte
-#define BM_BMInputB                   2      // char*, 2 Byte
-#define BM_BMOutputShort              0      // 8 Bits, Bit 7-0
-#define BM_BMOutputShortMultiple      0      // 8 Bits, Bit 7-0
-#define BM_BMOutput1ShortBool         1      // 4 Bits, Bit 7-4
-#define     BM_BMOutput1ShortBoolMask 0xF0
-#define     BM_BMOutput1ShortBoolShift 4
-#define BM_BMOutput1Open              1      // 2 Bits, Bit 7-6
-#define     BM_BMOutput1OpenMask 0xC0
-#define     BM_BMOutput1OpenShift 6
-#define BM_BMOutput2ShortBool         2      // 4 Bits, Bit 7-4
-#define     BM_BMOutput2ShortBoolMask 0xF0
-#define     BM_BMOutput2ShortBoolShift 4
-#define BM_BMOutput2Closed            2      // 2 Bits, Bit 7-6
-#define     BM_BMOutput2ClosedMask 0xC0
-#define     BM_BMOutput2ClosedShift 6
-#define BM_BMOutputShortInteraction   3      // 1 Bit, Bit 7
-#define     BM_BMOutputShortInteractionMask 0x80
-#define     BM_BMOutputShortInteractionShift 7
-#define BM_BMOutputLong               0      // 8 Bits, Bit 7-0
-#define BM_BMOutput1LongBool          1      // 4 Bits, Bit 7-4
-#define     BM_BMOutput1LongBoolMask 0xF0
-#define     BM_BMOutput1LongBoolShift 4
-#define BM_BMOutput2LongBool          2      // 4 Bits, Bit 7-4
-#define     BM_BMOutput2LongBoolMask 0xF0
-#define     BM_BMOutput2LongBoolShift 4
-#define BM_BMOutputLongInteraction    3      // 1 Bit, Bit 7
-#define     BM_BMOutputLongInteractionMask 0x80
-#define     BM_BMOutputLongInteractionShift 7
-#define BM_BMM1Dpt5                   0      // uint8_t
-#define BM_BMM1Dpt5001                0      // uint8_t
-#define BM_BMM2Dpt5                   1      // uint8_t
-#define BM_BMM2Dpt5001                1      // uint8_t
-#define BM_BMM3Dpt5                   2      // uint8_t
-#define BM_BMM3Dpt5001                2      // uint8_t
+#define BTN_ParamBlockOffset 1072
+#define BTN_ParamBlockSize 4
+#define BTN_BMMode                     0      // 8 Bits, Bit 7-0
+#define BTN_BMLock                     0      // 2 Bits, Bit 6-5
+#define     BTN_BMLockMask 0x60
+#define     BTN_BMLockShift 5
+#define BTN_BMOutputDim                0      // 1 Bit, Bit 5
+#define     BTN_BMOutputDimMask 0x20
+#define     BTN_BMOutputDimShift 5
+#define BTN_BMOutputDirection          0      // 1 Bit, Bit 4
+#define     BTN_BMOutputDirectionMask 0x10
+#define     BTN_BMOutputDirectionShift 4
+#define BTN_BMOutputJalousie           0      // 1 Bit, Bit 3
+#define     BTN_BMOutputJalousieMask 0x08
+#define     BTN_BMOutputJalousieShift 3
+#define BTN_BMPeriodic                 0      // 1 Bit, Bit 2
+#define     BTN_BMPeriodicMask 0x04
+#define     BTN_BMPeriodicShift 2
+#define BTN_BMPeriodicBase             0      // 2 Bits, Bit 7-6
+#define     BTN_BMPeriodicBaseMask 0xC0
+#define     BTN_BMPeriodicBaseShift 6
+#define BTN_BMPeriodicTime             0      // uint14_t
+#define BTN_BMInputA                   1      // char*, 2 Byte
+#define BTN_BMInputB                   2      // char*, 2 Byte
+#define BTN_BMOutputShort              0      // 8 Bits, Bit 7-0
+#define BTN_BMOutput1ShortBool         1      // 4 Bits, Bit 7-4
+#define     BTN_BMOutput1ShortBoolMask 0xF0
+#define     BTN_BMOutput1ShortBoolShift 4
+#define BTN_BMOutput1Open              1      // 2 Bits, Bit 7-6
+#define     BTN_BMOutput1OpenMask 0xC0
+#define     BTN_BMOutput1OpenShift 6
+#define BTN_BMOutput2ShortBool         2      // 4 Bits, Bit 7-4
+#define     BTN_BMOutput2ShortBoolMask 0xF0
+#define     BTN_BMOutput2ShortBoolShift 4
+#define BTN_BMOutput2Closed            2      // 2 Bits, Bit 7-6
+#define     BTN_BMOutput2ClosedMask 0xC0
+#define     BTN_BMOutput2ClosedShift 6
+#define BTN_BMOutput1ShortDpt5         1      // uint8_t
+#define BTN_BMOutput2ShortDpt5         2      // uint8_t
+#define BTN_BMOutput1ShortDpt5001      1      // uint8_t
+#define BTN_BMOutput2ShortDpt5001      2      // uint8_t
+#define BTN_BMOutput1ShortDpt17        1      // 8 Bits, Bit 7-0
+#define BTN_BMOutput2ShortDpt17        2      // 8 Bits, Bit 7-0
+#define BTN_BMOutputShortMultiple      0      // 8 Bits, Bit 7-0
+#define BTN_BMOutputShortInteraction   3      // 1 Bit, Bit 7
+#define     BTN_BMOutputShortInteractionMask 0x80
+#define     BTN_BMOutputShortInteractionShift 7
+#define BTN_BMOutputLong               0      // 8 Bits, Bit 7-0
+#define BTN_BMOutput1LongBool          1      // 4 Bits, Bit 7-4
+#define     BTN_BMOutput1LongBoolMask 0xF0
+#define     BTN_BMOutput1LongBoolShift 4
+#define BTN_BMOutput2LongBool          2      // 4 Bits, Bit 7-4
+#define     BTN_BMOutput2LongBoolMask 0xF0
+#define     BTN_BMOutput2LongBoolShift 4
+#define BTN_BMOutput1LongDpt5          1      // uint8_t
+#define BTN_BMOutput2LongDpt5          2      // uint8_t
+#define BTN_BMOutput1LongDpt5001       1      // uint8_t
+#define BTN_BMOutput2LongDpt5001       2      // uint8_t
+#define BTN_BMOutput1LongDpt17         1      // 8 Bits, Bit 7-0
+#define BTN_BMOutput2LongDpt17         2      // 8 Bits, Bit 7-0
+#define BTN_BMOutputLongInteraction    3      // 1 Bit, Bit 7
+#define     BTN_BMOutputLongInteractionMask 0x80
+#define     BTN_BMOutputLongInteractionShift 7
+#define BTN_BMM1Dpt1                   0      // 2 Bits, Bit 7-6
+#define     BTN_BMM1Dpt1Mask 0xC0
+#define     BTN_BMM1Dpt1Shift 6
+#define BTN_BMM1Dpt5                   0      // uint8_t
+#define BTN_BMM1Dpt5001                0      // uint8_t
+#define BTN_BMM1Dpt17                  0      // 8 Bits, Bit 7-0
+#define BTN_BMM2Dpt1                   1      // 2 Bits, Bit 7-6
+#define     BTN_BMM2Dpt1Mask 0xC0
+#define     BTN_BMM2Dpt1Shift 6
+#define BTN_BMM2Dpt5                   1      // uint8_t
+#define BTN_BMM2Dpt5001                1      // uint8_t
+#define BTN_BMM2Dpt17                  1      // 8 Bits, Bit 7-0
+#define BTN_BMM3Dpt1                   2      // 2 Bits, Bit 7-6
+#define     BTN_BMM3Dpt1Mask 0xC0
+#define     BTN_BMM3Dpt1Shift 6
+#define BTN_BMM3Dpt5                   2      // uint8_t
+#define BTN_BMM3Dpt5001                2      // uint8_t
+#define BTN_BMM3Dpt17                  2      // 8 Bits, Bit 7-0
+
+// Communication objects per channel (multiple occurrence)
+#define BTN_KoOffset 400
+#define BTN_KoBlockSize 3
+#define BTN_KoBTNLock 0
+#define BTN_KoBTNOutput1 1
+#define BTN_KoBTNOutput2 2
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 9
+#define MAIN_ApplicationVersion 7
 #define MAIN_OrderNumber "SOM-UP1"
