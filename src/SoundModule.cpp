@@ -1,11 +1,16 @@
 #include "Helper.h"
 #include "Common.h"
 #include "Logic.h"
+#include "BinaryInput.h"
 #include "SoundControl.h"
 
 SoundControl gSoundControl;
 Logic gLogic;
 Common gCommon;
+BinaryInput gBinaryInputA(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE);
+BinaryInput gBinaryInputB(1, BINARY_INPUT_B_PIN, BINARY_INPUT_PULSE);
+BinaryInput gBinaryInputC(2, BINARY_INPUT_C_PIN, BINARY_INPUT_PULSE);
+BinaryInput gBinaryInputD(3, BINARY_INPUT_D_PIN, BINARY_INPUT_PULSE);
 
 void ProcessReadRequests()
 {
@@ -89,19 +94,10 @@ void appLoop()
   ProcessReadRequests();
   gSoundControl.loop();
   gLogic.loop();
-
-  bool buttonState = digitalRead(2);
-
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-  if (buttonState == LOW && !pressed) {
-    SERIAL_DEBUG.println("Pressed");
-    pressed = true;
-  }
-
-if (buttonState == HIGH && pressed) {
-    SERIAL_DEBUG.println("Released");
-    pressed = false;
-  }
+  gBinaryInputA.loop();
+  gBinaryInputB.loop();
+  gBinaryInputC.loop();
+  gBinaryInputD.loop();
 }
 
 void appSetup()
@@ -112,6 +108,10 @@ void appSetup()
   if (GroupObject::classCallback() == 0)
     GroupObject::classCallback(processInputKoCallback);
 
+  gBinaryInputA.setup();
+  gBinaryInputB.setup();
+  gBinaryInputC.setup();
+  gBinaryInputD.setup();
   gSoundControl.setup();
   gLogic.setup(true);
 

@@ -12,7 +12,7 @@
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="1" ReplacesVersions="" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="5" ReplacesVersions="1 2 3 4" ApplicationRevision="0" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
@@ -21,19 +21,20 @@
             <op:define prefix="LOG" header="SoundModule.h" NumChannels="10" KoOffset="600" ModuleType="1" />
             <op:define prefix="SOM" header="SoundModule.h" NumChannels="10" KoOffset="200" ModuleType="2" />
             <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="300" ModuleType="3" />
-            <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="100" ModuleType="4" />
+            <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="51" ModuleType="4" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />
               <op:include href="VirtualButton.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BTN" />
               <op:include href="SoundModule.share.xml" xpath="//ParameterTypes/ParameterType" prefix="SOM" />
-              <op:include href="BinaryInput.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BTN" />
+              <op:include href="BinaryInput.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BI" />
             </ParameterTypes>
             <Parameters>
               <!-- Standard parameter in any of our devices -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="LOG" />
               <op:include href="SoundModule.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="SOM" />
               <op:include href="VirtualButton.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BTN" />
+              <op:include href="BinaryInput.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BI" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="LOG" />
               <op:include href="SoundModule.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="SOM" />
               <op:include href="VirtualButton.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BTN" />
@@ -44,6 +45,7 @@
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="LOG" />
               <op:include href="SoundModule.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="SOM" />
               <op:include href="VirtualButton.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BTN" />
+              <op:include href="BinaryInput.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BI" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="LOG" />
               <op:include href="SoundModule.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="SOM" />
               <op:include href="VirtualButton.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BTN" />
@@ -53,6 +55,7 @@
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectTable/ComObject" prefix="LOG" />
               <op:include href="SoundModule.share.xml" xpath="//ComObjectTable/ComObject" prefix="SOM" />
               <op:include href="VirtualButton.share.xml" xpath="//ComObjectTable/ComObject" prefix="BTN" />
+              <op:include href="BinaryInput.share.xml" xpath="//ComObjectTable/ComObject" prefix="BI" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="LOG" />
               <op:include href="SoundModule.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="SOM" />
               <op:include href="VirtualButton.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BTN" />
@@ -62,6 +65,7 @@
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="LOG" />
               <op:include href="SoundModule.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="SOM" />
               <op:include href="VirtualButton.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BTN" />
+              <op:include href="BinaryInput.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BI" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
               <op:include href="SoundModule.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="SOM" />
               <op:include href="VirtualButton.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BTN" />
@@ -114,7 +118,7 @@
               <op:include href="BinaryInput.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
               <op:include href="BinaryInput.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
             </Channel>
-            <Channel Name="BTN" Text="Taster" Number="6" Id="%AID%_CH-6">
+            <Channel Name="BTN" Text="Virtuelle Taster" Number="6" Id="%AID%_CH-6">
               <op:include href="VirtualButton.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
               <op:include href="VirtualButton.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
             </Channel>
