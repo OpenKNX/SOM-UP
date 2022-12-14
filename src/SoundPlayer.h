@@ -1,8 +1,7 @@
 #pragma once
 #include "DYPlayerArduino.h"
-#include "SoundModul.h"
-// #include "hardware.h"
-#include "SoundModulHardware.h"
+#include "SoundModule.h"
+#include "hardware.h"
 #include <iomanip>
 #include <iostream>
 

@@ -5,61 +5,67 @@
     <Manufacturer RefId="M-00FA">
       <Catalog>
         <CatalogSection Id="M-00FA_CS-OpenKNX" Name="OpenKNX" Number="OpenKNX" DefaultLanguage="de">
-          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModul-Dev" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
+          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-Dev" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="3" ReplacesVersions="1 2" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModul-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA4" ApplicationNumber="66" ApplicationVersion="1" ReplacesVersions="" ApplicationRevision="0" />
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
-            <op:define prefix="SOM" header="SoundModul.h" NumChannels="10" KoOffset="200" ModuleType="2" />
-            <op:define prefix="BTN" header="SoundModul.h" NumChannels="20" KoOffset="300" ModuleType="3" />
-            <op:define prefix="LOG" header="SoundModul.h" NumChannels="10" KoOffset="600" ModuleType="1" />
+            <op:define prefix="LOG" header="SoundModule.h" NumChannels="10" KoOffset="600" ModuleType="1" />
+            <op:define prefix="SOM" header="SoundModule.h" NumChannels="10" KoOffset="200" ModuleType="2" />
+            <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="300" ModuleType="3" />
+            <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="100" ModuleType="4" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />
-              <op:include href="ButtonModul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BTN" />
-              <op:include href="SoundModul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="SOM" />
+              <op:include href="VirtualButton.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BTN" />
+              <op:include href="SoundModule.share.xml" xpath="//ParameterTypes/ParameterType" prefix="SOM" />
+              <op:include href="BinaryInput.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BTN" />
             </ParameterTypes>
             <Parameters>
               <!-- Standard parameter in any of our devices -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="LOG" />
-              <op:include href="SoundModul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="SOM" />
-              <op:include href="ButtonModul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BTN" />
+              <op:include href="SoundModule.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="SOM" />
+              <op:include href="VirtualButton.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BTN" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="LOG" />
-              <op:include href="SoundModul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="SOM" />
-              <op:include href="ButtonModul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BTN" />
+              <op:include href="SoundModule.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="SOM" />
+              <op:include href="VirtualButton.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BTN" />
+              <op:include href="BinaryInput.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BI" />
             </Parameters>
             <ParameterRefs>
               <!-- General -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="LOG" />
-              <op:include href="SoundModul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="SOM" />
-              <op:include href="ButtonModul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BTN" />
+              <op:include href="SoundModule.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="SOM" />
+              <op:include href="VirtualButton.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BTN" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="LOG" />
-              <op:include href="SoundModul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="SOM" />
-              <op:include href="ButtonModul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BTN" />
+              <op:include href="SoundModule.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="SOM" />
+              <op:include href="VirtualButton.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BTN" />
+              <op:include href="BinaryInput.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BI" />
             </ParameterRefs>
             <ComObjectTable>
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectTable/ComObject" prefix="LOG" />
-              <op:include href="SoundModul.share.xml" xpath="//ComObjectTable/ComObject" prefix="SOM" />
-              <op:include href="ButtonModul.share.xml" xpath="//ComObjectTable/ComObject" prefix="BTN" />
+              <op:include href="SoundModule.share.xml" xpath="//ComObjectTable/ComObject" prefix="SOM" />
+              <op:include href="VirtualButton.share.xml" xpath="//ComObjectTable/ComObject" prefix="BTN" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="LOG" />
-              <op:include href="SoundModul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="SOM" />
-              <op:include href="ButtonModul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BTN" />
+              <op:include href="SoundModule.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="SOM" />
+              <op:include href="VirtualButton.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BTN" />
+              <op:include href="BinaryInput.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BI" />
             </ComObjectTable>
             <ComObjectRefs>
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="LOG" />
-              <op:include href="SoundModul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="SOM" />
-              <op:include href="ButtonModul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BTN" />
+              <op:include href="SoundModule.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="SOM" />
+              <op:include href="VirtualButton.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BTN" />
               <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
-              <op:include href="SoundModul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="SOM" />
-              <op:include href="ButtonModul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BTN" />
+              <op:include href="SoundModule.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="SOM" />
+              <op:include href="VirtualButton.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BTN" />
+              <op:include href="BinaryInput.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BI" />
             </ComObjectRefs>
             <AddressTable MaxEntries="2047" />
             <AssociationTable MaxEntries="2047" />
@@ -92,21 +98,25 @@
             <ChannelIndependentBlock>
               <!-- ChannelIndependentBlock is a composition of different parts of different modules -->
               <ParameterBlock Id="%AID%_PB-1" Name="General" Text="Allgemeine Parameter">
-                <!-- <op:include href="SoundModul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Init']/*" prefix="SOM" /> -->
+                <!-- <op:include href="SoundModule.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Init']/*" prefix="SOM" /> -->
                 <op:include href="../../OAM-LogicModule/src/Logikmodul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='General']/*" prefix="LOG" />
-                <!-- <op:include href="SoundModul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Hardware']/*" prefix="SOM" /> -->
+                <!-- <op:include href="SoundModule.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Hardware']/*" prefix="SOM" /> -->
                 <op:include href="../../OAM-LogicModule/src/Logikmodul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Diagnose']/*" prefix="LOG" />
               </ParameterBlock>
             </ChannelIndependentBlock>
-            <Channel Id="%AID%_CH-4" Name="SOMSound" Number="4" Text="Sound">
+            <Channel Id="%AID%_CH-4" Name="SOMS" Number="4" Text="Sound">
               <!-- SOM channel independent settings -->
-              <op:include href="SoundModul.share.xml" xpath="//Dynamic/Channel/*" prefix="SOM" />
+              <op:include href="SoundModule.share.xml" xpath="//Dynamic/Channel/*" prefix="SOM" />
               <!-- SOM channel settings -->
-              <op:include href="SoundModul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" />
+              <op:include href="SoundModule.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" />
             </Channel>
-            <Channel Name="ButtonChannels" Text="Taster" Number="6" Id="%AID%_CH-6">
-              <op:include href="ButtonModul.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
-              <op:include href="ButtonModul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
+            <Channel Name="BI" Text="Binäreingänge" Number="6" Id="%AID%_CH-7">
+              <op:include href="BinaryInput.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
+              <op:include href="BinaryInput.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
+            </Channel>
+            <Channel Name="BTN" Text="Taster" Number="6" Id="%AID%_CH-6">
+              <op:include href="VirtualButton.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
+              <op:include href="VirtualButton.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
             </Channel>
             <Channel Name="Logikkanaele" Text="Logikkanäle" Number="5" Id="%AID%_CH-5">
               <!-- compose logicmodule channel from some static blocks... -->
@@ -118,9 +128,9 @@
         </ApplicationProgram>
       </ApplicationPrograms>
       <Hardware>
-        <Hardware Id="%HardwareId%" Name="OpenKNX-SoundModule" SerialNumber="OpenKNXTRXA200" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
+        <Hardware Id="%HardwareId%" Name="OpenKNX-SoundModulee" SerialNumber="OpenKNXTRXA200" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
           <Products>
-            <Product Id="%ProductId%" Text="OpenKNX: SoundModul (dev)" OrderNumber="SOM-UP1" IsRailMounted="false" DefaultLanguage="de">
+            <Product Id="%ProductId%" Text="OpenKNX: SoundModule (dev)" OrderNumber="SOM-UP1" IsRailMounted="false" DefaultLanguage="de">
               <RegistrationInfo RegistrationStatus="Registered" />
             </Product>
           </Products>

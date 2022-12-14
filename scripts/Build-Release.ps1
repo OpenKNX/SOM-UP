@@ -35,7 +35,7 @@ if (!$?) { exit 1 }
 # see comment in Build-Step.ps1 for argument description
 
 # Example call, the following 2 lines might be there multiple times for each firmware which should be built
-../OGM-Common/scripts/setup/reusable/Build-Step.ps1 build_RP2040 SoundModul uf2
+../OGM-Common/scripts/setup/reusable/Build-Step.ps1 build_RP2040 SoundModule uf2
 if (!$?) { exit 1 }
 
 # # build firmware for PiPico-BCU-Connector

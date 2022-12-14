@@ -1095,7 +1095,13 @@
 #define BTN_KoBTNOutput2Multi 10
 #define BTN_KoBTNOutput3Multi 11
 
+#define BI_ChannelCount 4
+
+// Parameter per channel
+#define BI_ParamBlockOffset 0
+#define BI_ParamBlockSize -1
+
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 3
+#define MAIN_ApplicationVersion 1
 #define MAIN_OrderNumber "SOM-UP1"

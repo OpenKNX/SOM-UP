@@ -1,0 +1,134 @@
+#include "BinaryInput.h"
+
+BinaryInput::BinaryInput(uint8_t iIndex, uint8_t iInputPin, int8_t iPulsePin)
+{
+  this->mIndex = iIndex;
+  this->mInputPin = iInputPin;
+  this->mPulsePin = iPulsePin;
+}
+BinaryInput::~BinaryInput() {}
+
+uint32_t BinaryInput::calcParamIndex(uint16_t iParamIndex)
+{
+  return iParamIndex + mIndex * BI_ParamBlockSize + BI_ParamBlockOffset;
+}
+
+uint16_t BinaryInput::calcKoNumber(uint8_t iKoIndex)
+{
+  return iKoIndex + mIndex * BI_KoBlockSize + BI_KoOffset;
+}
+
+int8_t BinaryInput::calcKoIndex(uint16_t iKoNumber)
+{
+  int16_t result = (iKoNumber - BI_KoOffset);
+  // check if channel is valid
+  if ((int8_t)(result / BI_KoBlockSize) == mIndex)
+    result = result % BI_KoBlockSize;
+  else
+    result = -1;
+  return (int8_t)result;
+}
+
+GroupObject *BinaryInput::getKo(uint8_t iKoIndex)
+{
+  return &knx.getGroupObject(calcKoNumber(iKoIndex));
+}
+
+void BinaryInput::setup() {
+  // Params
+  paramState = (knx.paramByte(calcParamIndex(BI_InputState)) & BI_InputStateMask) >> BI_InputStateShift;
+  paramInvert = (knx.paramByte(calcParamIndex(BI_InputInvert)) & BI_InputInvertMask) >> BI_InputInvertShift;
+  paramDebouncing = (knx.paramByte(calcParamIndex(BI_InputDebouncing)));// & BI_InputDebouncingMask) >> BI_InputDebouncingShift;
+  paramPeriodic = (getDelayPattern(calcParamIndex(BI_InputPeriodicBase)));
+  paramPulsing = (knx.paramByte(BI_InputPulsing));
+  int test = (knx.paramByte(BI_BinaryInputs));
+
+  // Debug
+  SERIAL_DEBUG.printf("BE %i paramState: %i\n\r", mIndex, paramState);
+  SERIAL_DEBUG.printf("BE %i paramInvert: %i\n\r", mIndex, paramInvert);
+  SERIAL_DEBUG.printf("BE %i paramDebouncing: %i\n\r", mIndex, paramDebouncing);
+  SERIAL_DEBUG.printf("BE %i paramPulsing: %i\n\r", mIndex, paramPulsing);
+  SERIAL_DEBUG.printf("BE %i paramPeriodic: %i\n\r", mIndex, paramPeriodic);
+  SERIAL_DEBUG.printf("BE %i test: %i\n\r", mIndex, test);
+}
+void BinaryInput::loop() {
+  if (!paramState)
+    return;
+
+  processInput();
+  processPeriodicSend();
+}
+
+bool BinaryInput::queryInput() {
+  if (mPulsePin >= 0)
+    digitalWrite(mPulsePin, true);
+
+  bool lState = digitalRead(mInputPin);
+
+  if (mPulsePin >= 0)
+    digitalWrite(mPulsePin, false);
+
+  if (lState == LOW)
+    return true;
+
+  return false;
+}
+
+void BinaryInput::processInput() {
+  // pulsed query
+  if(!checkQueryTime())
+    return;
+
+  bool lState = queryInput();
+
+  // Skip till debounced
+  if(debounced(lState))
+    return;
+
+  if (lState != mCurrentState) {
+    // SERIAL_DEBUG.printf("BE %i: %i\n\r", mIndex, lState);
+    mCurrentState = lState;
+    sendState();
+  }
+}
+
+bool BinaryInput::debounced(bool iCurrentState) {
+  // Debounce
+  if (iCurrentState != mLastButtonState) {
+    mLastDebounceTime = millis();
+    mLastButtonState = iCurrentState;
+  }
+
+  if ((millis() - mLastDebounceTime) > paramDebouncing) {
+    mLastButtonState = iCurrentState;
+    return false;
+  }
+
+  return true;
+}
+
+bool BinaryInput::checkQueryTime() {
+  if ((millis() - mLastQueryTime) > paramPulsing) {
+    mLastQueryTime = millis();
+    return true;
+  }
+
+  return false;
+}
+
+void BinaryInput::processPeriodicSend() {
+  if (paramPeriodic == 0)
+    return;
+
+  if((millis() - mLastPeriodicSend) > paramPeriodic) {
+    mLastPeriodicSend = millis();
+    sendState();
+  }
+}
+
+void BinaryInput::sendState() {
+  bool lSendState = paramInvert ? !mCurrentState : mCurrentState;
+  getKo(BI_KoInputOutput)->value(lSendState, getDPT(VAL_DPT_1));
+}
+
+

@@ -1,5 +1,5 @@
 #include <OpenKNX.h>
-#include "SoundModul.h"
+#include "SoundModule.h"
 #include "hardware.h"
 #include "HardwareDevices.h"
 
