@@ -1080,8 +1080,8 @@
 #define BTN_BTNM3Dpt17                 2      // 8 Bits, Bit 7-0
 
 // Communication objects per channel (multiple occurrence)
-#define BTN_KoOffset 400
-#define BTN_KoBlockSize 9
+#define BTN_KoOffset 300
+#define BTN_KoBlockSize 12
 #define BTN_KoBTNLock 0
 #define BTN_KoBTNInput1 1
 #define BTN_KoBTNInput2 2
@@ -1091,6 +1091,9 @@
 #define BTN_KoBTNOutput2 6
 #define BTN_KoBTNOutput3Status 7
 #define BTN_KoBTNOutput3 8
+#define BTN_KoBTNOutput1Multi 9
+#define BTN_KoBTNOutput2Multi 10
+#define BTN_KoBTNOutput3Multi 11
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66

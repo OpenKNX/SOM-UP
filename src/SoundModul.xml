@@ -19,7 +19,7 @@
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
             <op:define prefix="SOM" header="SoundModul.h" NumChannels="10" KoOffset="200" ModuleType="2" />
-            <op:define prefix="BTN" header="SoundModul.h" NumChannels="20" KoOffset="400" ModuleType="3" />
+            <op:define prefix="BTN" header="SoundModul.h" NumChannels="20" KoOffset="300" ModuleType="3" />
             <op:define prefix="LOG" header="SoundModul.h" NumChannels="10" KoOffset="600" ModuleType="1" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
