@@ -36,19 +36,21 @@ GroupObject *BinaryInput::getKo(uint8_t iKoIndex)
 
 void BinaryInput::setup() {
   // Params
-  paramState = (knx.paramByte(calcParamIndex(BI_InputState)) & BI_InputStateMask) >> BI_InputStateShift;
-  paramInvert = (knx.paramByte(calcParamIndex(BI_InputInvert)) & BI_InputInvertMask) >> BI_InputInvertShift;
-  paramDebouncing = (knx.paramByte(calcParamIndex(BI_InputDebouncing)));// & BI_InputDebouncingMask) >> BI_InputDebouncingShift;
+  paramActive = (knx.paramByte(calcParamIndex(BI_InputActive)) & BI_InputActiveMask) >> BI_InputActiveShift;
+  paramMode = (knx.paramByte(calcParamIndex(BI_InputMode)) & BI_InputModeMask) >> BI_InputModeShift;
+  paramDebouncing = (knx.paramByte(calcParamIndex(BI_InputDebouncing)));
   paramPeriodic = (getDelayPattern(calcParamIndex(BI_InputPeriodicBase)));
 
+  getKo(BI_KoInputOutput)->valueNoSend(false, getDPT(VAL_DPT_1));
+
   // Debug
-  SERIAL_DEBUG.printf("BE %i paramState: %i\n\r", mIndex, paramState);
-  SERIAL_DEBUG.printf("BE %i paramInvert: %i\n\r", mIndex, paramInvert);
+  SERIAL_DEBUG.printf("BE %i paramActive: %i\n\r", mIndex, paramActive);
+  SERIAL_DEBUG.printf("BE %i paramMode: %i\n\r", mIndex, paramMode);
   SERIAL_DEBUG.printf("BE %i paramDebouncing: %i\n\r", mIndex, paramDebouncing);
   SERIAL_DEBUG.printf("BE %i paramPeriodic: %i\n\r", mIndex, paramPeriodic);
 }
 void BinaryInput::loop() {
-  if (!paramState)
+  if (paramActive != 1)
     return;
 
   processInput();
@@ -82,7 +84,7 @@ void BinaryInput::processInput() {
     return;
 
   if (lState != mCurrentState) {
-    // SERIAL_DEBUG.printf("BE %i: %i\n\r", mIndex, lState);
+    SERIAL_DEBUG.printf("BE %i: %i\n\r", mIndex, lState);
     mCurrentState = lState;
     sendState();
   }
@@ -122,8 +124,7 @@ void BinaryInput::processPeriodicSend() {
 }
 
 void BinaryInput::sendState() {
-  bool lSendState = paramInvert ? !mCurrentState : mCurrentState;
+  bool lSendState = paramMode ? !mCurrentState : mCurrentState;
+  SERIAL_DEBUG.printf("BE %i Output: %i\n\r", mIndex, lSendState);
   getKo(BI_KoInputOutput)->value(lSendState, getDPT(VAL_DPT_1));
 }
-
-

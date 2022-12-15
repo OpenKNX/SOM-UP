@@ -930,7 +930,7 @@
 #define LOG_fE2OtherKO                84      // uint15_t
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoOffset 600
+#define LOG_KoOffset 400
 #define LOG_KoBlockSize 3
 #define LOG_KoKOfE1 0
 #define LOG_KoKOfE2 1
@@ -968,7 +968,7 @@
 #define SOM_TriVolumeNightInactive     9      // uint8_t
 
 // Communication objects per channel (multiple occurrence)
-#define SOM_KoOffset 200
+#define SOM_KoOffset 50
 #define SOM_KoBlockSize 4
 #define SOM_KoTriTrigger 0
 #define SOM_KoTriStatus 1
@@ -1077,7 +1077,7 @@
 #define BTN_BTNM3Dpt17                 2      // 8 Bits, Bit 7-0
 
 // Communication objects per channel (multiple occurrence)
-#define BTN_KoOffset 300
+#define BTN_KoOffset 100
 #define BTN_KoBlockSize 12
 #define BTN_KoBTNLock 0
 #define BTN_KoBTNInput1 1
@@ -1097,15 +1097,15 @@
 // Parameter per channel
 #define BI_ParamBlockOffset 1151
 #define BI_ParamBlockSize 4
-#define BI_InputState                 0      // 1 Bit, Bit 7
-#define     BI_InputStateMask 0x80
-#define     BI_InputStateShift 7
-#define BI_InputInvert                0      // 1 Bit, Bit 6
-#define     BI_InputInvertMask 0x40
-#define     BI_InputInvertShift 6
-#define BI_InputPeriodic              0      // 1 Bit, Bit 5
-#define     BI_InputPeriodicMask 0x20
-#define     BI_InputPeriodicShift 5
+#define BI_InputActive                0      // 2 Bits, Bit 7-6
+#define     BI_InputActiveMask 0xC0
+#define     BI_InputActiveShift 6
+#define BI_InputMode                  0      // 1 Bit, Bit 5
+#define     BI_InputModeMask 0x20
+#define     BI_InputModeShift 5
+#define BI_InputPeriodic              0      // 1 Bit, Bit 4
+#define     BI_InputPeriodicMask 0x10
+#define     BI_InputPeriodicShift 4
 #define BI_InputDebouncing            1      // 8 Bits, Bit 7-0
 #define BI_InputPeriodicBase          2      // 2 Bits, Bit 7-6
 #define     BI_InputPeriodicBaseMask 0xC0
@@ -1113,11 +1113,11 @@
 #define BI_InputPeriodicTime          2      // uint14_t
 
 // Communication objects per channel (multiple occurrence)
-#define BI_KoOffset 51
+#define BI_KoOffset 41
 #define BI_KoBlockSize 1
 #define BI_KoInputOutput 0
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 6
-#define MAIN_OrderNumber "SOM-UP1"
+#define MAIN_ApplicationVersion 5
+#define MAIN_OrderNumber "SOM-UP"

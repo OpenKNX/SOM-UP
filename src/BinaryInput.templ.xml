@@ -10,9 +10,9 @@
               <Parameter Id="%AID%_P-%T%%CCC%000" Name="Input%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Input%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMStatus" Text="Status" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Input%C%Invert" Offset="0" BitOffset="1" ParameterType="%AID%_PT-SOMStatus" Text="Invertiert" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Input%C%Periodic" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMStatus" Text="Zyklisch senden" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Input%C%Active" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BIActive" Text="Kanalaktivität" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Input%C%Mode" Offset="0" BitOffset="2" ParameterType="%AID%_PT-BIMode" Text="Modus" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Input%C%Periodic" Offset="0" BitOffset="3" ParameterType="%AID%_PT-SOMStatus" Text="Zyklisch senden" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Input%C%Debouncing" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BIDebouncing" Text="Entprellung" Value="0" />
               </Union>
               <!-- Periodic -->

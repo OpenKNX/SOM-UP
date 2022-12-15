@@ -20,8 +20,8 @@ private:
   bool checkQueryTime();
   void sendState();
 
-  bool paramState;
-  bool paramInvert;
+  uint8_t paramActive;
+  bool paramMode;
   uint8_t paramDebouncing;
   uint32_t paramPeriodic;
   uint8_t paramPulsing;

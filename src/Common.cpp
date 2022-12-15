@@ -50,8 +50,3 @@ bool Common::setup() {
 
   return true;
 }
-
-
-// void Common::addTest(void (*callback)(int)) {
-//   testArray[sizeof(testArray)] = callback;
-// }

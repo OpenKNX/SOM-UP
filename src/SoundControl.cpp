@@ -100,7 +100,7 @@ void SoundControl::stop()
 void SoundControl::stopped()
 {
   SERIAL_DEBUG.println("SoundControl::stopped");
-  for (uint8_t i = 0; i < paramTriggers; i++)
+  for (uint8_t i = 0; i < SOM_ChannelCount; i++)
   {
     SoundTrigger *trigger = triggers[i];
     trigger->stopped();
@@ -116,7 +116,7 @@ void SoundControl::loop()
     return;
 
   player.loop();
-  for (uint8_t i = 0; i < paramTriggers; i++)
+  for (uint8_t i = 0; i < SOM_ChannelCount; i++)
   {
     triggers[i]->loop();
   }
@@ -188,7 +188,7 @@ void SoundControl::processInputKo(GroupObject &ko)
 
   default:
     // forward to trigger
-    if (asap >= SOM_KoOffset && asap < SOM_KoOffset + paramTriggers * SOM_KoBlockSize)
+    if (asap >= SOM_KoOffset && asap < SOM_KoOffset + SOM_ChannelCount * SOM_KoBlockSize)
     {
       uint8_t index = (asap - SOM_KoOffset) / SOM_KoBlockSize;
       triggers[index]->processInputKo(ko);

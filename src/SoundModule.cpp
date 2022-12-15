@@ -78,7 +78,7 @@ void processInputKoCallback(GroupObject &iKo)
     break;
 
   default:
-    //gCommon.processInputKo(iKo);
+    // gCommon.processInputKo(iKo);
     gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
 

@@ -47,7 +47,6 @@ private:
   bool paramExternal = false;
   bool paramLock = false;
   bool paramScenes = false;
-  uint8_t paramTriggers = 0;
   uint8_t paramVolumeDay = 0;
   uint8_t paramVolumeNight = 0;
   uint8_t currentDefaultVolume = 0;

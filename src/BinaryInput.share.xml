@@ -18,6 +18,19 @@
                   <Enumeration Text="100ms" Value="100" Id="%AID%_PT-BIDebouncing_EN-100" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-BIActive" Name="BIActive">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Inaktiv" Value="0" Id="%AID%_PT-BIActive_EN-0" />
+                  <Enumeration Text="Aktiv" Value="1" Id="%AID%_PT-BIActive_EN-1" />
+                  <Enumeration Text="Funktionslos" Value="2" Id="%AID%_PT-BIActive_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-BIMode" Name="BIMode">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="Normal (Geschlossen = 1 / Geöffnet = 0)" Value="0" Id="%AID%_PT-BIMode_EN-0" />
+                  <Enumeration Text="Invertiert (Geschlossen = 0 / Geöffnet = 1)" Value="1" Id="%AID%_PT-BIMode_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
             </ParameterTypes>
             <Parameters>
             </Parameters>

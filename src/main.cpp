@@ -28,7 +28,7 @@ void setup()
     ledInfo(true);
 #endif
 
-  const uint8_t firmwareRevision = 2;
+  const uint8_t firmwareRevision = 0;
   OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, firmwareRevision);
  
    // pin or GPIO the programming led is connected to. Default is LED_BUILDIN
@@ -51,9 +51,6 @@ void loop()
 {
   // don't delay here to much. Otherwise you might lose packages or mess up the timing with ETS
   knx.loop();
-
-  // only run the application code if the device was configured with ETS
-  // if (knx.configured())
-    appLoop();
+  appLoop();
 }
 
