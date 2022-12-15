@@ -42,5 +42,5 @@ public:
 
   void setup();
   void loop();
-  void processInputKo(GroupObject &iKO);
+  void processInputKo(GroupObject &iKo);
 };

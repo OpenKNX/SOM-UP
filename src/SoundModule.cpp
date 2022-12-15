@@ -2,15 +2,19 @@
 #include "Common.h"
 #include "Logic.h"
 #include "BinaryInput.h"
+#include "VirtualButton.h"
 #include "SoundControl.h"
 
 SoundControl gSoundControl;
 Logic gLogic;
 Common gCommon;
-BinaryInput gBinaryInputA(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE);
-BinaryInput gBinaryInputB(1, BINARY_INPUT_B_PIN, BINARY_INPUT_PULSE);
-BinaryInput gBinaryInputC(2, BINARY_INPUT_C_PIN, BINARY_INPUT_PULSE);
-BinaryInput gBinaryInputD(3, BINARY_INPUT_D_PIN, BINARY_INPUT_PULSE);
+BinaryInput *gBinaryInputs[BI_ChannelCount] = {
+ new BinaryInput(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
+ new BinaryInput(1, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
+ new BinaryInput(2, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
+ new BinaryInput(3, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE)
+};
+VirtualButton *gVirtualButtons[BTN_ChannelCount];
 
 void ProcessReadRequests()
 {
@@ -92,10 +96,12 @@ void appLoop()
   ProcessReadRequests();
   gSoundControl.loop();
   gLogic.loop();
-  gBinaryInputA.loop();
-  gBinaryInputB.loop();
-  gBinaryInputC.loop();
-  gBinaryInputD.loop();
+  for (uint8_t i = 0; i < BI_ChannelCount; i++)
+    gBinaryInputs[i]->loop();
+
+  for (uint8_t i = 0; i < BTN_ChannelCount; i++)
+    gVirtualButtons[i]->loop();
+    
 }
 
 void appSetup()
@@ -106,10 +112,16 @@ void appSetup()
   if (GroupObject::classCallback() == 0)
     GroupObject::classCallback(processInputKoCallback);
 
-  gBinaryInputA.setup();
-  gBinaryInputB.setup();
-  gBinaryInputC.setup();
-  gBinaryInputD.setup();
-  gSoundControl.setup();
+  // Setup BE
+  for (uint8_t i = 0; i < BI_ChannelCount; i++)
+    gBinaryInputs[i]->setup();
+
+  // Setup VBM
+  for (uint8_t i = 0; i < BTN_ChannelCount; i++) {
+    gVirtualButtons[i] = new VirtualButton(i);
+    gVirtualButtons[i]->loop();
+  }
+
+  // Setup Logic
   gLogic.setup(true);
 }
