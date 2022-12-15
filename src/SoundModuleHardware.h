@@ -15,6 +15,7 @@
 #define BINARY_INPUT_B_PIN 4
 #define BINARY_INPUT_C_PIN 6
 #define BINARY_INPUT_D_PIN 7
+#define BI_QueryDelay 15
 
 // #define PROG_LED_PIN 21
 // #define PROG_LED_PIN_ACTIVE_ON HIGH

@@ -40,16 +40,12 @@ void BinaryInput::setup() {
   paramInvert = (knx.paramByte(calcParamIndex(BI_InputInvert)) & BI_InputInvertMask) >> BI_InputInvertShift;
   paramDebouncing = (knx.paramByte(calcParamIndex(BI_InputDebouncing)));// & BI_InputDebouncingMask) >> BI_InputDebouncingShift;
   paramPeriodic = (getDelayPattern(calcParamIndex(BI_InputPeriodicBase)));
-  paramPulsing = (knx.paramByte(BI_InputPulsing));
-  int test = (knx.paramByte(BI_BinaryInputs));
 
   // Debug
   SERIAL_DEBUG.printf("BE %i paramState: %i\n\r", mIndex, paramState);
   SERIAL_DEBUG.printf("BE %i paramInvert: %i\n\r", mIndex, paramInvert);
   SERIAL_DEBUG.printf("BE %i paramDebouncing: %i\n\r", mIndex, paramDebouncing);
-  SERIAL_DEBUG.printf("BE %i paramPulsing: %i\n\r", mIndex, paramPulsing);
   SERIAL_DEBUG.printf("BE %i paramPeriodic: %i\n\r", mIndex, paramPeriodic);
-  SERIAL_DEBUG.printf("BE %i test: %i\n\r", mIndex, test);
 }
 void BinaryInput::loop() {
   if (!paramState)
@@ -93,7 +89,6 @@ void BinaryInput::processInput() {
 }
 
 bool BinaryInput::debounced(bool iCurrentState) {
-  // Debounce
   if (iCurrentState != mLastButtonState) {
     mLastDebounceTime = millis();
     mLastButtonState = iCurrentState;
@@ -108,7 +103,7 @@ bool BinaryInput::debounced(bool iCurrentState) {
 }
 
 bool BinaryInput::checkQueryTime() {
-  if ((millis() - mLastQueryTime) > paramPulsing) {
+  if ((millis() - mLastQueryTime) > BI_QueryDelay) {
     mLastQueryTime = millis();
     return true;
   }

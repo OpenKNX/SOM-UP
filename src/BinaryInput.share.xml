@@ -7,9 +7,6 @@
         <ApplicationProgram>
           <Static>
             <ParameterTypes>
-              <ParameterType Id="%AID%_PT-BinaryInputs" Name="BinaryInputs">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="%N%" maxInclusive="%N%" />
-              </ParameterType>
               <ParameterType Id="%AID%_PT-BIDebouncing" Name="BIDebouncing">
                 <TypeRestriction Base="Value" SizeInBit="8">
                   <Enumeration Text="Deaktiviert" Value="0" Id="%AID%_PT-BIDebouncing_EN-0" />
@@ -21,29 +18,10 @@
                   <Enumeration Text="100ms" Value="100" Id="%AID%_PT-BIDebouncing_EN-100" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-BIPulsing" Name="BIPulsing">
-                <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="Deaktiviert" Value="0" Id="%AID%_PT-BIPulsing_EN-0" />
-                  <Enumeration Text="10ms" Value="10" Id="%AID%_PT-BIPulsing_EN-10" />
-                  <Enumeration Text="20ms" Value="20" Id="%AID%_PT-BIPulsing_EN-20" />
-                  <Enumeration Text="30ms" Value="30" Id="%AID%_PT-BIPulsing_EN-30" />
-                  <Enumeration Text="40ms" Value="30" Id="%AID%_PT-BIPulsing_EN-40" />
-                  <Enumeration Text="50ms" Value="50" Id="%AID%_PT-BIPulsing_EN-50" />
-                  <Enumeration Text="100ms" Value="100" Id="%AID%_PT-BIPulsing_EN-100" />
-                </TypeRestriction>
-              </ParameterType>
             </ParameterTypes>
             <Parameters>
-              <Parameter Id="%AID%_P-%T%000001" Name="BinaryInputs" ParameterType="%AID%_PT-BinaryInputs" Text="Anzahl der verfügbarer Eingängen" Value="%N%" Access="Read">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-              </Parameter>
-              <Union SizeInBit="8">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%000001" Name="InputPulsing" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BIPulsing" Text="Gepulste Abfrage" Value="30" />
-              </Union>
             </Parameters>
             <ParameterRefs>
-              <ParameterRef Id="%AID%_UP-%T%000001_R-%T%00000101" RefId="%AID%_UP-%T%000001" />
             </ParameterRefs>
             <ComObjectTable>
             </ComObjectTable>
@@ -51,12 +29,6 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-BI1" Name="NumInputs" Number="1" Text="Eingänge">
-              <ParameterBlock Id="%AID%_PB-BI2" Name="General" Text="Allgemein">
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Einstellunge" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%T%000001_R-%T%00000101" />
-              </ParameterBlock>
-            </Channel>
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>

@@ -16,8 +16,6 @@ GroupObject *SoundControl::getKo(uint8_t numberKo)
 void SoundControl::setup()
 {
   // Params
-  paramTriggers = knx.paramByte(SOM_NumTriggers); // TODO
-  paramTriggers = 10;
   paramScenes = (knx.paramByte(SOM_Scenes) & SOM_ScenesMask) >> SOM_ScenesShift;
   paramExternal = (knx.paramByte(SOM_External) & SOM_ExternalMask) >> SOM_ExternalShift;
   paramLock = (knx.paramByte(SOM_Lock) & SOM_LockMask) >> SOM_LockShift;
@@ -38,11 +36,10 @@ void SoundControl::setup()
   SERIAL_DEBUG.printf("paramScenes %i\n\r", paramScenes);
   SERIAL_DEBUG.printf("paramDayNight %i\n\r", paramDayNight);
   SERIAL_DEBUG.printf("paramLock %i\n\r", paramLock);
-  SERIAL_DEBUG.printf("paramTriggers %i\n\r", paramTriggers);
 
   // Call dependend setup
   player.setup();
-  for (uint8_t i = 0; i < paramTriggers; i++)
+  for (uint8_t i = 0; i < SOM_ChannelCount; i++)
   {
     triggers[i] = new SoundTrigger(i);
     triggers[i]->setup();

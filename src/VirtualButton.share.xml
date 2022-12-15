@@ -7,9 +7,6 @@
         <ApplicationProgram>
           <Static>
             <ParameterTypes>
-              <ParameterType Id="%AID%_PT-NumBinary" Name="NumBinary">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="%N%" maxInclusive="%N%" />
-              </ParameterType>
             </ParameterTypes>
             <ParameterTypes>
               <ParameterType Id="%AID%_PT-BTNMode" Name="BMMode">
@@ -193,15 +190,7 @@
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>
-
-            <Parameters>
-              <Parameter Id="%AID%_P-%T%000001" Name="NumBinary" ParameterType="%AID%_PT-NumBinary" Text="Anzahl der verfügbarer Eingänge" Value="%N%" Access="Read">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-              </Parameter>
-            </Parameters>
-
             <ParameterRefs>
-              <ParameterRef Id="%AID%_P-%T%000001_R-%T%00000101" RefId="%AID%_P-%T%000001" />
             </ParameterRefs>
             <ComObjectTable>
             </ComObjectTable>
@@ -209,10 +198,6 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <ParameterBlock Id="%AID%_PB-12" Name="BMBasics" Text="BM Basiseinstellung">
-              <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
-              <ParameterSeparator Id="%AID%_PS-nnn" Text="asjkdhf sadjfhg kjshdfj sdajkhfds" />
-            </ParameterBlock>
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>

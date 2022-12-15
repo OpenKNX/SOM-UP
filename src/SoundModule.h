@@ -159,7 +159,6 @@
 #define LOG_KoLedLock 8
 #define LOG_KoBuzzerLock 9
 
-#define SOM_NumTriggers               26      // uint8_t
 #define SOM_External                  27      // 1 Bit, Bit 7
 #define     SOM_ExternalMask 0x80
 #define     SOM_ExternalShift 7
@@ -264,15 +263,10 @@
 #define SOM_KoExternalVolume 31
 #define SOM_KoExternalPriority 32
 
-#define BTN_NumBinary                 111      // uint8_t
-
-#define BI_BinaryInputs              112      // uint8_t
-#define BI_InputPulsing              113      // 8 Bits, Bit 7-0
-
 #define LOG_ChannelCount 10
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 114
+#define LOG_ParamBlockOffset 111
 #define LOG_ParamBlockSize 86
 #define LOG_fChannelDelayBase          0      // 2 Bits, Bit 7-6
 #define     LOG_fChannelDelayBaseMask 0xC0
@@ -945,7 +939,7 @@
 #define SOM_ChannelCount 10
 
 // Parameter per channel
-#define SOM_ParamBlockOffset 974
+#define SOM_ParamBlockOffset 971
 #define SOM_ParamBlockSize 10
 #define SOM_TriState                   0      // 1 Bit, Bit 7
 #define     SOM_TriStateMask 0x80
@@ -984,7 +978,7 @@
 #define BTN_ChannelCount 20
 
 // Parameter per channel
-#define BTN_ParamBlockOffset 1074
+#define BTN_ParamBlockOffset 1071
 #define BTN_ParamBlockSize 4
 #define BTN_BTNMode                    0      // 8 Bits, Bit 7-0
 #define BTN_BTNLock                    0      // 2 Bits, Bit 6-5
@@ -1101,7 +1095,7 @@
 #define BI_ChannelCount 4
 
 // Parameter per channel
-#define BI_ParamBlockOffset 1154
+#define BI_ParamBlockOffset 1151
 #define BI_ParamBlockSize 4
 #define BI_InputState                 0      // 1 Bit, Bit 7
 #define     BI_InputStateMask 0x80
@@ -1125,5 +1119,5 @@
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 5
+#define MAIN_ApplicationVersion 6
 #define MAIN_OrderNumber "SOM-UP1"

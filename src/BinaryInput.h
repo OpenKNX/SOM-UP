@@ -3,6 +3,7 @@
 #include "Helper.h"
 #include "KnxHelper.h"
 #include "knxprod.h"
+#include "hardware.h"
 
 class BinaryInput
 {
