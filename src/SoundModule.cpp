@@ -65,8 +65,8 @@ void ProcessDiagnoseCommand(GroupObject &iKo)
 
 void processInputKoCallback(GroupObject &iKo)
 {
-  uint16_t asap = iKo.asap();
-  switch (asap)
+  uint16_t lAsap = iKo.asap();
+  switch (lAsap)
   {
   case LOG_KoDiagnose:
     ProcessDiagnoseCommand(iKo);
@@ -84,7 +84,6 @@ void processInputKoCallback(GroupObject &iKo)
   }
 }
 
-bool pressed = false;
 void appLoop()
 {
   if (!gCommon.loop())

@@ -9,10 +9,10 @@ class BinaryInput
 {
 
 private:
-  uint32_t calcParamIndex(uint16_t paramIndex);
-  uint16_t calcKoNumber(uint8_t koIndex);
-  int8_t calcKoIndex(uint16_t koNumber);
-  GroupObject *getKo(uint8_t koIndex);
+  uint32_t calcParamIndex(uint16_t iParamIndex);
+  uint16_t calcKoNumber(uint8_t iKoIndex);
+  int8_t calcKoIndex(uint16_t iKoNumber);
+  GroupObject *getKo(uint8_t iKoIndex);
   bool debounced(bool iCurrentState);
   void processInput();
   void processPeriodicSend();
@@ -20,11 +20,11 @@ private:
   bool checkQueryTime();
   void sendState();
 
-  uint8_t paramActive;
-  bool paramMode;
-  uint8_t paramDebouncing;
-  uint32_t paramPeriodic;
-  uint8_t paramPulsing;
+  uint8_t mParamActive;
+  bool mParamMode;
+  uint8_t mParamDebouncing;
+  uint32_t mParamPeriodic;
+  uint8_t mParamPulsing;
 
   uint8_t mIndex = 0;
   uint8_t mInputPin = 0;

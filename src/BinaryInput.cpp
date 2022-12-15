@@ -37,22 +37,22 @@ GroupObject *BinaryInput::getKo(uint8_t iKoIndex)
 void BinaryInput::setup()
 {
   // Params
-  paramActive = (knx.paramByte(calcParamIndex(BI_InputActive)) & BI_InputActiveMask) >> BI_InputActiveShift;
-  paramMode = (knx.paramByte(calcParamIndex(BI_InputMode)) & BI_InputModeMask) >> BI_InputModeShift;
-  paramDebouncing = (knx.paramByte(calcParamIndex(BI_InputDebouncing)));
-  paramPeriodic = (getDelayPattern(calcParamIndex(BI_InputPeriodicBase)));
+  mParamActive = (knx.paramByte(calcParamIndex(BI_InputActive)) & BI_InputActiveMask) >> BI_InputActiveShift;
+  mParamMode = (knx.paramByte(calcParamIndex(BI_InputMode)) & BI_InputModeMask) >> BI_InputModeShift;
+  mParamDebouncing = (knx.paramByte(calcParamIndex(BI_InputDebouncing)));
+  mParamPeriodic = (getDelayPattern(calcParamIndex(BI_InputPeriodicBase)));
 
   getKo(BI_KoInputOutput)->valueNoSend(false, getDPT(VAL_DPT_1));
 
   // Debug
-  SERIAL_DEBUG.printf("BE %i paramActive: %i\n\r", mIndex, paramActive);
-  SERIAL_DEBUG.printf("BE %i paramMode: %i\n\r", mIndex, paramMode);
-  SERIAL_DEBUG.printf("BE %i paramDebouncing: %i\n\r", mIndex, paramDebouncing);
-  SERIAL_DEBUG.printf("BE %i paramPeriodic: %i\n\r", mIndex, paramPeriodic);
+  SERIAL_DEBUG.printf("BE %i mParamActive: %i\n\r", mIndex, mParamActive);
+  SERIAL_DEBUG.printf("BE %i mParamMode: %i\n\r", mIndex, mParamMode);
+  SERIAL_DEBUG.printf("BE %i mParamDebouncing: %i\n\r", mIndex, mParamDebouncing);
+  SERIAL_DEBUG.printf("BE %i mParamPeriodic: %i\n\r", mIndex, mParamPeriodic);
 }
 void BinaryInput::loop()
 {
-  if (paramActive != 1)
+  if (mParamActive != 1)
     return;
 
   processInput();
@@ -103,7 +103,7 @@ bool BinaryInput::debounced(bool iCurrentState)
     mLastButtonState = iCurrentState;
   }
 
-  if ((millis() - mLastDebounceTime) > paramDebouncing)
+  if ((millis() - mLastDebounceTime) > mParamDebouncing)
   {
     mLastButtonState = iCurrentState;
     return false;
@@ -125,10 +125,10 @@ bool BinaryInput::checkQueryTime()
 
 void BinaryInput::processPeriodicSend()
 {
-  if (paramPeriodic == 0)
+  if (mParamPeriodic == 0)
     return;
 
-  if ((millis() - mLastPeriodicSend) > paramPeriodic)
+  if ((millis() - mLastPeriodicSend) > mParamPeriodic)
   {
     mLastPeriodicSend = millis();
     sendState();
@@ -137,6 +137,6 @@ void BinaryInput::processPeriodicSend()
 
 void BinaryInput::sendState()
 {
-  bool lSendState = paramMode ? !mCurrentState : mCurrentState;
+  bool lSendState = mParamMode ? !mCurrentState : mCurrentState;
   getKo(BI_KoInputOutput)->value(lSendState, getDPT(VAL_DPT_1));
 }
