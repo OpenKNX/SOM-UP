@@ -12,7 +12,6 @@
               <ParameterType Id="%AID%_PT-BTNMode" Name="BMMode">
                 <TypeRestriction Base="Value" SizeInBit="8">
                   <Enumeration Text="Deaktviert" Value="0" Id="%AID%_PT-BTNMode_EN-0" />
-                  <Enumeration Text="Kontaktzustand" Value="1" Id="%AID%_PT-BTNMode_EN-1" />
                   <Enumeration Text="1-Taster, Mehrfach-Klick" Value="2" Id="%AID%_PT-BTNMode_EN-12" />
                   <Enumeration Text="1-Taster, Schalten" Value="11" Id="%AID%_PT-BTNMode_EN-11" />
                   <Enumeration Text="2-Taster, Schalten" Value="21" Id="%AID%_PT-BTNMode_EN-21" />

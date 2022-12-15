@@ -1,13 +1,5 @@
 #include "BinaryInput.h"
 
-BinaryInput::BinaryInput(uint8_t iIndex, uint8_t iInputPin, int8_t iPulsePin)
-{
-  this->mIndex = iIndex;
-  this->mInputPin = iInputPin;
-  this->mPulsePin = iPulsePin;
-}
-BinaryInput::~BinaryInput() {}
-
 uint32_t BinaryInput::calcParamIndex(uint16_t iParamIndex)
 {
   return iParamIndex + mIndex * BI_ParamBlockSize + BI_ParamBlockOffset;
@@ -59,29 +51,13 @@ void BinaryInput::loop()
   processPeriodicSend();
 }
 
-bool BinaryInput::queryInput()
-{
-  if (mPulsePin >= 0)
-    digitalWrite(mPulsePin, true);
-
-  bool lState = digitalRead(mInputPin);
-
-  if (mPulsePin >= 0)
-    digitalWrite(mPulsePin, false);
-
-  if (lState == LOW)
-    return true;
-
-  return false;
-}
-
 void BinaryInput::processInput()
 {
   // pulsed query
   if (!checkQueryTime())
     return;
 
-  bool lState = queryInput();
+  bool lState = queryHardwareInput();
 
   // Skip till debounced
   if (debounced(lState))
@@ -139,4 +115,17 @@ void BinaryInput::sendState()
 {
   bool lSendState = mParamMode ? !mCurrentState : mCurrentState;
   getKo(BI_KoInputOutput)->value(lSendState, getDPT(VAL_DPT_1));
+}
+
+BinaryInput::BinaryInput(uint8_t iIndex, uint8_t iInputPin, int8_t iPulsePin)
+{
+  mIndex = iIndex;
+  mInputPin = iInputPin;
+  mPulsePin = iPulsePin;
+}
+BinaryInput::~BinaryInput() {}
+
+bool BinaryInput::queryHardwareInput()
+{
+  return false;
 }

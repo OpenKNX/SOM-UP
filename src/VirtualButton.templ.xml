@@ -15,26 +15,18 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%120" Name="BTN%C%OutputDim" Offset="0" BitOffset="2" ParameterType="%AID%_PT-BTNOutputDim" Text="Taste 1 / Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%121" Name="BTN%C%OutputDirection" Offset="0" BitOffset="3" ParameterType="%AID%_PT-BTNOutputDirection" Text="Taste 1 / Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%122" Name="BTN%C%OutputJalousie" Offset="0" BitOffset="4" ParameterType="%AID%_PT-BTNOutputJalousie" Text="Funktion" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%020" Name="BTN%C%Periodic" Offset="0" BitOffset="5" ParameterType="%AID%_PT-SOMStatus" Text="Zyklisch senden" Value="0" />
-              </Union>
-
-              <!-- Periodic -->
-              <Union SizeInBit="8">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%021" Name="BTN%C%PeriodicBase" Offset="0" BitOffset="0" ParameterType="%AID%_PT-DelayBase" Text="Zeitbasis" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%022" Name="BTN%C%PeriodicTime" Offset="0" BitOffset="0" ParameterType="%AID%_PT-DelayTime" Text="Zeit" Value="2" />
               </Union>
 
               <!-- Inputs -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%008" Name="BTN%C%InputA" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNInput" Text="" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%009" Name="BTN%C%InputB" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNInput" Text="" Value="0" />
               </Union>
 
               <!-- Short -->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="3" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%500" Name="BTN%C%OutputShort" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutput" Text="  Ausgabe" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%501" Name="BTN%C%Output1ShortBool" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%511" Name="BTN%C%Output1Open" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool1" Text="Kontakt geöffnet" Value="1" />
@@ -52,7 +44,7 @@
 
               <!-- Long -->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="7" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%600" Name="BTN%C%OutputLong" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutput" Text="  Ausgabe" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%601" Name="BTN%C%Output1LongBool" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%602" Name="BTN%C%Output2LongBool" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
@@ -67,7 +59,7 @@
 
               <!-- ExtraLong -->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="11" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%700" Name="BTN%C%OutputExtraLong" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutput" Text="  Ausgabe" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%701" Name="BTN%C%Output1ExtraLongBool" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%702" Name="BTN%C%Output2ExtraLongBool" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
@@ -82,7 +74,7 @@
 
               <!-- Multiple -->
               <Union SizeInBit="24">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="15" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%411" Name="BTN%C%M1Dpt1"    Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool1" Text="  1. Klick" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%414" Name="BTN%C%M1Dpt5"    Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5"      Text="  1. Klick" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%415" Name="BTN%C%M1Dpt5001" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001"   Text="  1. Klick" Value="0" SuffixText="%" />
@@ -98,7 +90,6 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%435" Name="BTN%C%M3Dpt5001" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001"   Text="  3. Klick" Value="0" SuffixText="%" />
                 <Parameter Id="%AID%_UP-%T%%CCC%436" Name="BTN%C%M3Dpt17"   Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNScene"       Text="  3. Klick" Value="0" />
               </Union>
-
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_P-%T%%CCC%000" />
@@ -170,9 +161,6 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%708_R-%T%%CCC%70801" RefId="%AID%_UP-%T%%CCC%708" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%792_R-%T%%CCC%79201" RefId="%AID%_UP-%T%%CCC%792" />
               
-              <ParameterRef Id="%AID%_UP-%T%%CCC%020_R-%T%%CCC%02001" RefId="%AID%_UP-%T%%CCC%020" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%021_R-%T%%CCC%02101" RefId="%AID%_UP-%T%%CCC%021" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%022_R-%T%%CCC%02201" RefId="%AID%_UP-%T%%CCC%022" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%120_R-%T%%CCC%12001" RefId="%AID%_UP-%T%%CCC%120" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%121_R-%T%%CCC%12101" RefId="%AID%_UP-%T%%CCC%121" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%122_R-%T%%CCC%12201" RefId="%AID%_UP-%T%%CCC%122" />
@@ -539,32 +527,6 @@
                                 <ComObjectRefRef RefId="%AID%_O-%T%%CCC%013_R-%T%%CCC%01306" />
                                 <ParameterRefRef RefId="%AID%_UP-%T%%CCC%707_R-%T%%CCC%70701" />
                                 <ParameterRefRef RefId="%AID%_UP-%T%%CCC%708_R-%T%%CCC%70801" />
-                              </when>
-                            </choose>
-                          </when>
-                        </choose>
-
-                        <!-- Kontaktzustand -->
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101">
-                          <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%511_R-%T%%CCC%51101" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%512_R-%T%%CCC%51201" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%020_R-%T%%CCC%02001" />
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%020_R-%T%%CCC%02001">
-                              <when test="1">
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%011_R-%T%%CCC%01110" />
-                                <ParameterBlock Id="%AID%_PB-nnn" Name="BTN%C%Periodic" Inline="true" Layout="Grid">
-                                  <Rows>
-                                    <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                  </Rows>
-                                  <Columns>
-                                    <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                    <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                    <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                  </Columns>
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%022_R-%T%%CCC%02201" Cell="1,2" />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%021_R-%T%%CCC%02101" Cell="1,3" />
-                                </ParameterBlock>
                               </when>
                             </choose>
                           </when>

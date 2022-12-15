@@ -8,7 +8,7 @@
 class BinaryInput
 {
 
-private:
+protected:
   uint32_t calcParamIndex(uint16_t iParamIndex);
   uint16_t calcKoNumber(uint8_t iKoIndex);
   int8_t calcKoIndex(uint16_t iKoNumber);
@@ -16,7 +16,6 @@ private:
   bool debounced(bool iCurrentState);
   void processInput();
   void processPeriodicSend();
-  bool queryInput();
   bool checkQueryTime();
   void sendState();
 
@@ -37,10 +36,11 @@ private:
   uint32_t mLastPeriodicSend = 0;
 
 public:
-  BinaryInput(uint8_t iIndex, uint8_t iInputPin, int8_t iPulsePin = -1);
+  BinaryInput(uint8_t iIndex, uint8_t iInputPin, int8_t iPulsePin);
   ~BinaryInput();
-
+  
   void setup();
   void loop();
   void processInputKo(GroupObject &iKo);
+  virtual bool queryHardwareInput();
 };
