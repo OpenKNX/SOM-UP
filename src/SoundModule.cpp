@@ -81,7 +81,6 @@ void processInputKoCallback(GroupObject &iKo)
     // gCommon.processInputKo(iKo);
     gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
-
   }
 }
 

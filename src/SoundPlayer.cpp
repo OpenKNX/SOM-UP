@@ -36,9 +36,12 @@ void SoundPlayer::play(uint16_t file, uint8_t volume, bool repeat)
   hardware.stop();
 
   // Repeat
-  if (repeat) {
+  if (repeat)
+  {
     hardware.setCycleMode(DY::PlayMode::RepeatOne);
-  } else {
+  }
+  else
+  {
     hardware.setCycleMode(DY::PlayMode::OneOff);
   }
 

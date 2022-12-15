@@ -1,18 +1,20 @@
 #include "Common.h"
 
-Common::Common() {
-
+Common::Common()
+{
 }
 Common::~Common() {}
 
 #ifdef LOG_StartupDelayBase
-bool Common::processStartupDelay() {
+bool Common::processStartupDelay()
+{
   return !delayCheck(mStartupDelay, getDelayPattern(LOG_StartupDelayBase));
 }
 #endif
 
 #ifdef LOG_HeartbeatDelayBase
-void Common::processHeartbeat() {
+void Common::processHeartbeat()
+{
   // the first heartbeat is send directly after startup delay of the device
   if (mHeartbeatDelay == 0 || delayCheck(mHeartbeatDelay, getDelayPattern(LOG_HeartbeatDelayBase)))
   {
@@ -23,25 +25,27 @@ void Common::processHeartbeat() {
 }
 #endif
 
-bool Common::loop() {
+bool Common::loop()
+{
   if (!knx.configured())
-      return false;
+    return false;
 
-  // Handle Startup delay
+    // Handle Startup delay
 #ifdef LOG_StartupDelayBase
-    if (processStartupDelay())
-        return false;
+  if (processStartupDelay())
+    return false;
 #endif
 
-  // Handle heartbeat delay
+    // Handle heartbeat delay
 #ifdef LOG_HeartbeatDelayBase
-    processHeartbeat();
+  processHeartbeat();
 #endif
 
   return true;
 }
 
-bool Common::setup() {
+bool Common::setup()
+{
   if (!knx.configured())
     return false;
 

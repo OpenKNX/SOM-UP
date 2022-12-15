@@ -9,7 +9,7 @@ class SoundControl;
 
 class SoundPlayer
 {
-  
+
 private:
   DY::Player hardware;
   bool status = false;

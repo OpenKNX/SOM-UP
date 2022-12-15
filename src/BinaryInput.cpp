@@ -34,7 +34,8 @@ GroupObject *BinaryInput::getKo(uint8_t iKoIndex)
   return &knx.getGroupObject(calcKoNumber(iKoIndex));
 }
 
-void BinaryInput::setup() {
+void BinaryInput::setup()
+{
   // Params
   paramActive = (knx.paramByte(calcParamIndex(BI_InputActive)) & BI_InputActiveMask) >> BI_InputActiveShift;
   paramMode = (knx.paramByte(calcParamIndex(BI_InputMode)) & BI_InputModeMask) >> BI_InputModeShift;
@@ -49,7 +50,8 @@ void BinaryInput::setup() {
   SERIAL_DEBUG.printf("BE %i paramDebouncing: %i\n\r", mIndex, paramDebouncing);
   SERIAL_DEBUG.printf("BE %i paramPeriodic: %i\n\r", mIndex, paramPeriodic);
 }
-void BinaryInput::loop() {
+void BinaryInput::loop()
+{
   if (paramActive != 1)
     return;
 
@@ -57,7 +59,8 @@ void BinaryInput::loop() {
   processPeriodicSend();
 }
 
-bool BinaryInput::queryInput() {
+bool BinaryInput::queryInput()
+{
   if (mPulsePin >= 0)
     digitalWrite(mPulsePin, true);
 
@@ -72,31 +75,36 @@ bool BinaryInput::queryInput() {
   return false;
 }
 
-void BinaryInput::processInput() {
+void BinaryInput::processInput()
+{
   // pulsed query
-  if(!checkQueryTime())
+  if (!checkQueryTime())
     return;
 
   bool lState = queryInput();
 
   // Skip till debounced
-  if(debounced(lState))
+  if (debounced(lState))
     return;
 
-  if (lState != mCurrentState) {
+  if (lState != mCurrentState)
+  {
     SERIAL_DEBUG.printf("BE %i: %i\n\r", mIndex, lState);
     mCurrentState = lState;
     sendState();
   }
 }
 
-bool BinaryInput::debounced(bool iCurrentState) {
-  if (iCurrentState != mLastButtonState) {
+bool BinaryInput::debounced(bool iCurrentState)
+{
+  if (iCurrentState != mLastButtonState)
+  {
     mLastDebounceTime = millis();
     mLastButtonState = iCurrentState;
   }
 
-  if ((millis() - mLastDebounceTime) > paramDebouncing) {
+  if ((millis() - mLastDebounceTime) > paramDebouncing)
+  {
     mLastButtonState = iCurrentState;
     return false;
   }
@@ -104,8 +112,10 @@ bool BinaryInput::debounced(bool iCurrentState) {
   return true;
 }
 
-bool BinaryInput::checkQueryTime() {
-  if ((millis() - mLastQueryTime) > BI_QueryDelay) {
+bool BinaryInput::checkQueryTime()
+{
+  if ((millis() - mLastQueryTime) > BI_QueryDelay)
+  {
     mLastQueryTime = millis();
     return true;
   }
@@ -113,18 +123,20 @@ bool BinaryInput::checkQueryTime() {
   return false;
 }
 
-void BinaryInput::processPeriodicSend() {
+void BinaryInput::processPeriodicSend()
+{
   if (paramPeriodic == 0)
     return;
 
-  if((millis() - mLastPeriodicSend) > paramPeriodic) {
+  if ((millis() - mLastPeriodicSend) > paramPeriodic)
+  {
     mLastPeriodicSend = millis();
     sendState();
   }
 }
 
-void BinaryInput::sendState() {
+void BinaryInput::sendState()
+{
   bool lSendState = paramMode ? !mCurrentState : mCurrentState;
-  SERIAL_DEBUG.printf("BE %i Output: %i on %i\n\r", mIndex, lSendState, calcKoNumber(BI_KoInputOutput));
   getKo(BI_KoInputOutput)->value(lSendState, getDPT(VAL_DPT_1));
 }

@@ -7,7 +7,7 @@
 
 class BinaryInput
 {
-  
+
 private:
   uint32_t calcParamIndex(uint16_t paramIndex);
   uint16_t calcKoNumber(uint8_t koIndex);
@@ -35,6 +35,7 @@ private:
   uint32_t mLastDebounceTime = 0;
   uint32_t mLastQueryTime = 0;
   uint32_t mLastPeriodicSend = 0;
+
 public:
   BinaryInput(uint8_t iIndex, uint8_t iInputPin, int8_t iPulsePin = -1);
   ~BinaryInput();

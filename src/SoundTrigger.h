@@ -26,7 +26,7 @@ private:
   uint16_t paramFileDay;
   uint16_t paramFileNight;
   uint32_t paramDuration;
-  
+
   bool paramActive = false;
   bool paramRepeat = false;
   bool currentLocked = false;

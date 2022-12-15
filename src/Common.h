@@ -17,6 +17,6 @@ public:
   bool loop();
   bool processStartupDelay();
   void processHeartbeat();
- // void addTest(void (*callback)(int));
- // int *testArray[20];
+  // void addTest(void (*callback)(int));
+  // int *testArray[20];
 };

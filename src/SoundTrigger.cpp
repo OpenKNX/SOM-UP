@@ -67,11 +67,13 @@ GroupObject *SoundTrigger::getKo(uint8_t koIndex)
   return &knx.getGroupObject(calcKoNumber(koIndex));
 }
 
-void SoundTrigger::loop() {
+void SoundTrigger::loop()
+{
   processDuration();
 };
 
-void SoundTrigger::processDuration() {
+void SoundTrigger::processDuration()
+{
   // skip if timer not started?
   if (startMillis == 0)
     return;
@@ -84,7 +86,7 @@ void SoundTrigger::processDuration() {
   if (!paramRepeat)
     return;
 
-  // timer 
+  // timer
   if ((millis() - startMillis) > paramDuration)
     stop();
 };
@@ -209,7 +211,8 @@ void SoundTrigger::setStatus(bool newStatus)
   // internal timer for max duration
   startMillis = newStatus ? millis() : 0;
 
-  if (status != newStatus) {
+  if (status != newStatus)
+  {
     status = newStatus;
     getKo(SOM_KoTriStatus)->value(status, getDPT(VAL_DPT_1));
   }
