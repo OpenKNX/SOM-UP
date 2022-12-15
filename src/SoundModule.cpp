@@ -114,6 +114,4 @@ void appSetup()
   gBinaryInputD.setup();
   gSoundControl.setup();
   gLogic.setup(true);
-
-  pinMode(2, INPUT);
 }

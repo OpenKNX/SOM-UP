@@ -32,7 +32,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%012_R-%T%%CCC%01201" RefId="%AID%_UP-%T%%CCC%012" />
             </ParameterRefs>
             <ComObjectTable>
-              <ComObject Id="%AID%_O-%T%%CCC%000" Name="Input%C%Output" Number="%K0%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-9" />
+              <ComObject Id="%AID%_O-%T%%CCC%000" Name="Input%C%Output" Number="%K0%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-9" />
             </ComObjectTable>
             <ComObjectRefs>
               <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_O-%T%%CCC%000" FunctionText="BE %Z%, 1=Geschlossen, 0=Geöffnet" Text="Eingang: {{0:%Z%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>

@@ -125,6 +125,6 @@ void BinaryInput::processPeriodicSend() {
 
 void BinaryInput::sendState() {
   bool lSendState = paramMode ? !mCurrentState : mCurrentState;
-  SERIAL_DEBUG.printf("BE %i Output: %i\n\r", mIndex, lSendState);
+  SERIAL_DEBUG.printf("BE %i Output: %i on %i\n\r", mIndex, lSendState, calcKoNumber(BI_KoInputOutput));
   getKo(BI_KoInputOutput)->value(lSendState, getDPT(VAL_DPT_1));
 }
