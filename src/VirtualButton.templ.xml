@@ -10,44 +10,46 @@
               <Parameter Id="%AID%_P-%T%%CCC%000" Name="BTN%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
               <Union SizeInBit="8">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="BTN%C%Mode" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNMode" Text="Modus" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%002" Name="BTN%C%Lock" Offset="0" BitOffset="1" ParameterType="%AID%_PT-SOMLock" Text="Sperre" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%120" Name="BTN%C%OutputDim" Offset="0" BitOffset="2" ParameterType="%AID%_PT-BTNOutputDim" Text="Taste 1 / Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%121" Name="BTN%C%OutputDirection" Offset="0" BitOffset="3" ParameterType="%AID%_PT-BTNOutputDirection" Text="Taste 1 / Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%122" Name="BTN%C%OutputJalousie" Offset="0" BitOffset="4" ParameterType="%AID%_PT-BTNOutputJalousie" Text="Funktion" Value="0" />
               </Union>
 
+              <Union SizeInBit="8">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="BTN%C%Mode" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNMode" Text="Modus" Value="0" />
+              </Union>
+
               <!-- Inputs -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="2" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%008" Name="BTN%C%InputA" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNInput" Text="" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%009" Name="BTN%C%InputB" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNInput" Text="" Value="0" />
               </Union>
 
               <!-- Short -->
-              <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="3" BitOffset="0" />
+              <Union SizeInBit="40">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%500" Name="BTN%C%OutputShort" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutput" Text="  Ausgabe" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%501" Name="BTN%C%Output1ShortBool" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%511" Name="BTN%C%Output1Open" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool1" Text="Kontakt geöffnet" Value="1" />
-                <Parameter Id="%AID%_UP-%T%%CCC%502" Name="BTN%C%Output2ShortBool" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%512" Name="BTN%C%Output2Closed" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool1" Text="Kontakt geschlossen" Value="2" />
+                <Parameter Id="%AID%_UP-%T%%CCC%501" Name="BTN%C%Output1ShortDpt1" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%502" Name="BTN%C%Output2ShortDpt1" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%503" Name="BTN%C%Output1ShortDpt5" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%504" Name="BTN%C%Output2ShortDpt5" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="  Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%505" Name="BTN%C%Output1ShortDpt5001" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001" Text="  Taste 1" Value="0" SuffixText="%" />
                 <Parameter Id="%AID%_UP-%T%%CCC%506" Name="BTN%C%Output2ShortDpt5001" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001" Text="  Taste 2" Value="0" SuffixText="%" />
                 <Parameter Id="%AID%_UP-%T%%CCC%507" Name="BTN%C%Output1ShortDpt17" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNScene" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%508" Name="BTN%C%Output2ShortDpt17" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNScene" Text="  Taste 2" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%591" Name="BTN%C%OutputShortMultiple" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutputMultiple" Text="  Ausgabe" Value="5" />
                 <Parameter Id="%AID%_UP-%T%%CCC%592" Name="BTN%C%OutputShortInteraction" Offset="3" BitOffset="0" ParameterType="%AID%_PT-BTNTrigger" Text="  Auslösen beim" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%591" Name="BTN%C%OutputShortMultiple" Offset="4" BitOffset="0" ParameterType="%AID%_PT-BTNOutputMultiple" Text="  Ausgabe" Value="5" />
               </Union>
 
               <!-- Long -->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="7" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%600" Name="BTN%C%OutputLong" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutput" Text="  Ausgabe" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%601" Name="BTN%C%Output1LongBool" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%602" Name="BTN%C%Output2LongBool" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%601" Name="BTN%C%Output1LongDpt1" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%602" Name="BTN%C%Output2LongDpt1" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%603" Name="BTN%C%Output1LongDpt5" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%604" Name="BTN%C%Output2LongDpt5" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="  Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%605" Name="BTN%C%Output1LongDpt5001" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001" Text="  Taste 1" Value="0" SuffixText="%" />
@@ -59,10 +61,10 @@
 
               <!-- ExtraLong -->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="11" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="12" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%700" Name="BTN%C%OutputExtraLong" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutput" Text="  Ausgabe" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%701" Name="BTN%C%Output1ExtraLongBool" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%702" Name="BTN%C%Output2ExtraLongBool" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%701" Name="BTN%C%Output1ExtraLongDpt1" Offset="1" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 1" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%702" Name="BTN%C%Output2ExtraLongDpt1" Offset="2" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool2" Text="  Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%703" Name="BTN%C%Output1ExtraLongDpt5" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="  Taste 1" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%704" Name="BTN%C%Output2ExtraLongDpt5" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="  Taste 2" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%705" Name="BTN%C%Output1ExtraLongDpt5001" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001" Text="  Taste 1" Value="0" SuffixText="%" />
@@ -74,7 +76,7 @@
 
               <!-- Multiple -->
               <Union SizeInBit="24">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="15" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="16" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%411" Name="BTN%C%M1Dpt1"    Offset="0" BitOffset="0" ParameterType="%AID%_PT-BTNOutputBool1" Text="  1. Klick" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%414" Name="BTN%C%M1Dpt5"    Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5"      Text="  1. Klick" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%415" Name="BTN%C%M1Dpt5001" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5001"   Text="  1. Klick" Value="0" SuffixText="%" />
@@ -115,8 +117,6 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%501_R-%T%%CCC%50101" RefId="%AID%_UP-%T%%CCC%501" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%501_R-%T%%CCC%50102" RefId="%AID%_UP-%T%%CCC%501" Text="  Taste"/>
               <ParameterRef Id="%AID%_UP-%T%%CCC%502_R-%T%%CCC%50201" RefId="%AID%_UP-%T%%CCC%502" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%511_R-%T%%CCC%51101" RefId="%AID%_UP-%T%%CCC%511" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%512_R-%T%%CCC%51201" RefId="%AID%_UP-%T%%CCC%512" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%503_R-%T%%CCC%50301" RefId="%AID%_UP-%T%%CCC%503" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%503_R-%T%%CCC%50302" RefId="%AID%_UP-%T%%CCC%503" Text="  Taste" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%504_R-%T%%CCC%50401" RefId="%AID%_UP-%T%%CCC%504" />

@@ -33,24 +33,68 @@ VirtualButton::VirtualButton(uint8_t iIndex)
 
 void VirtualButton::setup()
 {
-  // Params
-  mParamMode = knx.paramByte(calcParamIndex(BTN_BTNMode));
-  // mParamMode = (knx.paramByte(calcParamIndex(BTN_BTNMode)) & BTN_BTNModeMask) >> BTN_BTNModeShift;
+  // Global Params
+  mParams.mode = knx.paramByte(calcParamIndex(BTN_BTNMode));
+  mParams.lock = (knx.paramByte(calcParamIndex(BTN_BTNLock)) & BTN_BTNLockMask) >> BTN_BTNLockShift;
+  mParams.outputShort = knx.paramByte(calcParamIndex(BTN_BTNOutputShort));
+  mParams.outputLong = knx.paramByte(calcParamIndex(BTN_BTNOutputLong));
+  mParams.outputExtraLong = knx.paramByte(calcParamIndex(BTN_BTNOutputExtraLong));
+
+  // Button 1 - Short
+  mButtonParams[0].outputShort.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt1) & BTN_BTNOutput1ShortDpt1Mask) >> BTN_BTNOutput1ShortDpt1Shift;
+  mButtonParams[0].outputShort.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt5));
+  mButtonParams[0].outputShort.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt5001));
+  mButtonParams[0].outputShort.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt17));
+
+  // Button 1 - Long
+  mButtonParams[0].outputLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt1) & BTN_BTNOutput1LongDpt1Mask) >> BTN_BTNOutput1LongDpt1Shift;
+  mButtonParams[0].outputLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt5));
+  mButtonParams[0].outputLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt5001));
+  mButtonParams[0].outputLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt17));
+
+  // Button 1 - ExtraLong
+  mButtonParams[0].outputExtraLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt1) & BTN_BTNOutput1ExtraLongDpt1Mask) >> BTN_BTNOutput1ExtraLongDpt1Shift;
+  mButtonParams[0].outputExtraLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt5));
+  mButtonParams[0].outputExtraLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt5001));
+  mButtonParams[0].outputExtraLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt17));
+
+  // Button 2 - Short
+  mButtonParams[1].outputShort.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt1) & BTN_BTNOutput2ShortDpt1Mask) >> BTN_BTNOutput2ShortDpt1Shift;
+  mButtonParams[1].outputShort.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt5));
+  mButtonParams[1].outputShort.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt5001));
+  mButtonParams[1].outputShort.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt17));
+
+  // Button 2 - Long
+  mButtonParams[1].outputLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt1) & BTN_BTNOutput2LongDpt1Mask) >> BTN_BTNOutput2LongDpt1Shift;
+  mButtonParams[1].outputLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt5));
+  mButtonParams[1].outputLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt5001));
+  mButtonParams[1].outputLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt17));
+
+  // Button 2 - ExtraLong
+  mButtonParams[1].outputExtraLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt1) & BTN_BTNOutput2ExtraLongDpt1Mask) >> BTN_BTNOutput2ExtraLongDpt1Shift;
+  mButtonParams[1].outputExtraLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt5));
+  mButtonParams[1].outputExtraLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt5001));
+  mButtonParams[1].outputExtraLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt17));
 
   // Debug
-  SERIAL_DEBUG.printf("BTN %i mParamMode: %i\n\r", mIndex, mParamMode);
+  SERIAL_DEBUG.printf("BTN %i outputShortDpt1: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt1, calcParamIndex(BTN_BTNOutput1ShortDpt1));
+  SERIAL_DEBUG.printf("BTN %i outputShortDpt5: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt5, calcParamIndex(BTN_BTNOutput1ShortDpt5));
+  SERIAL_DEBUG.printf("BTN %i outputShortDpt5001: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt5001, calcParamIndex(BTN_BTNOutput1ShortDpt5001));
+  SERIAL_DEBUG.printf("BTN %i outputShortDpt17: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt17, calcParamIndex(BTN_BTNOutput1ShortDpt17));
+  
+  SERIAL_DEBUG.printf("BTN %i mParamMode: %i\n\r", mIndex, mParams.mode);
 }
 
 void VirtualButton::loop()
 {
   processPress(0);
   processPress(1);
-  processMultiClickReset(0);
+  processMultiClickReset();
 }
 
 void VirtualButton::processInputKo(GroupObject &iKo)
 {
-  if (mParamMode == 0)
+  if (mParams.mode == 0)
     return;
 
   switch (calcKoIndex(iKo.asap()))
@@ -69,46 +113,50 @@ void VirtualButton::processInputKo(GroupObject &iKo)
 
 void VirtualButton::processPress(bool iButton)
 {
-  if (!mButton[iButton]->shortPress)
+  if (!mButtonState[iButton].shortPress)
     return;
 
-  if (!mButton[iButton]->longPress && (millis() - mButton[iButton]->pressedStart) > 1000)
+  if (!mButtonState[iButton].longPress && (millis() - mButtonState[iButton].pressedStart) > BTN_LongPressTime)
   {
     SERIAL_DEBUG.printf(" - long press\n\r");
-    mButton[iButton]->longPress = true;
+    mButtonState[iButton].longPress = true;
   }
 
-  if (!mButton[iButton]->extraLongPress && (millis() - mButton[iButton]->pressedStart) > 2500)
+  if (!mButtonState[iButton].extraLongPress && (millis() - mButtonState[iButton].pressedStart) > BTN_ExtraLongPressTime)
   {
     SERIAL_DEBUG.printf(" - extra long press\n\r");
-    mButton[iButton]->extraLongPress = true;
+    mButtonState[iButton].extraLongPress = true;
   }
 }
 
 void VirtualButton::processInputKoInput(GroupObject &iKo, bool iButton)
 {
   bool lNewPress = iKo.value(getDPT(VAL_DPT_1));
-  bool lLastPress = mButton[iButton]->shortPress;
-  //SERIAL_DEBUG.printf("BTN::processInputKoInput %i/%i: %i -> %i\n\r", mIndex, iButton, lLastPress, lNewPress);
+  bool lLastPress = &mButtonState[iButton].shortPress;
+  SERIAL_DEBUG.printf("BTN::processInputKoInput %i/%i: %i -> %i\n\r", mIndex, iButton, lLastPress, lNewPress);
 
   if (lNewPress)
   {
     SERIAL_DEBUG.printf(" - press\n\r");
-    mButton[iButton]->pressedStart = millis();
+    if (iButton == 0)
+    {
+      mButtonState[iButton].pressedStart = millis();
+      processMultiClickReset();
+    }
   }
 
-  if (!lNewPress && mButton[iButton]->shortPress)
+  if (!lNewPress && mButtonState[iButton].shortPress)
   {
-    if (mButton[iButton]->extraLongPress)
+    if (mButtonState[iButton].extraLongPress)
     {
-      mButton[iButton]->multiClicks = 0;
-      mButton[iButton]->multiClickTimer = 0;
+      mButtonState[iButton].multiClicks = 0;
+      mButtonState[iButton].multiClickTimer = 0;
       SERIAL_DEBUG.printf(" - extra long release\n\r");
     }
-    else if (mButton[iButton]->longPress)
+    else if (mButtonState[iButton].longPress)
     {
-      mButton[iButton]->multiClicks = 0;
-      mButton[iButton]->multiClickTimer = 0;
+      mButtonState[iButton].multiClicks = 0;
+      mButtonState[iButton].multiClickTimer = 0;
       SERIAL_DEBUG.printf(" - long release\n\r");
     }
     else
@@ -116,46 +164,53 @@ void VirtualButton::processInputKoInput(GroupObject &iKo, bool iButton)
       SERIAL_DEBUG.printf(" - release\n\r");
 
       // Allow multiclick only for first button
-      if (iButton == 0) {
-
-        processMultiClickReset(0);
-
-        // Check for multiclick
-        if (
-            mButton[iButton]->multiClickTimer == 0 ||
-            (millis() - mButton[iButton]->multiClickTimer) <= 600)
-        {
-          mButton[iButton]->multiClicks += 1;
-          mButton[iButton]->multiClickTimer = millis();
-        }
+      if (iButton == 0)
+      {
+        SERIAL_DEBUG.printf(" - multiclick +1 (%i)\n\r", mButtonState[iButton].multiClicks);
+        mButtonState[iButton].multiClicks += 1;
+        mButtonState[iButton].multiClickTimer = millis();
       }
-
     }
 
-    mButton[iButton]->shortPress = false;
-    mButton[iButton]->longPress = false;
-    mButton[iButton]->extraLongPress = false;
-    mButton[iButton]->pressedStart = 0;
+    mButtonState[iButton].shortPress = false;
+    mButtonState[iButton].longPress = false;
+    mButtonState[iButton].extraLongPress = false;
+    mButtonState[iButton].pressedStart = 0;
   }
 
-  mButton[iButton]->shortPress = lNewPress;
+  mButtonState[iButton].shortPress = lNewPress;
 }
 
-void VirtualButton::processMultiClickReset(bool iButton)
+void VirtualButton::processMultiClickReset()
 {
-  // multiclick: reset timer if expired
+  // skip during a press
+  if (mButtonState[0].shortPress)
+    return;
+
+  // skip when no timer started
+  if (mButtonState[0].multiClickTimer == 0)
+    return;
+
   if (
-      mButton[iButton]->multiClickTimer > 0 &&
-      (millis() - mButton[iButton]->multiClickTimer) > 600)
+      // mButtonState[0].multiClicks == BTN_MaxMuliClicks ||
+      millis() - mButtonState[0].multiClickTimer > BTN_MuliClickTime)
   {
-    SERIAL_DEBUG.printf(" - multiclick: %i\n\r", mButton[iButton]->multiClicks);
-    mButton[iButton]->multiClickTimer = 0;
-    mButton[iButton]->multiClicks = 0;
+    multiClick(mButtonState[0].multiClicks);
+    mButtonState[0].multiClickTimer = 0;
+    mButtonState[0].multiClicks = 0;
   }
+}
+
+void VirtualButton::multiClick(uint8_t iClicks)
+{
+  if (iClicks > BTN_MaxMuliClicks)
+    return;
+
+  SERIAL_DEBUG.printf("Button: %i: %i multiclicks\n\r", mIndex, iClicks);
 }
 
 void VirtualButton::processInputKoLock(GroupObject &iKo)
 {
   bool lValue = iKo.value(getDPT(VAL_DPT_1));
-  //SERIAL_DEBUG.printf("BTN::processInputKoLock %i: %i\n\r", mIndex, lValue);
+  // SERIAL_DEBUG.printf("BTN::processInputKoLock %i: %i\n\r", mIndex, lValue);
 }

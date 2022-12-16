@@ -82,8 +82,6 @@ void processInputKoCallback(GroupObject &iKo)
     break;
 
   default:
-    SERIAL_DEBUG.printf("processInputKo %i\n\r", lAsap);
-
     // gCommon.processInputKo(iKo);
     gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
