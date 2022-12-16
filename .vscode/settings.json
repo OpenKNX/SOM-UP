@@ -56,5 +56,6 @@
         "chrono": "cpp",
         "stop_token": "cpp",
         "thread": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": true
 }

@@ -1087,12 +1087,15 @@
 #define BI_InputActive                0      // 2 Bits, Bit 7-6
 #define     BI_InputActiveMask 0xC0
 #define     BI_InputActiveShift 6
-#define BI_InputMode                  0      // 1 Bit, Bit 5
-#define     BI_InputModeMask 0x20
-#define     BI_InputModeShift 5
-#define BI_InputPeriodic              0      // 1 Bit, Bit 4
-#define     BI_InputPeriodicMask 0x10
-#define     BI_InputPeriodicShift 4
+#define BI_InputOpen                  0      // 2 Bits, Bit 5-4
+#define     BI_InputOpenMask 0x30
+#define     BI_InputOpenShift 4
+#define BI_InputClose                 0      // 2 Bits, Bit 3-2
+#define     BI_InputCloseMask 0x0C
+#define     BI_InputCloseShift 2
+#define BI_InputPeriodic              0      // 1 Bit, Bit 2
+#define     BI_InputPeriodicMask 0x04
+#define     BI_InputPeriodicShift 2
 #define BI_InputDebouncing            1      // 8 Bits, Bit 7-0
 #define BI_InputPeriodicBase          2      // 2 Bits, Bit 7-6
 #define     BI_InputPeriodicBaseMask 0xC0
@@ -1106,5 +1109,5 @@
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 10
+#define MAIN_ApplicationVersion 12
 #define MAIN_OrderNumber "SOM-UP"
