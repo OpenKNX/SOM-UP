@@ -82,9 +82,16 @@ void processInputKoCallback(GroupObject &iKo)
     break;
 
   default:
+    SERIAL_DEBUG.printf("processInputKo %i\n\r", lAsap);
+
     // gCommon.processInputKo(iKo);
     gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
+    if (lAsap >= BTN_KoOffset && lAsap < BTN_KoOffset + BTN_ChannelCount * BTN_KoBlockSize)
+    {
+      uint8_t lIndex = (lAsap - BTN_KoOffset) / BTN_KoBlockSize;
+      gVirtualButtons[lIndex]->processInputKo(iKo);
+    }
   }
 }
 
@@ -119,7 +126,7 @@ void appSetup()
   // Setup VBM
   for (uint8_t i = 0; i < BTN_ChannelCount; i++) {
     gVirtualButtons[i] = new VirtualButton(i);
-    gVirtualButtons[i]->loop();
+    gVirtualButtons[i]->setup();
   }
 
   // Setup Logic

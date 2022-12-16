@@ -127,5 +127,16 @@ BinaryInput::~BinaryInput() {}
 
 bool BinaryInput::queryHardwareInput()
 {
+  if (mPulsePin >= 0)
+    digitalWrite(mPulsePin, true);
+
+  bool lState = digitalRead(mInputPin);
+
+  if (mPulsePin >= 0)
+    digitalWrite(mPulsePin, false);
+
+  if (lState == LOW)
+    return true;
+
   return false;
 }

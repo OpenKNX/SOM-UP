@@ -93,24 +93,20 @@ void SoundTrigger::processDuration()
 
 void SoundTrigger::processInputKo(GroupObject &iKo)
 {
-  // we process KO only if we are running
-  if (mParamActive)
-  {
-    switch (calcKoIndex(iKo.asap()))
-    {
-    case SOM_KoTriTrigger:
-      processInputKoTrigger(iKo);
-      break;
-    case SOM_KoTriLock:
-      processInputKoLock(iKo);
-      break;
-    case SOM_KoTriDayNight:
-      processInputKoDayNight(iKo);
-      break;
+  if (!mParamActive)
+    return;
 
-    default:
-      break;
-    }
+  switch (calcKoIndex(iKo.asap()))
+  {
+  case SOM_KoTriTrigger:
+    processInputKoTrigger(iKo);
+    break;
+  case SOM_KoTriLock:
+    processInputKoLock(iKo);
+    break;
+  case SOM_KoTriDayNight:
+    processInputKoDayNight(iKo);
+    break;
   }
 }
 
