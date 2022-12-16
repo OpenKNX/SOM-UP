@@ -117,6 +117,9 @@ void appSetup()
   if (GroupObject::classCallback() == 0)
     GroupObject::classCallback(processInputKoCallback);
 
+  // SoundModul first for fast player init
+  gSoundControl.setup();
+
   // Setup BE
   for (uint8_t i = 0; i < BI_ChannelCount; i++)
     gBinaryInputs[i]->setup();
