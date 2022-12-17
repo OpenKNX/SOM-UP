@@ -996,6 +996,7 @@
 #define BTN_BTNInputA                  3      // char*, 2 Byte
 #define BTN_BTNInputB                  4      // char*, 2 Byte
 #define BTN_BTNOutputShort             4      // 8 Bits, Bit 7-0
+#define BTN_BTNOutputShortMultiple     4      // 8 Bits, Bit 7-0
 #define BTN_BTNOutput1ShortDpt1        5      // 2 Bits, Bit 1-0
 #define     BTN_BTNOutput1ShortDpt1Mask 0x03
 #define     BTN_BTNOutput1ShortDpt1Shift 0
@@ -1011,7 +1012,6 @@
 #define BTN_BTNOutputShortEvent        7      // 1 Bit, Bit 7
 #define     BTN_BTNOutputShortEventMask 0x80
 #define     BTN_BTNOutputShortEventShift 7
-#define BTN_BTNOutputShortMultiple     8      // 8 Bits, Bit 7-0
 #define BTN_BTNOutputLong              8      // 8 Bits, Bit 7-0
 #define BTN_BTNOutput1LongDpt1         9      // 2 Bits, Bit 1-0
 #define     BTN_BTNOutput1LongDpt1Mask 0x03
@@ -1044,21 +1044,21 @@
 #define BTN_BTNOutputExtraLongEvent   15      // 1 Bit, Bit 7
 #define     BTN_BTNOutputExtraLongEventMask 0x80
 #define     BTN_BTNOutputExtraLongEventShift 7
-#define BTN_BTNM1Dpt1                 16      // 2 Bits, Bit 7-6
-#define     BTN_BTNM1Dpt1Mask 0xC0
-#define     BTN_BTNM1Dpt1Shift 6
+#define BTN_BTNM1Dpt1                 16      // 2 Bits, Bit 1-0
+#define     BTN_BTNM1Dpt1Mask 0x03
+#define     BTN_BTNM1Dpt1Shift 0
 #define BTN_BTNM1Dpt5                 16      // uint8_t
 #define BTN_BTNM1Dpt5001              16      // uint8_t
 #define BTN_BTNM1Dpt17                16      // 8 Bits, Bit 7-0
-#define BTN_BTNM2Dpt1                 17      // 2 Bits, Bit 7-6
-#define     BTN_BTNM2Dpt1Mask 0xC0
-#define     BTN_BTNM2Dpt1Shift 6
+#define BTN_BTNM2Dpt1                 17      // 2 Bits, Bit 1-0
+#define     BTN_BTNM2Dpt1Mask 0x03
+#define     BTN_BTNM2Dpt1Shift 0
 #define BTN_BTNM2Dpt5                 17      // uint8_t
 #define BTN_BTNM2Dpt5001              17      // uint8_t
 #define BTN_BTNM2Dpt17                17      // 8 Bits, Bit 7-0
-#define BTN_BTNM3Dpt1                 18      // 2 Bits, Bit 7-6
-#define     BTN_BTNM3Dpt1Mask 0xC0
-#define     BTN_BTNM3Dpt1Shift 6
+#define BTN_BTNM3Dpt1                 18      // 2 Bits, Bit 1-0
+#define     BTN_BTNM3Dpt1Mask 0x03
+#define     BTN_BTNM3Dpt1Shift 0
 #define BTN_BTNM3Dpt5                 18      // uint8_t
 #define BTN_BTNM3Dpt5001              18      // uint8_t
 #define BTN_BTNM3Dpt17                18      // 8 Bits, Bit 7-0
@@ -1109,5 +1109,5 @@
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 16
+#define MAIN_ApplicationVersion 18
 #define MAIN_OrderNumber "SOM-UP"
