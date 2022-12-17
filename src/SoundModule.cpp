@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "Logic.h"
 #include "BinaryInput.h"
+#include "BinaryInputGPIO.h"
 #include "VirtualButton.h"
 #include "SoundControl.h"
 
@@ -9,10 +10,10 @@ SoundControl gSoundControl;
 Logic gLogic;
 Common gCommon;
 BinaryInput *gBinaryInputs[BI_ChannelCount] = {
-  new BinaryInput(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
-  new BinaryInput(1, BINARY_INPUT_B_PIN, BINARY_INPUT_PULSE),
-  new BinaryInput(2, BINARY_INPUT_C_PIN, BINARY_INPUT_PULSE),
-  new BinaryInput(3, BINARY_INPUT_D_PIN, BINARY_INPUT_PULSE)
+  new BinaryInputGPIO(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
+  new BinaryInputGPIO(1, BINARY_INPUT_B_PIN, BINARY_INPUT_PULSE),
+  new BinaryInputGPIO(2, BINARY_INPUT_C_PIN, BINARY_INPUT_PULSE),
+  new BinaryInputGPIO(3, BINARY_INPUT_D_PIN, BINARY_INPUT_PULSE)
 };
 VirtualButton *gVirtualButtons[BTN_ChannelCount];
 
