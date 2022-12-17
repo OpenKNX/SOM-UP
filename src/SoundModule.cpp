@@ -1,32 +1,20 @@
 #include "Helper.h"
-#include "SoundControl.h"
+#include "Common.h"
 #include "Logic.h"
-#include "KnxHelper.h"
+#include "BinaryInput.h"
+#include "VirtualButton.h"
+#include "SoundControl.h"
 
-struct sRuntimeInfo
-{
-  uint32_t startupDelay;
-  uint32_t heartbeatDelay;
-};
-
-sRuntimeInfo gRuntimeData;
-
-SoundControl soundControl;
+SoundControl gSoundControl;
 Logic gLogic;
-
-void ProcessHeartbeat()
-{
-  // the first heartbeat is send directly after startup delay of the device
-  if (gRuntimeData.heartbeatDelay == 0 || delayCheck(gRuntimeData.heartbeatDelay, getDelayPattern(LOG_HeartbeatDelayBase)))
-  {
-    // we waited enough, let's send a heartbeat signal
-    knx.getGroupObject(LOG_KoHeartbeat).value(true, getDPT(VAL_DPT_1));
-    gRuntimeData.heartbeatDelay = millis();
-    // debug entry point
-    // gPresence.debug();
-    gLogic.debug();
-  }
-}
+Common gCommon;
+BinaryInput *gBinaryInputs[BI_ChannelCount] = {
+  new BinaryInput(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
+  new BinaryInput(1, BINARY_INPUT_B_PIN, BINARY_INPUT_PULSE),
+  new BinaryInput(2, BINARY_INPUT_C_PIN, BINARY_INPUT_PULSE),
+  new BinaryInput(3, BINARY_INPUT_D_PIN, BINARY_INPUT_PULSE)
+};
+VirtualButton *gVirtualButtons[BTN_ChannelCount];
 
 void ProcessReadRequests()
 {
@@ -37,12 +25,6 @@ void ProcessReadRequests()
     sCalledProcessReadRequests = true;
   }
   gLogic.processReadRequests();
-}
-
-// true solgange der Start des gesamten Moduls verzögert werden soll
-bool startupDelay()
-{
-  return !delayCheck(gRuntimeData.startupDelay, getDelayPattern(LOG_StartupDelayBase, true));
 }
 
 bool processDiagnoseCommand()
@@ -87,35 +69,67 @@ void ProcessDiagnoseCommand(GroupObject &iKo)
 
 void processInputKoCallback(GroupObject &iKo)
 {
-  if (iKo.asap() == LOG_KoDiagnose)
+  uint16_t lAsap = iKo.asap();
+  switch (lAsap)
   {
+  case LOG_KoDiagnose:
     ProcessDiagnoseCommand(iKo);
-  }
-  else
-  {
-    soundControl.processInputKo(iKo);
+    break;
+
+  case LOG_KoHeartbeat:
+    SERIAL_DEBUG.println("HA");
+    gLogic.debug();
+    break;
+
+  default:
+    // gCommon.processInputKo(iKo);
+    gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
+    if (lAsap >= BTN_KoOffset && lAsap < BTN_KoOffset + BTN_ChannelCount * BTN_KoBlockSize)
+    {
+      uint8_t lIndex = (lAsap - BTN_KoOffset) / BTN_KoBlockSize;
+      gVirtualButtons[lIndex]->processInputKo(iKo);
+    }
   }
 }
 
 void appLoop()
 {
-  ProcessHeartbeat();
+  if (!gCommon.loop())
+    return;
+
   ProcessReadRequests();
-  soundControl.loop();
+  gSoundControl.loop();
   gLogic.loop();
+  for (uint8_t i = 0; i < BI_ChannelCount; i++)
+    gBinaryInputs[i]->loop();
+
+  for (uint8_t i = 0; i < BTN_ChannelCount; i++)
+    gVirtualButtons[i]->loop();
+    
 }
 
 void appSetup()
 {
-  if (knx.configured())
-  {
-    if (GroupObject::classCallback() == 0)
-      GroupObject::classCallback(processInputKoCallback);
+  if (!gCommon.setup())
+    return;
 
-    gRuntimeData.startupDelay = millis();
-    gRuntimeData.heartbeatDelay = 0;
-    soundControl.setup();
-    gLogic.setup(false);
+  if (GroupObject::classCallback() == 0)
+    GroupObject::classCallback(processInputKoCallback);
+
+  // SoundModul first for fast player init
+  gSoundControl.setup();
+
+  // Setup BE
+  for (uint8_t i = 0; i < BI_ChannelCount; i++)
+    gBinaryInputs[i]->setup();
+
+  // Setup VBM
+  for (uint8_t i = 0; i < BTN_ChannelCount; i++) {
+    gVirtualButtons[i] = new VirtualButton(i);
+    gVirtualButtons[i]->setup();
   }
+
+  // Setup Logic
+  gLogic.setup(true);
 }

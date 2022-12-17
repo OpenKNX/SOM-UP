@@ -5,39 +5,39 @@ class SoundControl;
 class SoundTrigger
 {
 private:
-  uint32_t calcParamIndex(uint16_t paramIndex);
-  uint16_t calcKoNumber(uint8_t koIndex);
-  int8_t calcKoIndex(uint16_t koNumber);
-  GroupObject *getKo(uint8_t koIndex);
+  uint32_t calcParamIndex(uint16_t iParamIndex);
+  uint16_t calcKoNumber(uint8_t iKoIndex);
+  int8_t calcKoIndex(uint16_t iKoNumber);
+  GroupObject *getKo(uint8_t iKoIndex);
 
-  void processInputKoTrigger(GroupObject &ko);
-  void processInputKoLock(GroupObject &ko);
-  void processInputKoDayNight(GroupObject &ko);
+  void processInputKoTrigger(GroupObject &iKo);
+  void processInputKoLock(GroupObject &iKo);
+  void processInputKoDayNight(GroupObject &iKo);
   void processDuration();
 
-  uint8_t index = 0;
-  uint8_t currentFile;
-  uint8_t currentVolume;
-  uint8_t paramPriority;
-  uint8_t paramLock;
-  uint8_t paramDayNight;
-  uint8_t paramVolumeDay;
-  uint8_t paramVolumeNight;
-  uint8_t paramFileDay;
-  uint8_t paramFileNight;
-  uint32_t paramDuration;
-  
-  bool paramActive = false;
-  bool paramRepeat = false;
-  bool currentLocked = false;
-  bool status = false;
-  uint32_t startMillis = 0;
+  uint8_t mIndex = 0;
+  uint16_t mCurrentFile;
+  uint8_t mCurrentVolume;
+  uint8_t mParamPriority;
+  uint8_t mParamLock;
+  uint8_t mParamDayNight;
+  uint8_t mParamVolumeDay;
+  uint8_t mParamVolumeNight;
+  uint16_t mParamFileDay;
+  uint16_t mParamFileNight;
+  uint32_t mParamDuration;
+
+  bool mParamActive = false;
+  bool mParamRepeat = false;
+  bool mCurrentLocked = false;
+  bool mStatus = false;
+  uint32_t mStartMillis = 0;
 
 public:
-  SoundTrigger(uint8_t index);
+  SoundTrigger(uint8_t iIndex);
   ~SoundTrigger();
 
-  void processInputKo(GroupObject &ko);
+  void processInputKo(GroupObject &iKo);
   void setup();
   void loop();
   void lock();
@@ -47,5 +47,5 @@ public:
   void play();
   void stop();
   void stopped();
-  void setStatus(bool value);
+  void setStatus(bool iValue);
 };

@@ -2,9 +2,9 @@
 <?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
   <ManufacturerData>
-    <Manufacturer RefId="M-00FA">
+    <Manufacturer>
       <ApplicationPrograms>
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SOM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <ApplicationProgram>
           <Static>
             <Parameters>
               <Parameter Id="%AID%_P-%T%%CCC%000" Name="p%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
@@ -24,17 +24,17 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%091" Name="Tri%C%DurationBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%092" Name="Tri%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
               </Union>
-              <Union SizeInBit="16">
+              <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%101" Name="Tri%C%FileDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
-                <Parameter Id="%AID%_UP-%T%%CCC%102" Name="Tri%C%FileNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
+                <Parameter Id="%AID%_UP-%T%%CCC%102" Name="Tri%C%FileNight" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
               </Union>
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%201" Name="Tri%C%VolumeDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="25" />
-                <Parameter Id="%AID%_UP-%T%%CCC%211" Name="Tri%C%VolumeDayInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="0" Access="None" DefaultUnionParameter="true"/>
-                <Parameter Id="%AID%_UP-%T%%CCC%202" Name="Tri%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="20" />
-                <Parameter Id="%AID%_UP-%T%%CCC%212" Name="Tri%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Laustärke" Value="0" Access="None" DefaultUnionParameter="true"/>
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%201" Name="Tri%C%VolumeDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="25" />
+                <Parameter Id="%AID%_UP-%T%%CCC%211" Name="Tri%C%VolumeDayInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
+                <Parameter Id="%AID%_UP-%T%%CCC%202" Name="Tri%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="20" />
+                <Parameter Id="%AID%_UP-%T%%CCC%212" Name="Tri%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
               </Union>
             </Parameters>
             <ParameterRefs>
@@ -73,7 +73,7 @@
             <ChannelIndependentBlock> 
               <!-- START INCLUDE HERE -->
               <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
-                <Channel Id="%AID%_CH-PM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+                <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
                   <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="SOM%C%Wrapper" Inline="true">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslösekonfiguration" UIHint="Headline" />
                     <!-- Name -->
@@ -128,7 +128,7 @@
                             </when>
                         </choose>
 
-                        <!-- Laustärke -->
+                        <!-- Lautstärke -->
                         <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" />
                         <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000">
                           <when test=">0">

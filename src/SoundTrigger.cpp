@@ -1,9 +1,9 @@
 #include "SoundControl.h"
 #include "SoundTrigger.h"
 
-SoundTrigger::SoundTrigger(uint8_t index)
+SoundTrigger::SoundTrigger(uint8_t iIndex)
 {
-  this->index = index;
+  mIndex = iIndex;
 }
 
 SoundTrigger::~SoundTrigger() {}
@@ -11,132 +11,130 @@ SoundTrigger::~SoundTrigger() {}
 void SoundTrigger::setup()
 {
   // Params
-  paramActive = (knx.paramByte(calcParamIndex(SOM_TriState)) & SOM_TriStateMask) >> SOM_TriStateShift;
-  paramRepeat = (knx.paramByte(calcParamIndex(SOM_TriRepeat)) & SOM_TriRepeatMask) >> SOM_TriRepeatShift;
-  paramPriority = (knx.paramByte(calcParamIndex(SOM_TriPriority)) & SOM_TriPriorityMask) >> SOM_TriPriorityShift;
-  paramLock = (knx.paramByte(calcParamIndex(SOM_TriLock)) & SOM_TriLockMask) >> SOM_TriLockShift;
-  paramDayNight = (knx.paramByte(calcParamIndex(SOM_TriDayNight)) & SOM_TriDayNightMask) >> SOM_TriDayNightShift;
-  paramVolumeDay = (knx.paramByte(calcParamIndex(SOM_TriVolumeDay)));
-  paramVolumeNight = (knx.paramByte(calcParamIndex(SOM_TriVolumeNight)));
-  paramFileDay = (knx.paramByte(calcParamIndex(SOM_TriFileDay)));
-  paramFileNight = (knx.paramByte(calcParamIndex(SOM_TriFileNight)));
-  paramDuration = (getDelayPattern(calcParamIndex(SOM_TriDurationBase)));
+  mParamActive = (knx.paramByte(calcParamIndex(SOM_TriState)) & SOM_TriStateMask) >> SOM_TriStateShift;
+  mParamRepeat = (knx.paramByte(calcParamIndex(SOM_TriRepeat)) & SOM_TriRepeatMask) >> SOM_TriRepeatShift;
+  mParamPriority = (knx.paramByte(calcParamIndex(SOM_TriPriority)) & SOM_TriPriorityMask) >> SOM_TriPriorityShift;
+  mParamLock = (knx.paramByte(calcParamIndex(SOM_TriLock)) & SOM_TriLockMask) >> SOM_TriLockShift;
+  mParamDayNight = (knx.paramByte(calcParamIndex(SOM_TriDayNight)) & SOM_TriDayNightMask) >> SOM_TriDayNightShift;
+  mParamVolumeDay = (knx.paramByte(calcParamIndex(SOM_TriVolumeDay)));
+  mParamVolumeNight = (knx.paramByte(calcParamIndex(SOM_TriVolumeNight)));
+  mParamFileDay = (knx.paramWord(calcParamIndex(SOM_TriFileDay)));
+  mParamFileNight = (knx.paramWord(calcParamIndex(SOM_TriFileNight)));
+  mParamDuration = (getDelayPattern(calcParamIndex(SOM_TriDurationBase)));
 
   // Default
-  currentVolume = paramVolumeDay;
-  currentFile = paramFileDay;
+  mCurrentVolume = mParamVolumeDay;
+  mCurrentFile = mParamFileDay;
   getKo(SOM_KoTriStatus)->valueNoSend(false, getDPT(VAL_DPT_1));
   getKo(SOM_KoTriLock)->valueNoSend(false, getDPT(VAL_DPT_1));
 
   // Debug
-  SERIAL_DEBUG.printf("Trigger %i paramActive: %i\n\r", index, paramActive);
-  SERIAL_DEBUG.printf("Trigger %i paramRepeat: %i\n\r", index, paramRepeat);
-  SERIAL_DEBUG.printf("Trigger %i paramPriority: %i\n\r", index, paramPriority);
-  SERIAL_DEBUG.printf("Trigger %i paramLock: %i\n\r", index, paramLock);
-  SERIAL_DEBUG.printf("Trigger %i paramDayNight: %i\n\r", index, paramDayNight);
-  SERIAL_DEBUG.printf("Trigger %i paramVolumeDay: %i\n\r", index, paramVolumeDay);
-  SERIAL_DEBUG.printf("Trigger %i paramVolumeNight: %i\n\r", index, paramVolumeNight);
-  SERIAL_DEBUG.printf("Trigger %i paramFileDay: %i\n\r", index, paramFileDay);
-  SERIAL_DEBUG.printf("Trigger %i paramFileNight: %i\n\r", index, paramFileNight);
-  SERIAL_DEBUG.printf("Trigger %i paramDuration: %i\n\r", index, paramDuration);
+  SERIAL_DEBUG.printf("Trigger %i mParamActive: %i\n\r", mIndex, mParamActive);
+  SERIAL_DEBUG.printf("Trigger %i mParamRepeat: %i\n\r", mIndex, mParamRepeat);
+  SERIAL_DEBUG.printf("Trigger %i mParamPriority: %i\n\r", mIndex, mParamPriority);
+  SERIAL_DEBUG.printf("Trigger %i mParamLock: %i\n\r", mIndex, mParamLock);
+  SERIAL_DEBUG.printf("Trigger %i mParamDayNight: %i\n\r", mIndex, mParamDayNight);
+  SERIAL_DEBUG.printf("Trigger %i mParamVolumeDay: %i\n\r", mIndex, mParamVolumeDay);
+  SERIAL_DEBUG.printf("Trigger %i mParamVolumeNight: %i\n\r", mIndex, mParamVolumeNight);
+  SERIAL_DEBUG.printf("Trigger %i mParamFileDay: %i\n\r", mIndex, mParamFileDay);
+  SERIAL_DEBUG.printf("Trigger %i mParamFileNight: %i\n\r", mIndex, mParamFileNight);
+  SERIAL_DEBUG.printf("Trigger %i mParamDuration: %i\n\r", mIndex, mParamDuration);
 }
 
-uint32_t SoundTrigger::calcParamIndex(uint16_t paramIndex)
+uint32_t SoundTrigger::calcParamIndex(uint16_t iParamIndex)
 {
-  return paramIndex + index * SOM_ParamBlockSize + SOM_ParamBlockOffset;
+  return iParamIndex + mIndex * SOM_ParamBlockSize + SOM_ParamBlockOffset;
 }
 
-uint16_t SoundTrigger::calcKoNumber(uint8_t koIndex)
+uint16_t SoundTrigger::calcKoNumber(uint8_t iKoIndex)
 {
-  return koIndex + index * SOM_KoBlockSize + SOM_KoOffset;
+  return iKoIndex + mIndex * SOM_KoBlockSize + SOM_KoOffset;
 }
 
-int8_t SoundTrigger::calcKoIndex(uint16_t koNumber)
+int8_t SoundTrigger::calcKoIndex(uint16_t iKoNumber)
 {
-  int16_t result = (koNumber - SOM_KoOffset);
+  int16_t lResult = (iKoNumber - SOM_KoOffset);
   // check if channel is valid
-  if ((int8_t)(result / SOM_KoBlockSize) == index)
-    result = result % SOM_KoBlockSize;
+  if ((int8_t)(lResult / SOM_KoBlockSize) == mIndex)
+    lResult = lResult % SOM_KoBlockSize;
   else
-    result = -1;
-  return (int8_t)result;
+    lResult = -1;
+  return (int8_t)lResult;
 }
 
-GroupObject *SoundTrigger::getKo(uint8_t koIndex)
+GroupObject *SoundTrigger::getKo(uint8_t iKoIndex)
 {
-  return &knx.getGroupObject(calcKoNumber(koIndex));
+  return &knx.getGroupObject(calcKoNumber(iKoIndex));
 }
 
-void SoundTrigger::loop() {
+void SoundTrigger::loop()
+{
   processDuration();
 };
 
-void SoundTrigger::processDuration() {
+void SoundTrigger::processDuration()
+{
   // skip if timer not started?
-  if (startMillis == 0)
+  if (mStartMillis == 0)
     return;
 
   // skip if not playing
-  if (!status)
+  if (!mStatus)
     return;
 
   // skip if repeated is inactive
-  if (!paramRepeat)
+  if (!mParamRepeat)
     return;
 
-  // timer 
-  if ((millis() - startMillis) > paramDuration)
+  // timer
+  if ((millis() - mStartMillis) > mParamDuration)
     stop();
 };
 
-void SoundTrigger::processInputKo(GroupObject &ko)
+void SoundTrigger::processInputKo(GroupObject &iKo)
 {
-  // we process KO only if we are running
-  if (paramActive)
-  {
-    switch (calcKoIndex(ko.asap()))
-    {
-    case SOM_KoTriTrigger:
-      processInputKoTrigger(ko);
-      break;
-    case SOM_KoTriLock:
-      processInputKoLock(ko);
-      break;
-    case SOM_KoTriDayNight:
-      processInputKoDayNight(ko);
-      break;
+  if (!mParamActive)
+    return;
 
-    default:
-      break;
-    }
+  switch (calcKoIndex(iKo.asap()))
+  {
+  case SOM_KoTriTrigger:
+    processInputKoTrigger(iKo);
+    break;
+  case SOM_KoTriLock:
+    processInputKoLock(iKo);
+    break;
+  case SOM_KoTriDayNight:
+    processInputKoDayNight(iKo);
+    break;
   }
 }
 
-void SoundTrigger::processInputKoTrigger(GroupObject &ko)
+void SoundTrigger::processInputKoTrigger(GroupObject &iKo)
 {
-  bool value = ko.value(getDPT(VAL_DPT_1));
+  bool lValue = iKo.value(getDPT(VAL_DPT_1));
 
-  if (value)
+  if (lValue)
     return play();
 
   return stop();
 }
 
-void SoundTrigger::processInputKoDayNight(GroupObject &ko)
+void SoundTrigger::processInputKoDayNight(GroupObject &iKo)
 {
-  bool value = ko.value(getDPT(VAL_DPT_1));
+  bool lValue = iKo.value(getDPT(VAL_DPT_1));
 
-  if (paramDayNight == 1 && value == 0 || paramDayNight == 2 && value == 1)
+  if (mParamDayNight == 1 && lValue == 0 || mParamDayNight == 2 && lValue == 1)
     return night();
 
   return day();
 }
 
-void SoundTrigger::processInputKoLock(GroupObject &ko)
+void SoundTrigger::processInputKoLock(GroupObject &iKo)
 {
-  bool value = ko.value(getDPT(VAL_DPT_1));
+  bool lValue = iKo.value(getDPT(VAL_DPT_1));
 
-  if (paramLock == 1 && value == 1 || paramLock == 2 && value == 0)
+  if (mParamLock == 1 && lValue == 1 || mParamLock == 2 && lValue == 0)
     return lock();
 
   return unlock();
@@ -144,59 +142,59 @@ void SoundTrigger::processInputKoLock(GroupObject &ko)
 
 void SoundTrigger::lock()
 {
-  if (paramLock == 0 || currentLocked)
+  if (mParamLock == 0 || mCurrentLocked)
     return;
 
-  currentLocked = true;
+  mCurrentLocked = true;
   stop();
-  getKo(SOM_KoTriLock)->value(currentLocked, getDPT(VAL_DPT_1));
-  SERIAL_DEBUG.printf("Lock Trigger %i\n\r", index);
+  getKo(SOM_KoTriLock)->value(mCurrentLocked, getDPT(VAL_DPT_1));
+  SERIAL_DEBUG.printf("Lock Trigger %i\n\r", mIndex);
 }
 
 void SoundTrigger::unlock()
 {
-  if (paramLock == 0 || !currentLocked)
+  if (mParamLock == 0 || !mCurrentLocked)
     return;
 
-  currentLocked = false;
-  getKo(SOM_KoTriLock)->value(currentLocked, getDPT(VAL_DPT_1));
-  SERIAL_DEBUG.printf("Unlock Trigger %i\n\r", index);
+  mCurrentLocked = false;
+  getKo(SOM_KoTriLock)->value(mCurrentLocked, getDPT(VAL_DPT_1));
+  SERIAL_DEBUG.printf("Unlock Trigger %i\n\r", mIndex);
 }
 
 void SoundTrigger::day()
 {
-  SERIAL_DEBUG.printf("Trigger %i switch to day\n\r", index);
-  currentVolume = paramVolumeDay;
-  currentFile = paramFileDay;
+  SERIAL_DEBUG.printf("Trigger %i switch to day\n\r", mIndex);
+  mCurrentVolume = mParamVolumeDay;
+  mCurrentFile = mParamFileDay;
 }
 
 void SoundTrigger::night()
 {
-  SERIAL_DEBUG.printf("Trigger %i switch to night\n\r", index);
-  currentVolume = paramVolumeNight;
-  currentFile = paramFileNight;
+  SERIAL_DEBUG.printf("Trigger %i switch to night\n\r", mIndex);
+  mCurrentVolume = mParamVolumeNight;
+  mCurrentFile = mParamFileNight;
 }
 
 void SoundTrigger::play()
 {
-  if (currentLocked)
+  if (mCurrentLocked)
   {
-    SERIAL_DEBUG.printf("Trigger %i play ignored (locked)\n\r", index);
+    SERIAL_DEBUG.printf("Trigger %i play ignored (locked)\n\r", mIndex);
     return;
   }
-  SERIAL_DEBUG.printf("Trigger %i play\n\r", index);
-  setStatus(SoundControl::instance->play(currentFile, currentVolume, paramPriority, paramRepeat, index));
+  SERIAL_DEBUG.printf("Trigger %i play\n\r", mIndex);
+  setStatus(SoundControl::sInstance->play(mCurrentFile, mCurrentVolume, mParamPriority, mParamRepeat, mIndex));
 }
 
 void SoundTrigger::stop()
 {
   // skip if not playing
-  if (!status)
+  if (!mStatus)
     return;
 
-  SERIAL_DEBUG.printf("Trigger %i stop\n\r", index);
+  SERIAL_DEBUG.printf("Trigger %i stop\n\r", mIndex);
   setStatus(false);
-  SoundControl::instance->stop();
+  SoundControl::sInstance->stop();
 }
 
 void SoundTrigger::stopped()
@@ -204,13 +202,14 @@ void SoundTrigger::stopped()
   setStatus(false);
 }
 
-void SoundTrigger::setStatus(bool newStatus)
+void SoundTrigger::setStatus(bool iNewStatus)
 {
   // internal timer for max duration
-  startMillis = newStatus ? millis() : 0;
+  mStartMillis = iNewStatus ? millis() : 0;
 
-  if (status != newStatus) {
-    status = newStatus;
-    getKo(SOM_KoTriStatus)->value(status, getDPT(VAL_DPT_1));
+  if (mStatus != iNewStatus)
+  {
+    mStatus = iNewStatus;
+    getKo(SOM_KoTriStatus)->value(mStatus, getDPT(VAL_DPT_1));
   }
 }

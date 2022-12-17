@@ -7,14 +7,11 @@
         <ApplicationProgram Id="%AID%" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SOM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
           <Static>
             <ParameterTypes>
-              <ParameterType Id="%AID%_PT-NumTriggers" Name="NumTriggers">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="%N%" maxInclusive="%N%" />
-              </ParameterType>
               <ParameterType Id="%AID%_PT-SOMVolume" Name="SOMVolume">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="30" UIHint="Slider" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMFile" Name="SOMFile">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="255" />
+                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="1" maxInclusive="65535" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMStatus" Name="SOMStatus">
                 <TypeRestriction Base="Value" SizeInBit="1">
@@ -84,9 +81,6 @@
               </ParameterType>
             </ParameterTypes>
             <Parameters>
-              <Parameter Id="%AID%_P-%T%000001" Name="NumTriggers" ParameterType="%AID%_PT-NumTriggers" Text="Anzahl der verfügbarer Auslöser" Value="%N%" Access="Read">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-              </Parameter>
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%000008" Name="External" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMStatus" Text="Externe Logik" Value="0" />
@@ -181,7 +175,6 @@
               </Union>
             </Parameters>
             <ParameterRefs>
-              <ParameterRef Id="%AID%_P-%T%000001_R-%T%00000101" RefId="%AID%_P-%T%000001" />
               <ParameterRef Id="%AID%_UP-%T%000002_R-%T%00000201" RefId="%AID%_UP-%T%000002" Text="Lautsärke" />
               <ParameterRef Id="%AID%_UP-%T%000002_R-%T%00000202" RefId="%AID%_UP-%T%000002" Text="Lautsärke (Tag)" />
               <ParameterRef Id="%AID%_UP-%T%000003_R-%T%00000301" RefId="%AID%_UP-%T%000003" Text="Lautsärke (Nacht)" />
@@ -189,7 +182,6 @@
               <ParameterRef Id="%AID%_UP-%T%000007_R-%T%00000701" RefId="%AID%_UP-%T%000007" />
               <ParameterRef Id="%AID%_UP-%T%000008_R-%T%00000801" RefId="%AID%_UP-%T%000008" />
               <ParameterRef Id="%AID%_UP-%T%000009_R-%T%00000901" RefId="%AID%_UP-%T%000009" />
-
               <ParameterRef Id="%AID%_UP-%T%000100_R-%T%00010001" RefId="%AID%_UP-%T%000100" />
               <ParameterRef Id="%AID%_UP-%T%000101_R-%T%00010101" RefId="%AID%_UP-%T%000101" />
               <ParameterRef Id="%AID%_UP-%T%000102_R-%T%00010201" RefId="%AID%_UP-%T%000102" />
@@ -295,7 +287,7 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-SM1" Name="NumTriggers" Number="1" Text="Auslöser">
+            <Channel Id="%AID%_CH-SM1" Name="SOMChannels" Number="1" Text="Auslöser">
               <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Sounddatei" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Sounddatei wird über eine Zahl gesteuert. Dazu müssen die Sounddateien auf dem Speicher im Format 00001.MP3 (5stellig) und im MP3-Format gespeichert werden." />

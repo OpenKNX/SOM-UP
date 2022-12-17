@@ -23,7 +23,7 @@
             "args": [
                 "create",
                 "--Debug",
-                "SoundModul"
+                "SoundModule"
             ],
             "problemMatcher": [],
             "group": "test"

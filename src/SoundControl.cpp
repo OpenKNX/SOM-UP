@@ -1,10 +1,10 @@
 #include "SoundControl.h"
 
-SoundControl *SoundControl::instance = nullptr;
+SoundControl *SoundControl::sInstance = nullptr;
 
 SoundControl::SoundControl()
 {
-  SoundControl::instance = this;
+  SoundControl::sInstance = this;
 }
 SoundControl::~SoundControl() {}
 
@@ -16,15 +16,13 @@ GroupObject *SoundControl::getKo(uint8_t numberKo)
 void SoundControl::setup()
 {
   // Params
-  paramTriggers = knx.paramByte(SOM_NumTriggers); // TODO
-  paramTriggers = 10;
-  paramScenes = (knx.paramByte(SOM_Scenes) & SOM_ScenesMask) >> SOM_ScenesShift;
-  paramExternal = (knx.paramByte(SOM_External) & SOM_ExternalMask) >> SOM_ExternalShift;
-  paramLock = (knx.paramByte(SOM_Lock) & SOM_LockMask) >> SOM_LockShift;
-  paramDayNight = (knx.paramByte(SOM_DayNight) & SOM_DayNightMask) >> SOM_DayNightShift;
-  paramVolumeDay = knx.paramByte(SOM_VolumeDay);
-  paramVolumeNight = knx.paramByte(SOM_VolumeNight);
-  currentDefaultVolume = paramVolumeDay;
+  mParamScenes = (knx.paramByte(SOM_Scenes) & SOM_ScenesMask) >> SOM_ScenesShift;
+  mParamExternal = (knx.paramByte(SOM_External) & SOM_ExternalMask) >> SOM_ExternalShift;
+  mParamLock = (knx.paramByte(SOM_Lock) & SOM_LockMask) >> SOM_LockShift;
+  mParamDayNight = (knx.paramByte(SOM_DayNight) & SOM_DayNightMask) >> SOM_DayNightShift;
+  mParamVolumeDay = knx.paramByte(SOM_VolumeDay);
+  mParamVolumeNight = knx.paramByte(SOM_VolumeNight);
+  mCurrentDefaultVolume = mParamVolumeDay;
 
   // Default
   getKo(SOM_KoStatus)->valueNoSend(false, getDPT(VAL_DPT_1));
@@ -32,83 +30,77 @@ void SoundControl::setup()
   getKo(SOM_KoLock)->valueNoSend(false, getDPT(VAL_DPT_1));
 
   // Debug
-  SERIAL_DEBUG.printf("paramVolumeDay %i\n\r", paramVolumeDay);
-  SERIAL_DEBUG.printf("paramVolumeNight %i\n\r", paramVolumeNight);
-  SERIAL_DEBUG.printf("paramExternal %i\n\r", paramExternal);
-  SERIAL_DEBUG.printf("paramScenes %i\n\r", paramScenes);
-  SERIAL_DEBUG.printf("paramDayNight %i\n\r", paramDayNight);
-  SERIAL_DEBUG.printf("paramLock %i\n\r", paramLock);
-  SERIAL_DEBUG.printf("paramTriggers %i\n\r", paramTriggers);
+  SERIAL_DEBUG.printf("mParamVolumeDay %i\n\r", mParamVolumeDay);
+  SERIAL_DEBUG.printf("mParamVolumeNight %i\n\r", mParamVolumeNight);
+  SERIAL_DEBUG.printf("mParamExternal %i\n\r", mParamExternal);
+  SERIAL_DEBUG.printf("mParamScenes %i\n\r", mParamScenes);
+  SERIAL_DEBUG.printf("mParamDayNight %i\n\r", mParamDayNight);
+  SERIAL_DEBUG.printf("mParamLock %i\n\r", mParamLock);
 
   // Call dependend setup
-  player.setup();
-  for (uint8_t i = 0; i < paramTriggers; i++)
+  mPlayer.setup();
+  for (uint8_t i = 0; i < SOM_ChannelCount; i++)
   {
-    triggers[i] = new SoundTrigger(i);
-    triggers[i]->setup();
+    mTriggers[i] = new SoundTrigger(i);
+    mTriggers[i]->setup();
   }
 }
 
-bool SoundControl::play(uint8_t file, uint8_t volume, uint8_t priority, bool repeat)
+bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, bool iRepeat, uint8_t iTrigger)
 {
-  return SoundControl::play(file, volume, priority, repeat, 0);
-}
-
-bool SoundControl::play(uint8_t file, uint8_t volume, uint8_t priority, bool repeat, uint8_t trigger)
-{
-  SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i\n\r", file, volume, priority, repeat, trigger);
+  SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i\n\r", iFile, iVolume, iPriority, iRepeat, iTrigger);
 
   // abort on lock
-  if (currentLocked)
+  if (mCurrentLocked)
   {
     SERIAL_DEBUG.printf("SoundControl::play ignore -> lock\n\r");
     return false;
   }
 
   // skip if higher prio while playing
-  if (status && lastPriority > priority)
+  if (mStatus && mLastPriority > iPriority)
   {
     SERIAL_DEBUG.printf("SoundControl::play ignore -> prio\n\r");
     return false;
   }
 
   // use default volume if zero
-  if (volume == 0)
-    volume = currentDefaultVolume;
+  if (iVolume == 0)
+    iVolume = mCurrentDefaultVolume;
 
   // reset states
   SoundControl::stopped();
 
   // play music
-  player.play(file, volume, repeat);
+  mPlayer.play(iFile, iVolume, iRepeat);
 
   // send ko
   getKo(SOM_KoStatus)->value(true, getDPT(VAL_DPT_1));
-  getKo(SOM_KoFile)->value(file, getDPT(VAL_DPT_5));
+  getKo(SOM_KoFile)->value(iFile, getDPT(VAL_DPT_5));
 
   // save status
-  status = true;
-  lastFile = file;
-  lastVolume = volume;
-  lastPriority = priority;
-  lastTrigger = trigger;
+  mStatus = true;
+  mLastFile = iFile;
+  mLastVolume = iVolume;
+  mLastPriority = iPriority;
+  mLastTrigger = iTrigger;
 
   return true;
 }
 void SoundControl::stop()
 {
   SERIAL_DEBUG.println("SoundControl::stop");
-  player.stop();
+  mPlayer.stop();
 }
 void SoundControl::stopped()
 {
   SERIAL_DEBUG.println("SoundControl::stopped");
-  for (uint8_t i = 0; i < paramTriggers; i++)
+  for (uint8_t i = 0; i < SOM_ChannelCount; i++)
   {
-    SoundTrigger *trigger = triggers[i];
-    trigger->stopped();
+    SoundTrigger *lTrigger = mTriggers[i];
+    lTrigger->stopped();
   }
-  status = false;
+  mStatus = false;
   getKo(SOM_KoStatus)->value(false, getDPT(VAL_DPT_1));
   getKo(SOM_KoFile)->value((uint8_t)0, getDPT(VAL_DPT_5));
 }
@@ -118,121 +110,121 @@ void SoundControl::loop()
   if (!knx.configured())
     return;
 
-  player.loop();
-  for (uint8_t i = 0; i < paramTriggers; i++)
+  mPlayer.loop();
+  for (uint8_t i = 0; i < SOM_ChannelCount; i++)
   {
-    triggers[i]->loop();
+    mTriggers[i]->loop();
   }
 }
 
 void SoundControl::lock()
 {
-  if (paramLock == 0 || currentLocked)
+  if (mParamLock == 0 || mCurrentLocked)
     return;
 
-  currentLocked = true;
+  mCurrentLocked = true;
   stop();
-  getKo(SOM_KoLock)->value(currentLocked, getDPT(VAL_DPT_1));
+  getKo(SOM_KoLock)->value(mCurrentLocked, getDPT(VAL_DPT_1));
   SERIAL_DEBUG.println("Lock Global");
 }
 
 void SoundControl::unlock()
 {
-  if (paramLock == 0 || !currentLocked)
+  if (mParamLock == 0 || !mCurrentLocked)
     return;
 
-  currentLocked = false;
-  getKo(SOM_KoLock)->value(currentLocked, getDPT(VAL_DPT_1));
+  mCurrentLocked = false;
+  getKo(SOM_KoLock)->value(mCurrentLocked, getDPT(VAL_DPT_1));
   SERIAL_DEBUG.println("Unlocked Gobal");
 }
 
 void SoundControl::day()
 {
   SERIAL_DEBUG.printf("Switch to day\n\r");
-  currentNight = false;
+  mCurrentNight = false;
   setDefaultVolume();
 }
 void SoundControl::night()
 {
   SERIAL_DEBUG.printf("Switch to night\n\r");
-  currentNight = true;
+  mCurrentNight = true;
   setDefaultVolume();
 }
 
-void SoundControl::processInputKo(GroupObject &ko)
+void SoundControl::processInputKo(GroupObject &iKo)
 {
   // we have to check first, if external KO are used
-  uint16_t asap = ko.asap();
-  switch (asap)
+  uint16_t lAsap = iKo.asap();
+  switch (lAsap)
   {
   case SOM_KoDayNight:
-    processInputKoDayNight(ko);
+    processInputKoDayNight(iKo);
     break;
 
   case SOM_KoLock:
-    processInputKoLock(ko);
+    processInputKoLock(iKo);
     break;
 
   case SOM_KoScene:
-    processInputKoScene(ko);
+    processInputKoScene(iKo);
     break;
 
   case SOM_KoExternalFile:
-    processInputKoExternalFile(ko);
+    processInputKoExternalFile(iKo);
     break;
 
   case SOM_KoExternalVolume:
-    processInputKoExternalVolume(ko);
+    processInputKoExternalVolume(iKo);
     break;
 
   case SOM_KoExternalPriority:
-    processInputKoExternalPriority(ko);
+    processInputKoExternalPriority(iKo);
     break;
 
   default:
     // forward to trigger
-    if (asap >= SOM_KoOffset && asap < SOM_KoOffset + paramTriggers * SOM_KoBlockSize)
+    if (lAsap >= SOM_KoOffset && lAsap < SOM_KoOffset + SOM_ChannelCount * SOM_KoBlockSize)
     {
-      uint8_t index = (asap - SOM_KoOffset) / SOM_KoBlockSize;
-      triggers[index]->processInputKo(ko);
+      uint8_t lIndex = (lAsap - SOM_KoOffset) / SOM_KoBlockSize;
+      mTriggers[lIndex]->processInputKo(iKo);
     }
     break;
   }
 }
 
-void SoundControl::processInputKoLock(GroupObject &ko)
+void SoundControl::processInputKoLock(GroupObject &iKo)
 {
-  bool value = ko.value(getDPT(VAL_DPT_1));
+  bool lValue = iKo.value(getDPT(VAL_DPT_1));
 
-  if (paramLock == 1 && value == 1 || paramLock == 2 && value == 0)
+  if (mParamLock == 1 && lValue == 1 || mParamLock == 2 && lValue == 0)
     return lock();
 
   return unlock();
 }
-void SoundControl::processInputKoDayNight(GroupObject &ko)
+void SoundControl::processInputKoDayNight(GroupObject &iKo)
 {
-  bool value = ko.value(getDPT(VAL_DPT_1));
+  bool lValue = iKo.value(getDPT(VAL_DPT_1));
 
-  if (paramDayNight == 1 && value == 0 || paramDayNight == 2 && value == 1)
+  if (mParamDayNight == 1 && lValue == 0 || mParamDayNight == 2 && lValue == 1)
     return night();
 
   return day();
 }
 
-void SoundControl::processInputKoScene(GroupObject &ko)
+void SoundControl::processInputKoScene(GroupObject &iKo)
 {
-  uint8_t value = ko.value(getDPT(VAL_DPT_17));
+  uint8_t lValue = iKo.value(getDPT(VAL_DPT_17));
 
-  value += 1;
-  if (value > 0 && value <= 64)
+  lValue += 1;
+  if (lValue > 0 && lValue <= 64)
   {
 
     for (uint8_t i = 0; i < 20; i++)
     {
       uint8_t sceneId = knx.paramByte(SOM_Scene0 + i);
-      if (value == sceneId)
+      if (lValue == sceneId)
       {
-        SERIAL_DEBUG.printf("Szene %i\n\r", value);
+        SERIAL_DEBUG.printf("Szene %i\n\r", lValue);
         uint8_t sceneAction = knx.paramByte(SOM_SceneAction0 + i);
         uint8_t sceneTarget = knx.paramByte(SOM_SceneTargetA0 + i);
   
@@ -256,7 +248,7 @@ void SoundControl::processInputKoScene(GroupObject &ko)
         }
         else
         {
-          SoundTrigger *trigger = triggers[sceneTarget];
+          SoundTrigger *trigger = mTriggers[sceneTarget];
           switch (sceneAction)
           {
           case SOM_SceneActionStart:
@@ -280,54 +272,54 @@ void SoundControl::processInputKoScene(GroupObject &ko)
   }
 }
 
-void SoundControl::processInputKoExternalVolume(GroupObject &ko)
+void SoundControl::processInputKoExternalVolume(GroupObject &iKo)
 {
-  uint8_t value = ko.value(getDPT(VAL_DPT_5));
+  uint8_t lValue = iKo.value(getDPT(VAL_DPT_5));
   
   // invalid volume
-  if (value < 0 || value > 30)
-    value = 0;
+  if (lValue < 0 || lValue > 30)
+    lValue = 0;
 
-  externalVolume = value;
+  mExternalVolume = lValue;
 }
 
-void SoundControl::processInputKoExternalPriority(GroupObject &ko)
+void SoundControl::processInputKoExternalPriority(GroupObject &iKo)
 {
-  uint8_t value = ko.value(getDPT(VAL_DPT_5));
+  uint8_t lValue = iKo.value(getDPT(VAL_DPT_5));
   
   // invalid volume
-  if (value < 1 || value > 5)
-    value = 3;
+  if (lValue < 1 || lValue > 5)
+    lValue = 3;
 
-  externalPriority = value;
+  mExternalPriority = lValue;
 }
 
-void SoundControl::processInputKoExternalFile(GroupObject &ko)
+void SoundControl::processInputKoExternalFile(GroupObject &iKo)
 {
-  uint8_t file = ko.value(getDPT(VAL_DPT_5));
+  uint8_t iFile = iKo.value(getDPT(VAL_DPT_5));
   
-  if(file == 0)
+  if(iFile == 0)
     return stop();
 
   // invalid volume
-  if (file < 1 || file > 255)
+  if (iFile < 1 || iFile > 255)
     return;
 
-  play(file, externalVolume, externalPriority, false);
+  play(iFile, mExternalVolume, mExternalPriority, false);
 }
 
 void SoundControl::setDefaultVolume() {
   // Dont set during playing
-  if (status)
+  if (mStatus)
     return;
 
-  // select currentDefaultVolume
-  if (currentNight) {
-    currentDefaultVolume = paramVolumeNight;
+  // select mCurrentDefaultVolume
+  if (mCurrentNight) {
+    mCurrentDefaultVolume = mParamVolumeNight;
   } else {
-    currentDefaultVolume = paramVolumeDay;
+    mCurrentDefaultVolume = mParamVolumeDay;
   }
 
-  // update currentDefaultVolume
-  player.setVolume(currentDefaultVolume);
+  // update mCurrentDefaultVolume
+  mPlayer.setVolume(mCurrentDefaultVolume);
 }
