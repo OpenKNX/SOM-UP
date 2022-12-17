@@ -81,15 +81,15 @@ void VirtualButton::setup()
   SERIAL_DEBUG.printf("BTN %i outputShortDpt5: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt5, calcParamIndex(BTN_BTNOutput1ShortDpt5));
   SERIAL_DEBUG.printf("BTN %i outputShortDpt5001: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt5001, calcParamIndex(BTN_BTNOutput1ShortDpt5001));
   SERIAL_DEBUG.printf("BTN %i outputShortDpt17: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt17, calcParamIndex(BTN_BTNOutput1ShortDpt17));
-  
+
   SERIAL_DEBUG.printf("BTN %i mParamMode: %i\n\r", mIndex, mParams.mode);
 }
 
 void VirtualButton::loop()
 {
-  processPress(0);
-  processPress(1);
-  processMultiClickReset();
+  processPressAndHold(0);
+  processPressAndHold(1);
+  processMultiClick();
 }
 
 void VirtualButton::processInputKo(GroupObject &iKo)
@@ -111,106 +111,159 @@ void VirtualButton::processInputKo(GroupObject &iKo)
   }
 }
 
-void VirtualButton::processPress(bool iButton)
+void VirtualButton::processInputKoLock(GroupObject &iKo)
 {
-  if (!mButtonState[iButton].shortPress)
-    return;
-
-  if (!mButtonState[iButton].longPress && (millis() - mButtonState[iButton].pressedStart) > BTN_LongPressTime)
-  {
-    SERIAL_DEBUG.printf(" - long press\n\r");
-    mButtonState[iButton].longPress = true;
-  }
-
-  if (!mButtonState[iButton].extraLongPress && (millis() - mButtonState[iButton].pressedStart) > BTN_ExtraLongPressTime)
-  {
-    SERIAL_DEBUG.printf(" - extra long press\n\r");
-    mButtonState[iButton].extraLongPress = true;
-  }
+  bool lValue = iKo.value(getDPT(VAL_DPT_1));
+  // SERIAL_DEBUG.printf("BTN::processInputKoLock %i: %i\n\r", mIndex, lValue);
 }
 
 void VirtualButton::processInputKoInput(GroupObject &iKo, bool iButton)
 {
   bool lNewPress = iKo.value(getDPT(VAL_DPT_1));
-  bool lLastPress = &mButtonState[iButton].shortPress;
-  SERIAL_DEBUG.printf("BTN::processInputKoInput %i/%i: %i -> %i\n\r", mIndex, iButton, lLastPress, lNewPress);
+  bool lLastPress = mButtonState[iButton].press;
+
+  // no state change
+  if (lLastPress == lNewPress)
+    return;
 
   if (lNewPress)
   {
-    SERIAL_DEBUG.printf(" - press\n\r");
-    if (iButton == 0)
-    {
-      mButtonState[iButton].pressedStart = millis();
-      processMultiClickReset();
-    }
+    processPress(iButton);
   }
-
-  if (!lNewPress && mButtonState[iButton].shortPress)
+  else
   {
-    if (mButtonState[iButton].extraLongPress)
-    {
-      mButtonState[iButton].multiClicks = 0;
-      mButtonState[iButton].multiClickTimer = 0;
-      SERIAL_DEBUG.printf(" - extra long release\n\r");
-    }
-    else if (mButtonState[iButton].longPress)
-    {
-      mButtonState[iButton].multiClicks = 0;
-      mButtonState[iButton].multiClickTimer = 0;
-      SERIAL_DEBUG.printf(" - long release\n\r");
-    }
-    else
-    {
-      SERIAL_DEBUG.printf(" - release\n\r");
-
-      // Allow multiclick only for first button
-      if (iButton == 0)
-      {
-        SERIAL_DEBUG.printf(" - multiclick +1 (%i)\n\r", mButtonState[iButton].multiClicks);
-        mButtonState[iButton].multiClicks += 1;
-        mButtonState[iButton].multiClickTimer = millis();
-      }
-    }
-
-    mButtonState[iButton].shortPress = false;
-    mButtonState[iButton].longPress = false;
-    mButtonState[iButton].extraLongPress = false;
-    mButtonState[iButton].pressedStart = 0;
+    processRelease(iButton);
   }
-
-  mButtonState[iButton].shortPress = lNewPress;
 }
 
-void VirtualButton::processMultiClickReset()
+void VirtualButton::processPressAndHold(bool iButton)
 {
+  // not pressed
+  if (!mButtonState[iButton].press)
+    return;
+
+  // no long press configured
+  if (mParams.outputLong == 0)
+    return;
+
+  if (!mButtonState[iButton].pressLong && (millis() - mButtonState[iButton].pressStart) > BTN_LongPressTime)
+  {
+    eventLongPress(iButton);
+    mButtonState[iButton].pressLong = true;
+  }
+
+  // no extra long press configured
+  if (mParams.outputExtraLong == 0)
+    return;
+
+  if (!mButtonState[iButton].pressExtraLong && (millis() - mButtonState[iButton].pressStart) > BTN_ExtraLongPressTime)
+  {
+    eventExtraLongPress(iButton);
+    mButtonState[iButton].pressExtraLong = true;
+  }
+}
+
+void VirtualButton::processPress(bool iButton)
+{
+  if (mParams.mode == 2 && iButton == 0)
+  {
+    mButtonState[0].multiClicks += 1;
+    mButtonState[0].multiClickTimer = millis();
+    // SERIAL_DEBUG.printf("  BTN%i: mc press %i\n\r", iButton, mButtonState[0].multiClicks);
+  }
+  else
+  {
+    eventShortPress(iButton);
+  }
+
+  mButtonState[iButton].press = true;
+  mButtonState[iButton].pressLong = false;
+  mButtonState[iButton].pressExtraLong = false;
+  mButtonState[iButton].pressStart = millis();
+}
+
+void VirtualButton::processRelease(bool iButton)
+{
+  if (mButtonState[iButton].pressExtraLong)
+  {
+    eventExtraLongRelease(iButton);
+  }
+  else if (mButtonState[iButton].pressLong)
+  {
+    eventLongRelease(iButton);
+  }
+  else if (mParams.mode == 2)
+  {
+    mButtonState[iButton].multiClickTimer = millis();
+  }
+  else
+  {
+    eventShortRelease(iButton);
+  }
+
+  // Reset MultiClick on Long or ExtraLong
+  if (mButtonState[iButton].pressExtraLong || mButtonState[iButton].pressLong)
+  {
+    mButtonState[iButton].multiClicks = 0;
+    mButtonState[iButton].multiClickTimer = 0;
+  }
+
+  // Reset all others
+  mButtonState[iButton].press = false;
+  mButtonState[iButton].pressLong = false;
+  mButtonState[iButton].pressExtraLong = false;
+  mButtonState[iButton].pressStart = 0;
+}
+
+void VirtualButton::processMultiClick()
+{
+  // no multiclick mode
+  if (mParams.mode != 2)
+    return;
+
   // skip during a press
-  if (mButtonState[0].shortPress)
+  if (mButtonState[0].press)
     return;
 
   // skip when no timer started
   if (mButtonState[0].multiClickTimer == 0)
     return;
 
-  if (
-      // mButtonState[0].multiClicks == BTN_MaxMuliClicks ||
-      millis() - mButtonState[0].multiClickTimer > BTN_MuliClickTime)
+  if (millis() - mButtonState[0].multiClickTimer > BTN_MuliClickTime)
   {
-    multiClick(mButtonState[0].multiClicks);
+    eventMultiClick(mButtonState[0].multiClicks);
     mButtonState[0].multiClickTimer = 0;
     mButtonState[0].multiClicks = 0;
   }
 }
 
-void VirtualButton::multiClick(uint8_t iClicks)
+void VirtualButton::eventMultiClick(uint8_t iClicks)
 {
+  SERIAL_DEBUG.printf("  BTN%i: mc release %i\n\r", 0, iClicks);
   if (iClicks > BTN_MaxMuliClicks)
     return;
-
-  SERIAL_DEBUG.printf("Button: %i: %i multiclicks\n\r", mIndex, iClicks);
 }
-
-void VirtualButton::processInputKoLock(GroupObject &iKo)
+void VirtualButton::eventShortPress(bool iButton)
 {
-  bool lValue = iKo.value(getDPT(VAL_DPT_1));
-  // SERIAL_DEBUG.printf("BTN::processInputKoLock %i: %i\n\r", mIndex, lValue);
+  SERIAL_DEBUG.printf("  BTN%i: short press\n\r", iButton);
+}
+void VirtualButton::eventLongPress(bool iButton)
+{
+  SERIAL_DEBUG.printf("  BTN%i: long press\n\r", iButton);
+}
+void VirtualButton::eventExtraLongPress(bool iButton)
+{
+  SERIAL_DEBUG.printf("  BTN%i: extra long press\n\r", iButton);
+}
+void VirtualButton::eventShortRelease(bool iButton)
+{
+  SERIAL_DEBUG.printf("  BTN%i: short release\n\r", iButton);
+}
+void VirtualButton::eventLongRelease(bool iButton)
+{
+  SERIAL_DEBUG.printf("  BTN%i: long release\n\r", iButton);
+}
+void VirtualButton::eventExtraLongRelease(bool iButton)
+{
+  SERIAL_DEBUG.printf("  BTN%i: extra long release\n\r", iButton);
 }

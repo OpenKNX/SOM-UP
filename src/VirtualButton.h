@@ -36,10 +36,10 @@ struct VirtualButtonGlobalParams
 
 struct VirtualButtonState
 {
-  bool shortPress = false;
-  bool longPress = false;
-  bool extraLongPress = false;
-  uint32_t pressedStart = 0;
+  bool press = false;
+  bool pressLong = false;
+  bool pressExtraLong = false;
+  uint32_t pressStart = 0;
   uint32_t multiClickTimer = 0;
   int8_t multiClicks = 0;
 };
@@ -57,8 +57,16 @@ private:
   void processInputKoInput(GroupObject &iKo, bool iButton);
   void processInputKoLock(GroupObject &iKo);
   void processPress(bool iButton);
-  void processMultiClickReset();
-  void multiClick(uint8_t iClicks);
+  void processRelease(bool iButton);
+  void processPressAndHold(bool iButton);
+  void processMultiClick();
+  void eventMultiClick(uint8_t iClicks);
+  void eventShortPress(bool iButton);
+  void eventLongPress(bool iButton);
+  void eventExtraLongPress(bool iButton);
+  void eventShortRelease(bool iButton);
+  void eventLongRelease(bool iButton);
+  void eventExtraLongRelease(bool iButton);
 
   uint8_t mIndex = 0;
 
