@@ -80,7 +80,7 @@
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-BTNOutputBool2" Name="BMOutputBool2">
-                <TypeRestriction Base="Value" SizeInBit="4">
+                <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="Deaktiviert" Value="0" Id="%AID%_PT-BTNOutputBool2_EN-0" />
                   <Enumeration Text="Aus" Value="1" Id="%AID%_PT-BTNOutputBool2_EN-1" />
                   <Enumeration Text="Ein" Value="2" Id="%AID%_PT-BTNOutputBool2_EN-2" />
@@ -88,7 +88,7 @@
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-BTNOutputChanger" Name="BMOutputChanger">
-                <TypeRestriction Base="Value" SizeInBit="4">
+                <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="Anfang" Value="0" Id="%AID%_PT-BTNOutputChanger_EN-0" />
                   <Enumeration Text="Hoch" Value="1" Id="%AID%_PT-BTNOutputChanger_EN-1" />
                   <Enumeration Text="Runter" Value="2" Id="%AID%_PT-BTNOutputChanger_EN-2" />
@@ -113,10 +113,10 @@
                   <Enumeration Text="Dunkler/Heller" Value="1" Id="%AID%_PT-BTNOutputDim_EN-1" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-BTNTrigger" Name="BMTrigger">
+              <ParameterType Id="%AID%_PT-BTNEvent" Name="BTNEvent">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="Loslassen" Value="0" Id="%AID%_PT-BTNTrigger_EN-0" />
-                  <Enumeration Text="Drücken" Value="1" Id="%AID%_PT-BTNTrigger_EN-1" />
+                  <Enumeration Text="Loslassen" Value="0" Id="%AID%_PT-BTNEvent_EN-0" />
+                  <Enumeration Text="Drücken" Value="1" Id="%AID%_PT-BTNEvent_EN-1" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-BTNScene" Name="BMScene">

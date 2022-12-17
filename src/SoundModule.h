@@ -996,54 +996,54 @@
 #define BTN_BTNInputA                  3      // char*, 2 Byte
 #define BTN_BTNInputB                  4      // char*, 2 Byte
 #define BTN_BTNOutputShort             4      // 8 Bits, Bit 7-0
-#define BTN_BTNOutput1ShortDpt1        5      // 4 Bits, Bit 7-4
-#define     BTN_BTNOutput1ShortDpt1Mask 0xF0
-#define     BTN_BTNOutput1ShortDpt1Shift 4
-#define BTN_BTNOutput2ShortDpt1        6      // 4 Bits, Bit 7-4
-#define     BTN_BTNOutput2ShortDpt1Mask 0xF0
-#define     BTN_BTNOutput2ShortDpt1Shift 4
+#define BTN_BTNOutput1ShortDpt1        5      // 2 Bits, Bit 1-0
+#define     BTN_BTNOutput1ShortDpt1Mask 0x03
+#define     BTN_BTNOutput1ShortDpt1Shift 0
+#define BTN_BTNOutput2ShortDpt1        6      // 2 Bits, Bit 1-0
+#define     BTN_BTNOutput2ShortDpt1Mask 0x03
+#define     BTN_BTNOutput2ShortDpt1Shift 0
 #define BTN_BTNOutput1ShortDpt5        5      // uint8_t
 #define BTN_BTNOutput2ShortDpt5        6      // uint8_t
 #define BTN_BTNOutput1ShortDpt5001     5      // uint8_t
 #define BTN_BTNOutput2ShortDpt5001     6      // uint8_t
 #define BTN_BTNOutput1ShortDpt17       5      // 8 Bits, Bit 7-0
 #define BTN_BTNOutput2ShortDpt17       6      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputShortInteraction  7      // 1 Bit, Bit 7
-#define     BTN_BTNOutputShortInteractionMask 0x80
-#define     BTN_BTNOutputShortInteractionShift 7
+#define BTN_BTNOutputShortEvent        7      // 1 Bit, Bit 7
+#define     BTN_BTNOutputShortEventMask 0x80
+#define     BTN_BTNOutputShortEventShift 7
 #define BTN_BTNOutputShortMultiple     8      // 8 Bits, Bit 7-0
 #define BTN_BTNOutputLong              8      // 8 Bits, Bit 7-0
-#define BTN_BTNOutput1LongDpt1         9      // 4 Bits, Bit 7-4
-#define     BTN_BTNOutput1LongDpt1Mask 0xF0
-#define     BTN_BTNOutput1LongDpt1Shift 4
-#define BTN_BTNOutput2LongDpt1        10      // 4 Bits, Bit 7-4
-#define     BTN_BTNOutput2LongDpt1Mask 0xF0
-#define     BTN_BTNOutput2LongDpt1Shift 4
+#define BTN_BTNOutput1LongDpt1         9      // 2 Bits, Bit 1-0
+#define     BTN_BTNOutput1LongDpt1Mask 0x03
+#define     BTN_BTNOutput1LongDpt1Shift 0
+#define BTN_BTNOutput2LongDpt1        10      // 2 Bits, Bit 1-0
+#define     BTN_BTNOutput2LongDpt1Mask 0x03
+#define     BTN_BTNOutput2LongDpt1Shift 0
 #define BTN_BTNOutput1LongDpt5         9      // uint8_t
 #define BTN_BTNOutput2LongDpt5        10      // uint8_t
 #define BTN_BTNOutput1LongDpt5001      9      // uint8_t
 #define BTN_BTNOutput2LongDpt5001     10      // uint8_t
 #define BTN_BTNOutput1LongDpt17        9      // 8 Bits, Bit 7-0
 #define BTN_BTNOutput2LongDpt17       10      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputLongInteraction  11      // 1 Bit, Bit 7
-#define     BTN_BTNOutputLongInteractionMask 0x80
-#define     BTN_BTNOutputLongInteractionShift 7
+#define BTN_BTNOutputLongEvent        11      // 1 Bit, Bit 7
+#define     BTN_BTNOutputLongEventMask 0x80
+#define     BTN_BTNOutputLongEventShift 7
 #define BTN_BTNOutputExtraLong        12      // 8 Bits, Bit 7-0
-#define BTN_BTNOutput1ExtraLongDpt1   13      // 4 Bits, Bit 7-4
-#define     BTN_BTNOutput1ExtraLongDpt1Mask 0xF0
-#define     BTN_BTNOutput1ExtraLongDpt1Shift 4
-#define BTN_BTNOutput2ExtraLongDpt1   14      // 4 Bits, Bit 7-4
-#define     BTN_BTNOutput2ExtraLongDpt1Mask 0xF0
-#define     BTN_BTNOutput2ExtraLongDpt1Shift 4
+#define BTN_BTNOutput1ExtraLongDpt1   13      // 2 Bits, Bit 1-0
+#define     BTN_BTNOutput1ExtraLongDpt1Mask 0x03
+#define     BTN_BTNOutput1ExtraLongDpt1Shift 0
+#define BTN_BTNOutput2ExtraLongDpt1   14      // 2 Bits, Bit 1-0
+#define     BTN_BTNOutput2ExtraLongDpt1Mask 0x03
+#define     BTN_BTNOutput2ExtraLongDpt1Shift 0
 #define BTN_BTNOutput1ExtraLongDpt5   13      // uint8_t
 #define BTN_BTNOutput2ExtraLongDpt5   14      // uint8_t
 #define BTN_BTNOutput1ExtraLongDpt5001 13      // uint8_t
 #define BTN_BTNOutput2ExtraLongDpt5001 14      // uint8_t
 #define BTN_BTNOutput1ExtraLongDpt17  13      // 8 Bits, Bit 7-0
 #define BTN_BTNOutput2ExtraLongDpt17  14      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputExtraLongInteraction 15      // 1 Bit, Bit 7
-#define     BTN_BTNOutputExtraLongInteractionMask 0x80
-#define     BTN_BTNOutputExtraLongInteractionShift 7
+#define BTN_BTNOutputExtraLongEvent   15      // 1 Bit, Bit 7
+#define     BTN_BTNOutputExtraLongEventMask 0x80
+#define     BTN_BTNOutputExtraLongEventShift 7
 #define BTN_BTNM1Dpt1                 16      // 2 Bits, Bit 7-6
 #define     BTN_BTNM1Dpt1Mask 0xC0
 #define     BTN_BTNM1Dpt1Shift 6
@@ -1070,10 +1070,10 @@
 #define BTN_KoBTNInput1 1
 #define BTN_KoBTNInput2 2
 #define BTN_KoBTNOutput1Status 3
-#define BTN_KoBTNOutput1 4
 #define BTN_KoBTNOutput2Status 5
-#define BTN_KoBTNOutput2 6
 #define BTN_KoBTNOutput3Status 7
+#define BTN_KoBTNOutput1 4
+#define BTN_KoBTNOutput2 6
 #define BTN_KoBTNOutput3 8
 #define BTN_KoBTNOutput1Multi 9
 #define BTN_KoBTNOutput2Multi 10
@@ -1109,5 +1109,5 @@
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 12
+#define MAIN_ApplicationVersion 16
 #define MAIN_OrderNumber "SOM-UP"

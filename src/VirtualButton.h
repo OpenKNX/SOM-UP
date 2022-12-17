@@ -10,19 +10,11 @@
 #define BTN_LongPressTime 1000
 #define BTN_ExtraLongPressTime 2500
 
-struct VirtualButtonOutputParams
-{
-  uint8_t dpt1 = 0;
-  uint8_t dpt5 = 0;
-  uint8_t dpt5001 = 0;
-  uint8_t dpt17 = 0;
-};
-
 struct VirtualButtonParams
 {
-  struct VirtualButtonOutputParams outputShort;
-  struct VirtualButtonOutputParams outputLong;
-  struct VirtualButtonOutputParams outputExtraLong;
+  uint8_t outputShort;
+  uint8_t outputLong;
+  uint8_t outputExtraLong;
 };
 
 struct VirtualButtonGlobalParams
@@ -32,6 +24,9 @@ struct VirtualButtonGlobalParams
   uint8_t outputShort = 0;
   uint8_t outputLong = 0;
   uint8_t outputExtraLong = 0;
+  bool eventShort = false;
+  bool eventLong = false;
+  bool eventExtraLong = false;
 };
 
 struct VirtualButtonState
@@ -67,6 +62,7 @@ private:
   void eventShortRelease(bool iButton);
   void eventLongRelease(bool iButton);
   void eventExtraLongRelease(bool iButton);
+  void writeSwitchOutput(uint8_t iOutput, uint8_t iValue, uint8_t iKoOutput, uint8_t iKoStatus);
 
   uint8_t mIndex = 0;
 

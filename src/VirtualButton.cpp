@@ -36,51 +36,27 @@ void VirtualButton::setup()
   // Global Params
   mParams.mode = knx.paramByte(calcParamIndex(BTN_BTNMode));
   mParams.lock = (knx.paramByte(calcParamIndex(BTN_BTNLock)) & BTN_BTNLockMask) >> BTN_BTNLockShift;
+
   mParams.outputShort = knx.paramByte(calcParamIndex(BTN_BTNOutputShort));
   mParams.outputLong = knx.paramByte(calcParamIndex(BTN_BTNOutputLong));
   mParams.outputExtraLong = knx.paramByte(calcParamIndex(BTN_BTNOutputExtraLong));
 
-  // Button 1 - Short
-  mButtonParams[0].outputShort.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt1) & BTN_BTNOutput1ShortDpt1Mask) >> BTN_BTNOutput1ShortDpt1Shift;
-  mButtonParams[0].outputShort.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt5));
-  mButtonParams[0].outputShort.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt5001));
-  mButtonParams[0].outputShort.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt17));
+  mParams.eventShort = knx.paramByte(calcParamIndex(BTN_BTNOutputShortEvent));
+  mParams.eventLong = knx.paramByte(calcParamIndex(BTN_BTNOutputLongEvent));
+  mParams.eventExtraLong = knx.paramByte(calcParamIndex(BTN_BTNOutputExtraLongEvent));
 
-  // Button 1 - Long
-  mButtonParams[0].outputLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt1) & BTN_BTNOutput1LongDpt1Mask) >> BTN_BTNOutput1LongDpt1Shift;
-  mButtonParams[0].outputLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt5));
-  mButtonParams[0].outputLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt5001));
-  mButtonParams[0].outputLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt17));
+  mButtonParams[0].outputShort = knx.paramByte(calcParamIndex(BTN_BTNOutput1ShortDpt1));
+  mButtonParams[0].outputLong = knx.paramByte(calcParamIndex(BTN_BTNOutput1LongDpt1));
+  mButtonParams[0].outputExtraLong = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt1));
 
-  // Button 1 - ExtraLong
-  mButtonParams[0].outputExtraLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt1) & BTN_BTNOutput1ExtraLongDpt1Mask) >> BTN_BTNOutput1ExtraLongDpt1Shift;
-  mButtonParams[0].outputExtraLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt5));
-  mButtonParams[0].outputExtraLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt5001));
-  mButtonParams[0].outputExtraLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput1ExtraLongDpt17));
-
-  // Button 2 - Short
-  mButtonParams[1].outputShort.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt1) & BTN_BTNOutput2ShortDpt1Mask) >> BTN_BTNOutput2ShortDpt1Shift;
-  mButtonParams[1].outputShort.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt5));
-  mButtonParams[1].outputShort.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt5001));
-  mButtonParams[1].outputShort.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt17));
-
-  // Button 2 - Long
-  mButtonParams[1].outputLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt1) & BTN_BTNOutput2LongDpt1Mask) >> BTN_BTNOutput2LongDpt1Shift;
-  mButtonParams[1].outputLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt5));
-  mButtonParams[1].outputLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt5001));
-  mButtonParams[1].outputLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt17));
-
-  // Button 2 - ExtraLong
-  mButtonParams[1].outputExtraLong.dpt1 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt1) & BTN_BTNOutput2ExtraLongDpt1Mask) >> BTN_BTNOutput2ExtraLongDpt1Shift;
-  mButtonParams[1].outputExtraLong.dpt5 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt5));
-  mButtonParams[1].outputExtraLong.dpt5001 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt5001));
-  mButtonParams[1].outputExtraLong.dpt17 = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt17));
+  mButtonParams[1].outputShort = knx.paramByte(calcParamIndex(BTN_BTNOutput2ShortDpt1));
+  mButtonParams[1].outputLong = knx.paramByte(calcParamIndex(BTN_BTNOutput2LongDpt1));
+  mButtonParams[1].outputExtraLong = knx.paramByte(calcParamIndex(BTN_BTNOutput2ExtraLongDpt1));
 
   // Debug
-  SERIAL_DEBUG.printf("BTN %i outputShortDpt1: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt1, calcParamIndex(BTN_BTNOutput1ShortDpt1));
-  SERIAL_DEBUG.printf("BTN %i outputShortDpt5: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt5, calcParamIndex(BTN_BTNOutput1ShortDpt5));
-  SERIAL_DEBUG.printf("BTN %i outputShortDpt5001: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt5001, calcParamIndex(BTN_BTNOutput1ShortDpt5001));
-  SERIAL_DEBUG.printf("BTN %i outputShortDpt17: %i/%i\n\r", mIndex, mButtonParams[0].outputShort.dpt17, calcParamIndex(BTN_BTNOutput1ShortDpt17));
+  SERIAL_DEBUG.printf("BTN %i outputShort: %i/%i\n\r", mIndex, mButtonParams[0].outputShort, calcParamIndex(BTN_BTNOutput1ShortDpt1));
+  SERIAL_DEBUG.printf("BTN %i outputLong: %i/%i\n\r", mIndex, mButtonParams[0].outputLong, calcParamIndex(BTN_BTNOutput1LongDpt1));
+  SERIAL_DEBUG.printf("BTN %i outputExtraLong: %i/%i\n\r", mIndex, mButtonParams[0].outputExtraLong, calcParamIndex(BTN_BTNOutput1ExtraLongDpt1));
 
   SERIAL_DEBUG.printf("BTN %i mParamMode: %i\n\r", mIndex, mParams.mode);
 }
@@ -245,25 +221,91 @@ void VirtualButton::eventMultiClick(uint8_t iClicks)
 }
 void VirtualButton::eventShortPress(bool iButton)
 {
+  if (mParams.eventShort != 1)
+    return;
+
   SERIAL_DEBUG.printf("  BTN%i: short press\n\r", iButton);
+  writeSwitchOutput(mParams.outputShort, mButtonParams[iButton].outputShort, BTN_KoBTNOutput1, BTN_KoBTNOutput1Status);
 }
 void VirtualButton::eventLongPress(bool iButton)
 {
+  if (mParams.eventLong != 1)
+    return;
+
   SERIAL_DEBUG.printf("  BTN%i: long press\n\r", iButton);
+  writeSwitchOutput(mParams.outputLong, mButtonParams[iButton].outputLong, BTN_KoBTNOutput2, BTN_KoBTNOutput2Status);
 }
 void VirtualButton::eventExtraLongPress(bool iButton)
 {
+  if (mParams.eventExtraLong != 1)
+    return;
+
   SERIAL_DEBUG.printf("  BTN%i: extra long press\n\r", iButton);
+  writeSwitchOutput(mParams.outputExtraLong, mButtonParams[iButton].outputExtraLong, BTN_KoBTNOutput3, BTN_KoBTNOutput3Status);
 }
 void VirtualButton::eventShortRelease(bool iButton)
 {
+  if (mParams.eventShort != 0)
+    return;
+
   SERIAL_DEBUG.printf("  BTN%i: short release\n\r", iButton);
+  writeSwitchOutput(mParams.outputShort, mButtonParams[iButton].outputShort, BTN_KoBTNOutput1, BTN_KoBTNOutput1Status);
 }
 void VirtualButton::eventLongRelease(bool iButton)
 {
+  if (mParams.eventLong != 0)
+    return;
+
   SERIAL_DEBUG.printf("  BTN%i: long release\n\r", iButton);
+  writeSwitchOutput(mParams.outputLong, mButtonParams[iButton].outputLong, BTN_KoBTNOutput2, BTN_KoBTNOutput2Status);
 }
 void VirtualButton::eventExtraLongRelease(bool iButton)
 {
+  if (mParams.eventExtraLong != 0)
+    return;
+
   SERIAL_DEBUG.printf("  BTN%i: extra long release\n\r", iButton);
+  writeSwitchOutput(mParams.outputExtraLong, mButtonParams[iButton].outputExtraLong, BTN_KoBTNOutput3, BTN_KoBTNOutput3Status);
+}
+
+void VirtualButton::writeSwitchOutput(uint8_t iOutput, uint8_t iValue, uint8_t iKoOutput, uint8_t iKoStatus)
+{
+  SERIAL_DEBUG.printf("  BTN WRITE %i/%i/%i/%i\n\r", iOutput, iValue, iKoOutput, iKoStatus);
+  bool lValueBool = true;
+
+  switch (iOutput)
+  {
+  case 1:
+    // DPT1
+
+    // disabled
+    if (iValue == 0)
+      return;
+
+    // default true
+
+    // true
+    if (iValue == 1)
+      lValueBool = false;
+
+    // toggle
+    if (iValue == 3)
+    {
+      lValueBool = !(bool)getKo(iKoStatus)->value(getDPT(VAL_DPT_1));
+    }
+
+    getKo(iKoOutput)->value(lValueBool, getDPT(VAL_DPT_1));
+    break;
+
+  case 4:
+  case 6:
+    // DPT5 & DPT17
+    getKo(iKoOutput)->value((uint8_t)iValue, getDPT(VAL_DPT_5));
+    break;
+
+  case 5:
+    // DPT5001
+    getKo(iKoOutput)->value((uint8_t)iValue, getDPT(VAL_DPT_5001));
+    break;
+  }
 }
