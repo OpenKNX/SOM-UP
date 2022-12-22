@@ -86,11 +86,8 @@ void processInputKoCallback(GroupObject &iKo)
     // gCommon.processInputKo(iKo);
     gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
-    if (lAsap >= BTN_KoOffset && lAsap < BTN_KoOffset + BTN_ChannelCount * BTN_KoBlockSize)
-    {
-      uint8_t lIndex = (lAsap - BTN_KoOffset) / BTN_KoBlockSize;
-      gVirtualButtons[lIndex]->processInputKo(iKo);
-    }
+    for (uint8_t i = 0; i < BTN_ChannelCount; i++)
+      gVirtualButtons[i]->processInputKo(iKo);
   }
 }
 
