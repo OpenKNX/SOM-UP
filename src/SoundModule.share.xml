@@ -7,6 +7,15 @@
         <ApplicationProgram Id="%AID%" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SOM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
           <Static>
             <ParameterTypes>
+              <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
+                <TypeRestriction Base="Value" SizeInBit="16">
+                  <Enumeration Text="Externes KO" Value="0" Id="%AID%_PT-BTNInputs_EN-0" />
+                  <Enumeration Text="Binäreingang A" Value="41" Id="%AID%_PT-BTNInputs_EN-41" />
+                  <Enumeration Text="Binäreingang B" Value="42" Id="%AID%_PT-BTNInputs_EN-42" />
+                  <Enumeration Text="Binäreingang C" Value="43" Id="%AID%_PT-BTNInputs_EN-43" />
+                  <Enumeration Text="Binäreingang D" Value="44" Id="%AID%_PT-BTNInputs_EN-44" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-SOMVolume" Name="SOMVolume">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="30" UIHint="Slider" />
               </ParameterType>

@@ -991,14 +991,8 @@
 #define BTN_BTNLock                    0      // 2 Bits, Bit 3-2
 #define     BTN_BTNLockMask 0x0C
 #define     BTN_BTNLockShift 2
-#define BTN_BTNInputKoA                1      // uint15_t
-#define BTN_BTNInputKoB                3      // uint15_t
-#define BTN_BTNInputA                  1      // 1 Bit, Bit 7
-#define     BTN_BTNInputAMask 0x80
-#define     BTN_BTNInputAShift 7
-#define BTN_BTNInputB                  3      // 1 Bit, Bit 7
-#define     BTN_BTNInputBMask 0x80
-#define     BTN_BTNInputBShift 7
+#define BTN_BTNInputA                  1      // char*, 2 Byte
+#define BTN_BTNInputB                  3      // char*, 2 Byte
 #define BTN_BTNOutputShort             5      // 8 Bits, Bit 7-0
 #define BTN_BTNOutputShortMultiple     5      // 8 Bits, Bit 7-0
 #define BTN_BTNOutput1ShortDpt1        6      // 2 Bits, Bit 1-0
@@ -1161,5 +1155,5 @@
 
 #define MAIN_OpenKnxId 0xA4
 #define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 8
+#define MAIN_ApplicationVersion 5
 #define MAIN_OrderNumber "SOM-UP"
