@@ -13,7 +13,6 @@ private:
   void processInputKoTrigger(GroupObject &iKo);
   void processInputKoLock(GroupObject &iKo);
   void processInputKoDayNight(GroupObject &iKo);
-  void processDuration();
 
   uint8_t mIndex = 0;
   uint16_t mCurrentFile;
@@ -28,10 +27,9 @@ private:
   uint32_t mParamDuration;
 
   bool mParamActive = false;
-  bool mParamRepeat = false;
+  bool mParamLoop = false;
   bool mCurrentLocked = false;
   bool mStatus = false;
-  uint32_t mStartMillis = 0;
 
 public:
   SoundTrigger(uint8_t iIndex);

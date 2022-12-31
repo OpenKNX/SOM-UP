@@ -49,7 +49,11 @@ void setup()
 
 void loop()
 {
+  uint32_t lTime = millis();
   // don't delay here to much. Otherwise you might lose packages or mess up the timing with ETS
   knx.loop();
   appLoop();
+
+  if((millis() - lTime) > 20)
+    SERIAL_DEBUG.printf("loop took too long %i\n\r", (millis() - lTime));
 }

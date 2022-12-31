@@ -46,9 +46,9 @@ void SoundControl::setup()
   }
 }
 
-bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, bool iRepeat, uint8_t iTrigger)
+bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, uint32_t iDuration, bool iLoop, uint8_t iTrigger)
 {
-  SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i\n\r", iFile, iVolume, iPriority, iRepeat, iTrigger);
+  // SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i/%i\n\r", iFile, iVolume, iPriority, iDuration, iLoop, iTrigger);
 
   // abort on lock
   if (mCurrentLocked)
@@ -72,7 +72,7 @@ bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, bool 
   SoundControl::stopped();
 
   // play music
-  mPlayer.play(iFile, iVolume, iRepeat);
+  mPlayer.play(iFile, iVolume, iDuration, iLoop);
 
   // send ko
   getKo(SOM_KoStatus)->value(true, getDPT(VAL_DPT_1));

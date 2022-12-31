@@ -23,41 +23,49 @@ void SoundPlayer::setup()
   SERIAL_DEBUG.println("SoundPlayer::setup ready");
 }
 
-void SoundPlayer::play(uint16_t iFile, uint8_t iVolume, bool iRepeat)
+void SoundPlayer::play(uint16_t iFile, uint8_t iVolume, uint32_t iDuration, bool iLoop)
 {
-  SERIAL_DEBUG.printf("SoundPlayer::play %i - %i\n\r", iFile, iVolume);
-  mStatus = true;
-  mWaitForPlaying = true;
-  mStartPlayMillis = millis();
+  SERIAL_DEBUG.printf("SoundPlayer::play %i/%i/%i/%i\n\r", iFile, iVolume, iDuration, iLoop);
 
-  // Volume
-  setVolume(iVolume);
-  SERIAL_DEBUG.printf("SoundPlayer::play after vol: %i\n\r", (millis() - mStartPlayMillis));
+  mNextPlay.file = iFile;
+  mNextPlay.volume = iVolume;
+  mNextPlay.duration = iDuration;
+  mNextPlay.loop = iLoop;
+  mNextPlay.repeats = 1;
+  mNextPlay.playMillis = millis();
 
-  // stop
-  // stop();
-  // SERIAL_DEBUG.printf("SoundPlayer::play after stop: %i\n\r", (millis() - mStartPlayMillis));
+  // Stop current if needed
+  if (mPlaying)
+    stop();
+}
+
+// Internal play
+void SoundPlayer::play(Play &iPlay)
+{
+  if (iPlay.repeats > 0)
+    iPlay.repeats -= 1;
+
+  // set volume
+  setVolume(iPlay.volume);
 
   // Repeat
-  if (iRepeat)
-  {
+  if (iPlay.loop)
     mHardware.setCycleMode(DY::PlayMode::RepeatOne);
-  }
   else
-  {
     mHardware.setCycleMode(DY::PlayMode::OneOff);
-  }
-  SERIAL_DEBUG.printf("SoundPlayer::play after cyclemode: %i\n\r", (millis() - mStartPlayMillis));
 
-  std::stringstream lFilepath;
-  lFilepath << "/" << std::setfill('0') << std::setw(5) << std::to_string(iFile) << "*MP3";
-  // SERIAL_DEBUG.printf("SoundPlayer::path %s\n\r", lFilepath.str().c_str());
-  mHardware.playSpecifiedDevicePath(DY::Device::Flash, (char *)lFilepath.str().c_str());
-  //_dyplayer.playSpecified(iFile);
-  SERIAL_DEBUG.printf("SoundPlayer::play after play: %i\n\r", (millis() - mStartPlayMillis));
+  // play file
+  mHardware.playSpecifiedDevicePath(DY::Device::Flash, getFilePath(iPlay.file));
+}
 
-  // reset for next check in 250ms
-  mPreviousMillis = millis();
+char *SoundPlayer::getFilePath(uint16_t iFile)
+{
+  std::stringstream lFilePath;
+  // lFilePath << "/" << std::to_string(iFile) << ".MP3";
+  lFilePath << "/" << std::setfill('0') << std::setw(5) << std::to_string(iFile) << "*MP3";
+  mHardware.playSpecifiedDevicePath(DY::Device::Flash, (char *)lFilePath.str().c_str());
+  // SERIAL_DEBUG.printf("SoundPlayer::path %s\n\r", lFilePath.str().c_str());
+  return (char *)lFilePath.str().c_str();
 }
 
 void SoundPlayer::setVolume(uint8_t iVolume)
@@ -80,6 +88,39 @@ void SoundPlayer::loop()
 {
   requestStatus();
   processStatus();
+  processDuration();
+  processNextPlay();
+}
+
+void SoundPlayer::processNextPlay()
+{
+  // Already playing
+  if (mPlaying)
+    return;
+
+  // No next play
+  if (mNextPlay.file == 0)
+    return;
+
+  SERIAL_DEBUG.printf("SoundPlayer::processNextPlay: %i (%i)\n\r", mNextPlay.file, (millis() - mNextPlay.playMillis));
+
+  play(mNextPlay);
+
+  mCurrentPlay = mNextPlay;
+  mNextPlay = SoundPlayer::Play();
+}
+
+void SoundPlayer::processDuration()
+{
+  if (
+      !mStopping &&
+      mCurrentPlay.duration > 0 &&
+      mCurrentPlay.playingMillis > 0 &&
+      delayCheck(mCurrentPlay.playingMillis, mCurrentPlay.duration))
+  {
+    SERIAL_DEBUG.printf("SoundPlayer::processDuration %i/%i/%i\n\r", millis(), mCurrentPlay.playingMillis, mCurrentPlay.duration);
+    stop();
+  }
 }
 
 void SoundPlayer::requestStatus()
@@ -88,8 +129,8 @@ void SoundPlayer::requestStatus()
   if (mWaitForState)
     return;
 
-  // check only every 250ms
-  if ((millis() - mPreviousMillis) < 250)
+  // check only every Xms
+  if (!delayCheck(mPreviousMillis, 5))
     return;
 
   mPreviousMillis = millis();
@@ -100,9 +141,19 @@ void SoundPlayer::requestStatus()
 
 void SoundPlayer::processStatus()
 {
-  // do waiting for status and new byte is available
-  if (mWaitForState && Serial2.available())
+  uint32_t lTime = millis();
+  uint16_t lI = 0;
+
+  // allow 5ms for read data
+  while (millis() - lTime <= 5)
   {
+    lI += 1;
+    if (!mWaitForState)
+      return;
+
+    if (!Serial2.available())
+      return;
+
     // read byte into buffer
     mResponseStateBuffer[mResponseStatePos] = Serial2.read();
     mResponseStatePos++;
@@ -111,29 +162,15 @@ void SoundPlayer::processStatus()
     if (mResponseStatePos == 5)
     {
       // POSSIBLE IMPROVEMENT: Validate checksum - not needed yet - only check responsed
-
-      // Check Status Changed
-      if (!mLastHardwareStatus && mResponseStateBuffer[3] == 1)
+      switch (mResponseStateBuffer[3])
       {
-        SERIAL_DEBUG.printf("SoundPlayer::processStatus: play %i\n\r", (millis() - mStartPlayMillis));
-        mLastHardwareStatus = true;
-      }
+      case 1:
+        processStatusPlaying();
+        break;
 
-      if (mLastHardwareStatus && mResponseStateBuffer[3] == 0)
-      {
-        SERIAL_DEBUG.printf("SoundPlayer::processStatus: stop %i\n\r", (millis() - mStartPlayMillis));
-        mLastHardwareStatus = false;
-      }
-
-      if (mStatus && mResponseStateBuffer[3] != 1)
-        mWaitForPlaying = false;
-
-      // status is playing and response is stopped
-      if (mStatus && mResponseStateBuffer[3] == 0)
-      {
-        mStatus = false;
-        SoundControl::sInstance->stopped();
-        SERIAL_DEBUG.printf("SoundPlayer::processStatus after stop: %i\n\r", (millis() - mStartPlayMillis));
+      case 0:
+        processStatusStopped();
+        break;
       }
 
       // Reset for next requestStatus
@@ -144,12 +181,53 @@ void SoundPlayer::processStatus()
   }
 }
 
+void SoundPlayer::processStatusStopped()
+{
+  // Already Stopped
+  if (!mPlaying)
+    return;
+
+  SERIAL_DEBUG.printf("SoundPlayer::processStatusStopped: %i\n\r", (millis() - mCurrentPlay.playingMillis));
+
+  // Repeat
+  if (mCurrentPlay.repeats > 0)
+  {
+    // mPlaying = false;
+    play(mCurrentPlay);
+    return;
+  }
+
+  if (mNextPlay.file == 0)
+    SoundControl::sInstance->stopped();
+
+  mStopping = false;
+  mPlaying = false;
+  mCurrentPlay = SoundPlayer::Play();
+}
+
+void SoundPlayer::processStatusPlaying()
+{
+  // Already Playing
+  if (mPlaying)
+    return;
+
+  SERIAL_DEBUG.printf("SoundPlayer::processStatusPlaying: %i\n\r", (millis() - mCurrentPlay.playMillis));
+
+  mPlaying = true;
+  mCurrentPlay.playingMillis = millis();
+}
+
 void SoundPlayer::stop()
 {
   SERIAL_DEBUG.println("SoundPlayer::stop");
 
-  if (!mStatus)
+  if (!mPlaying)
     return;
 
-  //mHardware.stop();
+  if (mStopping)
+    return;
+
+  uint8_t lMsg[] = {0xAA, 0x04, 0x00, 0xAE};
+  Serial2.write(lMsg, sizeof(lMsg));
+  mStopping = true;
 }

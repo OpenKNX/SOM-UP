@@ -12,7 +12,7 @@ void SoundTrigger::setup()
 {
   // Params
   mParamActive = (knx.paramByte(calcParamIndex(SOM_TriState)) & SOM_TriStateMask) >> SOM_TriStateShift;
-  mParamRepeat = (knx.paramByte(calcParamIndex(SOM_TriRepeat)) & SOM_TriRepeatMask) >> SOM_TriRepeatShift;
+  mParamLoop = (knx.paramByte(calcParamIndex(SOM_TriRepeat)) & SOM_TriRepeatMask) >> SOM_TriRepeatShift;
   mParamPriority = (knx.paramByte(calcParamIndex(SOM_TriPriority)) & SOM_TriPriorityMask) >> SOM_TriPriorityShift;
   mParamLock = (knx.paramByte(calcParamIndex(SOM_TriLock)) & SOM_TriLockMask) >> SOM_TriLockShift;
   mParamDayNight = (knx.paramByte(calcParamIndex(SOM_TriDayNight)) & SOM_TriDayNightMask) >> SOM_TriDayNightShift;
@@ -30,7 +30,7 @@ void SoundTrigger::setup()
 
   // Debug
   SERIAL_DEBUG.printf("Trigger %i mParamActive: %i\n\r", mIndex, mParamActive);
-  SERIAL_DEBUG.printf("Trigger %i mParamRepeat: %i\n\r", mIndex, mParamRepeat);
+  SERIAL_DEBUG.printf("Trigger %i mParamLoop: %i\n\r", mIndex, mParamLoop);
   SERIAL_DEBUG.printf("Trigger %i mParamPriority: %i\n\r", mIndex, mParamPriority);
   SERIAL_DEBUG.printf("Trigger %i mParamLock: %i\n\r", mIndex, mParamLock);
   SERIAL_DEBUG.printf("Trigger %i mParamDayNight: %i\n\r", mIndex, mParamDayNight);
@@ -69,26 +69,6 @@ GroupObject *SoundTrigger::getKo(uint8_t iKoIndex)
 
 void SoundTrigger::loop()
 {
-  processDuration();
-};
-
-void SoundTrigger::processDuration()
-{
-  // skip if timer not started?
-  if (mStartMillis == 0)
-    return;
-
-  // skip if not playing
-  if (!mStatus)
-    return;
-
-  // skip if repeated is inactive
-  if (!mParamRepeat)
-    return;
-
-  // timer
-  if ((millis() - mStartMillis) > mParamDuration)
-    stop();
 };
 
 void SoundTrigger::processInputKo(GroupObject &iKo)
@@ -183,7 +163,7 @@ void SoundTrigger::play()
     return;
   }
   SERIAL_DEBUG.printf("Trigger %i play\n\r", mIndex);
-  setStatus(SoundControl::sInstance->play(mCurrentFile, mCurrentVolume, mParamPriority, mParamRepeat, mIndex));
+  setStatus(SoundControl::sInstance->play(mCurrentFile, mCurrentVolume, mParamPriority, mParamDuration, mParamLoop, mIndex));
 }
 
 void SoundTrigger::stop()
@@ -204,9 +184,6 @@ void SoundTrigger::stopped()
 
 void SoundTrigger::setStatus(bool iNewStatus)
 {
-  // internal timer for max duration
-  mStartMillis = iNewStatus ? millis() : 0;
-
   if (mStatus != iNewStatus)
   {
     mStatus = iNewStatus;

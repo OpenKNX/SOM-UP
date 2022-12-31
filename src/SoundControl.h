@@ -16,7 +16,7 @@ public:
   SoundControl();
   ~SoundControl();
 
-  bool play(uint8_t iFile, uint8_t iVolume, uint8_t IPriority, bool repeat, uint8_t iTrigger = 0);
+  bool play(uint8_t iFile, uint8_t iVolume = 0, uint8_t IPriority = 3, uint32_t iDuration = 0, bool iLoop = false, uint8_t iTrigger = 0);
   void stop();
   void loop();
   void setup();
