@@ -1,6 +1,6 @@
 #pragma once
 #define BINARY_INPUT_PULSE_PAUSE_TIME 5
-#define BINARY_INPUT_PULSE_WAIT_CYCLE (1/125 * 500) // 1/125 (Mhz/1000000) = 0,008 = 1 ns per Cycle 
+#define BINARY_INPUT_PULSE_WAIT_TIME 500
 
 #ifdef BOARD_MASIFI_SMBB_V1
 #define PROG_LED_PIN 1

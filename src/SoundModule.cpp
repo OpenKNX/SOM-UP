@@ -96,7 +96,6 @@ void appLoop()
   gVirtualButtonControl.loop();
   gSoundControl.loop();
   gLogic.loop();
-
 }
 
 void appSetup()

@@ -4,6 +4,7 @@
 #include "hardware.h"
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 class SoundControl;
 
@@ -24,12 +25,13 @@ class SoundPlayer
 private:
   void processStatus();
   void requestStatus();
+  void requestStatusWatchdog();
   void processDuration();
   void processStatusStopped();
   void processStatusPlaying();
   void processNextPlay();
   void play(Play &iPlay);
-  char *getFilePath(uint16_t iFile);
+  std::string getFilePath(uint16_t iFile);
 
   DY::Player mHardware;
   bool mPlaying = false;
@@ -56,5 +58,4 @@ public:
 
   void powerOn();
   void powerOff();
-
 };

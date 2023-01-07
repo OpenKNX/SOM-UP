@@ -28,7 +28,7 @@ void setup()
   ledInfo(true);
 #endif
 
-  const uint8_t firmwareRevision = 0;
+  const uint8_t firmwareRevision = 1;
   OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, firmwareRevision);
 
   // pin or GPIO the programming led is connected to. Default is LED_BUILDIN
@@ -54,6 +54,6 @@ void loop()
   knx.loop();
   appLoop();
 
-  if((millis() - lTime) > 10)
+  if((millis() - lTime) > 5)
     SERIAL_DEBUG.printf("loop took too long %i\n\r", (millis() - lTime));
 }

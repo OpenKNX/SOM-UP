@@ -40,7 +40,7 @@ void BinaryInputControl::processHardwareInputs()
     return;
 
   digitalWrite(BINARY_INPUT_PULSE, true);
-  busy_wait_at_least_cycles(BINARY_INPUT_PULSE_WAIT_CYCLE);
+  busy_wait_us(500); // BINARY_INPUT_PULSE_WAIT_TIME);
 #endif
 
   if (mBinaryInputs[0]->isActive())

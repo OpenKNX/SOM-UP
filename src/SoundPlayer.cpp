@@ -75,17 +75,15 @@ void SoundPlayer::play(Play &iPlay)
     mHardware.setCycleMode(DY::PlayMode::OneOff);
 
   // play file
-  mHardware.playSpecifiedDevicePath(DY::Device::Flash, getFilePath(iPlay.file));
+  mHardware.playSpecifiedDevicePath(DY::Device::Flash, (char *)getFilePath(iPlay.file).c_str());
 }
 
-char *SoundPlayer::getFilePath(uint16_t iFile)
+std::string SoundPlayer::getFilePath(uint16_t iFile)
 {
   std::stringstream lFilePath;
-  // lFilePath << "/" << std::to_string(iFile) << ".MP3";
   lFilePath << "/" << std::setfill('0') << std::setw(5) << std::to_string(iFile) << "*MP3";
-  mHardware.playSpecifiedDevicePath(DY::Device::Flash, (char *)lFilePath.str().c_str());
   // SERIAL_DEBUG.printf("SoundPlayer::path %s\n\r", lFilePath.str().c_str());
-  return (char *)lFilePath.str().c_str();
+  return lFilePath.str();
 }
 
 void SoundPlayer::setVolume(uint8_t iVolume)
@@ -108,6 +106,7 @@ void SoundPlayer::loop()
 {
   requestStatus();
   processStatus();
+  requestStatusWatchdog();
   processDuration();
   processNextPlay();
 }
@@ -143,9 +142,25 @@ void SoundPlayer::processDuration()
   }
 }
 
+// sound to loud and communication interruppted - internal reset
+void SoundPlayer::requestStatusWatchdog()
+{
+  if (!mWaitForState)
+    return;
+
+  if (!delayCheck(mPreviousMillis, 1000))
+    return ;
+  
+  mWaitForState = false;
+  mPreviousMillis = millis();
+  mResponseStatePos = 0;
+  mNextPlay.file= 0;
+  mPlaying = false;
+}
+
 void SoundPlayer::requestStatus()
 {
-  // wait already for status
+  // skip if wait already for response
   if (mWaitForState)
     return;
 
@@ -157,6 +172,7 @@ void SoundPlayer::requestStatus()
   uint8_t lMsg[] = {0xAA, 0x01, 0x00, 0xAB};
   Serial2.write(lMsg, sizeof(lMsg));
   mWaitForState = true;
+  mResponseStatePos = 0;
 }
 
 void SoundPlayer::processStatus()
