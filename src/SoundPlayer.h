@@ -53,4 +53,8 @@ public:
   void stop();
   void loop();
   void setVolume(uint8_t iVolume);
+
+  void powerOn();
+  void powerOff();
+
 };

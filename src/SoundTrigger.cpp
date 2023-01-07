@@ -4,6 +4,11 @@
 SoundTrigger::SoundTrigger(uint8_t iIndex)
 {
   mIndex = iIndex;
+  mChannelIndex = mIndex;
+  mChannelParamBlockSize = SOM_ParamBlockSize;
+  mChannelParamOffset = SOM_ParamBlockOffset;
+  mChannelParamKoBlockSize = SOM_KoBlockSize;
+  mChannelParamKoOffset = SOM_KoOffset;
 }
 
 SoundTrigger::~SoundTrigger() {}
@@ -41,7 +46,7 @@ void SoundTrigger::setup()
   SERIAL_DEBUG.printf("Trigger %i mParamDuration: %i\n\r", mIndex, mParamDuration);
 }
 
-uint32_t SoundTrigger::calcParamIndex(uint16_t iParamIndex)
+/*uint32_t SoundTrigger::calcParamIndex(uint16_t iParamIndex)
 {
   return iParamIndex + mIndex * SOM_ParamBlockSize + SOM_ParamBlockOffset;
 }
@@ -66,7 +71,7 @@ GroupObject *SoundTrigger::getKo(uint8_t iKoIndex)
 {
   return &knx.getGroupObject(calcKoNumber(iKoIndex));
 }
-
+*/
 void SoundTrigger::loop()
 {
 };

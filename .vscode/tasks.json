@@ -4,16 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build RP2040",
-            "type": "shell",
-            "command": "scripts/OpenKNX-Build.ps1",
-            "args": [
-                "build_RP2040"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
             "label": "OpenKNXproducer",
             "type": "shell",
             "options": {
@@ -29,11 +19,42 @@
             "group": "test"
         },
         {
-            "label": "Upload USB RP2040",
+            "label": "Build MASIFI_SMBB_V1",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "upload_USB_RP2040",
+                "build_MASIFI_SMBB_V1"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Upload USB MASIFI_SMBB_V1",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "upload_USB_MASIFI_SMBB_V1",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build SOM_UP",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "build_SOM_UP"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Upload USB SOM_UP",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "upload_USB_SOM_UP",
                 "upload"
             ],
             "group": "build",
@@ -46,8 +67,7 @@
             "args": [
                 "Release"
             ],
-            "problemMatcher": [],
-            "group": "test"
+            "problemMatcher": []
         },
         {
             "label": "Build-Beta",

@@ -8,10 +8,10 @@ SoundControl::SoundControl()
 }
 SoundControl::~SoundControl() {}
 
-GroupObject *SoundControl::getKo(uint8_t numberKo)
-{
-  return &knx.getGroupObject(numberKo);
-}
+// GroupObject *SoundControl::getKo(uint8_t numberKo)
+// {
+//   return &knx.getGroupObject(numberKo);
+// }
 
 void SoundControl::setup()
 {

@@ -9,7 +9,7 @@
 #define SOM_SceneActionLock 3
 #define SOM_SceneActionUnlock 4
 
-class SoundControl
+class SoundControl : public OpenKNX::Module
 {
 
 public:
@@ -38,7 +38,7 @@ private:
   void setDefaultVolume();
   SoundPlayer mPlayer;
   SoundTrigger *mTriggers[SOM_ChannelCount];
-  GroupObject *getKo(uint8_t iNumberKo);
+  //GroupObject *getKo(uint8_t iNumberKo);
   bool mStatus = false;
   bool mCurrentNight = false;
   bool mCurrentLocked = false;

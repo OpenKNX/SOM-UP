@@ -6,8 +6,28 @@ SoundPlayer::SoundPlayer()
 }
 SoundPlayer::~SoundPlayer() {}
 
+void SoundPlayer::powerOn()
+{
+#ifdef PLAYER_PWR
+  SERIAL_DEBUG.println("poweron player...");
+  digitalWrite(PLAYER_PWR, HIGH);
+#endif
+}
+void SoundPlayer::powerOff()
+{
+  SERIAL_DEBUG.println("poweroff player...");
+#ifdef PLAYER_PWR
+  digitalWrite(PLAYER_PWR, LOW);
+#endif
+}
+
 void SoundPlayer::setup()
 {
+#ifdef PLAYER_PWR
+  pinMode(PLAYER_PWR, OUTPUT);
+  powerOn();
+#endif
+
   // setup hardware serial
   SERIAL_DEBUG.println("SoundPlayer::setup start");
   Serial2.setRX(PLAYER_UART_RX_PIN);
@@ -18,7 +38,7 @@ void SoundPlayer::setup()
   mHardware = DY::Player(&Serial2);
   mHardware.begin();
 
-  delay(100);
+  // delay(100);
   mHardware.stop();
   SERIAL_DEBUG.println("SoundPlayer::setup ready");
 }
@@ -144,8 +164,8 @@ void SoundPlayer::processStatus()
   uint32_t lTime = millis();
   uint16_t lI = 0;
 
-  // allow 5ms for read data
-  while (millis() - lTime <= 5)
+  // allow 1ms for read data
+  while (millis() - lTime <= 1)
   {
     lI += 1;
     if (!mWaitForState)

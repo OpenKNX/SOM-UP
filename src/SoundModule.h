@@ -1206,9 +1206,9 @@
 // Parameter per channel
 #define BI_ParamBlockOffset 2095
 #define BI_ParamBlockSize 4
-#define BI_InputActive                0      // 2 Bits, Bit 7-6
-#define     BI_InputActiveMask 0xC0
-#define     BI_InputActiveShift 6
+#define BI_InputActive                0      // 1 Bit, Bit 7
+#define     BI_InputActiveMask 0x80
+#define     BI_InputActiveShift 7
 #define BI_InputOpen                  0      // 2 Bits, Bit 5-4
 #define     BI_InputOpenMask 0x30
 #define     BI_InputOpenShift 4
@@ -1229,7 +1229,7 @@
 #define BI_KoBlockSize 1
 #define BI_KoInputOutput 0
 
-#define MAIN_OpenKnxId 0xA4
-#define MAIN_ApplicationNumber 66
-#define MAIN_ApplicationVersion 3
+#define MAIN_OpenKnxId 0xA3
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 2
 #define MAIN_OrderNumber "SOM-UP"

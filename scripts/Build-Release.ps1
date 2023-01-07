@@ -21,8 +21,6 @@
 #     "group": "test"
 # }
 
-
-
 # set product names, allows mapping of (devel) name in Project to a more consistent name in release
 # $settings = scripts/OpenKNX-Build-Settings.ps1
 
@@ -35,7 +33,11 @@ if (!$?) { exit 1 }
 # see comment in Build-Step.ps1 for argument description
 
 # Example call, the following 2 lines might be there multiple times for each firmware which should be built
-../OGM-Common/scripts/setup/reusable/Build-Step.ps1 build_RP2040 SoundModule uf2
+../OGM-Common/scripts/setup/reusable/Build-Step.ps1 build_MASIFI_SMBB_V1 firmware_MASIFI_SMBB_V1 uf2
+if (!$?) { exit 1 }
+
+# Example call, the following 2 lines might be there multiple times for each firmware which should be built
+../OGM-Common/scripts/setup/reusable/Build-Step.ps1 build_SOM_UP firmware_SOM_UP uf2
 if (!$?) { exit 1 }
 
 # # build firmware for PiPico-BCU-Connector

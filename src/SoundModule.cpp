@@ -1,23 +1,20 @@
 #include "Helper.h"
-#include "Common.h"
+#include "OpenKNX/Common.h"
+#include "OpenKNX/Module.h"
 #include "Logic.h"
-#include "BinaryInput.h"
-#include "BinaryInputGPIO.h"
 #include "VirtualButton.h"
 #include "SoundControl.h"
+#include "BinaryInputControl.h"
+#include "VirtualButtonControl.h"
+
+BinaryInputControl gBinaryInputHardware;
+VirtualButtonControl gVirtualButtonControl;
 
 SoundControl gSoundControl;
 Logic gLogic;
-Common gCommon;
-BinaryInput *gBinaryInputs[BI_ChannelCount] = {
-  new BinaryInputGPIO(0, BINARY_INPUT_A_PIN, BINARY_INPUT_PULSE),
-  new BinaryInputGPIO(1, BINARY_INPUT_B_PIN, BINARY_INPUT_PULSE),
-  new BinaryInputGPIO(2, BINARY_INPUT_C_PIN, BINARY_INPUT_PULSE),
-  new BinaryInputGPIO(3, BINARY_INPUT_D_PIN, BINARY_INPUT_PULSE)
-};
-VirtualButton *gVirtualButtons[BTN_ChannelCount];
+OpenKNX::Common gCommon;
 
-void ProcessReadRequests()
+void processReadRequests()
 {
   // this method is called after startup delay and executes read requests, which should just happen once after startup
   static bool sCalledProcessReadRequests = false;
@@ -49,7 +46,7 @@ bool processDiagnoseCommand()
   return lOutput;
 }
 
-void ProcessDiagnoseCommand(GroupObject &iKo)
+void processDiagnoseCommand(GroupObject &iKo)
 {
   // this method is called as soon as iKo is changed
   // an external change is expected
@@ -74,7 +71,7 @@ void processInputKoCallback(GroupObject &iKo)
   switch (lAsap)
   {
   case LOG_KoDiagnose:
-    ProcessDiagnoseCommand(iKo);
+    processDiagnoseCommand(iKo);
     break;
 
   case LOG_KoHeartbeat:
@@ -83,11 +80,9 @@ void processInputKoCallback(GroupObject &iKo)
     break;
 
   default:
-    // gCommon.processInputKo(iKo);
     gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
-    for (uint8_t i = 0; i < BTN_ChannelCount; i++)
-      gVirtualButtons[i]->processInputKo(iKo);
+    gVirtualButtonControl.processInputKo(iKo);
   }
 }
 
@@ -96,15 +91,12 @@ void appLoop()
   if (!gCommon.loop())
     return;
 
-  ProcessReadRequests();
+  processReadRequests();
+  gBinaryInputHardware.loop();
+  gVirtualButtonControl.loop();
   gSoundControl.loop();
   gLogic.loop();
-  for (uint8_t i = 0; i < BI_ChannelCount; i++)
-    gBinaryInputs[i]->loop();
 
-  for (uint8_t i = 0; i < BTN_ChannelCount; i++)
-    gVirtualButtons[i]->loop();
-    
 }
 
 void appSetup()
@@ -115,19 +107,8 @@ void appSetup()
   if (GroupObject::classCallback() == 0)
     GroupObject::classCallback(processInputKoCallback);
 
-  // SoundModul first for fast player init
   gSoundControl.setup();
-
-  // Setup BE
-  for (uint8_t i = 0; i < BI_ChannelCount; i++)
-    gBinaryInputs[i]->setup();
-
-  // Setup VBM
-  for (uint8_t i = 0; i < BTN_ChannelCount; i++) {
-    gVirtualButtons[i] = new VirtualButton(i);
-    gVirtualButtons[i]->setup();
-  }
-
-  // Setup Logic
+  gBinaryInputHardware.setup();
+  gVirtualButtonControl.setup();
   gLogic.setup(true);
 }

@@ -1,14 +1,15 @@
 #pragma once
 #include "knx.h"
+#include "OpenKNX/Module.h"
 
 class SoundControl;
-class SoundTrigger
+class SoundTrigger : public OpenKNX::Module
 {
 private:
-  uint32_t calcParamIndex(uint16_t iParamIndex);
-  uint16_t calcKoNumber(uint8_t iKoIndex);
-  int8_t calcKoIndex(uint16_t iKoNumber);
-  GroupObject *getKo(uint8_t iKoIndex);
+  // uint32_t calcParamIndex(uint16_t iParamIndex);
+  // uint16_t calcKoNumber(uint8_t iKoIndex);
+  // int8_t calcKoIndex(uint16_t iKoNumber);
+  // GroupObject *getKo(uint8_t iKoIndex);
 
   void processInputKoTrigger(GroupObject &iKo);
   void processInputKoLock(GroupObject &iKo);

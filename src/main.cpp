@@ -54,6 +54,6 @@ void loop()
   knx.loop();
   appLoop();
 
-  if((millis() - lTime) > 20)
+  if((millis() - lTime) > 10)
     SERIAL_DEBUG.printf("loop took too long %i\n\r", (millis() - lTime));
 }
