@@ -1,12 +1,13 @@
 #include "BinaryInput.h"
 #include "hardware.h"
+#include "OpenKNX/Module.h"
 
-class BinaryInputControl
+class SoundBinaryInput : public OpenKNX::Module
 {
 
 public:
-  BinaryInputControl();
-  ~BinaryInputControl();
+  SoundBinaryInput();
+  ~SoundBinaryInput();
 
   void loop();
   void setup();

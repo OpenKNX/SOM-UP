@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+#define PLAYER_STATUS_WATCHDOG 1000
+
 class SoundControl;
 
 class SoundPlayer
@@ -25,7 +27,7 @@ class SoundPlayer
 private:
   void processStatus();
   void requestStatus();
-  void requestStatusWatchdog();
+  void watchdogStatus();
   void processDuration();
   void processStatusStopped();
   void processStatusPlaying();

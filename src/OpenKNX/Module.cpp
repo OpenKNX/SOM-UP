@@ -30,4 +30,5 @@ namespace OpenKNX
 
   void Module::loop() {}
   void Module::setup() {}
+  void Module::processInputKo(GroupObject &iKo) {}
 }

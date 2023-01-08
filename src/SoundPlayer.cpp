@@ -106,7 +106,7 @@ void SoundPlayer::loop()
 {
   requestStatus();
   processStatus();
-  requestStatusWatchdog();
+  watchdogStatus();
   processDuration();
   processNextPlay();
 }
@@ -143,19 +143,23 @@ void SoundPlayer::processDuration()
 }
 
 // sound to loud and communication interruppted - internal reset
-void SoundPlayer::requestStatusWatchdog()
+void SoundPlayer::watchdogStatus()
 {
   if (!mWaitForState)
     return;
 
-  if (!delayCheck(mPreviousMillis, 1000))
+  // no status from player in Xms
+  if (!delayCheck(mPreviousMillis, PLAYER_STATUS_WATCHDOG))
     return ;
   
+  SERIAL_DEBUG.printf("SoundPlayer::watchdogStatus triggered\n\r");
+
   mWaitForState = false;
   mPreviousMillis = millis();
   mResponseStatePos = 0;
-  mNextPlay.file= 0;
-  mPlaying = false;
+  mNextPlay.file = 0;
+  mCurrentPlay.repeats = 0;
+  mLastVolume = 0;
 }
 
 void SoundPlayer::requestStatus()

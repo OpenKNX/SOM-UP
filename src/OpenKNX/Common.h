@@ -3,8 +3,10 @@
 #include "Helper.h" // TODO: Hier ist das delayChecks drinne (Logicmodul)
 #include <cstdio>
 #include <functional>
+#include "OpenKNX/Module.h"
 
 #define MAX_LOOP_CALLBACKS 20
+#define MAX_MODULES 10
 
 namespace OpenKNX
 {
@@ -15,15 +17,28 @@ namespace OpenKNX
     uint32_t mStartupDelay;
     uint32_t mHeartbeatDelay;
 
-    std::function<void()> sLoopCallback[MAX_LOOP_CALLBACKS];
-    uint16_t sLoopCallbackCount = 0;
+    Module *mModules[MAX_MODULES];
+    uint16_t mModulesCount = 0;
 
   public:
     Common();
     ~Common();
 
+    static Common *sInstance;
+
     bool setup();
     bool loop();
+    void registerCallbacks();
+
+    static void onSafePinInterruptHandler();
+    static void onBeforeRestartHandler();
+    static void onBeforeTablesUnloadHandler();
+    static void onInputKo(GroupObject &iKo);
+    
+    void _onSafePinInterruptHandler();
+    void _onBeforeRestartHandler();
+    void _onBeforeTablesUnloadHandler();
+    void _onInputKo(GroupObject &iKo);
 
 #ifdef LOG_StartupDelayBase
     bool processStartupDelay();
@@ -31,8 +46,7 @@ namespace OpenKNX
 #ifdef LOG_HeartbeatDelayBase
     void processHeartbeat();
 #endif
-    void addLoop(std::function<void()> callback);
-    void processLoop();
-    void callLoop();
+
+    void addModule(Module *iModule);
   };
 }

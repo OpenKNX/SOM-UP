@@ -24,5 +24,6 @@ namespace OpenKNX
   public:
     virtual void loop();
     virtual void setup();
+    virtual void processInputKo(GroupObject &iKo);
   };
 }

@@ -28,7 +28,7 @@ void setup()
   ledInfo(true);
 #endif
 
-  const uint8_t firmwareRevision = 1;
+  const uint8_t firmwareRevision = 3;
   OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, firmwareRevision);
 
   // pin or GPIO the programming led is connected to. Default is LED_BUILDIN

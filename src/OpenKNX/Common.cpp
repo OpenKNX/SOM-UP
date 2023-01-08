@@ -2,7 +2,13 @@
 
 namespace OpenKNX
 {
-  Common::Common() {}
+
+  Common *Common::sInstance = nullptr;
+
+  Common::Common()
+  {
+    Common::sInstance = this;
+  }
   Common::~Common() {}
 
 #ifdef LOG_StartupDelayBase
@@ -41,13 +47,12 @@ namespace OpenKNX
     processHeartbeat();
 #endif
 
-    processLoop();
-    return true;
-  }
+    for (uint8_t i = 1; i <= mModulesCount; i++)
+    {
+      mModules[i - 1]->loop();
+    }
 
-  void Common::callLoop()
-  {
-    //  SERIAL_DEBUG.println("CALLBACK");
+    return true;
   }
 
   bool Common::setup()
@@ -58,29 +63,74 @@ namespace OpenKNX
     mStartupDelay = millis();
     mHeartbeatDelay = 0;
 
-    for (uint8_t i = 0; i < MAX_LOOP_CALLBACKS; i++)
+    for (uint8_t i = 1; i <= mModulesCount; i++)
     {
-      Common::addLoop([this]() -> void
-                      { this->callLoop(); });
+      mModules[i - 1]->setup();
     }
 
     return true;
   }
 
-  void Common::addLoop(std::function<void()> callback)
+  void Common::onSafePinInterruptHandler()
   {
-    sLoopCallbackCount++;
-    sLoopCallback[sLoopCallbackCount - 1] = callback;
+    sInstance->_onSafePinInterruptHandler();
   }
 
-  void Common::processLoop()
+  void Common::_onSafePinInterruptHandler()
   {
-    if (!sLoopCallbackCount)
-      return;
+    SERIAL_DEBUG.println("hook onSafePinInterruptHandler");
+  }
 
-    for (uint8_t i = 1; i <= sLoopCallbackCount; i++)
+  void Common::onBeforeRestartHandler()
+  {
+    sInstance->_onBeforeRestartHandler();
+  }
+
+  void Common::_onBeforeRestartHandler()
+  {
+    SERIAL_DEBUG.println("hook onBeforeRestartHandler");
+  }
+
+  void Common::onBeforeTablesUnloadHandler()
+  {
+    sInstance->_onBeforeTablesUnloadHandler();
+  }
+
+  void Common::_onBeforeTablesUnloadHandler()
+  {
+    SERIAL_DEBUG.println("hook onBeforeTablesUnloadHandler");
+  }
+
+  void Common::onInputKo(GroupObject &iKo)
+  {
+    sInstance->_onInputKo(iKo);
+  }
+
+  void Common::_onInputKo(GroupObject &iKo)
+  {
+    SERIAL_DEBUG.println("hook onInputKo");
+    for (uint8_t i = 1; i <= mModulesCount; i++)
     {
-      sLoopCallback[i - 1]();
+      mModules[i - 1]->processInputKo(iKo);
     }
   }
+
+  void Common::registerCallbacks()
+  {
+    // knx.beforeRestartCallback(onBeforeRestartHandler);
+    // GroupObject::classCallback(processInputKoCallback);
+    // TableObject::beforeTablesUnloadCallback(onBeforeTablesUnloadHandler);
+#ifdef SAVE_INTERRUPT_PIN
+    // we need to do this as late as possible, tried in constructor, but this doesn't work on RP2040
+    // pinMode(SAVE_INTERRUPT_PIN, INPUT);
+    // attachInterrupt(digitalPinToInterrupt(SAVE_INTERRUPT_PIN), onSafePinInterruptHandler, FALLING);
+#endif
+  }
+
+  void Common::addModule(Module *iModule)
+  {
+    mModulesCount++;
+    mModules[mModulesCount - 1] = iModule;
+  }
+
 }

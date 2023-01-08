@@ -4,10 +4,10 @@
 #include "Logic.h"
 #include "VirtualButton.h"
 #include "SoundControl.h"
-#include "BinaryInputControl.h"
+#include "SoundBinaryInput.h"
 #include "VirtualButtonControl.h"
 
-BinaryInputControl gBinaryInputHardware;
+SoundBinaryInput gSoundBinaryInput;
 VirtualButtonControl gVirtualButtonControl;
 
 SoundControl gSoundControl;
@@ -80,7 +80,8 @@ void processInputKoCallback(GroupObject &iKo)
     break;
 
   default:
-    gSoundControl.processInputKo(iKo);
+    OpenKNX::Common::onInputKo(iKo);
+    //gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
     gVirtualButtonControl.processInputKo(iKo);
   }
@@ -92,22 +93,27 @@ void appLoop()
     return;
 
   processReadRequests();
-  gBinaryInputHardware.loop();
+  //gSoundBinaryInput.loop();
   gVirtualButtonControl.loop();
-  gSoundControl.loop();
+  //gSoundControl.loop();
   gLogic.loop();
 }
 
 void appSetup()
 {
+  gCommon.addModule(&gSoundControl);
+  gCommon.addModule(&gSoundBinaryInput);
+
   if (!gCommon.setup())
     return;
 
   if (GroupObject::classCallback() == 0)
-    GroupObject::classCallback(processInputKoCallback);
+   GroupObject::classCallback(processInputKoCallback);
 
-  gSoundControl.setup();
-  gBinaryInputHardware.setup();
+  //gSoundControl.setup();
+  //gSoundBinaryInput.setup();
   gVirtualButtonControl.setup();
   gLogic.setup(true);
+  
+  gCommon.registerCallbacks();
 }

@@ -1,9 +1,9 @@
-#include "BinaryInputControl.h"
+#include "SoundBinaryInput.h"
 
-BinaryInputControl::BinaryInputControl() {}
-BinaryInputControl::~BinaryInputControl() {}
+SoundBinaryInput::SoundBinaryInput() {}
+SoundBinaryInput::~SoundBinaryInput() {}
 
-void BinaryInputControl::setup()
+void SoundBinaryInput::setup()
 {
   pinMode(BINARY_INPUT_A_PIN, INPUT);
   pinMode(BINARY_INPUT_B_PIN, INPUT);
@@ -18,7 +18,7 @@ void BinaryInputControl::setup()
     mBinaryInputs[i]->setup();
 }
 
-void BinaryInputControl::loop()
+void SoundBinaryInput::loop()
 {
   processHardwareInputs();
 
@@ -26,7 +26,7 @@ void BinaryInputControl::loop()
     mBinaryInputs[i]->loop();
 }
 
-void BinaryInputControl::processHardwareInputs()
+void SoundBinaryInput::processHardwareInputs()
 {
   if (
       !mBinaryInputs[0]->isActive() &&
@@ -40,7 +40,7 @@ void BinaryInputControl::processHardwareInputs()
     return;
 
   digitalWrite(BINARY_INPUT_PULSE, true);
-  busy_wait_us(500); // BINARY_INPUT_PULSE_WAIT_TIME);
+  busy_wait_us(BINARY_INPUT_PULSE_WAIT_TIME);
 #endif
 
   if (mBinaryInputs[0]->isActive())
