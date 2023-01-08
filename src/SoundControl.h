@@ -36,6 +36,7 @@ private:
   void processInputKoExternalPriority(GroupObject &iKo);
   void processInputKoExternalFile(GroupObject &iKo);
   void setDefaultVolume();
+  void onSafePinInterruptHandler();
   SoundPlayer mPlayer;
   SoundTrigger *mTriggers[SOM_ChannelCount];
   //GroupObject *getKo(uint8_t iNumberKo);

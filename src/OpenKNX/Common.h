@@ -5,48 +5,38 @@
 #include <functional>
 #include "OpenKNX/Module.h"
 
-#define MAX_LOOP_CALLBACKS 20
-#define MAX_MODULES 10
+#define MAX_MODULES 9
 
 namespace OpenKNX
 {
+  struct Modules
+  {
+    uint8_t count = 0;
+    Module *list[MAX_MODULES];
+  };
+
   class Common
   {
-
-  private:
-    uint32_t mStartupDelay;
-    uint32_t mHeartbeatDelay;
-
-    Module *mModules[MAX_MODULES];
-    uint16_t mModulesCount = 0;
-
   public:
-    Common();
-    ~Common();
+    static bool calledSaveInterrupt;
+    static Modules modules;
 
-    static Common *sInstance;
-
-    bool setup();
-    bool loop();
-    void registerCallbacks();
-
+    static bool setup();
+    static bool loop();
+    static void addModule(Module *module);
+    static void registerCallbacks();
     static void onSafePinInterruptHandler();
     static void onBeforeRestartHandler();
     static void onBeforeTablesUnloadHandler();
-    static void onInputKo(GroupObject &iKo);
-    
-    void _onSafePinInterruptHandler();
-    void _onBeforeRestartHandler();
-    void _onBeforeTablesUnloadHandler();
-    void _onInputKo(GroupObject &iKo);
+    static void processInputKo(GroupObject &iKo);
 
 #ifdef LOG_StartupDelayBase
-    bool processStartupDelay();
+    static uint32_t startupDelay;
+    static bool processStartupDelay();
 #endif
 #ifdef LOG_HeartbeatDelayBase
-    void processHeartbeat();
+    static uint32_t heartbeatDelay;
+    static void processHeartbeat();
 #endif
-
-    void addModule(Module *iModule);
   };
 }

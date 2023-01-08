@@ -12,7 +12,7 @@ VirtualButtonControl gVirtualButtonControl;
 
 SoundControl gSoundControl;
 Logic gLogic;
-OpenKNX::Common gCommon;
+// OpenKNX::Common gCommon;
 
 void processReadRequests()
 {
@@ -80,7 +80,7 @@ void processInputKoCallback(GroupObject &iKo)
     break;
 
   default:
-    OpenKNX::Common::onInputKo(iKo);
+    OpenKNX::Common::processInputKo(iKo);
     //gSoundControl.processInputKo(iKo);
     gLogic.processInputKo(iKo);
     gVirtualButtonControl.processInputKo(iKo);
@@ -89,7 +89,7 @@ void processInputKoCallback(GroupObject &iKo)
 
 void appLoop()
 {
-  if (!gCommon.loop())
+  if (!OpenKNX::Common::loop())
     return;
 
   processReadRequests();
@@ -101,10 +101,10 @@ void appLoop()
 
 void appSetup()
 {
-  gCommon.addModule(&gSoundControl);
-  gCommon.addModule(&gSoundBinaryInput);
+  OpenKNX::Common::addModule(&gSoundControl);
+  OpenKNX::Common::addModule(&gSoundBinaryInput);
 
-  if (!gCommon.setup())
+  if (!OpenKNX::Common::setup())
     return;
 
   if (GroupObject::classCallback() == 0)
@@ -115,5 +115,5 @@ void appSetup()
   gVirtualButtonControl.setup();
   gLogic.setup(true);
   
-  gCommon.registerCallbacks();
+  OpenKNX::Common::registerCallbacks();
 }

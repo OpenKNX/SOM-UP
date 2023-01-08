@@ -323,3 +323,8 @@ void SoundControl::setDefaultVolume() {
   // update mCurrentDefaultVolume
   mPlayer.setVolume(mCurrentDefaultVolume);
 }
+
+void SoundControl::onSafePinInterruptHandler()
+{
+  mPlayer.powerOff();
+}

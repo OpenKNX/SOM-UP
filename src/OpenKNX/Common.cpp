@@ -1,20 +1,22 @@
 #include "OpenKNX/Common.h"
+#include "hardware.h"
+
+OpenKNX::Modules OpenKNX::Common::modules;
+#ifdef LOG_StartupDelayBase
+uint32_t OpenKNX::Common::startupDelay = 0;
+#endif
+#ifdef LOG_HeartbeatDelayBase
+uint32_t OpenKNX::Common::heartbeatDelay = 0;
+#endif
+bool OpenKNX::Common::calledSaveInterrupt = false;
 
 namespace OpenKNX
 {
 
-  Common *Common::sInstance = nullptr;
-
-  Common::Common()
-  {
-    Common::sInstance = this;
-  }
-  Common::~Common() {}
-
 #ifdef LOG_StartupDelayBase
   bool Common::processStartupDelay()
   {
-    return !delayCheck(mStartupDelay, getDelayPattern(LOG_StartupDelayBase));
+    return !delayCheck(startupDelay, getDelayPattern(LOG_StartupDelayBase));
   }
 #endif
 
@@ -22,17 +24,30 @@ namespace OpenKNX
   void Common::processHeartbeat()
   {
     // the first heartbeat is send directly after startup delay of the device
-    if (mHeartbeatDelay == 0 || delayCheck(mHeartbeatDelay, getDelayPattern(LOG_HeartbeatDelayBase)))
+    if (heartbeatDelay == 0 || delayCheck(heartbeatDelay, getDelayPattern(LOG_HeartbeatDelayBase)))
     {
       // we waited enough, let's send a heartbeat signal
       knx.getGroupObject(LOG_KoHeartbeat).value(true, getDPT(VAL_DPT_1));
-      mHeartbeatDelay = millis();
+      heartbeatDelay = millis();
     }
   }
 #endif
 
   bool Common::loop()
   {
+    if (calledSaveInterrupt)
+    {
+      SERIAL_DEBUG.println("execute save handling");
+      for (uint8_t i = 1; i <= modules.count; i++)
+      {
+        modules.list[i - 1]->onSafePinInterruptHandler();
+      }
+      // TODO SaveToFlash
+
+      // Then reboot
+      watchdog_reboot(0, 0, 0);
+    }
+
     if (!knx.configured())
       return false;
 
@@ -47,9 +62,9 @@ namespace OpenKNX
     processHeartbeat();
 #endif
 
-    for (uint8_t i = 1; i <= mModulesCount; i++)
+    for (uint8_t i = 1; i <= modules.count; i++)
     {
-      mModules[i - 1]->loop();
+      modules.list[i - 1]->loop();
     }
 
     return true;
@@ -60,12 +75,12 @@ namespace OpenKNX
     if (!knx.configured())
       return false;
 
-    mStartupDelay = millis();
-    mHeartbeatDelay = 0;
+    startupDelay = millis();
+    heartbeatDelay = 0;
 
-    for (uint8_t i = 1; i <= mModulesCount; i++)
+    for (uint8_t i = 1; i <= modules.count; i++)
     {
-      mModules[i - 1]->setup();
+      modules.list[i - 1]->setup();
     }
 
     return true;
@@ -73,64 +88,46 @@ namespace OpenKNX
 
   void Common::onSafePinInterruptHandler()
   {
-    sInstance->_onSafePinInterruptHandler();
-  }
-
-  void Common::_onSafePinInterruptHandler()
-  {
     SERIAL_DEBUG.println("hook onSafePinInterruptHandler");
+    calledSaveInterrupt = true;
   }
 
   void Common::onBeforeRestartHandler()
-  {
-    sInstance->_onBeforeRestartHandler();
-  }
-
-  void Common::_onBeforeRestartHandler()
   {
     SERIAL_DEBUG.println("hook onBeforeRestartHandler");
   }
 
   void Common::onBeforeTablesUnloadHandler()
   {
-    sInstance->_onBeforeTablesUnloadHandler();
-  }
-
-  void Common::_onBeforeTablesUnloadHandler()
-  {
     SERIAL_DEBUG.println("hook onBeforeTablesUnloadHandler");
   }
 
-  void Common::onInputKo(GroupObject &iKo)
-  {
-    sInstance->_onInputKo(iKo);
-  }
-
-  void Common::_onInputKo(GroupObject &iKo)
+  void Common::processInputKo(GroupObject &iKo)
   {
     SERIAL_DEBUG.println("hook onInputKo");
-    for (uint8_t i = 1; i <= mModulesCount; i++)
+    for (uint8_t i = 1; i <= modules.count; i++)
     {
-      mModules[i - 1]->processInputKo(iKo);
+      modules.list[i - 1]->processInputKo(iKo);
     }
   }
 
   void Common::registerCallbacks()
   {
-    // knx.beforeRestartCallback(onBeforeRestartHandler);
-    // GroupObject::classCallback(processInputKoCallback);
-    // TableObject::beforeTablesUnloadCallback(onBeforeTablesUnloadHandler);
+    knx.beforeRestartCallback(onBeforeRestartHandler);
+    //GroupObject::classCallback(processInputKo);
+    TableObject::beforeTablesUnloadCallback(onBeforeTablesUnloadHandler);
 #ifdef SAVE_INTERRUPT_PIN
     // we need to do this as late as possible, tried in constructor, but this doesn't work on RP2040
-    // pinMode(SAVE_INTERRUPT_PIN, INPUT);
-    // attachInterrupt(digitalPinToInterrupt(SAVE_INTERRUPT_PIN), onSafePinInterruptHandler, FALLING);
+    pinMode(SAVE_INTERRUPT_PIN, INPUT);
+    SERIAL_DEBUG.printf("SAVE %i\n\r", digitalPinToInterrupt(SAVE_INTERRUPT_PIN));
+    attachInterrupt(digitalPinToInterrupt(SAVE_INTERRUPT_PIN), onSafePinInterruptHandler, FALLING);
 #endif
   }
 
-  void Common::addModule(Module *iModule)
+  void Common::addModule(Module *module)
   {
-    mModulesCount++;
-    mModules[mModulesCount - 1] = iModule;
+    modules.count++;
+    modules.list[modules.count - 1] = module;
   }
 
 }
