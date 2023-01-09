@@ -29,7 +29,6 @@ class SoundPlayer
 private:
   void processStatus();
   void requestStatus();
-  void watchdogStatus();
   void processDuration();
   void processStatusStopped();
   void processStatusPlaying();
@@ -40,14 +39,18 @@ private:
   bool mStopping = false;
   bool mLastRepeats = false;
 
+  bool mPlayerAvailable = false;
+  uint32_t mLastReceivedStatus = 0;
+  uint32_t mReceiveStatusSince = 0;
+  uint32_t mLastRequestStatus = 0;
+  uint8_t mReceivedStatusPos = 0;
+  uint8_t mReceivedStatusBuffer[5];
+  bool mReceivedStatus = false;
+
+
   Play mCurrentPlay;
   Play mNextPlay;
-  uint32_t mLastRequestStatus = 0;
   uint8_t mLastVolume = 0;
-
-  bool mWaitForState = false;
-  uint8_t mResponseStateBuffer[5];
-  uint8_t mResponseStatePos = 0;
 
   uint8_t calcChecksum(uint8_t *data, uint8_t len);
   bool validateChecksum(uint8_t *data, uint8_t len);

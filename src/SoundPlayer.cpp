@@ -94,7 +94,6 @@ void SoundPlayer::loop()
 {
   requestStatus();
   processStatus();
-  watchdogStatus();
   processDuration();
   processNextPlay();
 }
@@ -135,96 +134,69 @@ void SoundPlayer::processDuration()
   stop();
 }
 
-// sound to loud and communication interruppted - internal reset
-void SoundPlayer::watchdogStatus()
-{
-  if (!mWaitForState)
-    return;
-
-  // no status from player in Xms
-  if (!delayCheck(mLastRequestStatus, PLAYER_STATUS_WATCHDOG))
-    return;
-
-  SERIAL_DEBUG.printf("SoundPlayer::watchdogStatus triggered\n\r");
-
-  mWaitForState = false;
-  mLastRequestStatus = millis();
-  mResponseStatePos = 0;
-  mNextPlay.file = 0;
-  mLastVolume = 0;
-}
-
 void SoundPlayer::requestStatus()
 {
-  // skip if wait already for response
-  if (mWaitForState)
+  // skip when you send request
+  if (!delayCheck(mLastRequestStatus, 100))
     return;
 
-  // check only every 25ms
-  if (!delayCheck(mLastRequestStatus, 25))
+  if (!(delayCheck(mLastReceivedStatus, 50) || delayCheck(mLastReceivedStatus, 1000)))
     return;
 
   mLastRequestStatus = millis();
+  mLastReceivedStatus = 0;
   uint8_t data[] = {0xAA, 0x01, 0x00};
   sendData(data, 3);
-  mWaitForState = true;
-  mResponseStatePos = 0;
 }
 
 void SoundPlayer::processStatus()
 {
-  uint32_t lTime = millis();
-  uint16_t lI = 0;
+  uint8_t lReceivedChar;
 
-  // after request status, it need around 9ms for answer of all 5 bytes
-  if (!delayCheck(mLastRequestStatus, 10))
-    return;
-
-  // allow 1ms for read data
-  while (millis() - lTime <= 1)
+  while (Serial2.available())
   {
-    lI += 1;
-    if (!mWaitForState)
-      return;
+    lReceivedChar = Serial2.read();
 
-    if (!Serial2.available())
-      return;
+    if (lReceivedChar == 0xAA)
+    {
+      mReceivedStatusPos = 0;
+      mReceiveStatusSince = millis();
+      mPlayerAvailable = true;
+    }
 
-    // read first byte
-    int lChar = Serial2.read();
-
-    // check if first byte start of state repsonse
-    if (mResponseStatePos == 0 && lChar != 0xAA)
-      return;
-
-    // read byte into buffer
-    mResponseStateBuffer[mResponseStatePos] = lChar;
-    mResponseStatePos++;
+    if (mReceiveStatusSince > 0)
+    {
+      mReceivedStatusBuffer[mReceivedStatusPos] = lReceivedChar;
+      mReceivedStatusPos++;
+    }
 
     // Response is completed (all 5 bytes recevied)
-    if (mResponseStatePos == 5)
+    if (mReceivedStatusPos == 5)
     {
-      if (validateChecksum(mResponseStateBuffer, 5))
+      mReceiveStatusSince = 0;
+      mReceivedStatusPos = 0;
+      mLastRequestStatus = 0;
+      mLastReceivedStatus = millis();
+      //printHEX("recevied status: ", mReceivedStatusBuffer, 5);
+
+      if (validateChecksum(mReceivedStatusBuffer, 5))
       {
-        switch (mResponseStateBuffer[3])
+        switch (mReceivedStatusBuffer[3])
         {
         case 1:
           processStatusPlaying();
           break;
 
         case 0:
+        case 2:
           processStatusStopped();
           break;
         }
       }
       else
       {
-        printHEX("SoundPlayer::processStatus invalid checksum", mResponseStateBuffer, 5);
+        printHEX("SoundPlayer::processStatus invalid checksum", mReceivedStatusBuffer, 5);
       }
-
-      // Reset for next requestStatus
-      mResponseStatePos = 0;
-      mWaitForState = false;
     }
   }
 }
@@ -234,6 +206,7 @@ void SoundPlayer::processStatusStopped()
 #ifdef PLAYER_BUSY_PIN
   digitalWrite(PLAYER_BUSY_PIN, LOW);
 #endif
+  mReceivedStatus = false;
 
   // Already Stopped
   if (!mPlaying)
@@ -254,6 +227,7 @@ void SoundPlayer::processStatusPlaying()
 #ifdef PLAYER_BUSY_PIN
   digitalWrite(PLAYER_BUSY_PIN, HIGH);
 #endif
+  mReceivedStatus = true;
 
   // Already Playing
   if (mPlaying)
