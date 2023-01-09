@@ -5,15 +5,15 @@
     <Manufacturer RefId="M-00FA">
       <Catalog>
         <CatalogSection Id="M-00FA_CS-OpenKNX" Name="OpenKNX" Number="OpenKNX" DefaultLanguage="de">
-          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-Beta" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
+          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-Dev" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA3" ApplicationNumber="00" ApplicationVersion="2" ReplacesVersions="1" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA3" ApplicationNumber="01" ApplicationVersion="6" ReplacesVersions="1 2 3 4 5" ApplicationRevision="0" />
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Dev" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />

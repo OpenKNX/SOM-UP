@@ -104,7 +104,7 @@ namespace OpenKNX
 
   void Common::processInputKo(GroupObject &iKo)
   {
-    SERIAL_DEBUG.println("hook onInputKo");
+    //SERIAL_DEBUG.printf("hook onInputKo %i\n\r", iKo.asap());
     for (uint8_t i = 1; i <= modules.count; i++)
     {
       modules.list[i - 1]->processInputKo(iKo);

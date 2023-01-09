@@ -17,7 +17,7 @@ void SoundTrigger::setup()
 {
   // Params
   mParamActive = (knx.paramByte(calcParamIndex(SOM_TriState)) & SOM_TriStateMask) >> SOM_TriStateShift;
-  mParamLoop = (knx.paramByte(calcParamIndex(SOM_TriRepeat)) & SOM_TriRepeatMask) >> SOM_TriRepeatShift;
+  mParamRepeats = (knx.paramWord(calcParamIndex(SOM_TriRepeats)));
   mParamPriority = (knx.paramByte(calcParamIndex(SOM_TriPriority)) & SOM_TriPriorityMask) >> SOM_TriPriorityShift;
   mParamLock = (knx.paramByte(calcParamIndex(SOM_TriLock)) & SOM_TriLockMask) >> SOM_TriLockShift;
   mParamDayNight = (knx.paramByte(calcParamIndex(SOM_TriDayNight)) & SOM_TriDayNightMask) >> SOM_TriDayNightShift;
@@ -35,7 +35,7 @@ void SoundTrigger::setup()
 
   // Debug
   SERIAL_DEBUG.printf("Trigger %i mParamActive: %i\n\r", mIndex, mParamActive);
-  SERIAL_DEBUG.printf("Trigger %i mParamLoop: %i\n\r", mIndex, mParamLoop);
+  SERIAL_DEBUG.printf("Trigger %i mParamRepeats: %i\n\r", mIndex, mParamRepeats);
   SERIAL_DEBUG.printf("Trigger %i mParamPriority: %i\n\r", mIndex, mParamPriority);
   SERIAL_DEBUG.printf("Trigger %i mParamLock: %i\n\r", mIndex, mParamLock);
   SERIAL_DEBUG.printf("Trigger %i mParamDayNight: %i\n\r", mIndex, mParamDayNight);
@@ -168,7 +168,7 @@ void SoundTrigger::play()
     return;
   }
   SERIAL_DEBUG.printf("Trigger %i play\n\r", mIndex);
-  setStatus(SoundControl::sInstance->play(mCurrentFile, mCurrentVolume, mParamPriority, mParamDuration, mParamLoop, mIndex));
+  setStatus(SoundControl::sInstance->play(mCurrentFile, mCurrentVolume, mParamPriority, mParamRepeats, mParamDuration, mIndex));
 }
 
 void SoundTrigger::stop()

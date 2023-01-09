@@ -7,6 +7,9 @@
         <ApplicationProgram Id="%AID%" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SOM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
           <Static>
             <ParameterTypes>
+              <ParameterType Id="%AID%_PT-SOMRepeats" Name="SOMRepeats">
+                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="1" maxInclusive="65535" />
+              </ParameterType>
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
                   <Enumeration Text="Externes KO" Value="0" Id="%AID%_PT-BTNInputs_EN-0" />
@@ -21,12 +24,6 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMFile" Name="SOMFile">
                 <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="1" maxInclusive="65535" />
-              </ParameterType>
-              <ParameterType Id="%AID%_PT-SOMStatus" Name="SOMStatus">
-                <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="Inaktiv" Value="0" Id="%AID%_PT-SOMStatus_EN-0" />
-                  <Enumeration Text="Aktiv" Value="1" Id="%AID%_PT-SOMStatus_EN-1" />
-                </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMLock" Name="SOMLock">
                 <TypeRestriction Base="Value" SizeInBit="2">
@@ -92,8 +89,8 @@
             <Parameters>
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%000008" Name="External" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMStatus" Text="Externe Logik" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000006" Name="Scenes" Offset="0" BitOffset="1" ParameterType="%AID%_PT-SOMStatus" Text="Szenen" Value="0" />
+                <Parameter Id="%AID%_UP-%T%000008" Name="External" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Externe Logik" Value="0" />
+                <Parameter Id="%AID%_UP-%T%000006" Name="Scenes" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Szenen" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000002" Name="VolumeDay" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="" Value="25" />
                 <Parameter Id="%AID%_UP-%T%000003" Name="VolumeNight" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="" Value="20" />
                 <Parameter Id="%AID%_UP-%T%000009" Name="Lock" Offset="3" BitOffset="0" ParameterType="%AID%_PT-SOMLock" Text="Zentrale Sperre" Value="0" />
@@ -274,11 +271,11 @@
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%T%000021" Name="Status" Text="Zentral" Number="20" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
-              <ComObject Id="%AID%_O-%T%000022" Name="File" Text="Zentral" Number="21" FunctionText="Status, Datei" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%T%000022" Name="File" Text="Zentral" Number="21" FunctionText="Status, Datei" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-7-1" />
               <ComObject Id="%AID%_O-%T%000028" Name="Scene" Text="Zentral" Number="28" FunctionText="Szene" ObjectSize="1 Byte" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-17-1" />
               <ComObject Id="%AID%_O-%T%000029" Name="Lock" Text="Zentral" Number="29" FunctionText="Sperre" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%000027" Name="DayNight" Text="Zentral" Number="27" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-24" />
-              <ComObject Id="%AID%_O-%T%000030" Name="ExternalFile" Text="Externe Logik" Number="30" FunctionText="Datei" ObjectSize="1 Byte" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%T%000030" Name="ExternalFile" Text="Externe Logik" Number="30" FunctionText="Datei" ObjectSize="2 Bytes" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-7-1" />
               <ComObject Id="%AID%_O-%T%000031" Name="ExternalVolume" Text="Externe Logik" Number="31" FunctionText="Lautstärke" ObjectSize="1 Byte" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
               <ComObject Id="%AID%_O-%T%000032" Name="ExternalPriority" Text="Externe Logik" Number="32" FunctionText="Priorität" ObjectSize="1 Byte" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
             </ComObjectTable>
@@ -305,7 +302,7 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslöser" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Es gibt 10 verschiede Auslöser, um diverse Sounds abzuspielen. Dabei wird über ein Schaltobjekt (EIN) das Soundfile abgespielt und kann aber auch frühzeitig beendet werden (AUS)." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Je Auslöser können mittels „Tag/Nacht“-Objekt auch unterschiedliche Sounds in unterschiedlichen Lautstärken abgespielt werden." />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Außerdem gibt es einen Repeatmodus, womit eine Sounddatei für eine eingestellte Zeit im Loop abgespielt werden kann (z.B. Innensiere einer Alarmanlage, welche 3 Minuten laufen soll). Dabei wird aber der Sound leider nicht „gapless“ abgespielt wird." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Neben der optionalen zeitlichen Begrenzung der Abspieldauern, besteht auch die Möglichkeit eine Datei mehrfach abspielen zu lassen. Die erfolgt leider nicht „gapless“ so dass z.B. kein Dauerton simuliert werden kann." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Lautstärke" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Lautstärke kann Global oder pro Auslöser eingestellt werden. Darüber hinaus wird auf Wunsch auch zwischen Tag und Nacht unterschieden." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Man beachte aber, dass ein zu lautes Abspielen (abhängig der Sounddatei) zum Absturz des Moduls führen kann, da der verfügbare Strom begrenzt ist." />

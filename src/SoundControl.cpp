@@ -46,9 +46,9 @@ void SoundControl::setup()
   }
 }
 
-bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, uint32_t iDuration, bool iLoop, uint8_t iTrigger)
+bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, uint32_t iRepeats, uint32_t iDuration, uint8_t iTrigger)
 {
-  // SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i/%i\n\r", iFile, iVolume, iPriority, iDuration, iLoop, iTrigger);
+  // SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i/%i\n\r", iFile, iVolume, iPriority, iRepeats, iDuration, iTrigger);
 
   // abort on lock
   if (mCurrentLocked)
@@ -72,11 +72,11 @@ bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, uint3
   SoundControl::stopped();
 
   // play music
-  mPlayer.play(iFile, iVolume, iDuration, iLoop);
+  mPlayer.play(iFile, iVolume, iRepeats, iDuration);
 
   // send ko
   getKo(SOM_KoStatus)->value(true, getDPT(VAL_DPT_1));
-  getKo(SOM_KoFile)->value(iFile, getDPT(VAL_DPT_5));
+  getKo(SOM_KoFile)->value(iFile, getDPT(VAL_DPT_7));
 
   // save status
   mStatus = true;
@@ -227,7 +227,7 @@ void SoundControl::processInputKoScene(GroupObject &iKo)
         SERIAL_DEBUG.printf("Szene %i\n\r", lValue);
         uint8_t sceneAction = knx.paramByte(SOM_SceneAction0 + i);
         uint8_t sceneTarget = knx.paramByte(SOM_SceneTargetA0 + i);
-  
+
         // Zentral
         if (sceneTarget == 255)
         {
@@ -275,7 +275,7 @@ void SoundControl::processInputKoScene(GroupObject &iKo)
 void SoundControl::processInputKoExternalVolume(GroupObject &iKo)
 {
   uint8_t lValue = iKo.value(getDPT(VAL_DPT_5));
-  
+
   // invalid volume
   if (lValue < 0 || lValue > 30)
     lValue = 0;
@@ -286,7 +286,7 @@ void SoundControl::processInputKoExternalVolume(GroupObject &iKo)
 void SoundControl::processInputKoExternalPriority(GroupObject &iKo)
 {
   uint8_t lValue = iKo.value(getDPT(VAL_DPT_5));
-  
+
   // invalid volume
   if (lValue < 1 || lValue > 5)
     lValue = 3;
@@ -297,8 +297,8 @@ void SoundControl::processInputKoExternalPriority(GroupObject &iKo)
 void SoundControl::processInputKoExternalFile(GroupObject &iKo)
 {
   uint8_t iFile = iKo.value(getDPT(VAL_DPT_5));
-  
-  if(iFile == 0)
+
+  if (iFile == 0)
     return stop();
 
   // invalid volume
@@ -308,15 +308,19 @@ void SoundControl::processInputKoExternalFile(GroupObject &iKo)
   play(iFile, mExternalVolume, mExternalPriority, false);
 }
 
-void SoundControl::setDefaultVolume() {
+void SoundControl::setDefaultVolume()
+{
   // Dont set during playing
   if (mStatus)
     return;
 
   // select mCurrentDefaultVolume
-  if (mCurrentNight) {
+  if (mCurrentNight)
+  {
     mCurrentDefaultVolume = mParamVolumeNight;
-  } else {
+  }
+  else
+  {
     mCurrentDefaultVolume = mParamVolumeDay;
   }
 

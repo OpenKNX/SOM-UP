@@ -8,6 +8,15 @@ void appLoop();
 
 void setup()
 {
+#ifdef PLAYER_PWR
+  pinMode(PLAYER_PWR, OUTPUT);
+  digitalWrite(PLAYER_PWR, LOW);
+#endif
+
+#ifdef PLAYER_BUSY_PIN
+  pinMode(PLAYER_BUSY_PIN, OUTPUT);
+#endif
+
   Serial1.setRX(KNX_UART_RX_PIN);
   Serial1.setTX(KNX_UART_TX_PIN);
   SERIAL_DEBUG.begin(115200);
@@ -28,7 +37,7 @@ void setup()
   ledInfo(true);
 #endif
 
-  const uint8_t firmwareRevision = 3;
+  const uint8_t firmwareRevision = 0;
   OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, firmwareRevision);
 
   // pin or GPIO the programming led is connected to. Default is LED_BUILDIN

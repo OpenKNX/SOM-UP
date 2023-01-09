@@ -8,21 +8,23 @@
           <Static>
             <Parameters>
               <Parameter Id="%AID%_P-%T%%CCC%000" Name="p%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
-              <Parameter Id="%AID%_P-%T%%CCC%010" Name="p%C%VolumeDivergent" ParameterType="%AID%_PT-SOMStatus" Text="Abweichende Lautstärke" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%010" Name="p%C%VolumeDivergent" ParameterType="%AID%_PT-OnOffYesNo" Text="Abweichende Lautstärke" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%005" Name="Tri%C%Repeat" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiederholungen" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%006" Name="Tri%C%Duration" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiedergabedauer begrenzen" Value="0" />
+
               <!-- Bitfield settings (once per channel) -->
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Tri%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMStatus" Text="Status" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%005" Name="Tri%C%Repeat" Offset="0" BitOffset="1" ParameterType="%AID%_PT-SOMStatus" Text="Repeat" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Tri%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Trigger aktiv" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Tri%C%Lock" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMLock" Text="Sperrobjekt" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Tri%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht Objekt" Value="0" />
-
                 <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Tri%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
+
               </Union>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="2" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%091" Name="Tri%C%DurationBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%092" Name="Tri%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%092" Name="Tri%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="60" />
               </Union>
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
@@ -36,15 +38,22 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%202" Name="Tri%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="20" />
                 <Parameter Id="%AID%_UP-%T%%CCC%212" Name="Tri%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
               </Union>
+              <Union SizeInBit="16">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="10" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%080" Name="Tri%C%Repeats" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMRepeats" Text="" Value="1" SuffixText="x" />
+                <Parameter Id="%AID%_UP-%T%%CCC%081" Name="Tri%C%RepeatsInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt7" Text="" Value="0" Access="None" DefaultUnionParameter="true"/>
+              </Union>
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_P-%T%%CCC%000" />
               <ParameterRef Id="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" RefId="%AID%_P-%T%%CCC%010" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_P-%T%%CCC%005" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601" RefId="%AID%_P-%T%%CCC%006" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_UP-%T%%CCC%001" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_UP-%T%%CCC%002" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_UP-%T%%CCC%003" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_UP-%T%%CCC%004" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_UP-%T%%CCC%005" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" RefId="%AID%_UP-%T%%CCC%080" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" RefId="%AID%_UP-%T%%CCC%091" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" RefId="%AID%_UP-%T%%CCC%092" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="%AID%_UP-%T%%CCC%101" Text="Datei" />
@@ -85,27 +94,21 @@
                         <!-- Aktiv -->
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" />
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
-                        <!-- Prio -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" />
-                        <!-- Repeat -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501" />
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501">
+                                                
+                        <!-- Sperre -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" />
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201">
                           <when test="1">
-                            <ParameterBlock Id="%AID%_PB-nnn" Name="Tri%C%Duration" Inline="true" Layout="Grid">
-                              <Rows>
-                                <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                              </Rows>
-                              <Columns>
-                                <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                              </Columns>
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Maximale Abspieldauer" Cell="1,1" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" Cell="1,2" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" Cell="1,3" />
-                            </ParameterBlock>
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                          </when>
+                          <when test="2">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" />
                           </when>
                         </choose>
+
+                        <!-- Prio -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" />
+
                         <!-- Tag/Nacht -->
                         <ParameterRefRef RefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" /> 
                         <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
@@ -149,19 +152,36 @@
                               </when>
                             </choose>
 
-                            </when>
+                          </when>
                         </choose>
-                        
-                        <!-- Sperre -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" />
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201">
+
+                        <!-- Repeat -->
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501" />
+                        <choose ParamRefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501">
                           <when test="1">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
-                          </when>
-                          <when test="2">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" />
                           </when>
                         </choose>
+
+                        <!-- Dauer -->
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601" />
+                        <choose ParamRefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601">
+                          <when test="1">
+                            <ParameterBlock Id="%AID%_PB-nnn" Name="Tri%C%DurationGrid" Inline="true" Layout="Grid">
+                              <Rows>
+                                <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                              </Rows>
+                              <Columns>
+                                <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                              </Columns>
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" Cell="1,2" />
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" Cell="1,3" />
+                            </ParameterBlock>
+                          </when>
+                        </choose>
+
                       </when>
                     </choose>
                   </ParameterBlock>

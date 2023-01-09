@@ -16,19 +16,19 @@ private:
   void processInputKoDayNight(GroupObject &iKo);
 
   uint8_t mIndex = 0;
-  uint16_t mCurrentFile;
-  uint8_t mCurrentVolume;
-  uint8_t mParamPriority;
-  uint8_t mParamLock;
-  uint8_t mParamDayNight;
-  uint8_t mParamVolumeDay;
-  uint8_t mParamVolumeNight;
-  uint16_t mParamFileDay;
-  uint16_t mParamFileNight;
-  uint32_t mParamDuration;
+  uint16_t mCurrentFile = 0;
+  uint8_t mCurrentVolume = 0;
+  uint8_t mParamPriority = 0;
+  uint8_t mParamLock = 0;
+  uint8_t mParamDayNight = 0;
+  uint8_t mParamVolumeDay = 0;
+  uint8_t mParamVolumeNight = 0;
+  uint16_t mParamFileDay = 0;
+  uint16_t mParamFileNight = 0;
+  uint32_t mParamDuration = 0;
+  uint32_t mParamRepeats = 0;
 
   bool mParamActive = false;
-  bool mParamLoop = false;
   bool mCurrentLocked = false;
   bool mStatus = false;
 

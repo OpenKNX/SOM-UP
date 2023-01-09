@@ -944,13 +944,10 @@
 
 // Parameter per channel
 #define SOM_ParamBlockOffset 975
-#define SOM_ParamBlockSize 10
+#define SOM_ParamBlockSize 12
 #define SOM_TriState                   0      // 1 Bit, Bit 7
 #define     SOM_TriStateMask 0x80
 #define     SOM_TriStateShift 7
-#define SOM_TriRepeat                  0      // 1 Bit, Bit 6
-#define     SOM_TriRepeatMask 0x40
-#define     SOM_TriRepeatShift 6
 #define SOM_TriLock                    0      // 2 Bits, Bit 5-4
 #define     SOM_TriLockMask 0x30
 #define     SOM_TriLockShift 4
@@ -970,6 +967,8 @@
 #define SOM_TriVolumeDayInactive       8      // uint8_t
 #define SOM_TriVolumeNight             9      // uint8_t
 #define SOM_TriVolumeNightInactive     9      // uint8_t
+#define SOM_TriRepeats                10      // uint16_t
+#define SOM_TriRepeatsInactive        10      // uint16_t
 
 // Communication objects per channel (multiple occurrence)
 #define SOM_KoOffset 50
@@ -982,7 +981,7 @@
 #define BTN_ChannelCount 20
 
 // Parameter per channel
-#define BTN_ParamBlockOffset 1075
+#define BTN_ParamBlockOffset 1095
 #define BTN_ParamBlockSize 51
 #define BTN_BTNMode                    0      // 4 Bits, Bit 7-4
 #define     BTN_BTNModeMask 0xF0
@@ -1204,7 +1203,7 @@
 #define BI_ChannelCount 4
 
 // Parameter per channel
-#define BI_ParamBlockOffset 2095
+#define BI_ParamBlockOffset 2115
 #define BI_ParamBlockSize 4
 #define BI_InputActive                0      // 1 Bit, Bit 7
 #define     BI_InputActiveMask 0x80
@@ -1230,6 +1229,6 @@
 #define BI_KoInputOutput 0
 
 #define MAIN_OpenKnxId 0xA3
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 2
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 6
 #define MAIN_OrderNumber "SOM-UP"
