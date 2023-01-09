@@ -38,9 +38,6 @@ void SoundPlayer::setup()
   delay(50);
   stop(true);
 
-  uint8_t data1[4] = {0xAA, 0x18, 0x01, 0x01};
-  sendData(data1, 4);
-
   SERIAL_DEBUG.println("SoundPlayer::setup ready");
 }
 
@@ -140,7 +137,7 @@ void SoundPlayer::requestStatus()
   if (!delayCheck(mLastRequestStatus, 100))
     return;
 
-  if (!(delayCheck(mLastReceivedStatus, 50) || delayCheck(mLastReceivedStatus, 1000)))
+  if (!delayCheck(mLastReceivedStatus, 50))
     return;
 
   mLastRequestStatus = millis();
@@ -283,44 +280,14 @@ void SoundPlayer::sendData(uint8_t *data, uint8_t len)
 
 void SoundPlayer::setRepeats(uint16_t iRepeats)
 {
+  uint8_t data[4] = {0xAA, 0x18, 0x01, 0x01};
+  sendData(data, 4);
+  
   iRepeats++;
   uint8_t data2[5] = {0xAA, 0x19, 0x02, 0x00, 0x00};
   data2[3] = iRepeats >> 8;
   data2[4] = iRepeats & 0xff;
   sendData(data2, 5);
-
-  // if (iRepeats > 0)
-  // {
-  //   // enable repeat mode
-  //   if (!mLastRepeats)
-  //   {
-  //     printDebug("ENABLE LOOP\n\r");
-  //     uint8_t data1[4] = {0xAA, 0x18, 0x01, 0x01};
-  //     sendData(data1, 4);
-  //     mLastRepeats = true;
-  //   }
-
-  //   // set how often play file
-  //   iRepeats++; // one + x repeats
-  //   uint8_t data2[5] = {0xAA, 0x19, 0x02, 0x00, 0x00};
-  //   data2[3] = iRepeats >> 8;
-  //   data2[4] = iRepeats & 0xff;
-  //   sendData(data2, 5);
-  // }
-  // else if (mLastRepeats)
-  // {
-  //   uint8_t data2[5] = {0xAA, 0x19, 0x02, 0x00, 0x00};
-  //   data2[3] = iRepeats >> 8;
-  //   data2[4] = iRepeats & 0xff;
-  //   sendData(data2, 5);
-
-  //   // disabled repeat mode
-  //   // printDebug("DISABLED LOOP\n\r");
-  //   // uint8_t data1[4] = {0xAA, 0x18, 0x01, 0x02};
-  //   // sendData(data1, 4);
-  //   // mLastRepeats = false;
-  // }
-  // delay(1);
 }
 
 void SoundPlayer::playFileNumber(uint16_t iFile)

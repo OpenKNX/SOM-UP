@@ -37,7 +37,6 @@ private:
 
   bool mPlaying = false;
   bool mStopping = false;
-  bool mLastRepeats = false;
 
   bool mPlayerAvailable = false;
   uint32_t mLastReceivedStatus = 0;
