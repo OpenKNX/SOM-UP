@@ -267,7 +267,7 @@
 #define BTN_ReactionTimeLong          112      // 8 Bits, Bit 7-0
 #define BTN_ReactionTimeExtraLong     113      // 8 Bits, Bit 7-0
 
-#define LOG_ChannelCount 10
+#define LOG_ChannelCount 30
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 115
@@ -934,7 +934,7 @@
 #define LOG_fE2OtherKO                84      // uint15_t
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoOffset 400
+#define LOG_KoOffset 100
 #define LOG_KoBlockSize 3
 #define LOG_KoKOfE1 0
 #define LOG_KoKOfE2 1
@@ -943,292 +943,292 @@
 #define SOM_ChannelCount 10
 
 // Parameter per channel
-#define SOM_ParamBlockOffset 975
+#define SOM_ParamBlockOffset 2695
 #define SOM_ParamBlockSize 12
-#define SOM_TriState                   0      // 1 Bit, Bit 7
-#define     SOM_TriStateMask 0x80
-#define     SOM_TriStateShift 7
-#define SOM_TriLock                    0      // 2 Bits, Bit 5-4
-#define     SOM_TriLockMask 0x30
-#define     SOM_TriLockShift 4
-#define SOM_TriDayNight                0      // 2 Bits, Bit 3-2
-#define     SOM_TriDayNightMask 0x0C
-#define     SOM_TriDayNightShift 2
-#define SOM_TriPriority                1      // 3 Bits, Bit 7-5
-#define     SOM_TriPriorityMask 0xE0
-#define     SOM_TriPriorityShift 5
-#define SOM_TriDurationBase            2      // 2 Bits, Bit 7-6
-#define     SOM_TriDurationBaseMask 0xC0
-#define     SOM_TriDurationBaseShift 6
-#define SOM_TriDurationTime            2      // uint14_t
-#define SOM_TriFileDay                 4      // uint16_t
-#define SOM_TriFileNight               6      // uint16_t
-#define SOM_TriVolumeDay               8      // uint8_t
-#define SOM_TriVolumeDayInactive       8      // uint8_t
-#define SOM_TriVolumeNight             9      // uint8_t
-#define SOM_TriVolumeNightInactive     9      // uint8_t
-#define SOM_TriRepeats                10      // uint16_t
-#define SOM_TriRepeatsInactive        10      // uint16_t
+#define SOM_TriggerState               0      // 1 Bit, Bit 7
+#define     SOM_TriggerStateMask 0x80
+#define     SOM_TriggerStateShift 7
+#define SOM_TriggerLock                0      // 2 Bits, Bit 5-4
+#define     SOM_TriggerLockMask 0x30
+#define     SOM_TriggerLockShift 4
+#define SOM_TriggerDayNight            0      // 2 Bits, Bit 3-2
+#define     SOM_TriggerDayNightMask 0x0C
+#define     SOM_TriggerDayNightShift 2
+#define SOM_TriggerPriority            1      // 3 Bits, Bit 7-5
+#define     SOM_TriggerPriorityMask 0xE0
+#define     SOM_TriggerPriorityShift 5
+#define SOM_TriggerDurationBase        2      // 2 Bits, Bit 7-6
+#define     SOM_TriggerDurationBaseMask 0xC0
+#define     SOM_TriggerDurationBaseShift 6
+#define SOM_TriggerDurationTime        2      // uint14_t
+#define SOM_TriggerFileDay             4      // uint16_t
+#define SOM_TriggerFileNight           6      // uint16_t
+#define SOM_TriggerVolumeDay           8      // uint8_t
+#define SOM_TriggerVolumeDayInactive   8      // uint8_t
+#define SOM_TriggerVolumeNight         9      // uint8_t
+#define SOM_TriggerVolumeNightInactive  9      // uint8_t
+#define SOM_TriggerRepeats            10      // uint16_t
+#define SOM_TriggerRepeatsInactive    10      // uint16_t
 
 // Communication objects per channel (multiple occurrence)
 #define SOM_KoOffset 50
 #define SOM_KoBlockSize 4
-#define SOM_KoTriTrigger 0
-#define SOM_KoTriStatus 1
-#define SOM_KoTriLock 2
-#define SOM_KoTriDayNight 3
+#define SOM_KoTriggerTrigger 0
+#define SOM_KoTriggerStatus 1
+#define SOM_KoTriggerLock 2
+#define SOM_KoTriggerDayNight 3
 
 #define BTN_ChannelCount 20
 
 // Parameter per channel
-#define BTN_ParamBlockOffset 1095
+#define BTN_ParamBlockOffset 2815
 #define BTN_ParamBlockSize 51
-#define BTN_BTNMode                    0      // 4 Bits, Bit 7-4
-#define     BTN_BTNModeMask 0xF0
-#define     BTN_BTNModeShift 4
-#define BTN_BTNLock                    0      // 2 Bits, Bit 3-2
-#define     BTN_BTNLockMask 0x0C
-#define     BTN_BTNLockShift 2
-#define BTN_BTNMultiClickCount         0      // 1 Bit, Bit 3
-#define     BTN_BTNMultiClickCountMask 0x08
-#define     BTN_BTNMultiClickCountShift 3
-#define BTN_BTNInputA                  1      // char*, 2 Byte
-#define BTN_BTNInputB                  3      // char*, 2 Byte
-#define BTN_BTNReactionTimeMultiClick  5      // 8 Bits, Bit 7-0
-#define BTN_BTNReactionTimeLong        6      // 8 Bits, Bit 7-0
-#define BTN_BTNReactionTimeExtraLong   7      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputShort_DPT         8      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputLong_DPT          9      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputExtraLong_DPT    10      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputMulti_DPT        11      // 8 Bits, Bit 7-0
-#define BTN_BTNOutputMulti_Click1_Active 12      // 1 Bit, Bit 7
-#define     BTN_BTNOutputMulti_Click1_ActiveMask 0x80
-#define     BTN_BTNOutputMulti_Click1_ActiveShift 7
-#define BTN_BTNOutputMulti_Click2_Active 12      // 1 Bit, Bit 6
-#define     BTN_BTNOutputMulti_Click2_ActiveMask 0x40
-#define     BTN_BTNOutputMulti_Click2_ActiveShift 6
-#define BTN_BTNOutputMulti_Click3_Active 12      // 1 Bit, Bit 5
-#define     BTN_BTNOutputMulti_Click3_ActiveMask 0x20
-#define     BTN_BTNOutputMulti_Click3_ActiveShift 5
-#define BTN_BTNOutputShort_Taster1_Active_Press 13      // 1 Bit, Bit 7
-#define     BTN_BTNOutputShort_Taster1_Active_PressMask 0x80
-#define     BTN_BTNOutputShort_Taster1_Active_PressShift 7
-#define BTN_BTNOutputShort_Taster1_Active_Release 13      // 1 Bit, Bit 6
-#define     BTN_BTNOutputShort_Taster1_Active_ReleaseMask 0x40
-#define     BTN_BTNOutputShort_Taster1_Active_ReleaseShift 6
-#define BTN_BTNOutputShort_Taster2_Active_Press 13      // 1 Bit, Bit 5
-#define     BTN_BTNOutputShort_Taster2_Active_PressMask 0x20
-#define     BTN_BTNOutputShort_Taster2_Active_PressShift 5
-#define BTN_BTNOutputShort_Taster2_Active_Release 13      // 1 Bit, Bit 4
-#define     BTN_BTNOutputShort_Taster2_Active_ReleaseMask 0x10
-#define     BTN_BTNOutputShort_Taster2_Active_ReleaseShift 4
-#define BTN_BTNOutputLong_Taster1_Active_Press 14      // 1 Bit, Bit 7
-#define     BTN_BTNOutputLong_Taster1_Active_PressMask 0x80
-#define     BTN_BTNOutputLong_Taster1_Active_PressShift 7
-#define BTN_BTNOutputLong_Taster1_Active_Release 14      // 1 Bit, Bit 6
-#define     BTN_BTNOutputLong_Taster1_Active_ReleaseMask 0x40
-#define     BTN_BTNOutputLong_Taster1_Active_ReleaseShift 6
-#define BTN_BTNOutputLong_Taster2_Active_Press 14      // 1 Bit, Bit 5
-#define     BTN_BTNOutputLong_Taster2_Active_PressMask 0x20
-#define     BTN_BTNOutputLong_Taster2_Active_PressShift 5
-#define BTN_BTNOutputLong_Taster2_Active_Release 14      // 1 Bit, Bit 4
-#define     BTN_BTNOutputLong_Taster2_Active_ReleaseMask 0x10
-#define     BTN_BTNOutputLong_Taster2_Active_ReleaseShift 4
-#define BTN_BTNOutputExtraLong_Taster1_Active_Press 15      // 1 Bit, Bit 7
-#define     BTN_BTNOutputExtraLong_Taster1_Active_PressMask 0x80
-#define     BTN_BTNOutputExtraLong_Taster1_Active_PressShift 7
-#define BTN_BTNOutputExtraLong_Taster1_Active_Release 15      // 1 Bit, Bit 6
-#define     BTN_BTNOutputExtraLong_Taster1_Active_ReleaseMask 0x40
-#define     BTN_BTNOutputExtraLong_Taster1_Active_ReleaseShift 6
-#define BTN_BTNOutputExtraLong_Taster2_Active_Press 15      // 1 Bit, Bit 5
-#define     BTN_BTNOutputExtraLong_Taster2_Active_PressMask 0x20
-#define     BTN_BTNOutputExtraLong_Taster2_Active_PressShift 5
-#define BTN_BTNOutputExtraLong_Taster2_Active_Release 15      // 1 Bit, Bit 4
-#define     BTN_BTNOutputExtraLong_Taster2_Active_ReleaseMask 0x10
-#define     BTN_BTNOutputExtraLong_Taster2_Active_ReleaseShift 4
-#define BTN_BTNOutputShort_Taster1_Dpt1_Press 16      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt1_Release 18      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt1_Press 20      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt1_Release 24      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt1_Press 26      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt1_Release 28      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt1_Press 30      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt1_Release 32      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt1_Press 34      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt1_Release 36      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt1_Press 38      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt1_Release 40      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click1_Dpt1 42      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click2_Dpt1 44      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click3_Dpt1 46      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt2_Press 16      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt2_Release 18      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt2_Press 20      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt2_Release 24      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt2_Press 26      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt2_Release 28      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt2_Press 30      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt2_Release 32      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt2_Press 34      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt2_Release 36      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt2_Press 38      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt2_Release 40      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click1_Dpt2 42      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click2_Dpt2 44      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click3_Dpt2 46      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt5_Press 16      // uint16_t
-#define BTN_BTNOutputShort_Taster1_Dpt5_Release 18      // uint16_t
-#define BTN_BTNOutputShort_Taster2_Dpt5_Press 20      // uint16_t
-#define BTN_BTNOutputShort_Taster2_Dpt5_Release 24      // uint16_t
-#define BTN_BTNOutputLong_Taster1_Dpt5_Press 26      // uint16_t
-#define BTN_BTNOutputLong_Taster1_Dpt5_Release 28      // uint16_t
-#define BTN_BTNOutputLong_Taster2_Dpt5_Press 30      // uint16_t
-#define BTN_BTNOutputLong_Taster2_Dpt5_Release 32      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster1_Dpt5_Press 34      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster1_Dpt5_Release 36      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster2_Dpt5_Press 38      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster2_Dpt5_Release 40      // uint16_t
-#define BTN_BTNOutputMulti_Click1_Dpt5 42      // uint16_t
-#define BTN_BTNOutputMulti_Click2_Dpt5 44      // uint16_t
-#define BTN_BTNOutputMulti_Click3_Dpt5 46      // uint16_t
-#define BTN_BTNOutputShort_Taster1_Dpt5001_Press 16      // uint16_t
-#define BTN_BTNOutputShort_Taster1_Dpt5001_Release 18      // uint16_t
-#define BTN_BTNOutputShort_Taster2_Dpt5001_Press 20      // uint16_t
-#define BTN_BTNOutputShort_Taster2_Dpt5001_Release 24      // uint16_t
-#define BTN_BTNOutputLong_Taster1_Dpt5001_Press 26      // uint16_t
-#define BTN_BTNOutputLong_Taster1_Dpt5001_Release 28      // uint16_t
-#define BTN_BTNOutputLong_Taster2_Dpt5001_Press 30      // uint16_t
-#define BTN_BTNOutputLong_Taster2_Dpt5001_Release 32      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster1_Dpt5001_Press 34      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster1_Dpt5001_Release 36      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster2_Dpt5001_Press 38      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster2_Dpt5001_Release 40      // uint16_t
-#define BTN_BTNOutputMulti_Click1_Dpt5001 42      // uint16_t
-#define BTN_BTNOutputMulti_Click2_Dpt5001 44      // uint16_t
-#define BTN_BTNOutputMulti_Click3_Dpt5001 46      // uint16_t
-#define BTN_BTNOutputShort_Taster1_Dpt7_Press 16      // uint16_t
-#define BTN_BTNOutputShort_Taster1_Dpt7_Release 18      // uint16_t
-#define BTN_BTNOutputShort_Taster2_Dpt7_Press 20      // uint16_t
-#define BTN_BTNOutputShort_Taster2_Dpt7_Release 24      // uint16_t
-#define BTN_BTNOutputLong_Taster1_Dpt7_Press 26      // uint16_t
-#define BTN_BTNOutputLong_Taster1_Dpt7_Release 28      // uint16_t
-#define BTN_BTNOutputLong_Taster2_Dpt7_Press 30      // uint16_t
-#define BTN_BTNOutputLong_Taster2_Dpt7_Release 32      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster1_Dpt7_Press 34      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster1_Dpt7_Release 36      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster2_Dpt7_Press 38      // uint16_t
-#define BTN_BTNOutputExtraLong_Taster2_Dpt7_Release 40      // uint16_t
-#define BTN_BTNOutputMulti_Click1_Dpt7 42      // uint16_t
-#define BTN_BTNOutputMulti_Click2_Dpt7 44      // uint16_t
-#define BTN_BTNOutputMulti_Click3_Dpt7 46      // uint16_t
-#define BTN_BTNOutputShort_Taster1_Dpt18_Press 16      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt18_Release 18      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt18_Press 20      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt18_Release 24      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt18_Press 26      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt18_Release 28      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt18_Press 30      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt18_Release 32      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt18_Press 34      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt18_Release 36      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt18_Press 38      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt18_Release 40      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click1_Dpt18 42      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click2_Dpt18 44      // char*, 2 Byte
-#define BTN_BTNOutputMulti_Click3_Dpt18 46      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt3007_Press 16      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt3007_Release 18      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt3007_Press 20      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt3007_Release 24      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt3007_Press 26      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt3007_Release 28      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt3007_Press 30      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt3007_Release 32      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt3007_Press 34      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt3007_Release 36      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt3007_Press 38      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt3007_Release 40      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt3008_Press 16      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster1_Dpt3008_Release 18      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt3008_Press 20      // char*, 2 Byte
-#define BTN_BTNOutputShort_Taster2_Dpt3008_Release 24      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt3008_Press 26      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster1_Dpt3008_Release 28      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt3008_Press 30      // char*, 2 Byte
-#define BTN_BTNOutputLong_Taster2_Dpt3008_Release 32      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt3008_Press 34      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster1_Dpt3008_Release 36      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt3008_Press 38      // char*, 2 Byte
-#define BTN_BTNOutputExtraLong_Taster2_Dpt3008_Release 40      // char*, 2 Byte
-#define BTN_BTNOutput2Short_Taster1   46      // 2 Bits, Bit 7-6
-#define     BTN_BTNOutput2Short_Taster1Mask 0xC0
-#define     BTN_BTNOutput2Short_Taster1Shift 6
-#define BTN_BTNOutput2Short_Taster2   46      // 2 Bits, Bit 5-4
-#define     BTN_BTNOutput2Short_Taster2Mask 0x30
-#define     BTN_BTNOutput2Short_Taster2Shift 4
-#define BTN_BTNOutput2Long_Taster1    46      // 2 Bits, Bit 3-2
-#define     BTN_BTNOutput2Long_Taster1Mask 0x0C
-#define     BTN_BTNOutput2Long_Taster1Shift 2
-#define BTN_BTNOutput2Long_Taster2    46      // 2 Bits, Bit 1-0
-#define     BTN_BTNOutput2Long_Taster2Mask 0x03
-#define     BTN_BTNOutput2Long_Taster2Shift 0
-#define BTN_BTNOutput2ExtraLong_Taster1 47      // 2 Bits, Bit 7-6
-#define     BTN_BTNOutput2ExtraLong_Taster1Mask 0xC0
-#define     BTN_BTNOutput2ExtraLong_Taster1Shift 6
-#define BTN_BTNOutput2ExtraLong_Taster2 47      // 2 Bits, Bit 5-4
-#define     BTN_BTNOutput2ExtraLong_Taster2Mask 0x30
-#define     BTN_BTNOutput2ExtraLong_Taster2Shift 4
-#define BTN_BTNStatusThreshold        48      // uint8_t
-#define BTN_BTNStatusFallbackBase     49      // 2 Bits, Bit 7-6
-#define     BTN_BTNStatusFallbackBaseMask 0xC0
-#define     BTN_BTNStatusFallbackBaseShift 6
-#define BTN_BTNStatusFallbackTime     49      // uint14_t
+#define BTN_ChannelMode                0      // 4 Bits, Bit 7-4
+#define     BTN_ChannelModeMask 0xF0
+#define     BTN_ChannelModeShift 4
+#define BTN_ChannelLock                0      // 2 Bits, Bit 3-2
+#define     BTN_ChannelLockMask 0x0C
+#define     BTN_ChannelLockShift 2
+#define BTN_ChannelMultiClickCount     0      // 1 Bit, Bit 3
+#define     BTN_ChannelMultiClickCountMask 0x08
+#define     BTN_ChannelMultiClickCountShift 3
+#define BTN_ChannelInputA              1      // char*, 2 Byte
+#define BTN_ChannelInputB              3      // char*, 2 Byte
+#define BTN_ChannelReactionTimeMultiClick  5      // 8 Bits, Bit 7-0
+#define BTN_ChannelReactionTimeLong    6      // 8 Bits, Bit 7-0
+#define BTN_ChannelReactionTimeExtraLong  7      // 8 Bits, Bit 7-0
+#define BTN_ChannelOutputShort_DPT     8      // 8 Bits, Bit 7-0
+#define BTN_ChannelOutputLong_DPT      9      // 8 Bits, Bit 7-0
+#define BTN_ChannelOutputExtraLong_DPT 10      // 8 Bits, Bit 7-0
+#define BTN_ChannelOutputMulti_DPT    11      // 8 Bits, Bit 7-0
+#define BTN_ChannelOutputMulti_Click1_Active 12      // 1 Bit, Bit 7
+#define     BTN_ChannelOutputMulti_Click1_ActiveMask 0x80
+#define     BTN_ChannelOutputMulti_Click1_ActiveShift 7
+#define BTN_ChannelOutputMulti_Click2_Active 12      // 1 Bit, Bit 6
+#define     BTN_ChannelOutputMulti_Click2_ActiveMask 0x40
+#define     BTN_ChannelOutputMulti_Click2_ActiveShift 6
+#define BTN_ChannelOutputMulti_Click3_Active 12      // 1 Bit, Bit 5
+#define     BTN_ChannelOutputMulti_Click3_ActiveMask 0x20
+#define     BTN_ChannelOutputMulti_Click3_ActiveShift 5
+#define BTN_ChannelOutputShort_Taster1_Active_Press 13      // 1 Bit, Bit 7
+#define     BTN_ChannelOutputShort_Taster1_Active_PressMask 0x80
+#define     BTN_ChannelOutputShort_Taster1_Active_PressShift 7
+#define BTN_ChannelOutputShort_Taster1_Active_Release 13      // 1 Bit, Bit 6
+#define     BTN_ChannelOutputShort_Taster1_Active_ReleaseMask 0x40
+#define     BTN_ChannelOutputShort_Taster1_Active_ReleaseShift 6
+#define BTN_ChannelOutputShort_Taster2_Active_Press 13      // 1 Bit, Bit 5
+#define     BTN_ChannelOutputShort_Taster2_Active_PressMask 0x20
+#define     BTN_ChannelOutputShort_Taster2_Active_PressShift 5
+#define BTN_ChannelOutputShort_Taster2_Active_Release 13      // 1 Bit, Bit 4
+#define     BTN_ChannelOutputShort_Taster2_Active_ReleaseMask 0x10
+#define     BTN_ChannelOutputShort_Taster2_Active_ReleaseShift 4
+#define BTN_ChannelOutputLong_Taster1_Active_Press 14      // 1 Bit, Bit 7
+#define     BTN_ChannelOutputLong_Taster1_Active_PressMask 0x80
+#define     BTN_ChannelOutputLong_Taster1_Active_PressShift 7
+#define BTN_ChannelOutputLong_Taster1_Active_Release 14      // 1 Bit, Bit 6
+#define     BTN_ChannelOutputLong_Taster1_Active_ReleaseMask 0x40
+#define     BTN_ChannelOutputLong_Taster1_Active_ReleaseShift 6
+#define BTN_ChannelOutputLong_Taster2_Active_Press 14      // 1 Bit, Bit 5
+#define     BTN_ChannelOutputLong_Taster2_Active_PressMask 0x20
+#define     BTN_ChannelOutputLong_Taster2_Active_PressShift 5
+#define BTN_ChannelOutputLong_Taster2_Active_Release 14      // 1 Bit, Bit 4
+#define     BTN_ChannelOutputLong_Taster2_Active_ReleaseMask 0x10
+#define     BTN_ChannelOutputLong_Taster2_Active_ReleaseShift 4
+#define BTN_ChannelOutputExtraLong_Taster1_Active_Press 15      // 1 Bit, Bit 7
+#define     BTN_ChannelOutputExtraLong_Taster1_Active_PressMask 0x80
+#define     BTN_ChannelOutputExtraLong_Taster1_Active_PressShift 7
+#define BTN_ChannelOutputExtraLong_Taster1_Active_Release 15      // 1 Bit, Bit 6
+#define     BTN_ChannelOutputExtraLong_Taster1_Active_ReleaseMask 0x40
+#define     BTN_ChannelOutputExtraLong_Taster1_Active_ReleaseShift 6
+#define BTN_ChannelOutputExtraLong_Taster2_Active_Press 15      // 1 Bit, Bit 5
+#define     BTN_ChannelOutputExtraLong_Taster2_Active_PressMask 0x20
+#define     BTN_ChannelOutputExtraLong_Taster2_Active_PressShift 5
+#define BTN_ChannelOutputExtraLong_Taster2_Active_Release 15      // 1 Bit, Bit 4
+#define     BTN_ChannelOutputExtraLong_Taster2_Active_ReleaseMask 0x10
+#define     BTN_ChannelOutputExtraLong_Taster2_Active_ReleaseShift 4
+#define BTN_ChannelOutputShort_Taster1_Dpt1_Press 16      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt1_Release 18      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt1_Press 20      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt1_Release 24      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt1_Press 26      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt1_Release 28      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt1_Press 30      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt1_Release 32      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt1_Press 34      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt1_Release 36      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt1_Press 38      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt1_Release 40      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click1_Dpt1 42      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click2_Dpt1 44      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click3_Dpt1 46      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt2_Press 16      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt2_Release 18      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt2_Press 20      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt2_Release 24      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt2_Press 26      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt2_Release 28      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt2_Press 30      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt2_Release 32      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt2_Press 34      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt2_Release 36      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt2_Press 38      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt2_Release 40      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click1_Dpt2 42      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click2_Dpt2 44      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click3_Dpt2 46      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt5_Press 16      // uint16_t
+#define BTN_ChannelOutputShort_Taster1_Dpt5_Release 18      // uint16_t
+#define BTN_ChannelOutputShort_Taster2_Dpt5_Press 20      // uint16_t
+#define BTN_ChannelOutputShort_Taster2_Dpt5_Release 24      // uint16_t
+#define BTN_ChannelOutputLong_Taster1_Dpt5_Press 26      // uint16_t
+#define BTN_ChannelOutputLong_Taster1_Dpt5_Release 28      // uint16_t
+#define BTN_ChannelOutputLong_Taster2_Dpt5_Press 30      // uint16_t
+#define BTN_ChannelOutputLong_Taster2_Dpt5_Release 32      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt5_Press 34      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt5_Release 36      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt5_Press 38      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt5_Release 40      // uint16_t
+#define BTN_ChannelOutputMulti_Click1_Dpt5 42      // uint16_t
+#define BTN_ChannelOutputMulti_Click2_Dpt5 44      // uint16_t
+#define BTN_ChannelOutputMulti_Click3_Dpt5 46      // uint16_t
+#define BTN_ChannelOutputShort_Taster1_Dpt5001_Press 16      // uint16_t
+#define BTN_ChannelOutputShort_Taster1_Dpt5001_Release 18      // uint16_t
+#define BTN_ChannelOutputShort_Taster2_Dpt5001_Press 20      // uint16_t
+#define BTN_ChannelOutputShort_Taster2_Dpt5001_Release 24      // uint16_t
+#define BTN_ChannelOutputLong_Taster1_Dpt5001_Press 26      // uint16_t
+#define BTN_ChannelOutputLong_Taster1_Dpt5001_Release 28      // uint16_t
+#define BTN_ChannelOutputLong_Taster2_Dpt5001_Press 30      // uint16_t
+#define BTN_ChannelOutputLong_Taster2_Dpt5001_Release 32      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt5001_Press 34      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt5001_Release 36      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt5001_Press 38      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt5001_Release 40      // uint16_t
+#define BTN_ChannelOutputMulti_Click1_Dpt5001 42      // uint16_t
+#define BTN_ChannelOutputMulti_Click2_Dpt5001 44      // uint16_t
+#define BTN_ChannelOutputMulti_Click3_Dpt5001 46      // uint16_t
+#define BTN_ChannelOutputShort_Taster1_Dpt7_Press 16      // uint16_t
+#define BTN_ChannelOutputShort_Taster1_Dpt7_Release 18      // uint16_t
+#define BTN_ChannelOutputShort_Taster2_Dpt7_Press 20      // uint16_t
+#define BTN_ChannelOutputShort_Taster2_Dpt7_Release 24      // uint16_t
+#define BTN_ChannelOutputLong_Taster1_Dpt7_Press 26      // uint16_t
+#define BTN_ChannelOutputLong_Taster1_Dpt7_Release 28      // uint16_t
+#define BTN_ChannelOutputLong_Taster2_Dpt7_Press 30      // uint16_t
+#define BTN_ChannelOutputLong_Taster2_Dpt7_Release 32      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt7_Press 34      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt7_Release 36      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt7_Press 38      // uint16_t
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt7_Release 40      // uint16_t
+#define BTN_ChannelOutputMulti_Click1_Dpt7 42      // uint16_t
+#define BTN_ChannelOutputMulti_Click2_Dpt7 44      // uint16_t
+#define BTN_ChannelOutputMulti_Click3_Dpt7 46      // uint16_t
+#define BTN_ChannelOutputShort_Taster1_Dpt18_Press 16      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt18_Release 18      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt18_Press 20      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt18_Release 24      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt18_Press 26      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt18_Release 28      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt18_Press 30      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt18_Release 32      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt18_Press 34      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt18_Release 36      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt18_Press 38      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt18_Release 40      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click1_Dpt18 42      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click2_Dpt18 44      // char*, 2 Byte
+#define BTN_ChannelOutputMulti_Click3_Dpt18 46      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt3007_Press 16      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt3007_Release 18      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt3007_Press 20      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt3007_Release 24      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt3007_Press 26      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt3007_Release 28      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt3007_Press 30      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt3007_Release 32      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt3007_Press 34      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt3007_Release 36      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt3007_Press 38      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt3007_Release 40      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt3008_Press 16      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster1_Dpt3008_Release 18      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt3008_Press 20      // char*, 2 Byte
+#define BTN_ChannelOutputShort_Taster2_Dpt3008_Release 24      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt3008_Press 26      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster1_Dpt3008_Release 28      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt3008_Press 30      // char*, 2 Byte
+#define BTN_ChannelOutputLong_Taster2_Dpt3008_Release 32      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt3008_Press 34      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster1_Dpt3008_Release 36      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt3008_Press 38      // char*, 2 Byte
+#define BTN_ChannelOutputExtraLong_Taster2_Dpt3008_Release 40      // char*, 2 Byte
+#define BTN_ChannelOutput2Short_Taster1 46      // 2 Bits, Bit 7-6
+#define     BTN_ChannelOutput2Short_Taster1Mask 0xC0
+#define     BTN_ChannelOutput2Short_Taster1Shift 6
+#define BTN_ChannelOutput2Short_Taster2 46      // 2 Bits, Bit 5-4
+#define     BTN_ChannelOutput2Short_Taster2Mask 0x30
+#define     BTN_ChannelOutput2Short_Taster2Shift 4
+#define BTN_ChannelOutput2Long_Taster1 46      // 2 Bits, Bit 3-2
+#define     BTN_ChannelOutput2Long_Taster1Mask 0x0C
+#define     BTN_ChannelOutput2Long_Taster1Shift 2
+#define BTN_ChannelOutput2Long_Taster2 46      // 2 Bits, Bit 1-0
+#define     BTN_ChannelOutput2Long_Taster2Mask 0x03
+#define     BTN_ChannelOutput2Long_Taster2Shift 0
+#define BTN_ChannelOutput2ExtraLong_Taster1 47      // 2 Bits, Bit 7-6
+#define     BTN_ChannelOutput2ExtraLong_Taster1Mask 0xC0
+#define     BTN_ChannelOutput2ExtraLong_Taster1Shift 6
+#define BTN_ChannelOutput2ExtraLong_Taster2 47      // 2 Bits, Bit 5-4
+#define     BTN_ChannelOutput2ExtraLong_Taster2Mask 0x30
+#define     BTN_ChannelOutput2ExtraLong_Taster2Shift 4
+#define BTN_ChannelStatusThreshold    48      // uint8_t
+#define BTN_ChannelStatusFallbackBase 49      // 2 Bits, Bit 7-6
+#define     BTN_ChannelStatusFallbackBaseMask 0xC0
+#define     BTN_ChannelStatusFallbackBaseShift 6
+#define BTN_ChannelStatusFallbackTime 49      // uint14_t
 
 // Communication objects per channel (multiple occurrence)
-#define BTN_KoOffset 100
+#define BTN_KoOffset 200
 #define BTN_KoBlockSize 12
-#define BTN_KoBTNLock 0
-#define BTN_KoBTNInput1 1
-#define BTN_KoBTNInput2 2
-#define BTN_KoBTNOutput1Status 3
-#define BTN_KoBTNOutput2Status 4
-#define BTN_KoBTNOutput3Status 5
-#define BTN_KoBTNOutput1 6
-#define BTN_KoBTNOutput2 7
-#define BTN_KoBTNOutput3 8
-#define BTN_KoBTNOutput4 9
-#define BTN_KoBTNOutput5 10
-#define BTN_KoBTNOutput6 11
+#define BTN_KoChannelLock 0
+#define BTN_KoChannelInput1 1
+#define BTN_KoChannelInput2 2
+#define BTN_KoChannelOutput1Status 3
+#define BTN_KoChannelOutput2Status 4
+#define BTN_KoChannelOutput3Status 5
+#define BTN_KoChannelOutput1 6
+#define BTN_KoChannelOutput2 7
+#define BTN_KoChannelOutput3 8
+#define BTN_KoChannelOutput4 9
+#define BTN_KoChannelOutput5 10
+#define BTN_KoChannelOutput6 11
 
 #define BI_ChannelCount 4
 
 // Parameter per channel
-#define BI_ParamBlockOffset 2115
+#define BI_ParamBlockOffset 3835
 #define BI_ParamBlockSize 4
-#define BI_InputActive                0      // 1 Bit, Bit 7
-#define     BI_InputActiveMask 0x80
-#define     BI_InputActiveShift 7
-#define BI_InputOpen                  0      // 2 Bits, Bit 5-4
-#define     BI_InputOpenMask 0x30
-#define     BI_InputOpenShift 4
-#define BI_InputClose                 0      // 2 Bits, Bit 3-2
-#define     BI_InputCloseMask 0x0C
-#define     BI_InputCloseShift 2
-#define BI_InputPeriodic              0      // 1 Bit, Bit 2
-#define     BI_InputPeriodicMask 0x04
-#define     BI_InputPeriodicShift 2
-#define BI_InputDebouncing            1      // 8 Bits, Bit 7-0
-#define BI_InputPeriodicBase          2      // 2 Bits, Bit 7-6
-#define     BI_InputPeriodicBaseMask 0xC0
-#define     BI_InputPeriodicBaseShift 6
-#define BI_InputPeriodicTime          2      // uint14_t
+#define BI_ChannelActive              0      // 1 Bit, Bit 7
+#define     BI_ChannelActiveMask 0x80
+#define     BI_ChannelActiveShift 7
+#define BI_ChannelOpen                0      // 2 Bits, Bit 5-4
+#define     BI_ChannelOpenMask 0x30
+#define     BI_ChannelOpenShift 4
+#define BI_ChannelClose               0      // 2 Bits, Bit 3-2
+#define     BI_ChannelCloseMask 0x0C
+#define     BI_ChannelCloseShift 2
+#define BI_ChannelPeriodic            0      // 1 Bit, Bit 2
+#define     BI_ChannelPeriodicMask 0x04
+#define     BI_ChannelPeriodicShift 2
+#define BI_ChannelDebouncing          1      // 8 Bits, Bit 7-0
+#define BI_ChannelPeriodicBase        2      // 2 Bits, Bit 7-6
+#define     BI_ChannelPeriodicBaseMask 0xC0
+#define     BI_ChannelPeriodicBaseShift 6
+#define BI_ChannelPeriodicTime        2      // uint14_t
 
 // Communication objects per channel (multiple occurrence)
 #define BI_KoOffset 41
 #define BI_KoBlockSize 1
-#define BI_KoInputOutput 0
+#define BI_KoChannelOutput 0
 
 #define MAIN_OpenKnxId 0xA3
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 6
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 4
 #define MAIN_OrderNumber "SOM-UP"

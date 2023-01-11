@@ -102,7 +102,7 @@ void SoundControl::stopped()
   }
   mStatus = false;
   getKo(SOM_KoStatus)->value(false, getDPT(VAL_DPT_1));
-  getKo(SOM_KoFile)->value((uint8_t)0, getDPT(VAL_DPT_5));
+  getKo(SOM_KoFile)->value((uint8_t)0, getDPT(VAL_DPT_7));
 }
 
 void SoundControl::loop()
@@ -296,7 +296,7 @@ void SoundControl::processInputKoExternalPriority(GroupObject &iKo)
 
 void SoundControl::processInputKoExternalFile(GroupObject &iKo)
 {
-  uint8_t iFile = iKo.value(getDPT(VAL_DPT_5));
+  uint8_t iFile = iKo.value(getDPT(VAL_DPT_7));
 
   if (iFile == 0)
     return stop();

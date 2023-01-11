@@ -5,22 +5,22 @@
     <Manufacturer RefId="M-00FA">
       <Catalog>
         <CatalogSection Id="M-00FA_CS-OpenKNX" Name="OpenKNX" Number="OpenKNX" DefaultLanguage="de">
-          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-Dev" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
+          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-Beta" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA3" ApplicationNumber="01" ApplicationVersion="6" ReplacesVersions="1 2 3 4 5" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Dev" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA3" ApplicationNumber="0" ApplicationVersion="4" ReplacesVersions="3" ApplicationRevision="0" />
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
-            <op:define prefix="LOG" header="SoundModule.h" NumChannels="10" KoOffset="400" ModuleType="1" />
+            <op:define prefix="LOG" header="SoundModule.h" NumChannels="30" KoOffset="100" ModuleType="1" />
             <op:define prefix="SOM" header="SoundModule.h" NumChannels="10" KoOffset="50" ModuleType="2" />
-            <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="100" ModuleType="3" />
+            <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="200" ModuleType="3" />
             <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="41" ModuleType="4" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
@@ -115,8 +115,8 @@
               <op:include href="SoundModule.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" />
             </Channel>
             <Channel Name="BI" Text="Binäreingänge" Number="7" Id="%AID%_CH-7">
-              <op:include href="../lib/OFM-BinaryInput/BinaryInput.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
-              <op:include href="../lib/OFM-BinaryInput/BinaryInput.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-BinaryInput/BinaryInput.share.xml" xpath="//Dynamic/Channel/*" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/BinaryInput.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BI" />
             </Channel>
             <Channel Name="BTN" Text="Virtuelle Taster" Number="6" Id="%AID%_CH-6">
               <op:include href="../lib/OFM-VirtualButton/VirtualButton.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
