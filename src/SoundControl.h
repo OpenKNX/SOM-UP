@@ -25,6 +25,7 @@ public:
   void unlock();
   void day();
   void night();
+  void afterSetup();
   void processInputKo(GroupObject &iKo);
   static SoundControl *sInstance;
 

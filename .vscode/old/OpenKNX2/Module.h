@@ -26,5 +26,6 @@ namespace OpenKNX
     virtual void setup();
     virtual void processInputKo(GroupObject &iKo);
     virtual void onSafePinInterruptHandler();
+    virtual void afterSetup();
   };
 }

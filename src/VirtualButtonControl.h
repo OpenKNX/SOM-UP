@@ -1,7 +1,7 @@
 #include "VirtualButton.h"
 #include "hardware.h"
 
-class VirtualButtonControl
+class VirtualButtonControl : public OpenKNX::Module
 {
 
 public:

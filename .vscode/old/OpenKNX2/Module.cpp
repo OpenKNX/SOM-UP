@@ -32,4 +32,5 @@ namespace OpenKNX
   void Module::setup() {}
   void Module::processInputKo(GroupObject &iKo) {}
   void Module::onSafePinInterruptHandler() {}
+  void Module::afterSetup() {}
 }

@@ -2,6 +2,10 @@
 #include "knxprod.h"
 #include "Helper.h" // TODO: Hier ist das delayChecks drinne (Logicmodul)
 #include <cstdio>
+#include <iomanip>
+#include <iostream>
+#include <string>
+#include <cstring>
 #include <functional>
 #include "OpenKNX/Module.h"
 
@@ -18,6 +22,7 @@ namespace OpenKNX
   class Common
   {
   public:
+    static bool calledAfterSetup;
     static bool calledSaveInterrupt;
     static Modules modules;
 
@@ -29,6 +34,9 @@ namespace OpenKNX
     static void onBeforeRestartHandler();
     static void onBeforeTablesUnloadHandler();
     static void processInputKo(GroupObject &iKo);
+    static void log(const char* iModuleName, const char* iMessage);
+    static void processSerialInput();
+
 
 #ifdef LOG_StartupDelayBase
     static uint32_t startupDelay;

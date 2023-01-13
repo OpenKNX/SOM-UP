@@ -46,6 +46,11 @@ void SoundControl::setup()
   }
 }
 
+void SoundControl::afterSetup()
+{
+  SERIAL_DEBUG.printf("afterSetup\n\r");
+}
+
 bool SoundControl::play(uint8_t iFile, uint8_t iVolume, uint8_t iPriority, uint32_t iRepeats, uint32_t iDuration, uint8_t iTrigger)
 {
   // SERIAL_DEBUG.printf("SoundControl::play %i/%i/%i/%i/%i/%i\n\r", iFile, iVolume, iPriority, iRepeats, iDuration, iTrigger);

@@ -24,6 +24,11 @@ void SoundPlayer::powerOff()
 
 void SoundPlayer::setup()
 {
+
+#ifdef PLAYER_BUSY_PIN
+  pinMode(PLAYER_BUSY_PIN, OUTPUT);
+#endif
+
 #ifdef PLAYER_PWR
   pinMode(PLAYER_PWR, OUTPUT);
   powerOn();
@@ -174,7 +179,7 @@ void SoundPlayer::processStatus()
       mReceivedStatusPos = 0;
       mLastRequestStatus = 0;
       mLastReceivedStatus = millis();
-      //printHEX("recevied status: ", mReceivedStatusBuffer, 5);
+      // printHEX("recevied status: ", mReceivedStatusBuffer, 5);
 
       if (validateChecksum(mReceivedStatusBuffer, 5))
       {
@@ -282,7 +287,7 @@ void SoundPlayer::setRepeats(uint16_t iRepeats)
 {
   uint8_t data[4] = {0xAA, 0x18, 0x01, 0x01};
   sendData(data, 4);
-  
+
   iRepeats++;
   uint8_t data2[5] = {0xAA, 0x19, 0x02, 0x00, 0x00};
   data2[3] = iRepeats >> 8;

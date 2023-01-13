@@ -1,5 +1,6 @@
 #include "OpenKNX/Common.h"
 #include "hardware.h"
+#include "HardwareDevices.h"
 
 OpenKNX::Modules OpenKNX::Common::modules;
 #ifdef LOG_StartupDelayBase
@@ -9,6 +10,7 @@ uint32_t OpenKNX::Common::startupDelay = 0;
 uint32_t OpenKNX::Common::heartbeatDelay = 0;
 #endif
 bool OpenKNX::Common::calledSaveInterrupt = false;
+bool OpenKNX::Common::calledAfterSetup = false;
 
 namespace OpenKNX
 {
@@ -35,6 +37,19 @@ namespace OpenKNX
 
   bool Common::loop()
   {
+    if (SERIAL_DEBUG.available())
+      processSerialInput();
+
+    // Trigger afterSetup once (used for readrequest etc)
+    if (!calledAfterSetup)
+    {
+      for (uint8_t i = 1; i <= modules.count; i++)
+      {
+        modules.list[i - 1]->afterSetup();
+      }
+      calledAfterSetup = true;
+    }
+
     if (calledSaveInterrupt)
     {
       SERIAL_DEBUG.println("execute save handling");
@@ -46,6 +61,7 @@ namespace OpenKNX
 
       // Then reboot
       watchdog_reboot(0, 0, 0);
+      calledSaveInterrupt = true;
     }
 
     if (!knx.configured())
@@ -104,7 +120,7 @@ namespace OpenKNX
 
   void Common::processInputKo(GroupObject &iKo)
   {
-    //SERIAL_DEBUG.printf("hook onInputKo %i\n\r", iKo.asap());
+    // SERIAL_DEBUG.printf("hook onInputKo %i\n\r", iKo.asap());
     for (uint8_t i = 1; i <= modules.count; i++)
     {
       modules.list[i - 1]->processInputKo(iKo);
@@ -114,7 +130,7 @@ namespace OpenKNX
   void Common::registerCallbacks()
   {
     knx.beforeRestartCallback(onBeforeRestartHandler);
-    //GroupObject::classCallback(processInputKo);
+    // GroupObject::classCallback(processInputKo);
     TableObject::beforeTablesUnloadCallback(onBeforeTablesUnloadHandler);
 #ifdef SAVE_INTERRUPT_PIN
     // we need to do this as late as possible, tried in constructor, but this doesn't work on RP2040
@@ -128,6 +144,40 @@ namespace OpenKNX
   {
     modules.count++;
     modules.list[modules.count - 1] = module;
+  }
+
+  void Common::log(const char *iModuleName, const char *iMessage)
+  {
+    // TODO Timestamp?
+    SERIAL_DEBUG.print(iModuleName);
+    SERIAL_DEBUG.print(": ");
+    SERIAL_DEBUG.print(iMessage);
+    SERIAL_DEBUG.println("");
+  }
+
+  void Common::processSerialInput()
+  {
+    std::stringstream lStringHelper;
+    switch (SERIAL_DEBUG.read())
+    {
+    case 0x56: // V
+      // TODO firmwareRevision
+      lStringHelper << MAIN_ApplicationNumber << "." << MAIN_ApplicationVersion << "." << "0";
+      log("VERSION", lStringHelper.str().c_str());
+      break;
+    case 0x4F: // O
+      lStringHelper << "0x" << std::hex << std::uppercase << MAIN_OpenKnxId;
+      log("OPENKNX", lStringHelper.str().c_str());
+      break;
+    case 0x53: // S
+      lStringHelper << MAIN_OrderNumber;
+      log("SOFTWARE", lStringHelper.str().c_str());
+      break;
+    case 0x48: // H
+      lStringHelper << MAIN_Hardware;
+      log("HARDWARE", lStringHelper.str().c_str());
+      break;
+    }
   }
 
 }
