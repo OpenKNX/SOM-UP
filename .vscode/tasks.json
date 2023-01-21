@@ -13,48 +13,40 @@
             "args": [
                 "create",
                 "--Debug",
+                "-h",
+                "SoundModuleKnxprod.h",
                 "SoundModule"
             ],
             "problemMatcher": [],
             "group": "test"
         },
         {
-            "label": "Build MASIFI_SMBB_V1",
+            "label": "RP2040: Build",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "build_MASIFI_SMBB_V1"
+                "build_RP2040"
             ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "Upload USB MASIFI_SMBB_V1",
+            "label": "RP2040: Build & Upload (USB)",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "upload_USB_MASIFI_SMBB_V1",
+                "upload_USB_RP2040",
                 "upload"
             ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "Build SOM_UP",
+            "label": "RP2040: Build & Upload (JLINK)",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "build_SOM_UP"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Upload USB SOM_UP",
-            "type": "shell",
-            "command": "scripts/OpenKNX-Build.ps1",
-            "args": [
-                "upload_USB_SOM_UP",
+                "upload_JLINK_RP2040",
                 "upload"
             ],
             "group": "build",

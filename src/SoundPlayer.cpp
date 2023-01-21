@@ -1,22 +1,21 @@
-#include "SoundControl.h"
+#include "SoundModule.h"
 #include "SoundPlayer.h"
 #include "hardware.h"
 
 SoundPlayer::SoundPlayer()
 {
 }
-SoundPlayer::~SoundPlayer() {}
 
 void SoundPlayer::powerOn()
 {
 #ifdef PLAYER_PWR
-  SERIAL_DEBUG.println("poweron player...");
+  openknx.debug("SoundPlayer", "poweron player");
   digitalWrite(PLAYER_PWR, HIGH);
 #endif
 }
 void SoundPlayer::powerOff()
 {
-  SERIAL_DEBUG.println("poweroff player...");
+  openknx.debug("SoundPlayer", "poweroff player");
 #ifdef PLAYER_PWR
   digitalWrite(PLAYER_PWR, LOW);
 #endif
@@ -35,60 +34,59 @@ void SoundPlayer::setup()
 #endif
 
   // setup hardware serial
-  SERIAL_DEBUG.println("SoundPlayer::setup start");
+  openknx.debug("SoundPlayer", "setup start");
   Serial2.setRX(PLAYER_UART_RX_PIN);
   Serial2.setTX(PLAYER_UART_TX_PIN);
   Serial2.begin(9600);
 
   delay(50);
   stop(true);
-
-  SERIAL_DEBUG.println("SoundPlayer::setup ready");
+  openknx.debug("SoundPlayer", "setup ready");
 }
 
-void SoundPlayer::play(uint16_t iFile, uint8_t iVolume, uint32_t iRepeats, uint32_t iDuration)
+void SoundPlayer::play(uint16_t file, uint8_t volume, uint32_t repeats, uint32_t duration)
 {
-  SERIAL_DEBUG.printf("SoundPlayer::play %i/%i/%i/%i\n\r", iFile, iVolume, iRepeats, iDuration);
+  openknx.debug("SoundPlayer", "play %i/%i/%i/%i", file, volume, repeats, duration);
 
-  mNextPlay.file = iFile;
-  mNextPlay.volume = iVolume;
-  mNextPlay.duration = iDuration;
-  mNextPlay.repeats = iRepeats;
-  mNextPlay.playMillis = millis();
+  _nextPlay.file = file;
+  _nextPlay.volume = volume;
+  _nextPlay.duration = duration;
+  _nextPlay.repeats = repeats;
+  _nextPlay.playMillis = millis();
 
   // Stop current if needed
-  if (mPlaying)
+  if (_playing)
     stop();
 }
 
 // Internal play
-void SoundPlayer::play(Play &iPlay)
+void SoundPlayer::play(Play &play)
 {
   // set volume
-  setVolume(iPlay.volume);
+  setVolume(play.volume);
 
   // set repeats
-  setRepeats(iPlay.repeats);
+  setRepeats(play.repeats);
 
   // play file
-  playFileNumber(iPlay.file);
+  playFileNumber(play.file);
 }
 
-void SoundPlayer::setVolume(uint8_t iVolume)
+void SoundPlayer::setVolume(uint8_t volume)
 {
   // invalid volume
-  if (iVolume < 1 || iVolume > 30)
+  if (volume < 1 || volume > 30)
     return;
 
   // volume already set
-  if (iVolume == mLastVolume)
+  if (volume == _lastVolume)
     return;
 
   // update volume
-  SERIAL_DEBUG.printf("SoundPlayer::setVolume %i\n\r", iVolume);
-  mLastVolume = iVolume;
+  openknx.debug("SoundPlayer", "setVolume %i", volume);
+  _lastVolume = volume;
 
-  uint8_t data[] = {0xAA, 0x13, 0x01, iVolume};
+  uint8_t data[] = {0xAA, 0x13, 0x01, volume};
   sendData(data, 4);
 }
 
@@ -103,50 +101,50 @@ void SoundPlayer::loop()
 void SoundPlayer::processNextPlay()
 {
   // Already playing
-  if (mPlaying)
+  if (_playing)
     return;
 
   // No next play
-  if (mNextPlay.file == 0)
+  if (_nextPlay.file == 0)
     return;
 
-  SERIAL_DEBUG.printf("SoundPlayer::processNextPlay: %i (%i)\n\r", mNextPlay.file, (millis() - mNextPlay.playMillis));
+  openknx.debug("SoundPlayer", "processNextPlay%i (%i)", _nextPlay.file, (millis() - _nextPlay.playMillis));
 
-  play(mNextPlay);
+  play(_nextPlay);
 
-  mCurrentPlay = mNextPlay;
-  mNextPlay = SoundPlayer::Play();
+  _currentPlay = _nextPlay;
+  _nextPlay = SoundPlayer::Play();
 }
 
 void SoundPlayer::processDuration()
 {
-  if (mStopping)
+  if (_stopping)
     return;
 
-  if (mCurrentPlay.duration == 0)
+  if (_currentPlay.duration == 0)
     return;
 
-  if (mCurrentPlay.playingMillis == 0)
+  if (_currentPlay.playingMillis == 0)
     return;
 
-  if (!delayCheck(mCurrentPlay.playingMillis, mCurrentPlay.duration))
+  if (!delayCheck(_currentPlay.playingMillis, _currentPlay.duration))
     return;
 
-  SERIAL_DEBUG.printf("SoundPlayer::processDuration %i/%i/%i\n\r", millis(), mCurrentPlay.playingMillis, mCurrentPlay.duration);
+  openknx.debug("SoundPlayer", "processDuration %i/%i/%i", millis(), _currentPlay.playingMillis, _currentPlay.duration);
   stop();
 }
 
 void SoundPlayer::requestStatus()
 {
   // skip when you send request
-  if (!delayCheck(mLastRequestStatus, 100))
+  if (!delayCheck(_lastRequestStatus, 100))
     return;
 
-  if (!delayCheck(mLastReceivedStatus, 50))
+  if (!delayCheck(_lastReceivedStatus, 50))
     return;
 
-  mLastRequestStatus = millis();
-  mLastReceivedStatus = 0;
+  _lastRequestStatus = millis();
+  _lastReceivedStatus = 0;
   uint8_t data[] = {0xAA, 0x01, 0x00};
   sendData(data, 3);
 }
@@ -161,29 +159,29 @@ void SoundPlayer::processStatus()
 
     if (lReceivedChar == 0xAA)
     {
-      mReceivedStatusPos = 0;
-      mReceiveStatusSince = millis();
-      mPlayerAvailable = true;
+      _receivedStatusPos = 0;
+      _receiveStatusSince = millis();
+      _playerAvailable = true;
     }
 
-    if (mReceiveStatusSince > 0)
+    if (_receiveStatusSince > 0)
     {
-      mReceivedStatusBuffer[mReceivedStatusPos] = lReceivedChar;
-      mReceivedStatusPos++;
+      _receivedStatusBuffer[_receivedStatusPos] = lReceivedChar;
+      _receivedStatusPos++;
     }
 
     // Response is completed (all 5 bytes recevied)
-    if (mReceivedStatusPos == 5)
+    if (_receivedStatusPos == 5)
     {
-      mReceiveStatusSince = 0;
-      mReceivedStatusPos = 0;
-      mLastRequestStatus = 0;
-      mLastReceivedStatus = millis();
-      // printHEX("recevied status: ", mReceivedStatusBuffer, 5);
+      _receiveStatusSince = 0;
+      _receivedStatusPos = 0;
+      _lastRequestStatus = 0;
+      _lastReceivedStatus = millis();
+      // printHEX("recevied status: ", _receivedStatusBuffer, 5);
 
-      if (validateChecksum(mReceivedStatusBuffer, 5))
+      if (validateChecksum(_receivedStatusBuffer, 5))
       {
-        switch (mReceivedStatusBuffer[3])
+        switch (_receivedStatusBuffer[3])
         {
         case 1:
           processStatusPlaying();
@@ -197,7 +195,8 @@ void SoundPlayer::processStatus()
       }
       else
       {
-        printHEX("SoundPlayer::processStatus invalid checksum", mReceivedStatusBuffer, 5);
+        openknx.debug("SoundPlayer", "processStatus invalid checksum");
+        openknx.debugHex("DATA", _receivedStatusBuffer, 5);
       }
     }
   }
@@ -208,20 +207,20 @@ void SoundPlayer::processStatusStopped()
 #ifdef PLAYER_BUSY_PIN
   digitalWrite(PLAYER_BUSY_PIN, LOW);
 #endif
-  mReceivedStatus = false;
+  _receivedStatus = false;
 
   // Already Stopped
-  if (!mPlaying)
+  if (!_playing)
     return;
 
-  SERIAL_DEBUG.printf("SoundPlayer::processStatusStopped: %i\n\r", (millis() - mCurrentPlay.playingMillis));
+  openknx.debug("SoundPlayer", "processStatusStopped (%i)", (millis() - _currentPlay.playingMillis));
 
-  if (mNextPlay.file == 0)
-    SoundControl::sInstance->stopped();
+  if (_nextPlay.file == 0)
+    SoundModule::instance()->stopped();
 
-  mStopping = false;
-  mPlaying = false;
-  mCurrentPlay = SoundPlayer::Play();
+  _stopping = false;
+  _playing = false;
+  _currentPlay = SoundPlayer::Play();
 }
 
 void SoundPlayer::processStatusPlaying()
@@ -229,35 +228,35 @@ void SoundPlayer::processStatusPlaying()
 #ifdef PLAYER_BUSY_PIN
   digitalWrite(PLAYER_BUSY_PIN, HIGH);
 #endif
-  mReceivedStatus = true;
+  _receivedStatus = true;
 
   // Already Playing
-  if (mPlaying)
+  if (_playing)
     return;
 
-  SERIAL_DEBUG.printf("SoundPlayer::processStatusPlaying: %i\n\r", (millis() - mCurrentPlay.playMillis));
+  openknx.debug("SoundPlayer", "processStatusPlaying (%i)", (millis() - _currentPlay.playMillis));
 
-  mPlaying = true;
-  mCurrentPlay.playingMillis = millis();
+  _playing = true;
+  _currentPlay.playingMillis = millis();
 }
 
 void SoundPlayer::stop(bool force)
 {
   if (!force)
   {
-    if (!mPlaying)
+    if (!_playing)
       return;
 
-    if (mStopping)
+    if (_stopping)
       return;
   }
 
-  SERIAL_DEBUG.println("SoundPlayer::stop");
+  openknx.debug("SoundPlayer", "stop");
   uint8_t data[] = {0xAA, 0x04, 0x00};
   sendData(data, 3);
 
-  if (mPlaying)
-    mStopping = true;
+  if (_playing)
+    _stopping = true;
 }
 
 uint8_t SoundPlayer::calcChecksum(uint8_t *data, uint8_t len)
@@ -283,32 +282,32 @@ void SoundPlayer::sendData(uint8_t *data, uint8_t len)
   Serial2.write(checksum);
 }
 
-void SoundPlayer::setRepeats(uint16_t iRepeats)
+void SoundPlayer::setRepeats(uint16_t repeats)
 {
   uint8_t data[4] = {0xAA, 0x18, 0x01, 0x01};
   sendData(data, 4);
 
-  iRepeats++;
+  repeats++;
   uint8_t data2[5] = {0xAA, 0x19, 0x02, 0x00, 0x00};
-  data2[3] = iRepeats >> 8;
-  data2[4] = iRepeats & 0xff;
+  data2[3] = repeats >> 8;
+  data2[4] = repeats & 0xff;
   sendData(data2, 5);
 }
 
-void SoundPlayer::playFileNumber(uint16_t iFile)
+void SoundPlayer::playFileNumber(uint16_t file)
 {
   // 10 Bytes /00000.MP3
-  std::stringstream lFilePathBuild;
-  lFilePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(iFile) << "*MP3";
-  const std::string lFilePath = lFilePathBuild.str();
+  std::stringstream filePathBuild;
+  filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(file) << "*MP3";
+  const std::string filePath = filePathBuild.str();
 
   // 14 = 4 CMD + 10 PATH
   uint8_t data[14] = {0xAA, 0x08, 11 /* len + 1 */, 0x02};
-  uint8_t lCopyPos = 4;
-  for (char const &c : lFilePath)
+  uint8_t pos = 4;
+  for (char const &c : filePath)
   {
-    data[lCopyPos] = c;
-    lCopyPos++;
+    data[pos] = c;
+    pos++;
   }
   sendData(data, 14);
 }

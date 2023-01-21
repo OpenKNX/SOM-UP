@@ -1,44 +1,38 @@
 #pragma once
-#include "knx.h"
-#include "OpenKNX/Module.h"
+#include "OpenKNX.h"
 
-class SoundControl;
-class SoundTrigger : public OpenKNX::Module
+//class SoundControl;
+class SoundTrigger : public OpenKNX::Channel
 {
 private:
-  // uint32_t calcParamIndex(uint16_t iParamIndex);
-  // uint16_t calcKoNumber(uint8_t iKoIndex);
-  // int8_t calcKoIndex(uint16_t iKoNumber);
-  // GroupObject *getKo(uint8_t iKoIndex);
 
-  void processInputKoTrigger(GroupObject &iKo);
-  void processInputKoLock(GroupObject &iKo);
-  void processInputKoDayNight(GroupObject &iKo);
+  void processInputKoTrigger(GroupObject &ko);
+  void processInputKoLock(GroupObject &ko);
+  void processInputKoDayNight(GroupObject &ko);
 
-  uint8_t mIndex = 0;
-  uint16_t mCurrentFile = 0;
-  uint8_t mCurrentVolume = 0;
-  uint8_t mParamPriority = 0;
-  uint8_t mParamLock = 0;
-  uint8_t mParamDayNight = 0;
-  uint8_t mParamVolumeDay = 0;
-  uint8_t mParamVolumeNight = 0;
-  uint16_t mParamFileDay = 0;
-  uint16_t mParamFileNight = 0;
-  uint32_t mParamDuration = 0;
-  uint32_t mParamRepeats = 0;
+  uint8_t _channelIndex = 0;
+  uint16_t _currentFile = 0;
+  uint8_t _currentVolume = 0;
+  uint8_t _paramPriority = 0;
+  uint8_t _paramLock = 0;
+  uint8_t _paramDayNight = 0;
+  uint8_t _paramVolumeDay = 0;
+  uint8_t _paramVolumeNight = 0;
+  uint16_t _paramFileDay = 0;
+  uint16_t _paramFileNight = 0;
+  uint32_t _paramDuration = 0;
+  uint32_t _paramRepeats = 0;
 
-  bool mParamActive = false;
-  bool mCurrentLocked = false;
-  bool mStatus = false;
+  bool _paramActive = false;
+  bool _currentLocked = false;
+  bool _status = false;
 
 public:
-  SoundTrigger(uint8_t iIndex);
-  ~SoundTrigger();
+  SoundTrigger(uint8_t index);
+  const char* name() override;
 
-  void processInputKo(GroupObject &iKo);
+  void processInputKo(GroupObject &ko);
   void setup();
-  void loop();
   void lock();
   void unlock();
   void day();
@@ -46,5 +40,5 @@ public:
   void play();
   void stop();
   void stopped();
-  void setStatus(bool iValue);
+  void setStatus(bool value);
 };

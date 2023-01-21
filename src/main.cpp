@@ -1,22 +1,16 @@
-#include "hardware.h"
-#include "HardwareDevices.h"
-
-#include "SoundControl.h"
-#include "SoundBinaryInput.h"
-#include "VirtualButtonControl.h"
-
-#include "knx.h"
 #include "OpenKNX.h"
+#include "VirtualButtonModule.h"
+#include "SoundModule.h"
+#include "SoundBinaryInputModule.h"
 
 void setup()
 {
-  const uint8_t firmwareRevision = 0;
+  const uint8_t firmwareRevision = 1;
   openknx.init(firmwareRevision);
-
-  openknx.addModule(new SoundBinaryInput());
-  openknx.addModule(new VirtualButtonControl());
-  openknx.addModule(new SoundControl());
-
+  openknx.addModule(4, new SoundBinaryInputModule());
+  openknx.addModule(3, new VirtualButtonModule());
+  openknx.addModule(2, new SoundModule());
+  //openknx.addModule(1, new Logic());
   openknx.setup();
 }
 

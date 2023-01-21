@@ -33,39 +33,39 @@ private:
   void processStatusStopped();
   void processStatusPlaying();
   void processNextPlay();
-  void play(Play &iPlay);
+  void play(Play &play);
 
-  bool mPlaying = false;
-  bool mStopping = false;
+  bool _playing = false;
+  bool _stopping = false;
 
-  bool mPlayerAvailable = false;
-  uint32_t mLastReceivedStatus = 0;
-  uint32_t mReceiveStatusSince = 0;
-  uint32_t mLastRequestStatus = 0;
-  uint8_t mReceivedStatusPos = 0;
-  uint8_t mReceivedStatusBuffer[5];
-  bool mReceivedStatus = false;
+  bool _playerAvailable = false;
+  uint32_t _lastReceivedStatus = 0;
+  uint32_t _receiveStatusSince = 0;
+  uint32_t _lastRequestStatus = 0;
+  uint8_t _receivedStatusPos = 0;
+  uint8_t _receivedStatusBuffer[5];
+  bool _receivedStatus = false;
 
 
-  Play mCurrentPlay;
-  Play mNextPlay;
-  uint8_t mLastVolume = 0;
+  Play _currentPlay;
+  Play _nextPlay;
+  uint8_t _lastVolume = 0;
 
   uint8_t calcChecksum(uint8_t *data, uint8_t len);
   bool validateChecksum(uint8_t *data, uint8_t len);
   void sendData(uint8_t *data, uint8_t len);
-  void setRepeats(uint16_t iRepeats = 1);
-  void playFileNumber(uint16_t iFile);
+  void setRepeats(uint16_t repeats = 1);
+  void playFileNumber(uint16_t file);
 
 public:
   SoundPlayer();
   ~SoundPlayer();
 
   void setup();
-  void play(uint16_t iSound, uint8_t iVolume, uint32_t iRepeats = 0, uint32_t iDuration = 0);
+  void play(uint16_t sound, uint8_t volume, uint32_t repeats = 0, uint32_t duration = 0);
   void stop(bool force = false);
   void loop();
-  void setVolume(uint8_t iVolume);
+  void setVolume(uint8_t volume);
 
   void powerOn();
   void powerOff();
