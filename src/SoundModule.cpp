@@ -49,7 +49,7 @@ void SoundModule::afterSetup()
     debug("afterSetup");
 }
 
-bool SoundModule::play(uint8_t file, uint8_t volume, uint8_t priority, uint32_t repeats, uint32_t duration, uint8_t trigger)
+bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t repeats, uint32_t duration, uint8_t trigger)
 {
     // debug("play %i/%i/%i/%i/%i/%i", file, volume, priority, repeats, duration, trigger);
 
@@ -302,13 +302,13 @@ void SoundModule::processInputKoExternalPriority(GroupObject &ko)
 
 void SoundModule::processInputKoExternalFile(GroupObject &ko)
 {
-    uint8_t file = ko.value(DPT_Value_2_Ucount);
+    uint16_t file = ko.value(DPT_Value_2_Ucount);
 
     if (file == 0)
         return stop();
 
     // invalid volume
-    if (file < 1 || file > 255)
+    if (file < 1 || file > 65535)
         return;
 
     play(file, _externalVolume, _externalPriority, false);

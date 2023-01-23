@@ -15,7 +15,7 @@ class SoundModule : public OpenKNX::Module
   public:
     SoundModule();
     virtual const char *name() override;
-    bool play(uint8_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
+    bool play(uint16_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
     void stop();
     void loop();
     void setup();
@@ -44,7 +44,7 @@ class SoundModule : public OpenKNX::Module
     bool _currentNight = false;
     bool _currentLocked = false;
     uint8_t _currentDefaultVolume = 0;
-    uint8_t _lastFile = 0;
+    uint16_t _lastFile = 0;
     uint8_t _lastPriority = 0;
     uint8_t _lastVolume = 0;
     uint8_t _lastTrigger = 0;

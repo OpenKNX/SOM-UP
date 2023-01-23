@@ -30,7 +30,7 @@ void SoundTrigger::setup()
     debug("paramVolumeNight: %i", ParamSOM_TriggerVolumeNight);
     debug("paramFileDay: %i", ParamSOM_TriggerFileDay);
     debug("paramFileNight: %i", ParamSOM_TriggerFileNight);
-    debug("paramDuration: %i", openknx.paramTimer(ParamSOM_TriggerDurationBase, ParamSOM_TriggerDurationTime));
+    debug("paramDuration: %i", ParamSOM_TriggerDurationTimeMS);
 }
 
 void SoundTrigger::processInputKo(GroupObject &ko)
@@ -123,7 +123,7 @@ void SoundTrigger::play()
         return;
     }
     debug("play");
-    setStatus(SoundModule::instance()->play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, openknx.paramTimer(ParamSOM_TriggerDurationBase, ParamSOM_TriggerDurationTime), _channelIndex));
+    setStatus(SoundModule::instance()->play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
 }
 
 void SoundTrigger::stop()
