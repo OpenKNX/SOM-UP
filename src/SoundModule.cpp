@@ -27,13 +27,13 @@ void SoundModule::setup()
     KoSOM_Lock.valueNoSend(false, DPT_Switch);
 
     // Debug
-    debug("paramScenes: %i", ParamSOM_Scenes);
-    debug("paramExternal: %i", ParamSOM_External);
-    debug("paramLock: %i", ParamSOM_Lock);
-    debug("paramDayNight: %i", ParamSOM_DayNight);
-    debug("paramVolumeDay: %i", ParamSOM_VolumeDay);
-    debug("paramVolumeNight: %i", ParamSOM_VolumeNight);
-    debug("paramVolumeDay: %i", ParamSOM_VolumeDay);
+    log("paramScenes: %i", ParamSOM_Scenes);
+    log("paramExternal: %i", ParamSOM_External);
+    log("paramLock: %i", ParamSOM_Lock);
+    log("paramDayNight: %i", ParamSOM_DayNight);
+    log("paramVolumeDay: %i", ParamSOM_VolumeDay);
+    log("paramVolumeNight: %i", ParamSOM_VolumeNight);
+    log("paramVolumeDay: %i", ParamSOM_VolumeDay);
 
     // Call dependend setup
     _player.setup();
@@ -46,24 +46,24 @@ void SoundModule::setup()
 
 void SoundModule::afterSetup()
 {
-    debug("afterSetup");
+    log("afterSetup");
 }
 
 bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t repeats, uint32_t duration, uint8_t trigger)
 {
-    // debug("play %i/%i/%i/%i/%i/%i", file, volume, priority, repeats, duration, trigger);
+    // log("play %i/%i/%i/%i/%i/%i", file, volume, priority, repeats, duration, trigger);
 
     // abort on lock
     if (_currentLocked)
     {
-        debug("play ignore -> lock");
+        log("play ignore -> lock");
         return false;
     }
 
     // skip if higher prio while playing
     if (_status && _lastPriority > priority)
     {
-        debug("play ignore -> prio");
+        log("play ignore -> prio");
         return false;
     }
 
@@ -92,12 +92,12 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
 }
 void SoundModule::stop()
 {
-    debug("stop");
+    log("stop");
     _player.stop();
 }
 void SoundModule::stopped()
 {
-    debug("stopped");
+    log("stopped");
     for (uint8_t i = 0; i < SOM_ChannelCount; i++)
     {
         SoundTrigger *lTrigger = _triggers[i];
@@ -128,7 +128,7 @@ void SoundModule::lock()
     _currentLocked = true;
     stop();
     KoSOM_Lock.value(_currentLocked, DPT_Switch);
-    debug("lock");
+    log("lock");
 }
 
 void SoundModule::unlock()
@@ -138,18 +138,18 @@ void SoundModule::unlock()
 
     _currentLocked = false;
     KoSOM_Lock.value(_currentLocked, DPT_Switch);
-    debug("unlock");
+    log("unlock");
 }
 
 void SoundModule::day()
 {
-    debug("day mode");
+    log("day mode");
     _currentNight = false;
     setDefaultVolume();
 }
 void SoundModule::night()
 {
-    debug("night mode");
+    log("night mode");
     _currentNight = true;
     setDefaultVolume();
 }
@@ -230,7 +230,7 @@ void SoundModule::processInputKoScene(GroupObject &ko)
             uint8_t sceneId = knx.paramByte(SOM_Scene0 + i);
             if (value == sceneId)
             {
-                debug("Scene %i", value);
+                log("Scene %i", value);
                 uint8_t sceneAction = knx.paramByte(SOM_SceneAction0 + i);
                 uint8_t sceneTarget = knx.paramByte(SOM_SceneTargetA0 + i);
 

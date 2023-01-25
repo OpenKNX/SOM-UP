@@ -1,16 +1,6 @@
 #pragma once
 
-//#define paramDelay(base, time) ((uint32_t)(time & 0xC000 == 0) ? : (0))
-//& ((time & 0xC000) == 0xC000) ? ((time & 0x3FFF) * 100) : (((time & 0xC000) == 0x0000) ? ((time & 0x3FFF) * 1000) : (((time & 0xC000) = 0x4000) ? ((time & 0x3FFF) * 60000) : (((time & 0xC000) == 0x8000) ? (((time & 0x3FFF) > 1000) ? (3600000 : ((time & 0x3FFF) * 3600000)) : 0 ))))
-#define paramDelay(base, time) \
-  (uint32_t)( \
-    (base == 3) ? (time * 100) : \
-    (base == 0) ? (time * 1000) : \
-    (base == 1) ? (time * 60000) : \
-    (base == 2 && time >= 1000) ? (3600000000) : \
-    (base == 2 && time < 1000) ? (3600000 * time) : \
-    0 \
-  )
+#define paramDelay(time) (uint32_t)((time & 0xC000) == 0xC000 ? (time & 0x3FFF) * 100 : (time & 0xC000) == 0x0000 ? (time & 0x3FFF) * 1000 : (time & 0xC000) == 0x4000 ? (time & 0x3FFF) * 60000 : (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : (time & 0x3FFF) * 3600000 ) : 0 )
 
 // Parameter with single occurrence
 
@@ -356,7 +346,7 @@
 // Zeit
 #define ParamSOM_TriggerDurationTime       (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime)) & SOM_TriggerDurationTimeMask)
 // Zeit (in Millisekunden)
-#define ParamSOM_TriggerDurationTimeMS     (paramDelay(ParamSOM_TriggerDurationBase, SOM_TriggerDurationTime))
+#define ParamSOM_TriggerDurationTimeMS     (paramDelay(knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime))))
 // Datei
 #define ParamSOM_TriggerFileDay            (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerFileDay)))
 // Datei
@@ -440,7 +430,7 @@
 // Zeit
 #define ParamBI_ChannelPeriodicTime       (knx.paramWord(BI_ParamCalcIndex(BI_ChannelPeriodicTime)) & BI_ChannelPeriodicTimeMask)
 // Zeit (in Millisekunden)
-#define ParamBI_ChannelPeriodicTimeMS     (paramDelay(ParamBI_ChannelPeriodicBase, ParamBI_ChannelPeriodicTime))
+#define ParamBI_ChannelPeriodicTimeMS     (paramDelay(knx.paramWord(BI_ParamCalcIndex(BI_ChannelPeriodicTime))))
 
 // deprecated
 #define BI_KoOffset 41
@@ -615,13 +605,13 @@
 // Zeit
 #define ParamLOG_StartupDelayTime          (knx.paramWord(LOG_StartupDelayTime) & LOG_StartupDelayTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_StartupDelayTimeMS        (paramDelay(ParamLOG_StartupDelayBase, ParamLOG_StartupDelayTime))
+#define ParamLOG_StartupDelayTimeMS        (paramDelay(knx.paramWord(LOG_StartupDelayTime)))
 // Zeitbasis
 #define ParamLOG_HeartbeatDelayBase        ((knx.paramByte(LOG_HeartbeatDelayBase) & LOG_HeartbeatDelayBaseMask) >> LOG_HeartbeatDelayBaseShift)
 // Zeit
 #define ParamLOG_HeartbeatDelayTime        (knx.paramWord(LOG_HeartbeatDelayTime) & LOG_HeartbeatDelayTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_HeartbeatDelayTimeMS      (paramDelay(ParamLOG_HeartbeatDelayBase, ParamLOG_HeartbeatDelayTime))
+#define ParamLOG_HeartbeatDelayTimeMS      (paramDelay(knx.paramWord(LOG_HeartbeatDelayTime)))
 // Uhrzeit und Datum nach einem Neustart vom Bus lesen
 #define ParamLOG_ReadTimeDate              ((bool)(knx.paramByte(LOG_ReadTimeDate) & LOG_ReadTimeDateMask))
 // Akustischer Signalgeber vorhanden (Buzzer)?
@@ -1457,7 +1447,7 @@
 // Zeit
 #define ParamLOG_fChannelDelayTime         (knx.paramWord(LOG_ParamCalcIndex(LOG_fChannelDelayTime)) & LOG_fChannelDelayTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fChannelDelayTimeMS       (paramDelay(ParamLOG_fChannelDelayBase, ParamLOG_fChannelDelayBase))
+#define ParamLOG_fChannelDelayTimeMS       (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fChannelDelayTime))))
 // Logik-Operation
 #define ParamLOG_fLogic                    (knx.paramByte(LOG_ParamCalcIndex(LOG_fLogic)))
 // Logik auswerten
@@ -1515,7 +1505,7 @@
 // Zeit
 #define ParamLOG_fE1RepeatTime             (knx.paramWord(LOG_ParamCalcIndex(LOG_fE1RepeatTime)) & LOG_fE1RepeatTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fE1RepeatTimeMS           (paramDelay(ParamLOG_fE1RepeatBase, ParamLOG_fE1RepeatTime))
+#define ParamLOG_fE1RepeatTimeMS           (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fE1RepeatTime))))
 // Eingang 2
 #define ParamLOG_fE2                       (knx.paramByte(LOG_ParamCalcIndex(LOG_fE2)) & LOG_fE2Mask)
 // Wert für Eingang 2 wird ermittelt durch
@@ -1543,7 +1533,7 @@
 // Zeit
 #define ParamLOG_fE2RepeatTime             (knx.paramWord(LOG_ParamCalcIndex(LOG_fE2RepeatTime)) & LOG_fE2RepeatTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fE2RepeatTimeMS           (paramDelay(ParamLOG_fE2RepeatBase, ParamLOG_fE2RepeatTime))
+#define ParamLOG_fE2RepeatTimeMS           (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fE2RepeatTime))))
 // Zeitbezug
 #define ParamLOG_fTd1DuskDawn              ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd1DuskDawn)) & LOG_fTd1DuskDawnMask) >> LOG_fTd1DuskDawnShift)
 // Zeitbezug
@@ -2045,13 +2035,13 @@
 // Zeit
 #define ParamLOG_fOStairtimeTime           (knx.paramWord(LOG_ParamCalcIndex(LOG_fOStairtimeTime)) & LOG_fOStairtimeTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fOStairtimeTimeMS         (paramDelay(ParamLOG_fOStairtimeBase, ParamLOG_fOStairtimeTime))
+#define ParamLOG_fOStairtimeTimeMS         (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fOStairtimeTime))))
 // Zeitbasis
 #define ParamLOG_fOBlinkBase               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fOBlinkBase)) & LOG_fOBlinkBaseMask) >> LOG_fOBlinkBaseShift)
 // Zeit
 #define ParamLOG_fOBlinkTime               (knx.paramWord(LOG_ParamCalcIndex(LOG_fOBlinkTime)) & LOG_fOBlinkTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fOBlinkTimeMS             (paramDelay(ParamLOG_fOBlinkBase, ParamLOG_fOBlinkTime))
+#define ParamLOG_fOBlinkTimeMS             (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fOBlinkTime))))
 // Ausgang schaltet zeitverzögert
 #define ParamLOG_fODelay                   ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fODelay)) & LOG_fODelayMask))
 // Erneutes EIN führt zu
@@ -2067,13 +2057,13 @@
 // Zeit
 #define ParamLOG_fODelayOnTime             (knx.paramWord(LOG_ParamCalcIndex(LOG_fODelayOnTime)) & LOG_fODelayOnTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fODelayOnTimeMS           (paramDelay(ParamLOG_fODelayOnBase, ParamLOG_fODelayOnTime))
+#define ParamLOG_fODelayOnTimeMS           (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fODelayOnTime))))
 // Zeitbasis
 #define ParamLOG_fODelayOffBase            ((knx.paramByte(LOG_ParamCalcIndex(LOG_fODelayOffBase)) & LOG_fODelayOffBaseMask) >> LOG_fODelayOffBaseShift)
 // Zeit
 #define ParamLOG_fODelayOffTime            (knx.paramWord(LOG_ParamCalcIndex(LOG_fODelayOffTime)) & LOG_fODelayOffTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fODelayOffTimeMS          (paramDelay(ParamLOG_fODelayOffBase, ParamLOG_fODelayOffTime))
+#define ParamLOG_fODelayOffTimeMS          (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fODelayOffTime))))
 // Ausgang hat eine Treppenlichtfunktion
 #define ParamLOG_fOStair                   ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fOStair)) & LOG_fOStairMask))
 // Treppenlicht kann verlängert werden
@@ -2089,13 +2079,13 @@
 // Zeit
 #define ParamLOG_fORepeatOnTime            (knx.paramWord(LOG_ParamCalcIndex(LOG_fORepeatOnTime)) & LOG_fORepeatOnTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fORepeatOnTimeMS          (paramDelay(ParamLOG_fORepeatOnBase, ParamLOG_fORepeatOnTime))
+#define ParamLOG_fORepeatOnTimeMS          (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fORepeatOnTime))))
 // Zeitbasis
 #define ParamLOG_fORepeatOffBase           ((knx.paramByte(LOG_ParamCalcIndex(LOG_fORepeatOffBase)) & LOG_fORepeatOffBaseMask) >> LOG_fORepeatOffBaseShift)
 // Zeit
 #define ParamLOG_fORepeatOffTime           (knx.paramWord(LOG_ParamCalcIndex(LOG_fORepeatOffTime)) & LOG_fORepeatOffTimeMask)
 // Zeit (in Millisekunden)
-#define ParamLOG_fORepeatOffTimeMS         (paramDelay(ParamLOG_fORepeatOffBase, ParamLOG_fORepeatOffTime))
+#define ParamLOG_fORepeatOffTimeMS         (paramDelay(knx.paramWord(LOG_ParamCalcIndex(LOG_fORepeatOffTime))))
 // DPT für Ausgang
 #define ParamLOG_fODpt                     (knx.paramByte(LOG_ParamCalcIndex(LOG_fODpt)))
 // Wert für EIN senden?
@@ -2730,7 +2720,7 @@
 // Zeit
 #define ParamBTN_ChannelStatusFallbackTime (knx.paramWord(BTN_ParamCalcIndex(BTN_ChannelStatusFallbackTime)) & BTN_ChannelStatusFallbackTimeMask)
 // Zeit (in Millisekunden)
-#define ParamBTN_ChannelStatusFallbackTimeMS (paramDelay(ParamBTN_ChannelStatusFallbackBase, ParamBTN_ChannelStatusFallbackTime))
+#define ParamBTN_ChannelStatusFallbackTimeMS (paramDelay(knx.paramWord(BTN_ParamCalcIndex(BTN_ChannelStatusFallbackTime))))
 
 // deprecated
 #define BTN_KoOffset 200

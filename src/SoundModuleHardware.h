@@ -19,6 +19,11 @@
 #define BINARY_INPUT_C_PIN 6
 #define BINARY_INPUT_D_PIN 7
 #define HARDWARE_NAME "MASIFI-SENSOR-BREAKOUT"
+
+#define SmartMF_HardwareVariant_PIN 26
+#define SmartMF_HardwareRevision_PIN1 10
+#define SmartMF_HardwareRevision_PIN2 11
+#define SmartMF_HardwareRevision_PIN3 12
 #endif
 
 #ifdef BOARD_SOM_UP
@@ -39,4 +44,8 @@
 #define BINARY_INPUT_C_PIN 19
 #define BINARY_INPUT_D_PIN 18
 #define HARDWARE_NAME "SOM-UP"
+
+#define SmartMF_HardwareRevision_PIN1 10
+#define SmartMF_HardwareRevision_PIN2 11
+#define SmartMF_HardwareRevision_PIN3 12
 #endif
