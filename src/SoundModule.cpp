@@ -330,7 +330,13 @@ void SoundModule::setDefaultVolume()
     _player.setVolume(_currentDefaultVolume);
 }
 
-void SoundModule::onSafePinInterruptHandler()
+void SoundModule::savePower()
 {
     _player.powerOff();
+}
+
+bool SoundModule::restorePower()
+{
+    _player.powerOn();
+    return true;
 }
