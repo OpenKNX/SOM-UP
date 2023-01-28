@@ -16,9 +16,6 @@ void setup()
     openknx.addModule(2, new SoundModule());
     openknx.addModule(1, new Logic());
     openknx.setup();
-
-    openknx.log("SmartMF", "Hardware Variant: %i", smartmf.hardwareVariant());
-    openknx.log("SmartMF", "Hardware Revision: %i", smartmf.hardwareRevision());
 }
 
 void loop()
