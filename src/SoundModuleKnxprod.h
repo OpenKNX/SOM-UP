@@ -2770,7 +2770,7 @@
 // 
 #define KoBTN_ChannelOutput6            (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoChannelOutput6)))
 
-#define MAIN_OpenKnxId 0xA3
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 5
+#define MAIN_OpenKnxId 0xA2
+#define MAIN_ApplicationNumber 40
+#define MAIN_ApplicationVersion 1
 #define MAIN_OrderNumber "SOM-UP"
