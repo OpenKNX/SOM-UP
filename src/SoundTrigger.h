@@ -1,7 +1,6 @@
 #pragma once
 #include "OpenKNX.h"
 
-//class SoundControl;
 class SoundTrigger : public OpenKNX::Channel
 {
 private:

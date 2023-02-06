@@ -8,15 +8,19 @@ SoundPlayer::SoundPlayer()
 void SoundPlayer::powerOn()
 {
 #ifdef PLAYER_PWR
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "poweron player");
+#endif
     digitalWrite(PLAYER_PWR, HIGH);
 #endif
     _powerOff = false;
 }
 void SoundPlayer::powerOff()
 {
-    openknx.log("SoundPlayer", "poweroff player");
 #ifdef PLAYER_PWR
+#ifdef DEBUG_SOUND
+    openknx.log("SoundPlayer", "poweroff player");
+#endif
     digitalWrite(PLAYER_PWR, LOW);
 #endif
     _lastVolume = 0;
@@ -38,19 +42,26 @@ void SoundPlayer::setup()
 #endif
 
     // setup hardware serial
+#ifdef PLAYER_PWR
     openknx.log("SoundPlayer", "setup start");
+#endif
     Serial2.setRX(PLAYER_UART_RX_PIN);
     Serial2.setTX(PLAYER_UART_TX_PIN);
     Serial2.begin(9600);
 
     delay(50);
     stop(true);
+
+#ifdef PLAYER_PWR
     openknx.log("SoundPlayer", "setup ready");
+#endif
 }
 
 void SoundPlayer::play(uint16_t file, uint8_t volume, uint32_t repeats, uint32_t duration)
 {
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "play %i/%i/%i/%i", file, volume, repeats, duration);
+#endif
 
     _nextPlay.file = file;
     _nextPlay.volume = volume;
@@ -86,8 +97,10 @@ void SoundPlayer::setVolume(uint8_t volume)
     if (volume == _lastVolume)
         return;
 
-    // update volume
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "setVolume %i", volume);
+#endif
+    // update volume
     _lastVolume = volume;
 
     uint8_t data[] = {0xAA, 0x13, 0x01, volume};
@@ -112,7 +125,9 @@ void SoundPlayer::processNextPlay()
     if (_nextPlay.file == 0)
         return;
 
-    openknx.log("SoundPlayer", "processNextPlay%i (%i)", _nextPlay.file, (millis() - _nextPlay.playMillis));
+#ifdef DEBUG_SOUND
+    openknx.log("SoundPlayer", "processNextPlay %i (%i)", _nextPlay.file, (millis() - _nextPlay.playMillis));
+#endif
 
     play(_nextPlay);
 
@@ -134,7 +149,9 @@ void SoundPlayer::processDuration()
     if (!delayCheck(_currentPlay.playingMillis, _currentPlay.duration))
         return;
 
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "processDuration %i/%i/%i", millis(), _currentPlay.playingMillis, _currentPlay.duration);
+#endif
     stop();
 }
 
@@ -223,7 +240,9 @@ void SoundPlayer::processStatusStopped()
     if (!_playing)
         return;
 
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "processStatusStopped (%i)", (millis() - _currentPlay.playingMillis));
+#endif
 
     if (_nextPlay.file == 0)
         SoundModule::instance()->stopped();
@@ -244,7 +263,9 @@ void SoundPlayer::processStatusPlaying()
     if (_playing)
         return;
 
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "processStatusPlaying (%i)", (millis() - _currentPlay.playMillis));
+#endif
 
     _playing = true;
     _currentPlay.playingMillis = millis();
@@ -261,7 +282,10 @@ void SoundPlayer::stop(bool force)
             return;
     }
 
+#ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "stop");
+#endif
+
     uint8_t data[] = {0xAA, 0x04, 0x00};
     sendData(data, 3);
 

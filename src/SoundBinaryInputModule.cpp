@@ -45,7 +45,6 @@ void SoundBinaryInputModule::processHardwareInputs()
         return;
 
     digitalWrite(BINARY_INPUT_PULSE, true);
-    //busy_wait_us(BINARY_INPUT_PULSE_WAIT_TIME);
     delayMicroseconds(BINARY_INPUT_PULSE_WAIT_TIME);
 #endif
 

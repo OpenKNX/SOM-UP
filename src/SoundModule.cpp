@@ -51,8 +51,6 @@ void SoundModule::afterSetup()
 
 bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t repeats, uint32_t duration, uint8_t trigger)
 {
-    // log("play %i/%i/%i/%i/%i/%i", file, volume, priority, repeats, duration, trigger);
-
     // abort on lock
     if (_currentLocked)
     {
@@ -74,6 +72,8 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
     // reset states
     SoundModule::stopped();
 
+    log("play %i/%i/%i/%i/%i/%i", file, volume, priority, repeats, duration, trigger);
+
     // play music
     _player.play(file, volume, repeats, duration);
 
@@ -90,11 +90,13 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
 
     return true;
 }
+
 void SoundModule::stop()
 {
     log("stop");
     _player.stop();
 }
+
 void SoundModule::stopped()
 {
     log("stopped");

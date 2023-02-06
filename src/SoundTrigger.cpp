@@ -20,7 +20,8 @@ void SoundTrigger::setup()
     KoSOM_TriggerStatus.valueNoSend(false, DPT_Switch);
     KoSOM_TriggerLock.valueNoSend(false, DPT_Switch);
 
-    // Debug
+// Debug
+#ifdef DEBUG_SOUND
     log("paramActive: %i", ParamSOM_TriggerState);
     log("paramRepeats: %i", ParamSOM_TriggerRepeats);
     log("paramPriority: %i", ParamSOM_TriggerPriority);
@@ -30,12 +31,8 @@ void SoundTrigger::setup()
     log("paramVolumeNight: %i", ParamSOM_TriggerVolumeNight);
     log("paramFileDay: %i", ParamSOM_TriggerFileDay);
     log("paramFileNight: %i", ParamSOM_TriggerFileNight);
-    log("paramDuration1: %i", knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationBase)) & 0xC0);
-    log("paramDurationB: %i", knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationBase)));
-    log("paramDurationT: %i", knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime)));
-    log("paramDurationB: %i", ParamSOM_TriggerDurationBase);
-    log("paramDurationT: %i", ParamSOM_TriggerDurationTime);
     log("paramDurationMS: %i", ParamSOM_TriggerDurationTimeMS);
+#endif
 }
 
 void SoundTrigger::processInputKo(GroupObject &ko)
