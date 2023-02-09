@@ -19,6 +19,10 @@ class SoundModule : public OpenKNX::Module
     const char *name() override;
     const char *version() override;
     void processInputKo(GroupObject &ko) override;
+    void processBeforeRestart() override;
+    void processBeforeTablesUnload() override;
+    void savePower() override;
+    bool restorePower() override;
     bool play(uint16_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
     void stop();
     void stopped();
@@ -37,8 +41,6 @@ class SoundModule : public OpenKNX::Module
     void processInputKoExternalPriority(GroupObject &ko);
     void processInputKoExternalFile(GroupObject &ko);
     void setDefaultVolume();
-    void savePower() override;
-    bool restorePower() override;
     SoundPlayer _player;
     SoundTrigger *_triggers[SOM_ChannelCount];
     bool _status = false;

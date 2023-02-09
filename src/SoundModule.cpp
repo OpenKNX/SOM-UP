@@ -332,6 +332,16 @@ void SoundModule::setDefaultVolume()
     _player.setVolume(_currentDefaultVolume);
 }
 
+void SoundModule::processBeforeRestart()
+{
+    _player.stop();
+}
+
+void SoundModule::processBeforeTablesUnload()
+{
+    _player.stop();
+}
+
 void SoundModule::savePower()
 {
     _player.powerOff();
