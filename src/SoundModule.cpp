@@ -14,7 +14,12 @@ SoundModule *SoundModule::instance()
 
 const char *SoundModule::name()
 {
-    return "SoundModule";
+    return "Sound";
+}
+
+const char *SoundModule::version()
+{
+    return "0.0dev";
 }
 
 void SoundModule::setup()
@@ -42,11 +47,6 @@ void SoundModule::setup()
         _triggers[i] = new SoundTrigger(i);
         _triggers[i]->setup();
     }
-}
-
-void SoundModule::afterSetup()
-{
-    log("afterSetup");
 }
 
 bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t repeats, uint32_t duration, uint8_t trigger)

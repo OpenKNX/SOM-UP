@@ -6,18 +6,17 @@ class SoundBinaryInputModule : public OpenKNX::Module
 {
 
   public:
-    SoundBinaryInputModule();
-
-    virtual const char *name() override;
-    void loop();
-    void setup();
+    const char *name() override;
+    const char *version() override;
+    void loop() override;
+    void setup() override;
 
   private:
     void processHardwareInputs();
 
     uint32_t _lastHardwareQuery = 0;
 
-    BinaryInputChannel *_binaryInputChannels[BI_ChannelCount] = {
+    BinaryInputChannel *_channels[BI_ChannelCount] = {
         new BinaryInputChannel(0),
         new BinaryInputChannel(1),
         new BinaryInputChannel(2),

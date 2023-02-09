@@ -14,18 +14,18 @@ class SoundModule : public OpenKNX::Module
 
   public:
     SoundModule();
+    void loop() override;
+    void setup() override;
     const char *name() override;
+    const char *version() override;
+    void processInputKo(GroupObject &ko) override;
     bool play(uint16_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
     void stop();
-    void loop();
-    void setup();
     void stopped();
     void lock();
     void unlock();
     void day();
     void night();
-    void afterSetup();
-    void processInputKo(GroupObject &ko);
     static SoundModule *instance();
 
   private:
