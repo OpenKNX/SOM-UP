@@ -8,9 +8,7 @@ SoundTrigger::SoundTrigger(uint8_t index)
 
 const char *SoundTrigger::name()
 {
-    char *buffer = new char[17];
-    sprintf(buffer, "SoundTrigger<%i>", _channelIndex + 1);
-    return buffer;
+    return "SoundTrigger";
 }
 
 void SoundTrigger::setup()

@@ -9,7 +9,6 @@ private:
   void processInputKoLock(GroupObject &ko);
   void processInputKoDayNight(GroupObject &ko);
 
-  uint8_t _channelIndex = 0;
   uint16_t _currentFile = 0;
   uint8_t _currentVolume = 0;
   uint8_t _paramPriority = 0;
