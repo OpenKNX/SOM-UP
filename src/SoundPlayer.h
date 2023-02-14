@@ -57,9 +57,6 @@ class SoundPlayer
     void playFileNumber(uint16_t file);
 
   public:
-    SoundPlayer();
-    ~SoundPlayer();
-
     void setup();
     void play(uint16_t sound, uint8_t volume, uint32_t repeats = 0, uint32_t duration = 0);
     void stop(bool force = false);

@@ -1,10 +1,6 @@
 #include "SoundPlayer.h"
 #include "SoundModule.h"
 
-SoundPlayer::SoundPlayer()
-{
-}
-
 void SoundPlayer::powerOn()
 {
 #ifdef PLAYER_PWR
@@ -13,6 +9,7 @@ void SoundPlayer::powerOn()
 #endif
     digitalWrite(PLAYER_PWR, HIGH);
 #endif
+    delay(2000);
     _powerOff = false;
 }
 void SoundPlayer::powerOff()
@@ -23,6 +20,7 @@ void SoundPlayer::powerOff()
 #endif
     digitalWrite(PLAYER_PWR, LOW);
 #endif
+    processStatusStopped();
     _lastVolume = 0;
     _playing = false;
     _stopping = false;
@@ -59,6 +57,12 @@ void SoundPlayer::setup()
 
 void SoundPlayer::play(uint16_t file, uint8_t volume, uint32_t repeats, uint32_t duration)
 {
+    if(_powerOff) {
+        openknx.log("_powerOff", "%i", _powerOff);
+        SoundModule::instance()->stopped();
+        return;
+    }
+
 #ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "play %i/%i/%i/%i", file, volume, repeats, duration);
 #endif
