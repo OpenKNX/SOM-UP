@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include "OpenKNX/Led.h"
 
 #define PLAYER_STATUS_WATCHDOG 1000
 #define PLAYER_STATUS_PLAYING 1
@@ -33,6 +34,8 @@ class SoundPlayer
     void processStatusPlaying();
     void processNextPlay();
     void play(Play &play);
+
+    OpenKNX::Led _statusLed;
 
     bool _powerOff = false;
     bool _playing = false;

@@ -112,14 +112,9 @@ void SoundModule::stopped()
 
 void SoundModule::loop()
 {
-    if (!knx.configured())
-        return;
-
     _player.loop();
     for (uint8_t i = 0; i < SOM_ChannelCount; i++)
-    {
         _triggers[i]->loop();
-    }
 }
 
 void SoundModule::lock()

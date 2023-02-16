@@ -3,6 +3,7 @@
 
 void SoundPlayer::powerOn()
 {
+    _statusLed.powerSave(false);
 #ifdef PLAYER_PWR
 #ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "poweron player");
@@ -14,6 +15,7 @@ void SoundPlayer::powerOn()
 }
 void SoundPlayer::powerOff()
 {
+    _statusLed.powerSave(true);
 #ifdef PLAYER_PWR
 #ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "poweroff player");
@@ -31,7 +33,7 @@ void SoundPlayer::setup()
 {
 
 #ifdef PLAYER_BUSY_PIN
-    pinMode(PLAYER_BUSY_PIN, OUTPUT);
+    _statusLed.init(PLAYER_BUSY_PIN);
 #endif
 
 #ifdef PLAYER_PWR
@@ -57,7 +59,8 @@ void SoundPlayer::setup()
 
 void SoundPlayer::play(uint16_t file, uint8_t volume, uint32_t repeats, uint32_t duration)
 {
-    if(_powerOff) {
+    if (_powerOff)
+    {
         openknx.log("_powerOff", "%i", _powerOff);
         SoundModule::instance()->stopped();
         return;
@@ -113,6 +116,7 @@ void SoundPlayer::setVolume(uint8_t volume)
 
 void SoundPlayer::loop()
 {
+    _statusLed.loop();
     requestStatus();
     processStatus();
     processDuration();
@@ -235,14 +239,13 @@ void SoundPlayer::processStatus()
 
 void SoundPlayer::processStatusStopped()
 {
-#ifdef PLAYER_BUSY_PIN
-    digitalWrite(PLAYER_BUSY_PIN, LOW);
-#endif
     _receivedStatus = false;
 
     // Already Stopped
     if (!_playing)
         return;
+
+    _statusLed.off();
 
 #ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "processStatusStopped (%i)", (millis() - _currentPlay.playingMillis));
@@ -258,14 +261,13 @@ void SoundPlayer::processStatusStopped()
 
 void SoundPlayer::processStatusPlaying()
 {
-#ifdef PLAYER_BUSY_PIN
-    digitalWrite(PLAYER_BUSY_PIN, HIGH);
-#endif
     _receivedStatus = true;
 
     // Already Playing
     if (_playing)
         return;
+        
+    _statusLed.on();
 
 #ifdef DEBUG_SOUND
     openknx.log("SoundPlayer", "processStatusPlaying (%i)", (millis() - _currentPlay.playMillis));
