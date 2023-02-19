@@ -6,7 +6,7 @@ SoundTrigger::SoundTrigger(uint8_t index)
     _channelIndex = index;
 }
 
-const char *SoundTrigger::name()
+const std::string SoundTrigger::name()
 {
     return "SoundTrigger";
 }

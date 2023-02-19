@@ -1,11 +1,11 @@
 #include "SoundBinaryInputModule.h"
 
-const char *SoundBinaryInputModule::name()
+const std::string SoundBinaryInputModule::name()
 {
     return "SoundBinaryInput";
 }
 
-const char *SoundBinaryInputModule::version()
+const std::string SoundBinaryInputModule::version()
 {
     return "0.0dev";
 }

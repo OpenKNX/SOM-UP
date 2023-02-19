@@ -27,7 +27,7 @@ private:
 
 public:
   SoundTrigger(uint8_t index);
-  const char* name() override;
+  const std::string name() override;
 
   void processInputKo(GroupObject &ko);
   void setup();

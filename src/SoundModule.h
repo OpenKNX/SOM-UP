@@ -15,9 +15,11 @@ class SoundModule : public OpenKNX::Module
   public:
     SoundModule();
     void loop() override;
+    void loop2() override;
     void setup() override;
-    const char *name() override;
-    const char *version() override;
+    bool usesSecCore() override;
+    const std::string name() override;
+    const std::string version() override;
     void processInputKo(GroupObject &ko) override;
     void processBeforeRestart() override;
     void processBeforeTablesUnload() override;

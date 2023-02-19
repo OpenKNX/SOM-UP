@@ -6,8 +6,8 @@ class SoundBinaryInputModule : public OpenKNX::Module
 {
 
   public:
-    const char *name() override;
-    const char *version() override;
+    const std::string name() override;
+    const std::string version() override;
     void loop() override;
     void setup() override;
 

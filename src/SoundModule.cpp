@@ -12,12 +12,12 @@ SoundModule *SoundModule::instance()
     return SoundModule::_instance;
 }
 
-const char *SoundModule::name()
+const std::string SoundModule::name()
 {
     return "Sound";
 }
 
-const char *SoundModule::version()
+const std::string SoundModule::version()
 {
     return "0.0dev";
 }
@@ -115,6 +115,16 @@ void SoundModule::loop()
     _player.loop();
     for (uint8_t i = 0; i < SOM_ChannelCount; i++)
         _triggers[i]->loop();
+}
+
+void SoundModule::loop2()
+{
+
+}
+
+bool SoundModule::usesSecCore()
+{
+    return false;
 }
 
 void SoundModule::lock()
