@@ -17,7 +17,7 @@ class SoundModule : public OpenKNX::Module
     void loop() override;
     void loop2() override;
     void setup() override;
-    bool usesSecCore() override;
+    bool usesDualCore() override;
     const std::string name() override;
     const std::string version() override;
     void processInputKo(GroupObject &ko) override;

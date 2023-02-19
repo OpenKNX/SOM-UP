@@ -122,7 +122,7 @@ void SoundModule::loop2()
 
 }
 
-bool SoundModule::usesSecCore()
+bool SoundModule::usesDualCore()
 {
     return false;
 }
