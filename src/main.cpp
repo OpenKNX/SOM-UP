@@ -16,10 +16,11 @@ void setup()
     openknx.addModule(2, new SoundModule());
     openknx.addModule(1, new Logic());
     openknx.setup();
+
+    openknx.hardware.progLed.pulsing();
 }
 
 void loop()
 {
     openknx.loop();
-    // fatalError(3, "Alles Doof");
 }
