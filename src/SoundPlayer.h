@@ -34,6 +34,7 @@ class SoundPlayer
     void processStatusPlaying();
     void processNextPlay();
     void play(Play &play);
+    std::string logPrefix();
 
     OpenKNX::Led _statusLed;
 

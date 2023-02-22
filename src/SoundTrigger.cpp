@@ -18,19 +18,17 @@ void SoundTrigger::setup()
     KoSOM_TriggerStatus.valueNoSend(false, DPT_Switch);
     KoSOM_TriggerLock.valueNoSend(false, DPT_Switch);
 
-// Debug
-#ifdef DEBUG_SOUND
-    log("paramActive: %i", ParamSOM_TriggerState);
-    log("paramRepeats: %i", ParamSOM_TriggerRepeats);
-    log("paramPriority: %i", ParamSOM_TriggerPriority);
-    log("paramLock: %i", ParamSOM_TriggerLock);
-    log("paramDayNight: %i", ParamSOM_TriggerDayNight);
-    log("paramVolumeDay: %i", ParamSOM_TriggerVolumeDay);
-    log("paramVolumeNight: %i", ParamSOM_TriggerVolumeNight);
-    log("paramFileDay: %i", ParamSOM_TriggerFileDay);
-    log("paramFileNight: %i", ParamSOM_TriggerFileNight);
-    log("paramDurationMS: %i", ParamSOM_TriggerDurationTimeMS);
-#endif
+    // Debug
+    logTraceP("paramActive: %i", ParamSOM_TriggerState);
+    logTraceP("paramRepeats: %i", ParamSOM_TriggerRepeats);
+    logTraceP("paramPriority: %i", ParamSOM_TriggerPriority);
+    logTraceP("paramLock: %i", ParamSOM_TriggerLock);
+    logTraceP("paramDayNight: %i", ParamSOM_TriggerDayNight);
+    logTraceP("paramVolumeDay: %i", ParamSOM_TriggerVolumeDay);
+    logTraceP("paramVolumeNight: %i", ParamSOM_TriggerVolumeNight);
+    logTraceP("paramFileDay: %i", ParamSOM_TriggerFileDay);
+    logTraceP("paramFileNight: %i", ParamSOM_TriggerFileNight);
+    logTraceP("paramDurationMS: %i", ParamSOM_TriggerDurationTimeMS);
 }
 
 void SoundTrigger::processInputKo(GroupObject &ko)
@@ -88,7 +86,7 @@ void SoundTrigger::lock()
     _currentLocked = true;
     stop();
     KoSOM_TriggerLock.value(_currentLocked, DPT_Switch);
-    log("lock");
+    logInfoP("lock");
 }
 
 void SoundTrigger::unlock()
@@ -98,19 +96,19 @@ void SoundTrigger::unlock()
 
     _currentLocked = false;
     KoSOM_TriggerLock.value(_currentLocked, DPT_Switch);
-    log("unlock");
+    logInfoP("unlock");
 }
 
 void SoundTrigger::day()
 {
-    log("day mode");
+    logInfoP("day mode");
     _currentVolume = ParamSOM_TriggerVolumeDay;
     _currentFile = ParamSOM_TriggerFileDay;
 }
 
 void SoundTrigger::night()
 {
-    log("night mode");
+    logInfoP("night mode");
     _currentVolume = ParamSOM_TriggerVolumeNight;
     _currentFile = ParamSOM_TriggerFileNight;
 }
@@ -119,10 +117,10 @@ void SoundTrigger::play()
 {
     if (_currentLocked)
     {
-        log("play ignored (locked)");
+        logInfoP("play ignored (locked)");
         return;
     }
-    log("play");
+    logInfoP("play");
     setStatus(SoundModule::instance()->play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
 }
 
@@ -132,7 +130,7 @@ void SoundTrigger::stop()
     if (!_status)
         return;
 
-    log("stop");
+    logInfoP("stop");
     setStatus(false);
     SoundModule::instance()->stop();
 }
