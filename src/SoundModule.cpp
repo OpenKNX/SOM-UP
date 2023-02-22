@@ -70,10 +70,10 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
         volume = _currentDefaultVolume;
 
     // reset states
-    SoundModule::stopped();
+    if(_status)
+        SoundModule::stopped();
 
-    logInfoP("play");
-    logDebugP("  with %i/%i/%i/%i/%i/%i", file, volume, priority, repeats, duration, trigger);
+    logInfoP("play: file: %i  vol: %i  trigger: %i", file, volume, trigger);
 
     // play music
     _player.play(file, volume, repeats, duration);
