@@ -121,7 +121,9 @@ void SoundTrigger::play()
         return;
     }
     logInfoP("play");
+    logIndentUp();
     setStatus(SoundModule::instance()->play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
+    logIndentDown();
 }
 
 void SoundTrigger::stop()

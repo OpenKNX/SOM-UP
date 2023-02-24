@@ -73,7 +73,8 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
     if(_status)
         SoundModule::stopped();
 
-    logInfoP("play: file: %i  vol: %i  trigger: %i", file, volume, trigger);
+    logInfoP("play: file: %i  volume: %i:", file, volume);
+    logIndentUp();
 
     // play music
     _player.play(file, volume, repeats, duration);
@@ -89,6 +90,7 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
     _lastPriority = priority;
     _lastTrigger = trigger;
 
+    logIndentDown();
     return true;
 }
 
