@@ -12,11 +12,11 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
-                  <Enumeration Text="Externes KO" Value="0" Id="%AID%_PT-BTNInputs_EN-0" />
-                  <Enumeration Text="Binäreingang A" Value="41" Id="%AID%_PT-BTNInputs_EN-41" />
-                  <Enumeration Text="Binäreingang B" Value="42" Id="%AID%_PT-BTNInputs_EN-42" />
-                  <Enumeration Text="Binäreingang C" Value="43" Id="%AID%_PT-BTNInputs_EN-43" />
-                  <Enumeration Text="Binäreingang D" Value="44" Id="%AID%_PT-BTNInputs_EN-44" />
+                  <Enumeration Text="Externes KO" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang A" Value="41" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang B" Value="42" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang C" Value="43" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang D" Value="44" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMVolume" Name="SOMVolume">
@@ -27,62 +27,62 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMLock" Name="SOMLock">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%AID%_PT-SOMLock_EN-0" />
-                  <Enumeration Text="gesperrt (1) / nicht gesperrt (0)" Value="1" Id="%AID%_PT-SOMLock_EN-1" />
-                  <Enumeration Text="gesperrt (0) / nicht gesperrt (1)" Value="2" Id="%AID%_PT-SOMLock_EN-2" />
+                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
+                  <Enumeration Text="gesperrt (1) / nicht gesperrt (0)" Value="1" Id="%ENID%" />
+                  <Enumeration Text="gesperrt (0) / nicht gesperrt (1)" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMDayNight" Name="SOMDayNight">
                 <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="%AID%_PT-SOMDayNightk_EN-0" />
-                  <Enumeration Text="Tag (1) / Nacht (0)" Value="1" Id="%AID%_PT-SOMDayNightk_EN-1" />
-                  <Enumeration Text="Tag (0) / Nacht (1)" Value="2" Id="%AID%_PT-SOMDayNightk_EN-2" />
+                  <Enumeration Text="nicht aktiv" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Tag (1) / Nacht (0)" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Tag (0) / Nacht (1)" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMPriority" Name="SOMPriority">
                 <TypeRestriction Base="Value" SizeInBit="3">
-                  <Enumeration Text="Sehr Hoch" Value="5" Id="%AID%_PT-Priority_EN-5" />
-                  <Enumeration Text="Hoch" Value="4" Id="%AID%_PT-Priority_EN-4" />
-                  <Enumeration Text="Normal" Value="3" Id="%AID%_PT-Priority_EN-3" />
-                  <Enumeration Text="Niedrig" Value="2" Id="%AID%_PT-Priority_EN-2" />
-                  <Enumeration Text="Sehr Niedrig" Value="1" Id="%AID%_PT-Priority_EN-1" />
+                  <Enumeration Text="Sehr Hoch" Value="5" Id="%ENID%" />
+                  <Enumeration Text="Hoch" Value="4" Id="%ENID%" />
+                  <Enumeration Text="Normal" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Niedrig" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Sehr Niedrig" Value="1" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SceneAction" Name="SceneAction">
                 <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="Starte" Value="1" Id="%AID%_PT-SceneAction_EN-1" />
-                  <Enumeration Text="Stoppe" Value="2" Id="%AID%_PT-SceneAction_EN-2" />
-                  <Enumeration Text="Sperre" Value="3" Id="%AID%_PT-SceneAction_EN-3" />
-                  <Enumeration Text="Entsperre" Value="4" Id="%AID%_PT-SceneAction_EN-4" />
+                  <Enumeration Text="Starte" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Stoppe" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Sperre" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Entsperre" Value="4" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SceneTargetA" Name="SceneTargetA">
                 <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="Zentral" Value="255" Id="%AID%_PT-SceneTargetA_EN-255" />
-                  <Enumeration Text="Auslöser 1" Value="0" Id="%AID%_PT-SceneTargetA_EN-0" />
-                  <Enumeration Text="Auslöser 2" Value="1" Id="%AID%_PT-SceneTargetA_EN-1" />
-                  <Enumeration Text="Auslöser 3" Value="2" Id="%AID%_PT-SceneTargetA_EN-2" />
-                  <Enumeration Text="Auslöser 4" Value="3" Id="%AID%_PT-SceneTargetA_EN-3" />
-                  <Enumeration Text="Auslöser 5" Value="4" Id="%AID%_PT-SceneTargetA_EN-4" />
-                  <Enumeration Text="Auslöser 6" Value="5" Id="%AID%_PT-SceneTargetA_EN-5" />
-                  <Enumeration Text="Auslöser 7" Value="6" Id="%AID%_PT-SceneTargetA_EN-6" />
-                  <Enumeration Text="Auslöser 8" Value="7" Id="%AID%_PT-SceneTargetA_EN-7" />
-                  <Enumeration Text="Auslöser 9" Value="8" Id="%AID%_PT-SceneTargetA_EN-8" />
-                  <Enumeration Text="Auslöser 10" Value="9" Id="%AID%_PT-SceneTargetA_EN-9" />
+                  <Enumeration Text="Zentral" Value="255" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 1" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 2" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 3" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 4" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 5" Value="4" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 6" Value="5" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 7" Value="6" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 8" Value="7" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 9" Value="8" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 10" Value="9" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SceneTargetB" Name="SceneTargetB">
                 <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="Auslöser 1" Value="0" Id="%AID%_PT-SceneTargetB_EN-0" />
-                  <Enumeration Text="Auslöser 2" Value="1" Id="%AID%_PT-SceneTargetB_EN-1" />
-                  <Enumeration Text="Auslöser 3" Value="2" Id="%AID%_PT-SceneTargetB_EN-2" />
-                  <Enumeration Text="Auslöser 4" Value="3" Id="%AID%_PT-SceneTargetB_EN-3" />
-                  <Enumeration Text="Auslöser 5" Value="4" Id="%AID%_PT-SceneTargetB_EN-4" />
-                  <Enumeration Text="Auslöser 6" Value="5" Id="%AID%_PT-SceneTargetB_EN-5" />
-                  <Enumeration Text="Auslöser 7" Value="6" Id="%AID%_PT-SceneTargetB_EN-6" />
-                  <Enumeration Text="Auslöser 8" Value="7" Id="%AID%_PT-SceneTargetB_EN-7" />
-                  <Enumeration Text="Auslöser 9" Value="8" Id="%AID%_PT-SceneTargetB_EN-8" />
-                  <Enumeration Text="Auslöser 10" Value="9" Id="%AID%_PT-SceneTargetB_EN-9" />
+                  <Enumeration Text="Auslöser 1" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 2" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 3" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 4" Value="3" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 5" Value="4" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 6" Value="5" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 7" Value="6" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 8" Value="7" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 9" Value="8" Id="%ENID%" />
+                  <Enumeration Text="Auslöser 10" Value="9" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>
@@ -94,7 +94,7 @@
                 <Parameter Id="%AID%_UP-%T%000002" Name="VolumeDay" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="" Value="25" />
                 <Parameter Id="%AID%_UP-%T%000003" Name="VolumeNight" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="" Value="20" />
                 <Parameter Id="%AID%_UP-%T%000009" Name="Lock" Offset="3" BitOffset="0" ParameterType="%AID%_PT-SOMLock" Text="Zentrale Sperre" Value="0" />
-                <Parameter Id="%AID%_UP-%T%000007" Name="DayNight" Offset="3" BitOffset="2" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht Objekt" Value="0" />
+                <Parameter Id="%AID%_UP-%T%000007" Name="DayNight" Offset="3" BitOffset="2" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht-Objekt" Value="0" />
               </Union>
               <Union SizeInBit="640">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="5" BitOffset="0" />
@@ -291,10 +291,17 @@
               <ComObjectRef Id="%AID%_O-%T%000027_R-%T%00002701" RefId="%AID%_O-%T%000027" FunctionText="Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
               <ComObjectRef Id="%AID%_O-%T%000027_R-%T%00002702" RefId="%AID%_O-%T%000027" FunctionText="Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
             </ComObjectRefs>
+            <Extension>
+              <Baggage RefId="%FILE-HELP-de%" />
+              <Baggage RefId="%FILE-ICONS%" />
+              <Baggage RefId="%FILE-openknx%" />
+              <Baggage RefId="%FILE-pics-and%" />
+              <Baggage RefId="%FILE-pics-or%" />
+            </Extension>
           </Static>
           <Dynamic>
             <Channel Id="%AID%_CH-SM1" Name="SOMChannels" Number="1" Text="Auslöser">
-              <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation">
+              <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation" Icon="information-outline">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Sounddatei" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Sounddatei wird über eine Zahl gesteuert. Dazu müssen die Sounddateien auf dem Speicher im Format 00001.MP3 (5stellig) und im MP3-Format gespeichert werden." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 1: Um den Überblick zu behalten, legt eine weitere Datei wie folgt an: „00001 Klingel 1.txt“ oder „00002 Innensierene.txt“." />
@@ -317,11 +324,11 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Jetzt kannst du direkt diverse Meldungen wie „Wäsche ist fertig“ auslösen. Somit brauchst du keinen Umweg über die begrenzen 1bit-Auslöser zu gehen." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp: Auf der Seite ttsmp3.com kannst du dir schnell passende Statusmeldungen als MP3 erstellen lassen." />
               </ParameterBlock>
-              <ParameterBlock Id="%AID%_PB-6" Name="SOMBasic" Text="Basiseinstellung">
+              <ParameterBlock Id="%AID%_PB-6" Name="SOMBasic" Text="Basiseinstellung" Icon="cog-outline">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
 
                 <!-- Tag/Nacht -->
-                <ParameterRefRef RefId="%AID%_UP-%T%000007_R-%T%00000701" /> 
+                <ParameterRefRef RefId="%AID%_UP-%T%000007_R-%T%00000701" Icon="theme-light-dark" HelpContext="SOM-DayNight" /> 
                 <choose ParamRefId="%AID%_UP-%T%000007_R-%T%00000701">
                   <when test="1">
                     <ComObjectRefRef RefId="%AID%_O-%T%000027_R-%T%00002701" />
@@ -334,16 +341,16 @@
                 <!-- Volume -->
                 <choose ParamRefId="%AID%_UP-%T%000007_R-%T%00000701">
                   <when test="0">
-                    <ParameterRefRef RefId="%AID%_UP-%T%000002_R-%T%00000201" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%000002_R-%T%00000201" Icon="volume-high" HelpContext="SOM-Volume" />
                   </when>
                   <when test=">0">
-                    <ParameterRefRef RefId="%AID%_UP-%T%000002_R-%T%00000202" />
-                    <ParameterRefRef RefId="%AID%_UP-%T%000003_R-%T%00000301" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%000002_R-%T%00000202" Icon="volume-high" HelpContext="SOM-Volume" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%000003_R-%T%00000301" Icon="volume-medium" HelpContext="SOM-Volume" />
                   </when>
                 </choose>
 
                 <!-- Lock -->
-                <ParameterRefRef RefId="%AID%_UP-%T%000009_R-%T%00000901" />
+                <ParameterRefRef RefId="%AID%_UP-%T%000009_R-%T%00000901" Icon="lock-outline" HelpContext="SOM-GlobalLock" />
                 <choose ParamRefId="%AID%_UP-%T%000009_R-%T%00000901">
                   <when test="1">
                     <ComObjectRefRef RefId="%AID%_O-%T%000029_R-%T%00002901" />
@@ -353,13 +360,13 @@
                   </when>
                 </choose>
                 <!-- Szenensteuerung -->
-                <ParameterRefRef RefId="%AID%_UP-%T%000006_R-%T%00000601" />
+                <ParameterRefRef RefId="%AID%_UP-%T%000006_R-%T%00000601" Icon="list-box-outline" HelpContext="SOM-Scenes" />
 
                 <!-- Erweiterte Steuerung -->
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Externe Logik" UIHint="Headline" />
                 <!-- Externe Steuerung -->
-                <ParameterRefRef RefId="%AID%_UP-%T%000008_R-%T%00000801" />
+                <ParameterRefRef RefId="%AID%_UP-%T%000008_R-%T%00000801" Icon="remote-desktop" HelpContext="SOM-External" />
 
                 <ComObjectRefRef RefId="%AID%_O-%T%000021_R-%T%00002101" />
                 <ComObjectRefRef RefId="%AID%_O-%T%000022_R-%T%00002201" />
@@ -369,7 +376,7 @@
               <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
                 <when test="1">
                   <ComObjectRefRef RefId="%AID%_O-%T%000028_R-%T%00002801" />
-                  <ParameterBlock Id="%AID%_PB-7" Name="SOMScenes" Text="Szenensteuerung">
+                  <ParameterBlock Id="%AID%_PB-7" Name="SOMScenes" Text="Szenensteuerung" Icon="list-box-outline">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
                     <ParameterBlock Id="%AID%_PB-8" Name="Table1Scenes" Text="#" Inline="true" Layout="Table">
                       <Rows>
@@ -699,6 +706,14 @@
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
+      <Baggages>
+        <Baggage TargetPath="AF\01" Name="Help_de.zip" Id="%FILE-HELP-de%">
+          <FileInfo TimeInfo="%DATETIME%" />
+        </Baggage>
+        <Baggage TargetPath="AF\01" Name="Icons.zip" Id="%FILE-ICONS%">
+          <FileInfo TimeInfo="%DATETIME%" />
+        </Baggage>
+      </Baggages>
     </Manufacturer>
   </ManufacturerData>
 </KNX>

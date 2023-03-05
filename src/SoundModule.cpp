@@ -70,7 +70,7 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
         volume = _currentDefaultVolume;
 
     // reset states
-    if(_status)
+    if (_status)
         SoundModule::stopped();
 
     logInfoP("play: file: %i  volume: %i:", file, volume);
@@ -122,7 +122,6 @@ void SoundModule::loop()
 
 void SoundModule::loop2()
 {
-
 }
 
 bool SoundModule::usesDualCore()

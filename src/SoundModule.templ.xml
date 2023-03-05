@@ -17,7 +17,7 @@
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Trigger%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Trigger aktiv" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Trigger%C%Lock" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMLock" Text="Sperrobjekt" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Trigger%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht Objekt" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Trigger%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht-Objekt" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Trigger%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
 
               </Union>
@@ -81,14 +81,14 @@
           <Dynamic>
             <ChannelIndependentBlock> 
               <!-- START INCLUDE HERE -->
-              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0:-}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0:-}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" Icon="play-circle-outline">
                 <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:-}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
                   <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="SOM%C%Wrapper" Inline="true">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslösekonfiguration" UIHint="Headline" />
                     <!-- Name -->
-                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" Icon="tag-outline" HelpContext="SOM-TriggerName"/>
                     <!-- Status -->
-                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" Icon="power-cycle" HelpContext="SOM-TriggerStatus" />
                     <choose ParamRefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101">
                       <when test="1">
                         <!-- Aktiv -->
@@ -96,7 +96,7 @@
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
                                                 
                         <!-- Sperre -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" Icon="volume-off" HelpContext="SOM-TriggerLock"/>
                         <choose ParamRefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201">
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
@@ -107,10 +107,10 @@
                         </choose>
 
                         <!-- Prio -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" Icon="swap-vertical" HelpContext="SOM-TriggerPriority"/>
 
                         <!-- Tag/Nacht -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" /> 
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" Icon="theme-light-dark" HelpContext="SOM-TriggerDayNight" /> 
                         <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" />
@@ -123,26 +123,26 @@
                         <!-- Datai -->
                         <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
                             <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" Icon="file-outline" HelpContext="SOM-TriggerFile" />
                             </when>
                             <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10102" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10102" Icon="file-outline" HelpContext="SOM-TriggerFile" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" Icon="file" HelpContext="SOM-TriggerFile" />
                             </when>
                         </choose>
 
                         <!-- Lautstärke -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" Icon="volume-source-custom" HelpContext="SOM-Volume" />
                         <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000">
                           <when test=">0">
                             <!-- Abweichend -->
                             <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
                               <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" Icon="volume-high" HelpContext="SOM-Volume" />
                               </when>
                               <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20102" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20102" Icon="volume-high" HelpContext="SOM-Volume" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" Icon="volume-medium" HelpContext="SOM-Volume" />
                               </when>
                               <when test="1">
                                 <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" />
@@ -156,7 +156,7 @@
                         </choose>
 
                         <!-- Repeat -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501" Icon="repeat" HelpContext="SOM-TriggerRepeat" />
                         <choose ParamRefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501">
                           <when test="1">
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" />
@@ -164,7 +164,7 @@
                         </choose>
 
                         <!-- Dauer -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601" Icon="timer-sand" HelpContext="SOM-TriggerDurartion" />
                         <choose ParamRefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601">
                           <when test="1">
                             <ParameterBlock Id="%AID%_PB-nnn" Name="Trigger%C%DurationGrid" Inline="true" Layout="Grid">
