@@ -301,7 +301,7 @@
           </Static>
           <Dynamic>
             <Channel Id="%AID%_CH-SM1" Name="SOMChannels" Number="1" Text="Auslöser">
-              <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation" Icon="information-outline">
+              <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Sounddatei" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Sounddatei wird über eine Zahl gesteuert. Dazu müssen die Sounddateien auf dem Speicher im Format 00001.MP3 (5stellig) und im MP3-Format gespeichert werden." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 1: Um den Überblick zu behalten, legt eine weitere Datei wie folgt an: „00001 Klingel 1.txt“ oder „00002 Innensierene.txt“." />
@@ -324,7 +324,7 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Jetzt kannst du direkt diverse Meldungen wie „Wäsche ist fertig“ auslösen. Somit brauchst du keinen Umweg über die begrenzen 1bit-Auslöser zu gehen." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp: Auf der Seite ttsmp3.com kannst du dir schnell passende Statusmeldungen als MP3 erstellen lassen." />
               </ParameterBlock>
-              <ParameterBlock Id="%AID%_PB-6" Name="SOMBasic" Text="Basiseinstellung" Icon="cog-outline">
+              <ParameterBlock Id="%AID%_PB-6" Name="SOMBasic" Text="Basiseinstellung" Icon="cog-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
 
                 <!-- Tag/Nacht -->
