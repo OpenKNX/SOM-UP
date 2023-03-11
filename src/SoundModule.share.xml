@@ -713,6 +713,9 @@
         <Baggage TargetPath="AF\01" Name="Icons.zip" Id="%FILE-ICONS%">
           <FileInfo TimeInfo="%DATETIME%" />
         </Baggage>
+        <Baggage TargetPath="AF\01" Name="..\..\OGM-Common\baggages\Icons.zip" Id="%FILE-ICONS%">
+          <FileInfo TimeInfo="%DATETIME%" />
+        </Baggage>
       </Baggages>
     </Manufacturer>
   </ManufacturerData>

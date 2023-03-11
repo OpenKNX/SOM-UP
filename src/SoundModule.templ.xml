@@ -81,8 +81,8 @@
           <Dynamic>
             <ChannelIndependentBlock> 
               <!-- START INCLUDE HERE -->
-              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0:-}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" Icon="play-circle-outline" HelpContext="Empty">
-                <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0:-}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" Icon="play-circle-outline" HelpContext="Empty">
+                <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
                   <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="SOM%C%Wrapper" Inline="true">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslösekonfiguration" UIHint="Headline" />
                     <!-- Name -->
@@ -132,7 +132,7 @@
                         </choose>
 
                         <!-- Lautstärke -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" Icon="volume-source-custom" HelpContext="SOM-Volume" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" Icon="volume-source" HelpContext="SOM-Volume" />
                         <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000">
                           <when test=">0">
                             <!-- Abweichend -->

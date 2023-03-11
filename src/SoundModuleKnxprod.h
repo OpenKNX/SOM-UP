@@ -2935,5 +2935,5 @@
 
 #define MAIN_OpenKnxId 0xAF
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 8
+#define MAIN_ApplicationVersion 1
 #define MAIN_OrderNumber "SOM-UP"
