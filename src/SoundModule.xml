@@ -5,15 +5,15 @@
     <Manufacturer RefId="M-00FA">
       <Catalog>
         <CatalogSection Id="M-00FA_CS-OpenKNX" Name="OpenKNX" Number="OpenKNX" DefaultLanguage="de">
-          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-BAG" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
+          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xAF" ApplicationNumber="01" ApplicationVersion="1" ReplacesVersions="" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-BAG" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA2" ApplicationNumber="40" ApplicationVersion="4" ReplacesVersions="1 2 3" ApplicationRevision="0" />
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
@@ -136,7 +136,9 @@
       </ApplicationPrograms>
       <Baggages>
         <op:include href="SoundModule.share.xml" xpath="//Baggages/*" prefix="SOM" />
-        <op:include href="../../OGM-Common/src/Common.share.xml" xpath="//Baggages/*" prefix="OGM" />
+        <op:include href="../../OGM-Common/src/Common.share.xml" xpath="//Baggages/*" prefix="LOG" />
+        <op:include href="../../OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//Baggages/*" prefix="BI" />
+        <op:include href="../../OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//Baggages/*" prefix="BTN" />
       </Baggages>
       <Hardware>
         <Hardware Id="%HardwareId%" Name="OpenKNX-SoundModule" SerialNumber="0xAF01" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
