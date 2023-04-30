@@ -3,11 +3,12 @@
 #include "SmartMF.h"
 #include "SoundBinaryInputModule.h"
 #include "SoundModule.h"
+#include "UpdaterModule.h"
 #include "VirtualButtonModule.h"
 
 void setup()
 {
-    const uint8_t firmwareRevision = 0;
+    const uint8_t firmwareRevision = 6;
     openknx.init(firmwareRevision);
     smartmf.init();
 
@@ -15,9 +16,8 @@ void setup()
     openknx.addModule(2, new SoundModule());
     openknx.addModule(3, new VirtualButtonModule());
     openknx.addModule(4, new SoundBinaryInputModule());
+    openknx.addModule(9, new UpdaterModule());
     openknx.setup();
-
-    // openknx.hardware.progLed.pulsing();
 }
 
 void loop()
