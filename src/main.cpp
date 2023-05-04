@@ -8,7 +8,7 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 6;
+    const uint8_t firmwareRevision = 1;
     openknx.init(firmwareRevision);
     smartmf.init();
 
@@ -18,6 +18,14 @@ void setup()
     openknx.addModule(4, new SoundBinaryInputModule());
     openknx.addModule(9, new UpdaterModule());
     openknx.setup();
+
+    // OpenKNX::Flash::RP2040 test = OpenKNX::Flash::RP2040(OPENKNX_FLASH_OFFSET, OPENKNX_FLASH_SIZE, "Default"); // 1593344 +  65536
+    // test.eraseSector(0);
+    // uint32_t start = millis();
+    // test.write(0, 0xFD, 64); // FD F9 F8 F0 E0
+    // test.commit();
+    // logInfo("Speed", "Time: %i ms", millis() - start);
+    // test.printBaseInfo();
 }
 
 void loop()
