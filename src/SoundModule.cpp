@@ -228,12 +228,11 @@ void SoundModule::processInputKoScene(GroupObject &ko)
     if (!ParamSOM_Scenes)
         return;
 
-    uint8_t value = ko.value(DPT_SceneControl);
-
+    uint8_t value = ko.value(DPT_SceneNumber);
     value += 1;
+    
     if (value > 0 && value <= 64)
     {
-
         for (uint8_t i = 0; i < 20; i++)
         {
             uint8_t sceneId = knx.paramByte(SOM_Scene0 + i);
