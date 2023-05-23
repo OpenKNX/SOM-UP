@@ -120,7 +120,7 @@ void SoundModule::loop()
         _triggers[i]->loop();
 }
 
-void SoundModule::loop2()
+void SoundModule::loop1()
 {
 }
 
@@ -230,7 +230,7 @@ void SoundModule::processInputKoScene(GroupObject &ko)
 
     uint8_t value = ko.value(DPT_SceneNumber);
     value += 1;
-    
+
     if (value > 0 && value <= 64)
     {
         for (uint8_t i = 0; i < 20; i++)
