@@ -19,7 +19,7 @@ const std::string SoundModule::name()
 
 const std::string SoundModule::version()
 {
-    return "0.0dev";
+    return MAIN_Version;
 }
 
 void SoundModule::setup()
@@ -118,15 +118,6 @@ void SoundModule::loop()
     _player.loop();
     for (uint8_t i = 0; i < SOM_ChannelCount; i++)
         _triggers[i]->loop();
-}
-
-void SoundModule::loop1()
-{
-}
-
-bool SoundModule::usesDualCore()
-{
-    return false;
 }
 
 void SoundModule::lock()
@@ -357,4 +348,36 @@ bool SoundModule::restorePower()
 {
     _player.powerOn();
     return true;
+}
+
+bool SoundModule::processCommand(const std::string cmd, bool debugKo)
+{
+    if (cmd.substr(0, 5) == "play " && cmd.length() > 5)
+    {
+        uint16_t file = std::stoi(cmd.substr(5, 10));
+        if (file > 0)
+        {
+            if (knx.configured())
+            {
+
+                logInfoP("manual play file %i", file);
+                logIndentUp();
+                _player.play(file, _currentDefaultVolume);
+                logIndentDown();
+            }
+            else
+            {
+                logInfoP("manual play ist currenty not able (knx is not configured)");
+            }
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void SoundModule::showHelp()
+{
+    openknx.console.printHelpLine("play XXX", "play sound file XXX");
 }

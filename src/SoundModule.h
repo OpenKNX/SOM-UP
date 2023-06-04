@@ -1,6 +1,4 @@
 #pragma once
-#include "Helper.h"
-// #include "KnxHelper.h"
 #include "SoundPlayer.h"
 #include "SoundTrigger.h"
 
@@ -23,8 +21,10 @@ class SoundModule : public OpenKNX::Module
     void processInputKo(GroupObject &ko) override;
     void processBeforeRestart() override;
     void processBeforeTablesUnload() override;
+    void showHelp() override;
     void savePower() override;
     bool restorePower() override;
+    bool processCommand(const std::string cmd, bool debugKo) override;
     bool play(uint16_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
     void stop();
     void stopped();

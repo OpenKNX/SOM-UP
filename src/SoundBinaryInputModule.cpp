@@ -7,7 +7,7 @@ const std::string SoundBinaryInputModule::name()
 
 const std::string SoundBinaryInputModule::version()
 {
-    return "0.0dev";
+    return MAIN_Version;
 }
 
 void SoundBinaryInputModule::setup()
