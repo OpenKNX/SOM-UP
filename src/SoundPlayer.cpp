@@ -115,6 +115,16 @@ void SoundPlayer::loop()
     processStatus();
     processDuration();
     processNextPlay();
+    processMonitorHardwareStatus();
+}
+
+void SoundPlayer::processMonitorHardwareStatus()
+{
+    if (!delayCheck(_monitorHardwareStatus, 5000))
+        return;
+
+    logErrorP("No response from mp3 player!");
+    _monitorHardwareStatus = millis();
 }
 
 void SoundPlayer::processNextPlay()
@@ -202,6 +212,7 @@ void SoundPlayer::processStatus()
             _receivedStatusPos = 0;
             _lastRequestStatus = 0;
             _lastReceivedStatus = millis();
+            _monitorHardwareStatus = millis();
             // printHEX("recevied status: ", _receivedStatusBuffer, 5);
 
             if (validateChecksum(_receivedStatusBuffer, 5))

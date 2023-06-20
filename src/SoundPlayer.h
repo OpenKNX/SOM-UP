@@ -44,6 +44,7 @@ class SoundPlayer
 
     bool _playerAvailable = false;
     uint32_t _lastReceivedStatus = 0;
+    uint32_t _monitorHardwareStatus = 0;
     uint32_t _receiveStatusSince = 0;
     uint32_t _lastRequestStatus = 0;
     uint8_t _receivedStatusPos = 0;
@@ -59,6 +60,7 @@ class SoundPlayer
     void sendData(uint8_t *data, uint8_t len);
     void setRepeats(uint16_t repeats = 1);
     void playFileNumber(uint16_t file);
+    void processMonitorHardwareStatus();
 
   public:
     void setup();
