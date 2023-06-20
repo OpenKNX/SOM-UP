@@ -22,7 +22,7 @@ class SoundModule : public OpenKNX::Module
     void showHelp() override;
     void savePower() override;
     bool restorePower() override;
-    bool processCommand(const std::string cmd, bool debugKo) override;
+    bool processCommand(const std::string cmd, bool diagnoseKo) override;
     bool play(uint16_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
     void stop();
     void stopped();

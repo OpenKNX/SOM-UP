@@ -25,6 +25,7 @@ void loop()
     openknx.loop();
 }
 
-// void loop1() {
+// void loop1()
+// {
 //     openknx.loop1();
 // }

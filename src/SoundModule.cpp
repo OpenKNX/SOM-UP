@@ -350,7 +350,7 @@ bool SoundModule::restorePower()
     return true;
 }
 
-bool SoundModule::processCommand(const std::string cmd, bool debugKo)
+bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
 {
     if (cmd.substr(0, 5) == "play " && cmd.length() > 5)
     {
