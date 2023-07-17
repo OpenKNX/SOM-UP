@@ -12,7 +12,7 @@ class SoundModule : public OpenKNX::Module
 
   public:
     SoundModule();
-    void loop() override;
+    void loop(bool configured) override;
     void setup() override;
     const std::string name() override;
     const std::string version() override;
@@ -30,7 +30,16 @@ class SoundModule : public OpenKNX::Module
     void unlock();
     void day();
     void night();
+    void init();
     static SoundModule *instance();
+
+    bool usesDualCore() override {
+      return true;
+    }
+    void setup1(bool configured) override {
+      delay(5000);
+      logInfoP("setup1");
+    }
 
   private:
     static SoundModule *_instance;

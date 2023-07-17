@@ -22,6 +22,12 @@ const std::string SoundModule::version()
     return MAIN_Version;
 }
 
+void SoundModule::init()
+{
+    _player.setup();
+    _currentDefaultVolume = 10;
+}
+
 void SoundModule::setup()
 {
     _currentDefaultVolume = ParamSOM_VolumeDay;
@@ -40,8 +46,6 @@ void SoundModule::setup()
     logTraceP("paramVolumeNight: %i", ParamSOM_VolumeNight);
     logTraceP("paramVolumeDay: %i", ParamSOM_VolumeDay);
 
-    // Call dependend setup
-    _player.setup();
     for (uint8_t i = 0; i < SOM_ChannelCount; i++)
     {
         _triggers[i] = new SoundTrigger(i);
@@ -103,21 +107,27 @@ void SoundModule::stop()
 void SoundModule::stopped()
 {
     logInfoP("stopped");
-    for (uint8_t i = 0; i < SOM_ChannelCount; i++)
+
+    if (knx.configured())
     {
-        SoundTrigger *lTrigger = _triggers[i];
-        lTrigger->stopped();
+        for (uint8_t i = 0; i < SOM_ChannelCount; i++)
+        {
+            SoundTrigger *lTrigger = _triggers[i];
+            lTrigger->stopped();
+        }
+        _status = false;
+        KoSOM_Status.value(false, DPT_Switch);
+        KoSOM_File.value((uint8_t)0, DPT_Value_2_Ucount);
     }
-    _status = false;
-    KoSOM_Status.value(false, DPT_Switch);
-    KoSOM_File.value((uint8_t)0, DPT_Value_2_Ucount);
 }
 
-void SoundModule::loop()
+void SoundModule::loop(bool configured)
 {
     _player.loop();
-    for (uint8_t i = 0; i < SOM_ChannelCount; i++)
-        _triggers[i]->loop();
+
+    if (configured)
+        for (uint8_t i = 0; i < SOM_ChannelCount; i++)
+            _triggers[i]->loop();
 }
 
 void SoundModule::lock()
@@ -357,18 +367,10 @@ bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
         uint16_t file = std::stoi(cmd.substr(5, 10));
         if (file > 0)
         {
-            if (knx.configured())
-            {
-
-                logInfoP("manual play file %i", file);
-                logIndentUp();
-                _player.play(file, _currentDefaultVolume);
-                logIndentDown();
-            }
-            else
-            {
-                logInfoP("manual play ist currenty not able (knx is not configured)");
-            }
+            logInfoP("manual play file %i", file);
+            logIndentUp();
+            _player.play(file, _currentDefaultVolume);
+            logIndentDown();
 
             return true;
         }

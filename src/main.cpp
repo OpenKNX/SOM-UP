@@ -25,7 +25,14 @@ void loop()
     openknx.loop();
 }
 
-// void loop1()
-// {
-//     openknx.loop1();
-// }
+#ifdef OPENKNX_DUALCORE
+void loop1()
+{
+    openknx.loop1();
+}
+
+void setup1()
+{
+    openknx.setup1();
+}
+#endif
