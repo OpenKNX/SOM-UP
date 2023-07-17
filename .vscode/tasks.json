@@ -30,32 +30,64 @@
             "group": "test"
         },
         {
-            "label": "RP2040: Build",
+            "label": "Develop: SOM-UP",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "build_RP2040"
+                "develop_SOM_UP"
             ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "RP2040: Build & Upload (USB)",
+            "label": "Develop: SOM-UP (USB)",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "upload_USB_RP2040",
+                "develop_SOM_UP_USB",
                 "upload"
             ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "RP2040: Build & Upload (JLINK)",
+            "label": "Develop: SOM-UP (JLINK)",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "upload_JLINK_RP2040",
+                "develop_SOM_UP_JLINK",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Develop: MASIFI_SENSOR_BREAKOUT",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "develop_MASIFI_SENSOR_BREAKOUT"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Develop: MASIFI_SENSOR_BREAKOUT (USB)",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "develop_MASIFI_SENSOR_BREAKOUT_USB",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Develop: MASIFI_SENSOR_BREAKOUT (JLINK)",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "develop_MASIFI_SENSOR_BREAKOUT_JLINK",
                 "upload"
             ],
             "group": "build",
