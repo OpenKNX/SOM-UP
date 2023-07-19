@@ -8,7 +8,7 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 3;
+    const uint8_t firmwareRevision = 4;
     openknx.init(firmwareRevision);
     smartmf.init();
 
@@ -26,13 +26,13 @@ void loop()
 }
 
 #ifdef OPENKNX_DUALCORE
-void loop1()
-{
-    openknx.loop1();
-}
-
 void setup1()
 {
     openknx.setup1();
+}
+
+void loop1()
+{
+    openknx.loop1();
 }
 #endif

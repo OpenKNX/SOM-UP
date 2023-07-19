@@ -33,12 +33,10 @@ class SoundModule : public OpenKNX::Module
     void init();
     static SoundModule *instance();
 
-    bool usesDualCore() override {
-      return true;
-    }
-    void setup1(bool configured) override {
-      delay(5000);
-      logInfoP("setup1");
+    void setup1(bool configured) override
+    {
+        delay(100);
+        logInfoP("setup1");
     }
 
   private:
