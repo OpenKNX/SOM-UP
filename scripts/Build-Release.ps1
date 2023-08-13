@@ -25,8 +25,8 @@
 # $settings = scripts/OpenKNX-Build-Settings.ps1
 
 # execute generic pre-build steps
-lib/OGM-Common/scripts/setup/reusable/Build-Release-Preprocess.ps1 $args[0]
-if (!$?) { exit 1 }
+# lib/OGM-Common/scripts/setup/reusable/Build-Release-Preprocess.ps1 $args[0]
+# if (!$?) { exit 1 }
 
 # build firmware based on generated headerfile 
 # the following build steps are project specific and must be adopted accordingly
@@ -50,4 +50,4 @@ if (!$?) { exit 1 }
 
 # execute generic post-build steps
 lib/OGM-Common/scripts/setup/reusable/Build-Release-Postprocess.ps1 $args[0]
-if (!$?) { exit 1 }
+# if (!$?) { exit 1 }

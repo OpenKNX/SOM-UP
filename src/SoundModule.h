@@ -33,12 +33,6 @@ class SoundModule : public OpenKNX::Module
     void init();
     static SoundModule *instance();
 
-    void setup1(bool configured) override
-    {
-        delay(100);
-        logInfoP("setup1");
-    }
-
   private:
     static SoundModule *_instance;
     void processInputKoLock(GroupObject &ko);

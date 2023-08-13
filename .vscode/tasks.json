@@ -6,16 +6,13 @@
         {
             "label": "OpenKNXproducer",
             "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
             "command": "~/bin/OpenKNXproducer.exe",
             "args": [
                 "create",
                 "--Debug",
                 "-h",
-                "SoundModuleKnxprod.h",
-                "SoundModule"
+                "include/knxprod.h",
+                "src/SoundModule"
             ],
             "problemMatcher": [],
             "group": "test"
