@@ -97,7 +97,8 @@
             "args": [
                 "Release"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": "test"
         },
         {
             "label": "Build-Beta",
