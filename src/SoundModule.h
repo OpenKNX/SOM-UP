@@ -47,6 +47,7 @@ class SoundModule : public OpenKNX::Module
     bool _status = false;
     bool _currentNight = false;
     bool _currentLocked = false;
+    uint8_t _currentTrigger = 0;
     uint8_t _currentDefaultVolume = 0;
     uint16_t _lastFile = 0;
     uint8_t _lastPriority = 0;

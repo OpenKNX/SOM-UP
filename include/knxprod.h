@@ -14,6 +14,7 @@
 #define MAIN_ParameterSize 3851
 #define MAIN_MaxKoNumber 439
 #define MAIN_OrderNumber "SOM-UP"
+#define LOG_ModuleVersion 21
 // Parameter with single occurrence
 
 
@@ -1497,6 +1498,10 @@
 #define     LOG_fOOnPALineShift 0
 #define LOG_fOOnPADevice              54      // uint8_t
 #define LOG_fOOnFunction              53      // 8 Bits, Bit 7-0
+#define LOG_fOOnKONumber              53      // 15 Bits, Bit 15-1
+#define     LOG_fOOnKONumberMask 0xFFFE
+#define     LOG_fOOnKONumberShift 1
+#define LOG_fOOnKODpt                 55      // 8 Bits, Bit 7-0
 #define LOG_fOOff                     67      // 8 Bits, Bit 7-0
 #define LOG_fOOffBuzzer               67      // 8 Bits, Bit 7-0
 #define LOG_fOOffLed                  67      // 8 Bits, Bit 7-0
@@ -1526,6 +1531,10 @@
 #define     LOG_fOOffPALineShift 0
 #define LOG_fOOffPADevice             69      // uint8_t
 #define LOG_fOOffFunction             68      // 8 Bits, Bit 7-0
+#define LOG_fOOffKONumber             68      // 15 Bits, Bit 15-1
+#define     LOG_fOOffKONumberMask 0xFFFE
+#define     LOG_fOOffKONumberShift 1
+#define LOG_fOOffKODpt                70      // 8 Bits, Bit 7-0
 #define LOG_fE1UseOtherKO             82      // 1 Bit, Bit 7
 #define     LOG_fE1UseOtherKOMask 0x80
 #define     LOG_fE1UseOtherKOShift 7
@@ -1565,9 +1574,9 @@
 #define ParamLOG_fTriggerE1                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerE1)) & LOG_fTriggerE1Mask))
 //           Eingang 2
 #define ParamLOG_fTriggerE2                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerE2)) & LOG_fTriggerE2Mask))
-//           Kanalausgang X
+//           Interner Eingang 3
 #define ParamLOG_fTriggerI1                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerI1)) & LOG_fTriggerI1Mask))
-//           Kanalausgang Y
+//           Interner Eingang 4
 #define ParamLOG_fTriggerI2                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerI2)) & LOG_fTriggerI2Mask))
 // Logik sendet ihren Wert weiter
 #define ParamLOG_fTriggerTime              (knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerTime)))
@@ -2179,13 +2188,13 @@
 #define ParamLOG_fTy4IsWeekday             ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTy4IsWeekday)) & LOG_fTy4IsWeekdayMask))
 // Monat
 #define ParamLOG_fTy4Month                 ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTy4Month)) & LOG_fTy4MonthMask) >> LOG_fTy4MonthShift)
-// Kanalausgang X
+// Interner Eingang 3
 #define ParamLOG_fI1                       ((knx.paramByte(LOG_ParamCalcIndex(LOG_fI1)) & LOG_fI1Mask) >> LOG_fI1Shift)
-// Kanalausgang Y
+// Interner Eingang 4
 #define ParamLOG_fI2                       (knx.paramByte(LOG_ParamCalcIndex(LOG_fI2)) & LOG_fI2Mask)
-// Kanalausgang X als interner Eingang 1, X =
+// Internen Eingang 3 verbinden mit Kanalausgang Nr.:
 #define ParamLOG_fI1Function               (knx.paramByte(LOG_ParamCalcIndex(LOG_fI1Function)))
-// Kanalausgang Y als interner Eingang 2, Y =
+// Internen Eingang 4 verbinden mit Kanalausgang Nr.:
 #define ParamLOG_fI2Function               (knx.paramByte(LOG_ParamCalcIndex(LOG_fI2Function)))
 // Zeitbasis
 #define ParamLOG_fOStairtimeBase           ((knx.paramByte(LOG_ParamCalcIndex(LOG_fOStairtimeBase)) & LOG_fOStairtimeBaseMask) >> LOG_fOStairtimeBaseShift)
@@ -2291,6 +2300,10 @@
 #define ParamLOG_fOOnPADevice              (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOnPADevice)))
 //     Wert für EIN ermitteln als
 #define ParamLOG_fOOnFunction              (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOnFunction)))
+//     Nummer des Kommunikationsobjekts
+#define ParamLOG_fOOnKONumber              ((knx.paramWord(LOG_ParamCalcIndex(LOG_fOOnKONumber)) & LOG_fOOnKONumberMask) >> LOG_fOOnKONumberShift)
+//     DPT des Kommunikationsobjekts
+#define ParamLOG_fOOnKODpt                 (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOnKODpt)))
 // Wert für AUS senden?
 #define ParamLOG_fOOff                     (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOff)))
 // Wert für AUS senden?
@@ -2337,6 +2350,10 @@
 #define ParamLOG_fOOffPADevice             (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffPADevice)))
 //     Wert für AUS ermitteln als
 #define ParamLOG_fOOffFunction             (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffFunction)))
+//     Nummer des Kommunikationsobjekts
+#define ParamLOG_fOOffKONumber             ((knx.paramWord(LOG_ParamCalcIndex(LOG_fOOffKONumber)) & LOG_fOOffKONumberMask) >> LOG_fOOffKONumberShift)
+//     DPT des Kommunikationsobjekts
+#define ParamLOG_fOOffKODpt                (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffKODpt)))
 // Kommunikationsobjekt für Eingang 1
 #define ParamLOG_fE1UseOtherKO             ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fE1UseOtherKO)) & LOG_fE1UseOtherKOMask))
 //     Nummer des Kommunikationsobjekts

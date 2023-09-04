@@ -12,7 +12,7 @@
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA2" ApplicationNumber="40" ApplicationVersion="5" ReplacesVersions="4" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA2" ApplicationNumber="40" ApplicationVersion="6" ReplacesVersions="4 5" ApplicationRevision="0" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
@@ -20,7 +20,9 @@
             </Code>
             <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="41" ModuleType="4" />
             <op:define prefix="SOM" header="SoundModule.h" NumChannels="10" KoOffset="50" ModuleType="2" />
-            <op:define prefix="LOG" header="SoundModule.h" NumChannels="30" KoOffset="100" ModuleType="1" />
+            <op:define prefix="LOG" header="SoundModule.h" NumChannels="30" KoOffset="100" ModuleType="1">
+              <op:verify File="../lib/OFM-LogicModule/src/ModuleVersion.h" ModuleVersion="21" />
+            </op:define>
             <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="200" ModuleType="3" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->

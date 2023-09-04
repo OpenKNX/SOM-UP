@@ -112,8 +112,8 @@ void SoundModule::stopped()
     {
         for (uint8_t i = 0; i < SOM_ChannelCount; i++)
         {
-            SoundTrigger *lTrigger = _triggers[i];
-            lTrigger->stopped();
+            SoundTrigger *trigger = _triggers[i];
+            trigger->stopped();
         }
         _status = false;
         KoSOM_Status.value(false, DPT_Switch);
@@ -126,8 +126,12 @@ void SoundModule::loop(bool configured)
     _player.loop();
 
     if (configured)
-        for (uint8_t i = 0; i < SOM_ChannelCount; i++)
-            _triggers[i]->loop();
+    {
+        uint8_t processed = 0;
+        do
+            _triggers[_currentTrigger]->loop();
+        while (openknx.freeLoopIterate(SOM_ChannelCount, _currentTrigger, processed));
+    }
 }
 
 void SoundModule::lock()
