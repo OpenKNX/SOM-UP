@@ -21,9 +21,11 @@
             <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="41" ModuleType="4" />
             <op:define prefix="SOM" header="SoundModule.h" NumChannels="10" KoOffset="50" ModuleType="2" />
             <op:define prefix="LOG" header="SoundModule.h" NumChannels="30" KoOffset="100" ModuleType="1">
-              <op:verify File="../lib/OFM-LogicModule/src/ModuleVersion.h" ModuleVersion="21" />
+              <op:verify File="../lib/OFM-LogicModule/src/ModuleVersion.h" ModuleVersion="32" />
             </op:define>
-            <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="200" ModuleType="3" />
+            <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="200" ModuleType="3">
+              <op:verify File="../lib/OFM-VirtualButton/src/ModuleVersion.h" ModuleVersion="3" />
+            </op:define>
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="SoundModule.share.xml" xpath="//ParameterTypes/ParameterType" prefix="SOM" />

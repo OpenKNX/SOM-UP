@@ -7,7 +7,7 @@ const std::string SoundBinaryInputModule::name()
 
 const std::string SoundBinaryInputModule::version()
 {
-    return MAIN_Version;
+    return openknx.info.humanFirmwareVersion(true);
 }
 
 void SoundBinaryInputModule::setup()

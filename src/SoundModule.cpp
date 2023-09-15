@@ -19,7 +19,7 @@ const std::string SoundModule::name()
 
 const std::string SoundModule::version()
 {
-    return MAIN_Version;
+    return openknx.info.humanFirmwareVersion(true);
 }
 
 void SoundModule::init()

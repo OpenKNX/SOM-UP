@@ -10,11 +10,12 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 40
-#define MAIN_ApplicationVersion 5
+#define MAIN_ApplicationVersion 6
 #define MAIN_ParameterSize 3851
 #define MAIN_MaxKoNumber 439
 #define MAIN_OrderNumber "SOM-UP"
-#define LOG_ModuleVersion 21
+#define LOG_ModuleVersion 32
+#define BTN_ModuleVersion 3
 // Parameter with single occurrence
 
 
