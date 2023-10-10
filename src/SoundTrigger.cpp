@@ -22,6 +22,7 @@ void SoundTrigger::setup()
     logTraceP("paramActive: %i", ParamSOM_TriggerState);
     logTraceP("paramRepeats: %i", ParamSOM_TriggerRepeats);
     logTraceP("paramPriority: %i", ParamSOM_TriggerPriority);
+    logTraceP("paramControl: %i", ParamSOM_TriggerControl);
     logTraceP("paramLock: %i", ParamSOM_TriggerLock);
     logTraceP("paramDayNight: %i", ParamSOM_TriggerDayNight);
     logTraceP("paramVolumeDay: %i", ParamSOM_TriggerVolumeDay);
@@ -52,10 +53,19 @@ void SoundTrigger::processInputKo(GroupObject &ko)
 
 void SoundTrigger::processInputKoTrigger(GroupObject &ko)
 {
-    if (ko.value(DPT_Switch))
+    /* Control = 0 - Trigger 0 */
+    if (ParamSOM_TriggerControl == 0 && !ko.value(DPT_Switch))
         return play();
 
-    return stop();
+    /* Control = 1 - Trigger 1 */
+    if (ParamSOM_TriggerControl == 1 && ko.value(DPT_Switch))
+        return play();
+
+    /* Control = 2 - Start/Stopp */
+    if (ParamSOM_TriggerControl == 2 && ko.value(DPT_Switch))
+        return play();
+    if (ParamSOM_TriggerControl == 2 && !ko.value(DPT_Switch))
+        return stop();
 }
 
 void SoundTrigger::processInputKoDayNight(GroupObject &ko)

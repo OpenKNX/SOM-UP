@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 40
-#define MAIN_ApplicationVersion 6
+#define MAIN_ApplicationVersion 7
 #define MAIN_ParameterSize 3851
 #define MAIN_MaxKoNumber 439
 #define MAIN_OrderNumber "SOM-UP"
@@ -332,6 +332,9 @@
 #define SOM_TriggerPriority            1      // 3 Bits, Bit 7-5
 #define     SOM_TriggerPriorityMask 0xE0
 #define     SOM_TriggerPriorityShift 5
+#define SOM_TriggerControl             1      // 2 Bits, Bit 4-3
+#define     SOM_TriggerControlMask 0x18
+#define     SOM_TriggerControlShift 3
 #define SOM_TriggerDurationBase        2      // 2 Bits, Bit 7-6
 #define     SOM_TriggerDurationBaseMask 0xC0
 #define     SOM_TriggerDurationBaseShift 6
@@ -355,6 +358,8 @@
 #define ParamSOM_TriggerDayNight           ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDayNight)) & SOM_TriggerDayNightMask) >> SOM_TriggerDayNightShift)
 // Priorität
 #define ParamSOM_TriggerPriority           ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerPriority)) & SOM_TriggerPriorityMask) >> SOM_TriggerPriorityShift)
+// Steuerung
+#define ParamSOM_TriggerControl            ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerControl)) & SOM_TriggerControlMask) >> SOM_TriggerControlShift)
 // Zeitbasis
 #define ParamSOM_TriggerDurationBase       ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDurationBase)) & SOM_TriggerDurationBaseMask) >> SOM_TriggerDurationBaseShift)
 // Zeit

@@ -19,7 +19,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Trigger%C%Lock" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMLock" Text="Sperrobjekt" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Trigger%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht-Objekt" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Trigger%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
-
+                <Parameter Id="%AID%_UP-%T%%CCC%007" Name="Trigger%C%Control" Offset="1" BitOffset="3" ParameterType="%AID%_PT-SOMControl" Text="Steuerung" Value="2" />
               </Union>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="2" BitOffset="0" />
@@ -53,6 +53,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_UP-%T%%CCC%002" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_UP-%T%%CCC%003" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_UP-%T%%CCC%004" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701" RefId="%AID%_UP-%T%%CCC%007" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" RefId="%AID%_UP-%T%%CCC%080" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" RefId="%AID%_UP-%T%%CCC%091" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" RefId="%AID%_UP-%T%%CCC%092" />
@@ -64,13 +65,14 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" RefId="%AID%_UP-%T%%CCC%202" Text="Lautstärke (Nacht)" />
             </ParameterRefs>
             <ComObjectTable>
-              <ComObject Id="%AID%_O-%T%%CCC%000" Name="Trigger%C%Trigger" Number="%K000%" Text="" ObjectSize="1 Bit" FunctionText="Auslöser %C%, Trigger" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%000" Name="Trigger%C%Trigger" Number="%K000%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%%CCC%001" Name="Trigger%C%Status" Number="%K001%" Text="" ObjectSize="1 Bit" FunctionText="Auslöser %C%, Status" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
               <ComObject Id="%AID%_O-%T%%CCC%002" Name="Trigger%C%Lock" Number="%K002%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%%CCC%003" Name="Trigger%C%DayNight" Number="%K003%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-24" />
             </ComObjectTable>
             <ComObjectRefs>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_O-%T%%CCC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_O-%T%%CCC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" FunctionText="Auslöser %C%, Schalten" DatapointType="DPST-1-10"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00002" RefId="%AID%_O-%T%%CCC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" FunctionText="Auslöser %C%, Trigger" DatapointType="DPST-1-17"/>
               <ComObjectRef Id="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_O-%T%%CCC%001" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
               <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_O-%T%%CCC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=1 / Entsperre=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
               <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" RefId="%AID%_O-%T%%CCC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=0 / Entsperre=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
@@ -92,7 +94,6 @@
                     <choose ParamRefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101">
                       <when test="1">
                         <!-- Aktiv -->
-                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" />
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
                                                 
                         <!-- Sperre -->
@@ -108,6 +109,17 @@
 
                         <!-- Prio -->
                         <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" Icon="swap-vertical" HelpContext="SOM-TriggerPriority"/>
+
+                        <!-- Control -->
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701" Icon="gesture-tap" HelpContext="SOM-TriggerControl"/>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                          <when test="0 1">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00002" />
+                          </when>
+                          <when test="2">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                          </when>
+                        </choose>
 
                         <!-- Tag/Nacht -->
                         <ParameterRefRef RefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" Icon="theme-light-dark" HelpContext="SOM-TriggerDayNight" /> 

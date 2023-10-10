@@ -12,7 +12,7 @@
         <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA2" ApplicationNumber="40" ApplicationVersion="6" ReplacesVersions="4 5" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA2" ApplicationNumber="40" ApplicationVersion="7" ReplacesVersions="4 5 6" ApplicationRevision="0" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>

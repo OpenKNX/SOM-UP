@@ -19,6 +19,13 @@
                   <Enumeration Text="Binäreingang D" Value="44" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-SOMControl" Name="SOMControl">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Schalten" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Triggern mit EIN" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Triggern mit AUS" Value="0" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-SOMVolume" Name="SOMVolume">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="30" UIHint="Slider" />
               </ParameterType>
