@@ -7,7 +7,8 @@ const std::string SoundBinaryInputModule::name()
 
 const std::string SoundBinaryInputModule::version()
 {
-    return openknx.info.humanFirmwareVersion(true);
+    // hides the module in the version output on the console, because the firmware version is sufficient.
+    return "";
 }
 
 void SoundBinaryInputModule::setup()

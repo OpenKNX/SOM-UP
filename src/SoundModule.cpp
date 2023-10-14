@@ -19,7 +19,8 @@ const std::string SoundModule::name()
 
 const std::string SoundModule::version()
 {
-    return openknx.info.humanFirmwareVersion(true);
+    // hides the module in the version output on the console, because the firmware version is sufficient.
+    return "";
 }
 
 void SoundModule::init()
