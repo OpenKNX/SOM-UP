@@ -8,7 +8,6 @@ std::string SoundPlayer::logPrefix()
 
 void SoundPlayer::powerOn()
 {
-    _statusLed.powerSave(false);
 #ifdef PLAYER_PWR
     logTraceP("poweron player");
     digitalWrite(PLAYER_PWR, HIGH);
@@ -18,7 +17,6 @@ void SoundPlayer::powerOn()
 }
 void SoundPlayer::powerOff()
 {
-    _statusLed.powerSave(true);
 #ifdef PLAYER_PWR
     logTraceP("poweroff player");
     digitalWrite(PLAYER_PWR, LOW);
@@ -32,12 +30,6 @@ void SoundPlayer::powerOff()
 
 void SoundPlayer::setup()
 {
-
-#ifdef PLAYER_BUSY_PIN
-    logTraceP("init player led");
-    _statusLed.init(PLAYER_BUSY_PIN);
-#endif
-
 #ifdef PLAYER_PWR
     pinMode(PLAYER_PWR, OUTPUT);
     powerOn();
@@ -110,7 +102,6 @@ void SoundPlayer::setVolume(uint8_t volume)
 
 void SoundPlayer::loop()
 {
-    _statusLed.loop();
     requestStatus();
     processStatus();
     processDuration();
@@ -246,7 +237,9 @@ void SoundPlayer::processStatusStopped()
     if (!_playing)
         return;
 
-    _statusLed.off();
+#ifdef INFO1_LED_PIN
+    openknx.info1Led.off();
+#endif
 
     logTraceP("processStatusStopped (%ims)", (millis() - _currentPlay.playingMillis));
 
@@ -265,8 +258,9 @@ void SoundPlayer::processStatusPlaying()
     // Already Playing
     if (_playing)
         return;
-
-    _statusLed.on();
+#ifdef INFO1_LED_PIN
+    openknx.info1Led.on();
+#endif
 
     logTraceP("processStatusPlaying (%ims)", (millis() - _currentPlay.playMillis));
 

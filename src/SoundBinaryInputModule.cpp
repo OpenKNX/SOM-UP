@@ -17,8 +17,8 @@ void SoundBinaryInputModule::setup()
     pinMode(BINARY_INPUT_B_PIN, INPUT);
     pinMode(BINARY_INPUT_C_PIN, INPUT);
     pinMode(BINARY_INPUT_D_PIN, INPUT);
-#if defined(BINARY_INPUT_PULSE) && BINARY_INPUT_PULSE != -1
-    pinMode(BINARY_INPUT_PULSE, OUTPUT);
+#if defined(BINARY_INPUT_PULSE_PIN) && BINARY_INPUT_PULSE_PIN != -1
+    pinMode(BINARY_INPUT_PULSE_PIN, OUTPUT);
 #endif
 
     // Setup BE
@@ -43,11 +43,11 @@ void SoundBinaryInputModule::processHardwareInputs()
         !_channels[3]->isActive())
         return;
 
-#if defined(BINARY_INPUT_PULSE) && BINARY_INPUT_PULSE != -1
+#if defined(BINARY_INPUT_PULSE_PIN) && BINARY_INPUT_PULSE_PIN != -1
     if (!delayCheck(_lastHardwareQuery, BINARY_INPUT_PULSE_PAUSE_TIME))
         return;
 
-    digitalWrite(BINARY_INPUT_PULSE, true);
+    digitalWrite(BINARY_INPUT_PULSE_PIN, true);
     delayMicroseconds(BINARY_INPUT_PULSE_WAIT_TIME);
 #endif
 
@@ -60,8 +60,8 @@ void SoundBinaryInputModule::processHardwareInputs()
     if (_channels[3]->isActive())
         _channels[3]->setHardwareState(digitalRead(BINARY_INPUT_D_PIN) == LOW);
 
-#if defined(BINARY_INPUT_PULSE) && BINARY_INPUT_PULSE != -1
-    digitalWrite(BINARY_INPUT_PULSE, false);
+#if defined(BINARY_INPUT_PULSE_PIN) && BINARY_INPUT_PULSE_PIN != -1
+    digitalWrite(BINARY_INPUT_PULSE_PIN, false);
 #endif
     _lastHardwareQuery = millis();
 }
