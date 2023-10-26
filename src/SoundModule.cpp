@@ -379,6 +379,16 @@ bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
 
             return true;
         }
+    } else if (cmd.substr(0, 4) == "vol " && cmd.length() > 4)
+    {
+        uint8_t volume = std::stoi(cmd.substr(4, 4));
+        if (volume > 0)
+        {
+            logInfoP("manual set default volume %i", volume);
+            _currentDefaultVolume = volume;
+
+            return true;
+        }
     }
 
     return false;
@@ -386,5 +396,6 @@ bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
 
 void SoundModule::showHelp()
 {
-    openknx.console.printHelpLine("play XXX", "play sound file XXX");
+    openknx.console.printHelpLine("play XXX", "play sound file");
+    openknx.console.printHelpLine("vol XXX", "change default valume");
 }
