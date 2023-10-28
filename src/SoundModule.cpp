@@ -23,34 +23,48 @@ const std::string SoundModule::version()
     return "";
 }
 
-void SoundModule::init()
+#ifdef OPENKNX_DUALCORE
+void SoundModule::loop1(bool configured)
+{
+    _player.loop();
+};
+
+void SoundModule::setup1(bool configured)
 {
     _player.setup();
-    _currentDefaultVolume = 10;
-}
+};
+#endif
 
-void SoundModule::setup()
+void SoundModule::setup(bool configured)
 {
-    _currentDefaultVolume = ParamSOM_VolumeDay;
+#ifndef OPENKNX_DUALCORE
+    _player.setup();
+#endif
+    _currentDefaultVolume = 10;
 
-    // Default
-    KoSOM_Status.valueNoSend(false, DPT_Switch);
-    KoSOM_File.valueNoSend(false, DPT_Switch);
-    KoSOM_Lock.valueNoSend(false, DPT_Switch);
-
-    // Debug
-    logTraceP("paramScenes: %i", ParamSOM_Scenes);
-    logTraceP("paramExternal: %i", ParamSOM_External);
-    logTraceP("paramLock: %i", ParamSOM_Lock);
-    logTraceP("paramDayNight: %i", ParamSOM_DayNight);
-    logTraceP("paramVolumeDay: %i", ParamSOM_VolumeDay);
-    logTraceP("paramVolumeNight: %i", ParamSOM_VolumeNight);
-    logTraceP("paramVolumeDay: %i", ParamSOM_VolumeDay);
-
-    for (uint8_t i = 0; i < SOM_ChannelCount; i++)
+    if (configured)
     {
-        _triggers[i] = new SoundTrigger(i);
-        _triggers[i]->setup();
+        _currentDefaultVolume = ParamSOM_VolumeDay;
+
+        // Default
+        KoSOM_Status.valueNoSend(false, DPT_Switch);
+        KoSOM_File.valueNoSend(false, DPT_Switch);
+        KoSOM_Lock.valueNoSend(false, DPT_Switch);
+
+        // Debug
+        logTraceP("paramScenes: %i", ParamSOM_Scenes);
+        logTraceP("paramExternal: %i", ParamSOM_External);
+        logTraceP("paramLock: %i", ParamSOM_Lock);
+        logTraceP("paramDayNight: %i", ParamSOM_DayNight);
+        logTraceP("paramVolumeDay: %i", ParamSOM_VolumeDay);
+        logTraceP("paramVolumeNight: %i", ParamSOM_VolumeNight);
+        logTraceP("paramVolumeDay: %i", ParamSOM_VolumeDay);
+
+        for (uint8_t i = 0; i < SOM_ChannelCount; i++)
+        {
+            _triggers[i] = new SoundTrigger(i);
+            _triggers[i]->setup();
+        }
     }
 }
 
@@ -71,12 +85,10 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
     }
 
     // use default volume if zero
-    if (volume == 0)
-        volume = _currentDefaultVolume;
+    if (volume == 0) volume = _currentDefaultVolume;
 
     // reset states
-    if (_status)
-        SoundModule::stopped();
+    if (_status) SoundModule::stopped();
 
     logInfoP("play: file: %i  volume: %i:", file, volume);
     logIndentUp();
@@ -105,40 +117,44 @@ void SoundModule::stop()
     _player.stop();
 }
 
+/*
+ * May be called by core 1. Therefore only simple operations that do not need a mutex may be executed.
+ */
 void SoundModule::stopped()
 {
     logInfoP("stopped");
+    if (!knx.configured()) return;
 
-    if (knx.configured())
+    for (uint8_t i = 0; i < SOM_ChannelCount; i++)
     {
-        for (uint8_t i = 0; i < SOM_ChannelCount; i++)
-        {
-            SoundTrigger *trigger = _triggers[i];
-            trigger->stopped();
-        }
-        _status = false;
-        KoSOM_Status.value(false, DPT_Switch);
-        KoSOM_File.value((uint8_t)0, DPT_Value_2_Ucount);
+        SoundTrigger *trigger = _triggers[i];
+        trigger->stopped();
     }
+
+    _status = false;
+    KoSOM_Status.value(false, DPT_Switch);
+    KoSOM_File.value((uint8_t)0, DPT_Value_2_Ucount);
 }
 
 void SoundModule::loop(bool configured)
 {
+#ifndef OPENKNX_DUALCORE
     _player.loop();
+#endif
 
     if (configured)
     {
         uint8_t processed = 0;
         do
             _triggers[_currentTrigger]->loop();
+
         while (openknx.freeLoopIterate(SOM_ChannelCount, _currentTrigger, processed));
     }
 }
 
 void SoundModule::lock()
 {
-    if (ParamSOM_Lock == 0 || _currentLocked)
-        return;
+    if (ParamSOM_Lock == 0 || _currentLocked) return;
 
     _currentLocked = true;
     stop();
@@ -148,8 +164,7 @@ void SoundModule::lock()
 
 void SoundModule::unlock()
 {
-    if (ParamSOM_Lock == 0 || !_currentLocked)
-        return;
+    if (ParamSOM_Lock == 0 || !_currentLocked) return;
 
     _currentLocked = false;
     KoSOM_Lock.value(_currentLocked, DPT_Switch);
@@ -318,12 +333,10 @@ void SoundModule::processInputKoExternalFile(GroupObject &ko)
 {
     uint16_t file = ko.value(DPT_Value_2_Ucount);
 
-    if (file == 0)
-        return stop();
+    if (file == 0) return stop();
 
     // invalid volume
-    if (file < 1 || file > 65535)
-        return;
+    if (file < 1 || file > 65535) return;
 
     play(file, _externalVolume, _externalPriority, false);
 }
@@ -331,8 +344,7 @@ void SoundModule::processInputKoExternalFile(GroupObject &ko)
 void SoundModule::setDefaultVolume()
 {
     // Dont set during playing
-    if (_status)
-        return;
+    if (_status) return;
 
     // select _currentDefaultVolume
     if (_currentNight)
@@ -341,7 +353,7 @@ void SoundModule::setDefaultVolume()
         _currentDefaultVolume = ParamSOM_VolumeDay;
 
     // update _currentDefaultVolume
-    _player.setVolume(_currentDefaultVolume);
+    _player.setInitialVolume(_currentDefaultVolume);
 }
 
 void SoundModule::processBeforeRestart()
@@ -356,12 +368,12 @@ void SoundModule::processBeforeTablesUnload()
 
 void SoundModule::savePower()
 {
-    _player.powerOff();
+    _player.savePower();
 }
 
 bool SoundModule::restorePower()
 {
-    _player.powerOn();
+    _player.restorePower();
     return true;
 }
 
@@ -372,23 +384,29 @@ bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
         uint16_t file = std::stoi(cmd.substr(5, 10));
         if (file > 0)
         {
-            logInfoP("manual play file %i", file);
+            logInfoP("Manually play the file %i", file);
             logIndentUp();
-            _player.play(file, _currentDefaultVolume);
+            play(file, 0, 5);
             logIndentDown();
 
             return true;
         }
-    } else if (cmd.substr(0, 4) == "vol " && cmd.length() > 4)
+    }
+    else if (cmd.substr(0, 4) == "vol " && cmd.length() > 4)
     {
         uint8_t volume = std::stoi(cmd.substr(4, 4));
         if (volume > 0)
         {
-            logInfoP("manual set default volume %i", volume);
+            logInfoP("Change the default volume to %i", volume);
             _currentDefaultVolume = volume;
 
             return true;
         }
+    }
+    else if (cmd == "stop")
+    {
+        _player.stop();
+        return true;
     }
 
     return false;
@@ -396,6 +414,7 @@ bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
 
 void SoundModule::showHelp()
 {
-    openknx.console.printHelpLine("play XXX", "play sound file");
-    openknx.console.printHelpLine("vol XXX", "change default valume");
+    openknx.console.printHelpLine("play XXX", "Manually play the file");
+    openknx.console.printHelpLine("stop", "Stop playing immediately");
+    openknx.console.printHelpLine("vol XXX", "Change the default volume");
 }
