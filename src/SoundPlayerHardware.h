@@ -1,11 +1,13 @@
 #pragma once
-#include "SoundPlayer.h"
-#include "hardware.h"
 
-#define PLAYER_STATUS_WATCHDOG 1000
-#define PLAYER_STATUS_PLAYING 1
-#define PLAYER_STATUS_STOPPED 1
-#define PLAYER_DATA_BEGIN 0xAA
+#ifdef HARDWARE_PLAYER
+    #include "SoundPlayer.h"
+    #include "hardware.h"
+
+    #define PLAYER_STATUS_WATCHDOG 1000
+    #define PLAYER_STATUS_PLAYING 1
+    #define PLAYER_STATUS_STOPPED 1
+    #define PLAYER_DATA_BEGIN 0xAA
 
 class SoundPlayerHardware : public SoundPlayer
 {
@@ -47,3 +49,4 @@ class SoundPlayerHardware : public SoundPlayer
 
     void setInitialVolume(uint8_t volume) override { configureVolume(volume); };
 };
+#endif

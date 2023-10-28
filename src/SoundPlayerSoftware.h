@@ -1,9 +1,10 @@
 #pragma once
 
-#include "SoundPlayer.h"
-#include "AudioFileSourceLittleFS.h"
-#include "AudioGeneratorMP3.h"
-#include "AudioOutputSOM.h"
+#ifndef HARDWARE_PLAYER
+    #include "AudioFileSourceLittleFS.h"
+    #include "AudioGeneratorMP3.h"
+    #include "AudioOutputSOM.h"
+    #include "SoundPlayer.h"
 
 class SoundPlayerSoftware : public SoundPlayer
 {
@@ -26,3 +27,4 @@ class SoundPlayerSoftware : public SoundPlayer
 
     // static void callbackStatus(void *cbData, int code, const char *string);
 };
+#endif

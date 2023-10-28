@@ -1,5 +1,6 @@
-#include "SoundPlayerHardware.h"
-#include "SoundModule.h"
+#ifdef HARDWARE_PLAYER
+    #include "SoundPlayerHardware.h"
+    #include "SoundModule.h"
 
 void SoundPlayerHardware::powerOn()
 {
@@ -222,3 +223,4 @@ void SoundPlayerHardware::playFileNumber(uint16_t file)
     }
     sendData(data, 14);
 }
+#endif

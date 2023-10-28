@@ -1,6 +1,7 @@
-#include "SoundPlayerSoftware.h"
-#include "OpenKNX/Log/VirtualSerial.h"
-#include "SoundModule.h"
+#ifndef HARDWARE_PLAYER
+    #include "SoundPlayerSoftware.h"
+    #include "OpenKNX/Log/VirtualSerial.h"
+    #include "SoundModule.h"
 
 void SoundPlayerSoftware::playNextPlay()
 {
@@ -15,9 +16,9 @@ void SoundPlayerSoftware::setup()
     logInfoP("init software player");
     logIndentUp();
 
-#ifdef LOG_ESP8266AUDIO
+    #ifdef LOG_ESP8266AUDIO
     audioLogger = new OpenKNX::Log::VirtualSerial("ESP8266Audio");
-#endif
+    #endif
 
     SoundPlayer::setup();
     powerOff(); // will turn on only during play back
@@ -27,7 +28,7 @@ void SoundPlayerSoftware::setup()
     audioOutput->SetOutputModeMono(true);
     audioGenerator = new AudioGeneratorMP3();
 
-    //audioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)logPrefix().c_str());
+    // audioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)logPrefix().c_str());
     logTraceP("completed");
     logIndentDown();
 }
@@ -102,3 +103,4 @@ void SoundPlayerSoftware::processStatusStopped()
     SoundPlayer::processStatusStopped();
     powerOff();
 }
+#endif
