@@ -97,8 +97,11 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
     _player.play(file, volume, repeats, duration);
 
     // send ko
-    KoSOM_Status.value(true, DPT_Switch);
-    KoSOM_File.value(file, DPT_Value_2_Ucount);
+    if (knx.configured())
+    {
+        KoSOM_Status.value(true, DPT_Switch);
+        KoSOM_File.value(file, DPT_Value_2_Ucount);
+    }
 
     // save status
     _status = true;
@@ -122,8 +125,11 @@ void SoundModule::stop()
  */
 void SoundModule::stopped()
 {
-    logInfoP("stopped");
+    if(!_status) return;
     if (!knx.configured()) return;
+
+    logInfoP("stopped");
+    _status = false;
 
     for (uint8_t i = 0; i < SOM_ChannelCount; i++)
     {
@@ -131,7 +137,6 @@ void SoundModule::stopped()
         trigger->stopped();
     }
 
-    _status = false;
     KoSOM_Status.value(false, DPT_Switch);
     KoSOM_File.value((uint8_t)0, DPT_Value_2_Ucount);
 }
@@ -177,6 +182,7 @@ void SoundModule::day()
     _currentNight = false;
     setDefaultVolume();
 }
+
 void SoundModule::night()
 {
     logInfoP("night mode");
