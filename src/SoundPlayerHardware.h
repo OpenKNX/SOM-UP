@@ -29,7 +29,6 @@ class SoundPlayerHardware : public SoundPlayer
     void processMonitorHardwareStatus();
 
     void playNextPlay() override;
-    void playFileNumber(uint16_t file) override;
 
     void requestStatus();
     void processStatus();

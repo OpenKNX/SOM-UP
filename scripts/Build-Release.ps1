@@ -34,7 +34,10 @@ if (!$?) { exit 1 }
 
 
 # Example call, the following 2 lines might be there multiple times for each firmware which should be built
-../OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_SOM_UP firmware_SOM_UP uf2
+../OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_SOM_UP_HW firmware_SOM_UP_HW uf2
+if (!$?) { exit 1 }
+
+../OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_SOM_UP_SW firmware_SOM_UP_SW uf2
 if (!$?) { exit 1 }
 
 # # build firmware for PiPico-BCU-Connector
