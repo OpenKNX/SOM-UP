@@ -72,7 +72,7 @@ void SoundPlayer::play(uint16_t file, uint8_t volume, uint32_t repeats, uint32_t
     if (_powerSave)
     {
         logTraceP("no play - powerSave mode");
-        SoundModule::instance()->stopped();
+        soundModule.stopped();
         return;
     }
 
@@ -104,7 +104,7 @@ void SoundPlayer::processStatusStopped()
     _stopping = false;
     _currentPlay = SoundPlayer::Play();
 
-    if (_nextPlay.file == 0) SoundModule::instance()->stopped();
+    if (_nextPlay.file == 0) soundModule.stopped();
 }
 
 void SoundPlayer::processStatusPlaying()
@@ -150,4 +150,15 @@ void SoundPlayer::processStopping()
     _stopping = false;
 
     stopCurrentPlay();
+}
+void SoundPlayer::processCheckCurrentPlay(uint16_t delay)
+{
+    if (!_playing && _currentPlay.file > 0 && delayCheck(_currentPlay.playMillis, delay))
+    {
+        logErrorP("playback could not be started. file probably not found");
+        logIndentUp();
+        soundModule.stopped();
+        logIndentDown();
+        _currentPlay = SoundPlayer::Play();
+    }
 }

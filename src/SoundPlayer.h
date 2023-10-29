@@ -36,6 +36,7 @@ class SoundPlayer
     virtual void stopCurrentPlay() = 0;
     virtual void processStopping();
     virtual void processNextPlay();
+    virtual void processCheckCurrentPlay(uint16_t delay);
     virtual void playFileNumber(uint16_t file) = 0;
 
   public:
