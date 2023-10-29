@@ -424,3 +424,5 @@ void SoundModule::showHelp()
     openknx.console.printHelpLine("stop", "Stop playing immediately");
     openknx.console.printHelpLine("vol XXX", "Change the default volume");
 }
+
+SoundModule soundModule;

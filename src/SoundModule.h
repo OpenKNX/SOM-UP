@@ -71,3 +71,5 @@ class SoundModule : public OpenKNX::Module
     uint8_t _externalVolume = 0;
     uint8_t _externalPriority = 0;
 };
+
+extern SoundModule soundModule;
