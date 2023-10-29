@@ -58,6 +58,7 @@ void SoundPlayerHardware::loop()
 {
     if (_powerSave) return;
 
+    processCheckCurrentPlay(600);
     processDuration();
     processStopping();
     requestStatus();
