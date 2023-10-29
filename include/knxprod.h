@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 40
-#define MAIN_ApplicationVersion 7
+#define MAIN_ApplicationVersion 8
 #define MAIN_ParameterSize 3851
 #define MAIN_MaxKoNumber 439
 #define MAIN_OrderNumber "SOM-UP"
@@ -19,619 +19,172 @@
 // Parameter with single occurrence
 
 
-#define SOM_External                   1      // 1 Bit, Bit 7
-#define     SOM_ExternalMask 0x80
-#define     SOM_ExternalShift 7
-#define SOM_Scenes                     1      // 1 Bit, Bit 6
-#define     SOM_ScenesMask 0x40
-#define     SOM_ScenesShift 6
-#define SOM_VolumeDay                  2      // uint8_t
-#define SOM_VolumeNight                3      // uint8_t
-#define SOM_Lock                       4      // 2 Bits, Bit 7-6
-#define     SOM_LockMask 0xC0
-#define     SOM_LockShift 6
-#define SOM_DayNight                   4      // 2 Bits, Bit 5-4
-#define     SOM_DayNightMask 0x30
-#define     SOM_DayNightShift 4
-#define SOM_Scene0                     5      // 8 Bits, Bit 7-0
-#define SOM_Scene1                     6      // 8 Bits, Bit 7-0
-#define SOM_Scene2                     7      // 8 Bits, Bit 7-0
-#define SOM_Scene3                     8      // 8 Bits, Bit 7-0
-#define SOM_Scene4                     9      // 8 Bits, Bit 7-0
-#define SOM_Scene5                    10      // 8 Bits, Bit 7-0
-#define SOM_Scene6                    11      // 8 Bits, Bit 7-0
-#define SOM_Scene7                    12      // 8 Bits, Bit 7-0
-#define SOM_Scene8                    13      // 8 Bits, Bit 7-0
-#define SOM_Scene9                    14      // 8 Bits, Bit 7-0
-#define SOM_Scene10                   15      // 8 Bits, Bit 7-0
-#define SOM_Scene11                   16      // 8 Bits, Bit 7-0
-#define SOM_Scene12                   17      // 8 Bits, Bit 7-0
-#define SOM_Scene13                   18      // 8 Bits, Bit 7-0
-#define SOM_Scene14                   19      // 8 Bits, Bit 7-0
-#define SOM_Scene15                   20      // 8 Bits, Bit 7-0
-#define SOM_Scene16                   21      // 8 Bits, Bit 7-0
-#define SOM_Scene17                   22      // 8 Bits, Bit 7-0
-#define SOM_Scene18                   23      // 8 Bits, Bit 7-0
-#define SOM_Scene19                   24      // 8 Bits, Bit 7-0
-#define SOM_SceneAction0              25      // 8 Bits, Bit 7-0
-#define SOM_SceneAction1              26      // 8 Bits, Bit 7-0
-#define SOM_SceneAction2              27      // 8 Bits, Bit 7-0
-#define SOM_SceneAction3              28      // 8 Bits, Bit 7-0
-#define SOM_SceneAction4              29      // 8 Bits, Bit 7-0
-#define SOM_SceneAction5              30      // 8 Bits, Bit 7-0
-#define SOM_SceneAction6              31      // 8 Bits, Bit 7-0
-#define SOM_SceneAction7              32      // 8 Bits, Bit 7-0
-#define SOM_SceneAction8              33      // 8 Bits, Bit 7-0
-#define SOM_SceneAction9              34      // 8 Bits, Bit 7-0
-#define SOM_SceneAction10             35      // 8 Bits, Bit 7-0
-#define SOM_SceneAction11             36      // 8 Bits, Bit 7-0
-#define SOM_SceneAction12             37      // 8 Bits, Bit 7-0
-#define SOM_SceneAction13             38      // 8 Bits, Bit 7-0
-#define SOM_SceneAction14             39      // 8 Bits, Bit 7-0
-#define SOM_SceneAction15             40      // 8 Bits, Bit 7-0
-#define SOM_SceneAction16             41      // 8 Bits, Bit 7-0
-#define SOM_SceneAction17             42      // 8 Bits, Bit 7-0
-#define SOM_SceneAction18             43      // 8 Bits, Bit 7-0
-#define SOM_SceneAction19             44      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA0             45      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA1             46      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA2             47      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA3             48      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA4             49      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA5             50      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA6             51      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA7             52      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA8             53      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA9             54      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA10            55      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA11            56      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA12            57      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA13            58      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA14            59      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA15            60      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA16            61      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA17            62      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA18            63      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA19            64      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB0             45      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB1             46      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB2             47      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB3             48      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB4             49      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB5             50      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB6             51      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB7             52      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB8             53      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB9             54      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB10            55      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB11            56      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB12            57      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB13            58      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB14            59      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB15            60      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB16            61      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB17            62      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB18            63      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB19            64      // 8 Bits, Bit 7-0
-
-// Externe Logik
-#define ParamSOM_External                  ((bool)(knx.paramByte(SOM_External) & SOM_ExternalMask))
-// Szenen
-#define ParamSOM_Scenes                    ((bool)(knx.paramByte(SOM_Scenes) & SOM_ScenesMask))
-// 
-#define ParamSOM_VolumeDay                 (knx.paramByte(SOM_VolumeDay))
-// 
-#define ParamSOM_VolumeNight               (knx.paramByte(SOM_VolumeNight))
-// Zentrale Sperre
-#define ParamSOM_Lock                      ((knx.paramByte(SOM_Lock) & SOM_LockMask) >> SOM_LockShift)
-// Tag/Nacht-Objekt
-#define ParamSOM_DayNight                  ((knx.paramByte(SOM_DayNight) & SOM_DayNightMask) >> SOM_DayNightShift)
-// Scene0
-#define ParamSOM_Scene0                    (knx.paramByte(SOM_Scene0))
-// Scene1
-#define ParamSOM_Scene1                    (knx.paramByte(SOM_Scene1))
-// Scene2
-#define ParamSOM_Scene2                    (knx.paramByte(SOM_Scene2))
-// Scene3
-#define ParamSOM_Scene3                    (knx.paramByte(SOM_Scene3))
-// Scene4
-#define ParamSOM_Scene4                    (knx.paramByte(SOM_Scene4))
-// Scene5
-#define ParamSOM_Scene5                    (knx.paramByte(SOM_Scene5))
-// Scene6
-#define ParamSOM_Scene6                    (knx.paramByte(SOM_Scene6))
-// Scene7
-#define ParamSOM_Scene7                    (knx.paramByte(SOM_Scene7))
-// Scene8
-#define ParamSOM_Scene8                    (knx.paramByte(SOM_Scene8))
-// Scene9
-#define ParamSOM_Scene9                    (knx.paramByte(SOM_Scene9))
-// Scene10
-#define ParamSOM_Scene10                   (knx.paramByte(SOM_Scene10))
-// Scene11
-#define ParamSOM_Scene11                   (knx.paramByte(SOM_Scene11))
-// Scene12
-#define ParamSOM_Scene12                   (knx.paramByte(SOM_Scene12))
-// Scene13
-#define ParamSOM_Scene13                   (knx.paramByte(SOM_Scene13))
-// Scene14
-#define ParamSOM_Scene14                   (knx.paramByte(SOM_Scene14))
-// Scene15
-#define ParamSOM_Scene15                   (knx.paramByte(SOM_Scene15))
-// Scene16
-#define ParamSOM_Scene16                   (knx.paramByte(SOM_Scene16))
-// Scene17
-#define ParamSOM_Scene17                   (knx.paramByte(SOM_Scene17))
-// Scene18
-#define ParamSOM_Scene18                   (knx.paramByte(SOM_Scene18))
-// Scene19
-#define ParamSOM_Scene19                   (knx.paramByte(SOM_Scene19))
-// SceneAction0
-#define ParamSOM_SceneAction0              (knx.paramByte(SOM_SceneAction0))
-// SceneAction1
-#define ParamSOM_SceneAction1              (knx.paramByte(SOM_SceneAction1))
-// SceneAction2
-#define ParamSOM_SceneAction2              (knx.paramByte(SOM_SceneAction2))
-// SceneAction3
-#define ParamSOM_SceneAction3              (knx.paramByte(SOM_SceneAction3))
-// SceneAction4
-#define ParamSOM_SceneAction4              (knx.paramByte(SOM_SceneAction4))
-// SceneAction5
-#define ParamSOM_SceneAction5              (knx.paramByte(SOM_SceneAction5))
-// SceneAction6
-#define ParamSOM_SceneAction6              (knx.paramByte(SOM_SceneAction6))
-// SceneAction7
-#define ParamSOM_SceneAction7              (knx.paramByte(SOM_SceneAction7))
-// SceneAction8
-#define ParamSOM_SceneAction8              (knx.paramByte(SOM_SceneAction8))
-// SceneAction9
-#define ParamSOM_SceneAction9              (knx.paramByte(SOM_SceneAction9))
-// SceneAction10
-#define ParamSOM_SceneAction10             (knx.paramByte(SOM_SceneAction10))
-// SceneAction11
-#define ParamSOM_SceneAction11             (knx.paramByte(SOM_SceneAction11))
-// SceneAction12
-#define ParamSOM_SceneAction12             (knx.paramByte(SOM_SceneAction12))
-// SceneAction13
-#define ParamSOM_SceneAction13             (knx.paramByte(SOM_SceneAction13))
-// SceneAction14
-#define ParamSOM_SceneAction14             (knx.paramByte(SOM_SceneAction14))
-// SceneAction15
-#define ParamSOM_SceneAction15             (knx.paramByte(SOM_SceneAction15))
-// SceneAction16
-#define ParamSOM_SceneAction16             (knx.paramByte(SOM_SceneAction16))
-// SceneAction17
-#define ParamSOM_SceneAction17             (knx.paramByte(SOM_SceneAction17))
-// SceneAction18
-#define ParamSOM_SceneAction18             (knx.paramByte(SOM_SceneAction18))
-// SceneAction19
-#define ParamSOM_SceneAction19             (knx.paramByte(SOM_SceneAction19))
-// SceneTargetA0
-#define ParamSOM_SceneTargetA0             (knx.paramByte(SOM_SceneTargetA0))
-// SceneTargetA1
-#define ParamSOM_SceneTargetA1             (knx.paramByte(SOM_SceneTargetA1))
-// SceneTargetA2
-#define ParamSOM_SceneTargetA2             (knx.paramByte(SOM_SceneTargetA2))
-// SceneTargetA3
-#define ParamSOM_SceneTargetA3             (knx.paramByte(SOM_SceneTargetA3))
-// SceneTargetA4
-#define ParamSOM_SceneTargetA4             (knx.paramByte(SOM_SceneTargetA4))
-// SceneTargetA5
-#define ParamSOM_SceneTargetA5             (knx.paramByte(SOM_SceneTargetA5))
-// SceneTargetA6
-#define ParamSOM_SceneTargetA6             (knx.paramByte(SOM_SceneTargetA6))
-// SceneTargetA7
-#define ParamSOM_SceneTargetA7             (knx.paramByte(SOM_SceneTargetA7))
-// SceneTargetA8
-#define ParamSOM_SceneTargetA8             (knx.paramByte(SOM_SceneTargetA8))
-// SceneTargetA9
-#define ParamSOM_SceneTargetA9             (knx.paramByte(SOM_SceneTargetA9))
-// SceneTargetA10
-#define ParamSOM_SceneTargetA10            (knx.paramByte(SOM_SceneTargetA10))
-// SceneTargetA11
-#define ParamSOM_SceneTargetA11            (knx.paramByte(SOM_SceneTargetA11))
-// SceneTargetA12
-#define ParamSOM_SceneTargetA12            (knx.paramByte(SOM_SceneTargetA12))
-// SceneTargetA13
-#define ParamSOM_SceneTargetA13            (knx.paramByte(SOM_SceneTargetA13))
-// SceneTargetA14
-#define ParamSOM_SceneTargetA14            (knx.paramByte(SOM_SceneTargetA14))
-// SceneTargetA15
-#define ParamSOM_SceneTargetA15            (knx.paramByte(SOM_SceneTargetA15))
-// SceneTargetA16
-#define ParamSOM_SceneTargetA16            (knx.paramByte(SOM_SceneTargetA16))
-// SceneTargetA17
-#define ParamSOM_SceneTargetA17            (knx.paramByte(SOM_SceneTargetA17))
-// SceneTargetA18
-#define ParamSOM_SceneTargetA18            (knx.paramByte(SOM_SceneTargetA18))
-// SceneTargetA19
-#define ParamSOM_SceneTargetA19            (knx.paramByte(SOM_SceneTargetA19))
-// SceneTargetB0
-#define ParamSOM_SceneTargetB0             (knx.paramByte(SOM_SceneTargetB0))
-// SceneTargetB1
-#define ParamSOM_SceneTargetB1             (knx.paramByte(SOM_SceneTargetB1))
-// SceneTargetB2
-#define ParamSOM_SceneTargetB2             (knx.paramByte(SOM_SceneTargetB2))
-// SceneTargetB3
-#define ParamSOM_SceneTargetB3             (knx.paramByte(SOM_SceneTargetB3))
-// SceneTargetB4
-#define ParamSOM_SceneTargetB4             (knx.paramByte(SOM_SceneTargetB4))
-// SceneTargetB5
-#define ParamSOM_SceneTargetB5             (knx.paramByte(SOM_SceneTargetB5))
-// SceneTargetB6
-#define ParamSOM_SceneTargetB6             (knx.paramByte(SOM_SceneTargetB6))
-// SceneTargetB7
-#define ParamSOM_SceneTargetB7             (knx.paramByte(SOM_SceneTargetB7))
-// SceneTargetB8
-#define ParamSOM_SceneTargetB8             (knx.paramByte(SOM_SceneTargetB8))
-// SceneTargetB9
-#define ParamSOM_SceneTargetB9             (knx.paramByte(SOM_SceneTargetB9))
-// SceneTargetB0
-#define ParamSOM_SceneTargetB10            (knx.paramByte(SOM_SceneTargetB10))
-// SceneTargetB1
-#define ParamSOM_SceneTargetB11            (knx.paramByte(SOM_SceneTargetB11))
-// SceneTargetB2
-#define ParamSOM_SceneTargetB12            (knx.paramByte(SOM_SceneTargetB12))
-// SceneTargetB3
-#define ParamSOM_SceneTargetB13            (knx.paramByte(SOM_SceneTargetB13))
-// SceneTargetB4
-#define ParamSOM_SceneTargetB14            (knx.paramByte(SOM_SceneTargetB14))
-// SceneTargetB5
-#define ParamSOM_SceneTargetB15            (knx.paramByte(SOM_SceneTargetB15))
-// SceneTargetB6
-#define ParamSOM_SceneTargetB16            (knx.paramByte(SOM_SceneTargetB16))
-// SceneTargetB7
-#define ParamSOM_SceneTargetB17            (knx.paramByte(SOM_SceneTargetB17))
-// SceneTargetB8
-#define ParamSOM_SceneTargetB18            (knx.paramByte(SOM_SceneTargetB18))
-// SceneTargetB9
-#define ParamSOM_SceneTargetB19            (knx.paramByte(SOM_SceneTargetB19))
-
-#define SOM_KoStatus 20
-#define SOM_KoFile 21
-#define SOM_KoScene 28
-#define SOM_KoLock 29
-#define SOM_KoDayNight 27
-#define SOM_KoExternalFile 30
-#define SOM_KoExternalVolume 31
-#define SOM_KoExternalPriority 32
-
-// Zentral
-#define KoSOM_Status                    (knx.getGroupObject(SOM_KoStatus))
-// Zentral
-#define KoSOM_File                      (knx.getGroupObject(SOM_KoFile))
-// Zentral
-#define KoSOM_Scene                     (knx.getGroupObject(SOM_KoScene))
-// Zentral
-#define KoSOM_Lock                      (knx.getGroupObject(SOM_KoLock))
-// Zentral
-#define KoSOM_DayNight                  (knx.getGroupObject(SOM_KoDayNight))
-// Externe Logik
-#define KoSOM_ExternalFile              (knx.getGroupObject(SOM_KoExternalFile))
-// Externe Logik
-#define KoSOM_ExternalVolume            (knx.getGroupObject(SOM_KoExternalVolume))
-// Externe Logik
-#define KoSOM_ExternalPriority          (knx.getGroupObject(SOM_KoExternalPriority))
-
-#define SOM_ChannelCount 10
-
-// Parameter per channel
-#define SOM_ParamBlockOffset 85
-#define SOM_ParamBlockSize 12
-#define SOM_ParamCalcIndex(index) (index + SOM_ParamBlockOffset + _channelIndex * SOM_ParamBlockSize)
-
-#define SOM_TriggerState               0      // 1 Bit, Bit 7
-#define     SOM_TriggerStateMask 0x80
-#define     SOM_TriggerStateShift 7
-#define SOM_TriggerLock                0      // 2 Bits, Bit 5-4
-#define     SOM_TriggerLockMask 0x30
-#define     SOM_TriggerLockShift 4
-#define SOM_TriggerDayNight            0      // 2 Bits, Bit 3-2
-#define     SOM_TriggerDayNightMask 0x0C
-#define     SOM_TriggerDayNightShift 2
-#define SOM_TriggerPriority            1      // 3 Bits, Bit 7-5
-#define     SOM_TriggerPriorityMask 0xE0
-#define     SOM_TriggerPriorityShift 5
-#define SOM_TriggerControl             1      // 2 Bits, Bit 4-3
-#define     SOM_TriggerControlMask 0x18
-#define     SOM_TriggerControlShift 3
-#define SOM_TriggerDurationBase        2      // 2 Bits, Bit 7-6
-#define     SOM_TriggerDurationBaseMask 0xC0
-#define     SOM_TriggerDurationBaseShift 6
-#define SOM_TriggerDurationTime        2      // 14 Bits, Bit 13-0
-#define     SOM_TriggerDurationTimeMask 0x3FFF
-#define     SOM_TriggerDurationTimeShift 0
-#define SOM_TriggerFileDay             4      // uint16_t
-#define SOM_TriggerFileNight           6      // uint16_t
-#define SOM_TriggerVolumeDay           8      // uint8_t
-#define SOM_TriggerVolumeDayInactive   8      // uint8_t
-#define SOM_TriggerVolumeNight         9      // uint8_t
-#define SOM_TriggerVolumeNightInactive  9      // uint8_t
-#define SOM_TriggerRepeats            10      // uint16_t
-#define SOM_TriggerRepeatsInactive    10      // uint16_t
-
-// Trigger aktiv
-#define ParamSOM_TriggerState              ((bool)(knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerState)) & SOM_TriggerStateMask))
-// Sperrobjekt
-#define ParamSOM_TriggerLock               ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerLock)) & SOM_TriggerLockMask) >> SOM_TriggerLockShift)
-// Tag/Nacht-Objekt
-#define ParamSOM_TriggerDayNight           ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDayNight)) & SOM_TriggerDayNightMask) >> SOM_TriggerDayNightShift)
-// Priorität
-#define ParamSOM_TriggerPriority           ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerPriority)) & SOM_TriggerPriorityMask) >> SOM_TriggerPriorityShift)
-// Steuerung
-#define ParamSOM_TriggerControl            ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerControl)) & SOM_TriggerControlMask) >> SOM_TriggerControlShift)
-// Zeitbasis
-#define ParamSOM_TriggerDurationBase       ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDurationBase)) & SOM_TriggerDurationBaseMask) >> SOM_TriggerDurationBaseShift)
-// Zeit
-#define ParamSOM_TriggerDurationTime       (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime)) & SOM_TriggerDurationTimeMask)
-// Zeit (in Millisekunden)
-#define ParamSOM_TriggerDurationTimeMS     (paramDelay(knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime))))
-// Datei
-#define ParamSOM_TriggerFileDay            (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerFileDay)))
-// Datei
-#define ParamSOM_TriggerFileNight          (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerFileNight)))
-// Lautstärke
-#define ParamSOM_TriggerVolumeDay          (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeDay)))
-// Lautstärke
-#define ParamSOM_TriggerVolumeDayInactive  (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeDayInactive)))
-// Lautstärke
-#define ParamSOM_TriggerVolumeNight        (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeNight)))
-// Lautstärke
-#define ParamSOM_TriggerVolumeNightInactive (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeNightInactive)))
-// 
-#define ParamSOM_TriggerRepeats            (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerRepeats)))
-// 
-#define ParamSOM_TriggerRepeatsInactive    (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerRepeatsInactive)))
-
-// deprecated
-#define SOM_KoOffset 50
-
-// Communication objects per channel (multiple occurrence)
-#define SOM_KoBlockOffset 50
-#define SOM_KoBlockSize 4
-
-#define SOM_KoCalcNumber(index) (index + SOM_KoBlockOffset + _channelIndex * SOM_KoBlockSize)
-#define SOM_KoCalcIndex(number) ((number >= SOM_KoCalcNumber(0) && number < SOM_KoCalcNumber(SOM_KoBlockSize)) ? (number - SOM_KoOffset) % SOM_KoBlockSize : -1)
-
-#define SOM_KoTriggerTrigger 0
-#define SOM_KoTriggerStatus 1
-#define SOM_KoTriggerLock 2
-#define SOM_KoTriggerDayNight 3
-
-// 
-#define KoSOM_TriggerTrigger            (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerTrigger)))
-// 
-#define KoSOM_TriggerStatus             (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerStatus)))
-// 
-#define KoSOM_TriggerLock               (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerLock)))
-// 
-#define KoSOM_TriggerDayNight           (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerDayNight)))
-
-#define BI_ChannelCount 4
-
-// Parameter per channel
-#define BI_ParamBlockOffset 205
-#define BI_ParamBlockSize 4
-#define BI_ParamCalcIndex(index) (index + BI_ParamBlockOffset + _channelIndex * BI_ParamBlockSize)
-
-#define BI_ChannelActive              0      // 1 Bit, Bit 7
-#define     BI_ChannelActiveMask 0x80
-#define     BI_ChannelActiveShift 7
-#define BI_ChannelOpen                0      // 2 Bits, Bit 5-4
-#define     BI_ChannelOpenMask 0x30
-#define     BI_ChannelOpenShift 4
-#define BI_ChannelClose               0      // 2 Bits, Bit 3-2
-#define     BI_ChannelCloseMask 0x0C
-#define     BI_ChannelCloseShift 2
-#define BI_ChannelPeriodic            0      // 1 Bit, Bit 2
-#define     BI_ChannelPeriodicMask 0x04
-#define     BI_ChannelPeriodicShift 2
-#define BI_ChannelDebouncing          1      // 8 Bits, Bit 7-0
-#define BI_ChannelPeriodicBase        2      // 2 Bits, Bit 7-6
-#define     BI_ChannelPeriodicBaseMask 0xC0
-#define     BI_ChannelPeriodicBaseShift 6
-#define BI_ChannelPeriodicTime        2      // 14 Bits, Bit 13-0
-#define     BI_ChannelPeriodicTimeMask 0x3FFF
-#define     BI_ChannelPeriodicTimeShift 0
-
-// Aktiv
-#define ParamBI_ChannelActive             ((bool)(knx.paramByte(BI_ParamCalcIndex(BI_ChannelActive)) & BI_ChannelActiveMask))
-// Geöffnet
-#define ParamBI_ChannelOpen               ((knx.paramByte(BI_ParamCalcIndex(BI_ChannelOpen)) & BI_ChannelOpenMask) >> BI_ChannelOpenShift)
-// Geschlossen
-#define ParamBI_ChannelClose              ((knx.paramByte(BI_ParamCalcIndex(BI_ChannelClose)) & BI_ChannelCloseMask) >> BI_ChannelCloseShift)
-// Zyklisch senden
-#define ParamBI_ChannelPeriodic           ((bool)(knx.paramByte(BI_ParamCalcIndex(BI_ChannelPeriodic)) & BI_ChannelPeriodicMask))
-// Entprellung
-#define ParamBI_ChannelDebouncing         (knx.paramByte(BI_ParamCalcIndex(BI_ChannelDebouncing)))
-// Zeitbasis
-#define ParamBI_ChannelPeriodicBase       ((knx.paramByte(BI_ParamCalcIndex(BI_ChannelPeriodicBase)) & BI_ChannelPeriodicBaseMask) >> BI_ChannelPeriodicBaseShift)
-// Zeit
-#define ParamBI_ChannelPeriodicTime       (knx.paramWord(BI_ParamCalcIndex(BI_ChannelPeriodicTime)) & BI_ChannelPeriodicTimeMask)
-// Zeit (in Millisekunden)
-#define ParamBI_ChannelPeriodicTimeMS     (paramDelay(knx.paramWord(BI_ParamCalcIndex(BI_ChannelPeriodicTime))))
-
-// deprecated
-#define BI_KoOffset 41
-
-// Communication objects per channel (multiple occurrence)
-#define BI_KoBlockOffset 41
-#define BI_KoBlockSize 1
-
-#define BI_KoCalcNumber(index) (index + BI_KoBlockOffset + _channelIndex * BI_KoBlockSize)
-#define BI_KoCalcIndex(number) ((number >= BI_KoCalcNumber(0) && number < BI_KoCalcNumber(BI_KoBlockSize)) ? (number - BI_KoOffset) % BI_KoBlockSize : -1)
-
-#define BI_KoChannelOutput 0
-
-// 
-#define KoBI_ChannelOutput             (knx.getGroupObject(BI_KoCalcNumber(BI_KoChannelOutput)))
-
-#define LOG_NumChannels               221      // uint8_t
-#define LOG_StartupDelayBase          222      // 2 Bits, Bit 7-6
+#define LOG_NumChannels                0      // uint8_t
+#define LOG_StartupDelayBase           1      // 2 Bits, Bit 7-6
 #define     LOG_StartupDelayBaseMask 0xC0
 #define     LOG_StartupDelayBaseShift 6
-#define LOG_StartupDelayTime          222      // 14 Bits, Bit 13-0
+#define LOG_StartupDelayTime           1      // 14 Bits, Bit 13-0
 #define     LOG_StartupDelayTimeMask 0x3FFF
 #define     LOG_StartupDelayTimeShift 0
-#define LOG_HeartbeatDelayBase        224      // 2 Bits, Bit 7-6
+#define LOG_HeartbeatDelayBase         3      // 2 Bits, Bit 7-6
 #define     LOG_HeartbeatDelayBaseMask 0xC0
 #define     LOG_HeartbeatDelayBaseShift 6
-#define LOG_HeartbeatDelayTime        224      // 14 Bits, Bit 13-0
+#define LOG_HeartbeatDelayTime         3      // 14 Bits, Bit 13-0
 #define     LOG_HeartbeatDelayTimeMask 0x3FFF
 #define     LOG_HeartbeatDelayTimeShift 0
-#define LOG_ReadTimeDate              226      // 1 Bit, Bit 7
+#define LOG_ReadTimeDate               5      // 1 Bit, Bit 7
 #define     LOG_ReadTimeDateMask 0x80
 #define     LOG_ReadTimeDateShift 7
-#define LOG_BuzzerInstalled           226      // 1 Bit, Bit 6
+#define LOG_BuzzerInstalled            5      // 1 Bit, Bit 6
 #define     LOG_BuzzerInstalledMask 0x40
 #define     LOG_BuzzerInstalledShift 6
-#define LOG_LedInstalled              226      // 1 Bit, Bit 5
+#define LOG_LedInstalled               5      // 1 Bit, Bit 5
 #define     LOG_LedInstalledMask 0x20
 #define     LOG_LedInstalledShift 5
-#define LOG_CombinedTimeDate          226      // 1 Bit, Bit 4
+#define LOG_CombinedTimeDate           5      // 1 Bit, Bit 4
 #define     LOG_CombinedTimeDateMask 0x10
 #define     LOG_CombinedTimeDateShift 4
-#define LOG_VacationKo                226      // 1 Bit, Bit 2
+#define LOG_VacationKo                 5      // 1 Bit, Bit 2
 #define     LOG_VacationKoMask 0x04
 #define     LOG_VacationKoShift 2
-#define LOG_HolidayKo                 226      // 1 Bit, Bit 1
+#define LOG_HolidayKo                  5      // 1 Bit, Bit 1
 #define     LOG_HolidayKoMask 0x02
 #define     LOG_HolidayKoShift 1
-#define LOG_VacationRead              226      // 1 Bit, Bit 0
+#define LOG_VacationRead               5      // 1 Bit, Bit 0
 #define     LOG_VacationReadMask 0x01
 #define     LOG_VacationReadShift 0
-#define LOG_HolidaySend               227      // 1 Bit, Bit 7
+#define LOG_HolidaySend                6      // 1 Bit, Bit 7
 #define     LOG_HolidaySendMask 0x80
 #define     LOG_HolidaySendShift 7
-#define LOG_SummertimeAll             227      // 2 Bits, Bit 7-6
+#define LOG_SummertimeAll              6      // 2 Bits, Bit 7-6
 #define     LOG_SummertimeAllMask 0xC0
 #define     LOG_SummertimeAllShift 6
-#define LOG_SummertimeDE              227      // 2 Bits, Bit 7-6
+#define LOG_SummertimeDE               6      // 2 Bits, Bit 7-6
 #define     LOG_SummertimeDEMask 0xC0
 #define     LOG_SummertimeDEShift 6
-#define LOG_SummertimeWorld           227      // 2 Bits, Bit 7-6
+#define LOG_SummertimeWorld            6      // 2 Bits, Bit 7-6
 #define     LOG_SummertimeWorldMask 0xC0
 #define     LOG_SummertimeWorldShift 6
-#define LOG_SummertimeKO              227      // 2 Bits, Bit 7-6
+#define LOG_SummertimeKO               6      // 2 Bits, Bit 7-6
 #define     LOG_SummertimeKOMask 0xC0
 #define     LOG_SummertimeKOShift 6
-#define LOG_Diagnose                  227      // 1 Bit, Bit 3
+#define LOG_Diagnose                   6      // 1 Bit, Bit 3
 #define     LOG_DiagnoseMask 0x08
 #define     LOG_DiagnoseShift 3
-#define LOG_Watchdog                  227      // 1 Bit, Bit 2
+#define LOG_Watchdog                   6      // 1 Bit, Bit 2
 #define     LOG_WatchdogMask 0x04
 #define     LOG_WatchdogShift 2
-#define LOG_Neujahr                   228      // 1 Bit, Bit 7
+#define LOG_Neujahr                    7      // 1 Bit, Bit 7
 #define     LOG_NeujahrMask 0x80
 #define     LOG_NeujahrShift 7
-#define LOG_DreiKoenige               228      // 1 Bit, Bit 6
+#define LOG_DreiKoenige                7      // 1 Bit, Bit 6
 #define     LOG_DreiKoenigeMask 0x40
 #define     LOG_DreiKoenigeShift 6
-#define LOG_Weiberfastnacht           228      // 1 Bit, Bit 5
+#define LOG_Weiberfastnacht            7      // 1 Bit, Bit 5
 #define     LOG_WeiberfastnachtMask 0x20
 #define     LOG_WeiberfastnachtShift 5
-#define LOG_Rosenmontag               228      // 1 Bit, Bit 4
+#define LOG_Rosenmontag                7      // 1 Bit, Bit 4
 #define     LOG_RosenmontagMask 0x10
 #define     LOG_RosenmontagShift 4
-#define LOG_Fastnachtsdienstag        228      // 1 Bit, Bit 3
+#define LOG_Fastnachtsdienstag         7      // 1 Bit, Bit 3
 #define     LOG_FastnachtsdienstagMask 0x08
 #define     LOG_FastnachtsdienstagShift 3
-#define LOG_Aschermittwoch            228      // 1 Bit, Bit 2
+#define LOG_Aschermittwoch             7      // 1 Bit, Bit 2
 #define     LOG_AschermittwochMask 0x04
 #define     LOG_AschermittwochShift 2
-#define LOG_Frauentag                 228      // 1 Bit, Bit 1
+#define LOG_Frauentag                  7      // 1 Bit, Bit 1
 #define     LOG_FrauentagMask 0x02
 #define     LOG_FrauentagShift 1
-#define LOG_Gruendonnerstag           228      // 1 Bit, Bit 0
+#define LOG_Gruendonnerstag            7      // 1 Bit, Bit 0
 #define     LOG_GruendonnerstagMask 0x01
 #define     LOG_GruendonnerstagShift 0
-#define LOG_Karfreitag                229      // 1 Bit, Bit 7
+#define LOG_Karfreitag                 8      // 1 Bit, Bit 7
 #define     LOG_KarfreitagMask 0x80
 #define     LOG_KarfreitagShift 7
-#define LOG_Ostersonntag              229      // 1 Bit, Bit 6
+#define LOG_Ostersonntag               8      // 1 Bit, Bit 6
 #define     LOG_OstersonntagMask 0x40
 #define     LOG_OstersonntagShift 6
-#define LOG_Ostermontag               229      // 1 Bit, Bit 5
+#define LOG_Ostermontag                8      // 1 Bit, Bit 5
 #define     LOG_OstermontagMask 0x20
 #define     LOG_OstermontagShift 5
-#define LOG_TagDerArbeit              229      // 1 Bit, Bit 4
+#define LOG_TagDerArbeit               8      // 1 Bit, Bit 4
 #define     LOG_TagDerArbeitMask 0x10
 #define     LOG_TagDerArbeitShift 4
-#define LOG_Himmelfahrt               229      // 1 Bit, Bit 3
+#define LOG_Himmelfahrt                8      // 1 Bit, Bit 3
 #define     LOG_HimmelfahrtMask 0x08
 #define     LOG_HimmelfahrtShift 3
-#define LOG_Pfingstsonntag            229      // 1 Bit, Bit 2
+#define LOG_Pfingstsonntag             8      // 1 Bit, Bit 2
 #define     LOG_PfingstsonntagMask 0x04
 #define     LOG_PfingstsonntagShift 2
-#define LOG_Pfingstmontag             229      // 1 Bit, Bit 1
+#define LOG_Pfingstmontag              8      // 1 Bit, Bit 1
 #define     LOG_PfingstmontagMask 0x02
 #define     LOG_PfingstmontagShift 1
-#define LOG_Fronleichnam              229      // 1 Bit, Bit 0
+#define LOG_Fronleichnam               8      // 1 Bit, Bit 0
 #define     LOG_FronleichnamMask 0x01
 #define     LOG_FronleichnamShift 0
-#define LOG_Friedensfest              230      // 1 Bit, Bit 7
+#define LOG_Friedensfest               9      // 1 Bit, Bit 7
 #define     LOG_FriedensfestMask 0x80
 #define     LOG_FriedensfestShift 7
-#define LOG_MariaHimmelfahrt          230      // 1 Bit, Bit 6
+#define LOG_MariaHimmelfahrt           9      // 1 Bit, Bit 6
 #define     LOG_MariaHimmelfahrtMask 0x40
 #define     LOG_MariaHimmelfahrtShift 6
-#define LOG_DeutscheEinheit           230      // 1 Bit, Bit 5
+#define LOG_DeutscheEinheit            9      // 1 Bit, Bit 5
 #define     LOG_DeutscheEinheitMask 0x20
 #define     LOG_DeutscheEinheitShift 5
-#define LOG_Nationalfeiertag          231      // 1 Bit, Bit 1
+#define LOG_Nationalfeiertag          10      // 1 Bit, Bit 1
 #define     LOG_NationalfeiertagMask 0x02
 #define     LOG_NationalfeiertagShift 1
-#define LOG_Reformationstag           230      // 1 Bit, Bit 4
+#define LOG_Reformationstag            9      // 1 Bit, Bit 4
 #define     LOG_ReformationstagMask 0x10
 #define     LOG_ReformationstagShift 4
-#define LOG_Allerheiligen             230      // 1 Bit, Bit 3
+#define LOG_Allerheiligen              9      // 1 Bit, Bit 3
 #define     LOG_AllerheiligenMask 0x08
 #define     LOG_AllerheiligenShift 3
-#define LOG_BussBettag                230      // 1 Bit, Bit 2
+#define LOG_BussBettag                 9      // 1 Bit, Bit 2
 #define     LOG_BussBettagMask 0x04
 #define     LOG_BussBettagShift 2
-#define LOG_MariaEmpfaengnis          231      // 1 Bit, Bit 0
+#define LOG_MariaEmpfaengnis          10      // 1 Bit, Bit 0
 #define     LOG_MariaEmpfaengnisMask 0x01
 #define     LOG_MariaEmpfaengnisShift 0
-#define LOG_Advent1                   230      // 1 Bit, Bit 1
+#define LOG_Advent1                    9      // 1 Bit, Bit 1
 #define     LOG_Advent1Mask 0x02
 #define     LOG_Advent1Shift 1
-#define LOG_Advent2                   230      // 1 Bit, Bit 0
+#define LOG_Advent2                    9      // 1 Bit, Bit 0
 #define     LOG_Advent2Mask 0x01
 #define     LOG_Advent2Shift 0
-#define LOG_Advent3                   231      // 1 Bit, Bit 7
+#define LOG_Advent3                   10      // 1 Bit, Bit 7
 #define     LOG_Advent3Mask 0x80
 #define     LOG_Advent3Shift 7
-#define LOG_Advent4                   231      // 1 Bit, Bit 6
+#define LOG_Advent4                   10      // 1 Bit, Bit 6
 #define     LOG_Advent4Mask 0x40
 #define     LOG_Advent4Shift 6
-#define LOG_Heiligabend               231      // 1 Bit, Bit 5
+#define LOG_Heiligabend               10      // 1 Bit, Bit 5
 #define     LOG_HeiligabendMask 0x20
 #define     LOG_HeiligabendShift 5
-#define LOG_Weihnachtstag1            231      // 1 Bit, Bit 4
+#define LOG_Weihnachtstag1            10      // 1 Bit, Bit 4
 #define     LOG_Weihnachtstag1Mask 0x10
 #define     LOG_Weihnachtstag1Shift 4
-#define LOG_Weihnachtstag2            231      // 1 Bit, Bit 3
+#define LOG_Weihnachtstag2            10      // 1 Bit, Bit 3
 #define     LOG_Weihnachtstag2Mask 0x08
 #define     LOG_Weihnachtstag2Shift 3
-#define LOG_Silvester                 231      // 1 Bit, Bit 2
+#define LOG_Silvester                 10      // 1 Bit, Bit 2
 #define     LOG_SilvesterMask 0x04
 #define     LOG_SilvesterShift 2
-#define LOG_Latitude                  232      // float
-#define LOG_Longitude                 236      // float
-#define LOG_BuzzerSilent              240      // uint16_t
-#define LOG_BuzzerNormal              242      // uint16_t
-#define LOG_BuzzerLoud                244      // uint16_t
-#define LOG_LedMapping                246      // 3 Bits, Bit 7-5
+#define LOG_Latitude                  11      // float
+#define LOG_Longitude                 15      // float
+#define LOG_BuzzerSilent              19      // uint16_t
+#define LOG_BuzzerNormal              21      // uint16_t
+#define LOG_BuzzerLoud                23      // uint16_t
+#define LOG_LedMapping                25      // 3 Bits, Bit 7-5
 #define     LOG_LedMappingMask 0xE0
 #define     LOG_LedMappingShift 5
-#define LOG_Timezone                  246      // 5 Bits, Bit 4-0
+#define LOG_Timezone                  25      // 5 Bits, Bit 4-0
 #define     LOG_TimezoneMask 0x1F
 #define     LOG_TimezoneShift 0
-#define LOG_TimezoneSign              246      // 1 Bit, Bit 4
+#define LOG_TimezoneSign              25      // 1 Bit, Bit 4
 #define     LOG_TimezoneSignMask 0x10
 #define     LOG_TimezoneSignShift 4
-#define LOG_TimezoneValue             246      // 4 Bits, Bit 3-0
+#define LOG_TimezoneValue             25      // 4 Bits, Bit 3-0
 #define     LOG_TimezoneValueMask 0x0F
 #define     LOG_TimezoneValueShift 0
 
@@ -795,7 +348,7 @@
 #define LOG_ChannelCount 30
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 247
+#define LOG_ParamBlockOffset 26
 #define LOG_ParamBlockSize 86
 #define LOG_ParamCalcIndex(index) (index + LOG_ParamBlockOffset + _channelIndex * LOG_ParamBlockSize)
 
@@ -2389,6 +1942,453 @@
 #define KoLOG_KOfE2                     (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfE2)))
 // Ausgang
 #define KoLOG_KOfO                      (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfO)))
+
+#define SOM_External                  2607      // 1 Bit, Bit 7
+#define     SOM_ExternalMask 0x80
+#define     SOM_ExternalShift 7
+#define SOM_Scenes                    2607      // 1 Bit, Bit 6
+#define     SOM_ScenesMask 0x40
+#define     SOM_ScenesShift 6
+#define SOM_VolumeDay                 2608      // uint8_t
+#define SOM_VolumeNight               2609      // uint8_t
+#define SOM_Lock                      2610      // 2 Bits, Bit 7-6
+#define     SOM_LockMask 0xC0
+#define     SOM_LockShift 6
+#define SOM_DayNight                  2610      // 2 Bits, Bit 5-4
+#define     SOM_DayNightMask 0x30
+#define     SOM_DayNightShift 4
+#define SOM_Scene0                    2611      // 8 Bits, Bit 7-0
+#define SOM_Scene1                    2612      // 8 Bits, Bit 7-0
+#define SOM_Scene2                    2613      // 8 Bits, Bit 7-0
+#define SOM_Scene3                    2614      // 8 Bits, Bit 7-0
+#define SOM_Scene4                    2615      // 8 Bits, Bit 7-0
+#define SOM_Scene5                    2616      // 8 Bits, Bit 7-0
+#define SOM_Scene6                    2617      // 8 Bits, Bit 7-0
+#define SOM_Scene7                    2618      // 8 Bits, Bit 7-0
+#define SOM_Scene8                    2619      // 8 Bits, Bit 7-0
+#define SOM_Scene9                    2620      // 8 Bits, Bit 7-0
+#define SOM_Scene10                   2621      // 8 Bits, Bit 7-0
+#define SOM_Scene11                   2622      // 8 Bits, Bit 7-0
+#define SOM_Scene12                   2623      // 8 Bits, Bit 7-0
+#define SOM_Scene13                   2624      // 8 Bits, Bit 7-0
+#define SOM_Scene14                   2625      // 8 Bits, Bit 7-0
+#define SOM_Scene15                   2626      // 8 Bits, Bit 7-0
+#define SOM_Scene16                   2627      // 8 Bits, Bit 7-0
+#define SOM_Scene17                   2628      // 8 Bits, Bit 7-0
+#define SOM_Scene18                   2629      // 8 Bits, Bit 7-0
+#define SOM_Scene19                   2630      // 8 Bits, Bit 7-0
+#define SOM_SceneAction0              2631      // 8 Bits, Bit 7-0
+#define SOM_SceneAction1              2632      // 8 Bits, Bit 7-0
+#define SOM_SceneAction2              2633      // 8 Bits, Bit 7-0
+#define SOM_SceneAction3              2634      // 8 Bits, Bit 7-0
+#define SOM_SceneAction4              2635      // 8 Bits, Bit 7-0
+#define SOM_SceneAction5              2636      // 8 Bits, Bit 7-0
+#define SOM_SceneAction6              2637      // 8 Bits, Bit 7-0
+#define SOM_SceneAction7              2638      // 8 Bits, Bit 7-0
+#define SOM_SceneAction8              2639      // 8 Bits, Bit 7-0
+#define SOM_SceneAction9              2640      // 8 Bits, Bit 7-0
+#define SOM_SceneAction10             2641      // 8 Bits, Bit 7-0
+#define SOM_SceneAction11             2642      // 8 Bits, Bit 7-0
+#define SOM_SceneAction12             2643      // 8 Bits, Bit 7-0
+#define SOM_SceneAction13             2644      // 8 Bits, Bit 7-0
+#define SOM_SceneAction14             2645      // 8 Bits, Bit 7-0
+#define SOM_SceneAction15             2646      // 8 Bits, Bit 7-0
+#define SOM_SceneAction16             2647      // 8 Bits, Bit 7-0
+#define SOM_SceneAction17             2648      // 8 Bits, Bit 7-0
+#define SOM_SceneAction18             2649      // 8 Bits, Bit 7-0
+#define SOM_SceneAction19             2650      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA0             2651      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA1             2652      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA2             2653      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA3             2654      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA4             2655      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA5             2656      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA6             2657      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA7             2658      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA8             2659      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA9             2660      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA10            2661      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA11            2662      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA12            2663      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA13            2664      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA14            2665      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA15            2666      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA16            2667      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA17            2668      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA18            2669      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA19            2670      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB0             2651      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB1             2652      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB2             2653      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB3             2654      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB4             2655      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB5             2656      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB6             2657      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB7             2658      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB8             2659      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB9             2660      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB10            2661      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB11            2662      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB12            2663      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB13            2664      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB14            2665      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB15            2666      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB16            2667      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB17            2668      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB18            2669      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB19            2670      // 8 Bits, Bit 7-0
+
+// Externe Logik
+#define ParamSOM_External                  ((bool)(knx.paramByte(SOM_External) & SOM_ExternalMask))
+// Szenen
+#define ParamSOM_Scenes                    ((bool)(knx.paramByte(SOM_Scenes) & SOM_ScenesMask))
+// 
+#define ParamSOM_VolumeDay                 (knx.paramByte(SOM_VolumeDay))
+// 
+#define ParamSOM_VolumeNight               (knx.paramByte(SOM_VolumeNight))
+// Zentrale Sperre
+#define ParamSOM_Lock                      ((knx.paramByte(SOM_Lock) & SOM_LockMask) >> SOM_LockShift)
+// Tag/Nacht-Objekt
+#define ParamSOM_DayNight                  ((knx.paramByte(SOM_DayNight) & SOM_DayNightMask) >> SOM_DayNightShift)
+// Scene0
+#define ParamSOM_Scene0                    (knx.paramByte(SOM_Scene0))
+// Scene1
+#define ParamSOM_Scene1                    (knx.paramByte(SOM_Scene1))
+// Scene2
+#define ParamSOM_Scene2                    (knx.paramByte(SOM_Scene2))
+// Scene3
+#define ParamSOM_Scene3                    (knx.paramByte(SOM_Scene3))
+// Scene4
+#define ParamSOM_Scene4                    (knx.paramByte(SOM_Scene4))
+// Scene5
+#define ParamSOM_Scene5                    (knx.paramByte(SOM_Scene5))
+// Scene6
+#define ParamSOM_Scene6                    (knx.paramByte(SOM_Scene6))
+// Scene7
+#define ParamSOM_Scene7                    (knx.paramByte(SOM_Scene7))
+// Scene8
+#define ParamSOM_Scene8                    (knx.paramByte(SOM_Scene8))
+// Scene9
+#define ParamSOM_Scene9                    (knx.paramByte(SOM_Scene9))
+// Scene10
+#define ParamSOM_Scene10                   (knx.paramByte(SOM_Scene10))
+// Scene11
+#define ParamSOM_Scene11                   (knx.paramByte(SOM_Scene11))
+// Scene12
+#define ParamSOM_Scene12                   (knx.paramByte(SOM_Scene12))
+// Scene13
+#define ParamSOM_Scene13                   (knx.paramByte(SOM_Scene13))
+// Scene14
+#define ParamSOM_Scene14                   (knx.paramByte(SOM_Scene14))
+// Scene15
+#define ParamSOM_Scene15                   (knx.paramByte(SOM_Scene15))
+// Scene16
+#define ParamSOM_Scene16                   (knx.paramByte(SOM_Scene16))
+// Scene17
+#define ParamSOM_Scene17                   (knx.paramByte(SOM_Scene17))
+// Scene18
+#define ParamSOM_Scene18                   (knx.paramByte(SOM_Scene18))
+// Scene19
+#define ParamSOM_Scene19                   (knx.paramByte(SOM_Scene19))
+// SceneAction0
+#define ParamSOM_SceneAction0              (knx.paramByte(SOM_SceneAction0))
+// SceneAction1
+#define ParamSOM_SceneAction1              (knx.paramByte(SOM_SceneAction1))
+// SceneAction2
+#define ParamSOM_SceneAction2              (knx.paramByte(SOM_SceneAction2))
+// SceneAction3
+#define ParamSOM_SceneAction3              (knx.paramByte(SOM_SceneAction3))
+// SceneAction4
+#define ParamSOM_SceneAction4              (knx.paramByte(SOM_SceneAction4))
+// SceneAction5
+#define ParamSOM_SceneAction5              (knx.paramByte(SOM_SceneAction5))
+// SceneAction6
+#define ParamSOM_SceneAction6              (knx.paramByte(SOM_SceneAction6))
+// SceneAction7
+#define ParamSOM_SceneAction7              (knx.paramByte(SOM_SceneAction7))
+// SceneAction8
+#define ParamSOM_SceneAction8              (knx.paramByte(SOM_SceneAction8))
+// SceneAction9
+#define ParamSOM_SceneAction9              (knx.paramByte(SOM_SceneAction9))
+// SceneAction10
+#define ParamSOM_SceneAction10             (knx.paramByte(SOM_SceneAction10))
+// SceneAction11
+#define ParamSOM_SceneAction11             (knx.paramByte(SOM_SceneAction11))
+// SceneAction12
+#define ParamSOM_SceneAction12             (knx.paramByte(SOM_SceneAction12))
+// SceneAction13
+#define ParamSOM_SceneAction13             (knx.paramByte(SOM_SceneAction13))
+// SceneAction14
+#define ParamSOM_SceneAction14             (knx.paramByte(SOM_SceneAction14))
+// SceneAction15
+#define ParamSOM_SceneAction15             (knx.paramByte(SOM_SceneAction15))
+// SceneAction16
+#define ParamSOM_SceneAction16             (knx.paramByte(SOM_SceneAction16))
+// SceneAction17
+#define ParamSOM_SceneAction17             (knx.paramByte(SOM_SceneAction17))
+// SceneAction18
+#define ParamSOM_SceneAction18             (knx.paramByte(SOM_SceneAction18))
+// SceneAction19
+#define ParamSOM_SceneAction19             (knx.paramByte(SOM_SceneAction19))
+// SceneTargetA0
+#define ParamSOM_SceneTargetA0             (knx.paramByte(SOM_SceneTargetA0))
+// SceneTargetA1
+#define ParamSOM_SceneTargetA1             (knx.paramByte(SOM_SceneTargetA1))
+// SceneTargetA2
+#define ParamSOM_SceneTargetA2             (knx.paramByte(SOM_SceneTargetA2))
+// SceneTargetA3
+#define ParamSOM_SceneTargetA3             (knx.paramByte(SOM_SceneTargetA3))
+// SceneTargetA4
+#define ParamSOM_SceneTargetA4             (knx.paramByte(SOM_SceneTargetA4))
+// SceneTargetA5
+#define ParamSOM_SceneTargetA5             (knx.paramByte(SOM_SceneTargetA5))
+// SceneTargetA6
+#define ParamSOM_SceneTargetA6             (knx.paramByte(SOM_SceneTargetA6))
+// SceneTargetA7
+#define ParamSOM_SceneTargetA7             (knx.paramByte(SOM_SceneTargetA7))
+// SceneTargetA8
+#define ParamSOM_SceneTargetA8             (knx.paramByte(SOM_SceneTargetA8))
+// SceneTargetA9
+#define ParamSOM_SceneTargetA9             (knx.paramByte(SOM_SceneTargetA9))
+// SceneTargetA10
+#define ParamSOM_SceneTargetA10            (knx.paramByte(SOM_SceneTargetA10))
+// SceneTargetA11
+#define ParamSOM_SceneTargetA11            (knx.paramByte(SOM_SceneTargetA11))
+// SceneTargetA12
+#define ParamSOM_SceneTargetA12            (knx.paramByte(SOM_SceneTargetA12))
+// SceneTargetA13
+#define ParamSOM_SceneTargetA13            (knx.paramByte(SOM_SceneTargetA13))
+// SceneTargetA14
+#define ParamSOM_SceneTargetA14            (knx.paramByte(SOM_SceneTargetA14))
+// SceneTargetA15
+#define ParamSOM_SceneTargetA15            (knx.paramByte(SOM_SceneTargetA15))
+// SceneTargetA16
+#define ParamSOM_SceneTargetA16            (knx.paramByte(SOM_SceneTargetA16))
+// SceneTargetA17
+#define ParamSOM_SceneTargetA17            (knx.paramByte(SOM_SceneTargetA17))
+// SceneTargetA18
+#define ParamSOM_SceneTargetA18            (knx.paramByte(SOM_SceneTargetA18))
+// SceneTargetA19
+#define ParamSOM_SceneTargetA19            (knx.paramByte(SOM_SceneTargetA19))
+// SceneTargetB0
+#define ParamSOM_SceneTargetB0             (knx.paramByte(SOM_SceneTargetB0))
+// SceneTargetB1
+#define ParamSOM_SceneTargetB1             (knx.paramByte(SOM_SceneTargetB1))
+// SceneTargetB2
+#define ParamSOM_SceneTargetB2             (knx.paramByte(SOM_SceneTargetB2))
+// SceneTargetB3
+#define ParamSOM_SceneTargetB3             (knx.paramByte(SOM_SceneTargetB3))
+// SceneTargetB4
+#define ParamSOM_SceneTargetB4             (knx.paramByte(SOM_SceneTargetB4))
+// SceneTargetB5
+#define ParamSOM_SceneTargetB5             (knx.paramByte(SOM_SceneTargetB5))
+// SceneTargetB6
+#define ParamSOM_SceneTargetB6             (knx.paramByte(SOM_SceneTargetB6))
+// SceneTargetB7
+#define ParamSOM_SceneTargetB7             (knx.paramByte(SOM_SceneTargetB7))
+// SceneTargetB8
+#define ParamSOM_SceneTargetB8             (knx.paramByte(SOM_SceneTargetB8))
+// SceneTargetB9
+#define ParamSOM_SceneTargetB9             (knx.paramByte(SOM_SceneTargetB9))
+// SceneTargetB0
+#define ParamSOM_SceneTargetB10            (knx.paramByte(SOM_SceneTargetB10))
+// SceneTargetB1
+#define ParamSOM_SceneTargetB11            (knx.paramByte(SOM_SceneTargetB11))
+// SceneTargetB2
+#define ParamSOM_SceneTargetB12            (knx.paramByte(SOM_SceneTargetB12))
+// SceneTargetB3
+#define ParamSOM_SceneTargetB13            (knx.paramByte(SOM_SceneTargetB13))
+// SceneTargetB4
+#define ParamSOM_SceneTargetB14            (knx.paramByte(SOM_SceneTargetB14))
+// SceneTargetB5
+#define ParamSOM_SceneTargetB15            (knx.paramByte(SOM_SceneTargetB15))
+// SceneTargetB6
+#define ParamSOM_SceneTargetB16            (knx.paramByte(SOM_SceneTargetB16))
+// SceneTargetB7
+#define ParamSOM_SceneTargetB17            (knx.paramByte(SOM_SceneTargetB17))
+// SceneTargetB8
+#define ParamSOM_SceneTargetB18            (knx.paramByte(SOM_SceneTargetB18))
+// SceneTargetB9
+#define ParamSOM_SceneTargetB19            (knx.paramByte(SOM_SceneTargetB19))
+
+#define SOM_KoStatus 20
+#define SOM_KoFile 21
+#define SOM_KoScene 28
+#define SOM_KoLock 29
+#define SOM_KoDayNight 27
+#define SOM_KoExternalFile 30
+#define SOM_KoExternalVolume 31
+#define SOM_KoExternalPriority 32
+
+// Zentral
+#define KoSOM_Status                    (knx.getGroupObject(SOM_KoStatus))
+// Zentral
+#define KoSOM_File                      (knx.getGroupObject(SOM_KoFile))
+// Zentral
+#define KoSOM_Scene                     (knx.getGroupObject(SOM_KoScene))
+// Zentral
+#define KoSOM_Lock                      (knx.getGroupObject(SOM_KoLock))
+// Zentral
+#define KoSOM_DayNight                  (knx.getGroupObject(SOM_KoDayNight))
+// Externe Logik
+#define KoSOM_ExternalFile              (knx.getGroupObject(SOM_KoExternalFile))
+// Externe Logik
+#define KoSOM_ExternalVolume            (knx.getGroupObject(SOM_KoExternalVolume))
+// Externe Logik
+#define KoSOM_ExternalPriority          (knx.getGroupObject(SOM_KoExternalPriority))
+
+#define SOM_ChannelCount 10
+
+// Parameter per channel
+#define SOM_ParamBlockOffset 2691
+#define SOM_ParamBlockSize 12
+#define SOM_ParamCalcIndex(index) (index + SOM_ParamBlockOffset + _channelIndex * SOM_ParamBlockSize)
+
+#define SOM_TriggerState               0      // 1 Bit, Bit 7
+#define     SOM_TriggerStateMask 0x80
+#define     SOM_TriggerStateShift 7
+#define SOM_TriggerLock                0      // 2 Bits, Bit 5-4
+#define     SOM_TriggerLockMask 0x30
+#define     SOM_TriggerLockShift 4
+#define SOM_TriggerDayNight            0      // 2 Bits, Bit 3-2
+#define     SOM_TriggerDayNightMask 0x0C
+#define     SOM_TriggerDayNightShift 2
+#define SOM_TriggerPriority            1      // 3 Bits, Bit 7-5
+#define     SOM_TriggerPriorityMask 0xE0
+#define     SOM_TriggerPriorityShift 5
+#define SOM_TriggerControl             1      // 2 Bits, Bit 4-3
+#define     SOM_TriggerControlMask 0x18
+#define     SOM_TriggerControlShift 3
+#define SOM_TriggerDurationBase        2      // 2 Bits, Bit 7-6
+#define     SOM_TriggerDurationBaseMask 0xC0
+#define     SOM_TriggerDurationBaseShift 6
+#define SOM_TriggerDurationTime        2      // 14 Bits, Bit 13-0
+#define     SOM_TriggerDurationTimeMask 0x3FFF
+#define     SOM_TriggerDurationTimeShift 0
+#define SOM_TriggerFileDay             4      // uint16_t
+#define SOM_TriggerFileNight           6      // uint16_t
+#define SOM_TriggerVolumeDay           8      // uint8_t
+#define SOM_TriggerVolumeDayInactive   8      // uint8_t
+#define SOM_TriggerVolumeNight         9      // uint8_t
+#define SOM_TriggerVolumeNightInactive  9      // uint8_t
+#define SOM_TriggerRepeats            10      // uint16_t
+#define SOM_TriggerRepeatsInactive    10      // uint16_t
+
+// Trigger aktiv
+#define ParamSOM_TriggerState              ((bool)(knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerState)) & SOM_TriggerStateMask))
+// Sperrobjekt
+#define ParamSOM_TriggerLock               ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerLock)) & SOM_TriggerLockMask) >> SOM_TriggerLockShift)
+// Tag/Nacht-Objekt
+#define ParamSOM_TriggerDayNight           ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDayNight)) & SOM_TriggerDayNightMask) >> SOM_TriggerDayNightShift)
+// Priorität
+#define ParamSOM_TriggerPriority           ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerPriority)) & SOM_TriggerPriorityMask) >> SOM_TriggerPriorityShift)
+// Steuerung
+#define ParamSOM_TriggerControl            ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerControl)) & SOM_TriggerControlMask) >> SOM_TriggerControlShift)
+// Zeitbasis
+#define ParamSOM_TriggerDurationBase       ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDurationBase)) & SOM_TriggerDurationBaseMask) >> SOM_TriggerDurationBaseShift)
+// Zeit
+#define ParamSOM_TriggerDurationTime       (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime)) & SOM_TriggerDurationTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSOM_TriggerDurationTimeMS     (paramDelay(knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerDurationTime))))
+// Datei
+#define ParamSOM_TriggerFileDay            (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerFileDay)))
+// Datei
+#define ParamSOM_TriggerFileNight          (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerFileNight)))
+// Lautstärke
+#define ParamSOM_TriggerVolumeDay          (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeDay)))
+// Lautstärke
+#define ParamSOM_TriggerVolumeDayInactive  (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeDayInactive)))
+// Lautstärke
+#define ParamSOM_TriggerVolumeNight        (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeNight)))
+// Lautstärke
+#define ParamSOM_TriggerVolumeNightInactive (knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerVolumeNightInactive)))
+// 
+#define ParamSOM_TriggerRepeats            (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerRepeats)))
+// 
+#define ParamSOM_TriggerRepeatsInactive    (knx.paramWord(SOM_ParamCalcIndex(SOM_TriggerRepeatsInactive)))
+
+// deprecated
+#define SOM_KoOffset 50
+
+// Communication objects per channel (multiple occurrence)
+#define SOM_KoBlockOffset 50
+#define SOM_KoBlockSize 4
+
+#define SOM_KoCalcNumber(index) (index + SOM_KoBlockOffset + _channelIndex * SOM_KoBlockSize)
+#define SOM_KoCalcIndex(number) ((number >= SOM_KoCalcNumber(0) && number < SOM_KoCalcNumber(SOM_KoBlockSize)) ? (number - SOM_KoOffset) % SOM_KoBlockSize : -1)
+
+#define SOM_KoTriggerTrigger 0
+#define SOM_KoTriggerStatus 1
+#define SOM_KoTriggerLock 2
+#define SOM_KoTriggerDayNight 3
+
+// 
+#define KoSOM_TriggerTrigger            (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerTrigger)))
+// 
+#define KoSOM_TriggerStatus             (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerStatus)))
+// 
+#define KoSOM_TriggerLock               (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerLock)))
+// 
+#define KoSOM_TriggerDayNight           (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerDayNight)))
+
+#define BI_ChannelCount 4
+
+// Parameter per channel
+#define BI_ParamBlockOffset 2811
+#define BI_ParamBlockSize 4
+#define BI_ParamCalcIndex(index) (index + BI_ParamBlockOffset + _channelIndex * BI_ParamBlockSize)
+
+#define BI_ChannelActive              0      // 1 Bit, Bit 7
+#define     BI_ChannelActiveMask 0x80
+#define     BI_ChannelActiveShift 7
+#define BI_ChannelOpen                0      // 2 Bits, Bit 5-4
+#define     BI_ChannelOpenMask 0x30
+#define     BI_ChannelOpenShift 4
+#define BI_ChannelClose               0      // 2 Bits, Bit 3-2
+#define     BI_ChannelCloseMask 0x0C
+#define     BI_ChannelCloseShift 2
+#define BI_ChannelPeriodic            0      // 1 Bit, Bit 2
+#define     BI_ChannelPeriodicMask 0x04
+#define     BI_ChannelPeriodicShift 2
+#define BI_ChannelDebouncing          1      // 8 Bits, Bit 7-0
+#define BI_ChannelPeriodicBase        2      // 2 Bits, Bit 7-6
+#define     BI_ChannelPeriodicBaseMask 0xC0
+#define     BI_ChannelPeriodicBaseShift 6
+#define BI_ChannelPeriodicTime        2      // 14 Bits, Bit 13-0
+#define     BI_ChannelPeriodicTimeMask 0x3FFF
+#define     BI_ChannelPeriodicTimeShift 0
+
+// Aktiv
+#define ParamBI_ChannelActive             ((bool)(knx.paramByte(BI_ParamCalcIndex(BI_ChannelActive)) & BI_ChannelActiveMask))
+// Geöffnet
+#define ParamBI_ChannelOpen               ((knx.paramByte(BI_ParamCalcIndex(BI_ChannelOpen)) & BI_ChannelOpenMask) >> BI_ChannelOpenShift)
+// Geschlossen
+#define ParamBI_ChannelClose              ((knx.paramByte(BI_ParamCalcIndex(BI_ChannelClose)) & BI_ChannelCloseMask) >> BI_ChannelCloseShift)
+// Zyklisch senden
+#define ParamBI_ChannelPeriodic           ((bool)(knx.paramByte(BI_ParamCalcIndex(BI_ChannelPeriodic)) & BI_ChannelPeriodicMask))
+// Entprellung
+#define ParamBI_ChannelDebouncing         (knx.paramByte(BI_ParamCalcIndex(BI_ChannelDebouncing)))
+// Zeitbasis
+#define ParamBI_ChannelPeriodicBase       ((knx.paramByte(BI_ParamCalcIndex(BI_ChannelPeriodicBase)) & BI_ChannelPeriodicBaseMask) >> BI_ChannelPeriodicBaseShift)
+// Zeit
+#define ParamBI_ChannelPeriodicTime       (knx.paramWord(BI_ParamCalcIndex(BI_ChannelPeriodicTime)) & BI_ChannelPeriodicTimeMask)
+// Zeit (in Millisekunden)
+#define ParamBI_ChannelPeriodicTimeMS     (paramDelay(knx.paramWord(BI_ParamCalcIndex(BI_ChannelPeriodicTime))))
+
+// deprecated
+#define BI_KoOffset 41
+
+// Communication objects per channel (multiple occurrence)
+#define BI_KoBlockOffset 41
+#define BI_KoBlockSize 1
+
+#define BI_KoCalcNumber(index) (index + BI_KoBlockOffset + _channelIndex * BI_KoBlockSize)
+#define BI_KoCalcIndex(number) ((number >= BI_KoCalcNumber(0) && number < BI_KoCalcNumber(BI_KoBlockSize)) ? (number - BI_KoOffset) % BI_KoBlockSize : -1)
+
+#define BI_KoChannelOutput 0
+
+// 
+#define KoBI_ChannelOutput             (knx.getGroupObject(BI_KoCalcNumber(BI_KoChannelOutput)))
 
 #define BTN_ReactionTimeMultiClick    2827      // 8 Bits, Bit 7-0
 #define BTN_ReactionTimeLong          2828      // 8 Bits, Bit 7-0
