@@ -1,20 +1,21 @@
 #pragma once
 
 #ifndef HARDWARE_PLAYER
+    #include "AudioFileSourceFunction.h"
     #include "AudioFileSourceLittleFS.h"
     #include "AudioGeneratorMP3.h"
+    #include "AudioGeneratorWAV.h"
     #include "AudioOutputSOM.h"
     #include "SoundPlayer.h"
 
 class SoundPlayerSoftware : public SoundPlayer
 {
   private:
-    AudioFileSource *audioSource = nullptr;
-    AudioGeneratorMP3 *audioGenerator = nullptr;
-    AudioOutputSOM *audioOutput;
+    AudioFileSource *_audioSource = nullptr;
+    AudioGenerator *_audioGenerator = nullptr;
+    AudioOutputSOM *_audioOutput = nullptr;
 
     void playNextPlay() override;
-    void playFileNumber(uint16_t file) override;
 
     void processStatus();
     void stopCurrentPlay();
@@ -25,6 +26,6 @@ class SoundPlayerSoftware : public SoundPlayer
     void setup() override;
     void loop() override;
 
-    // static void callbackStatus(void *cbData, int code, const char *string);
+    static void callbackStatus(void *cbData, int code, const char *string);
 };
 #endif

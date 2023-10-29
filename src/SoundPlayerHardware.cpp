@@ -31,7 +31,7 @@ void SoundPlayerHardware::setup()
     Serial2.begin(9600);
 
     delay(50);
-    
+
     stopCurrentPlay();
     logTraceP("completed");
     logIndentDown();
@@ -83,8 +83,20 @@ void SoundPlayerHardware::playNextPlay()
     // set repeats
     configureRepeats(_nextPlay.repeats);
 
-    // play file
-    playFileNumber(_nextPlay.file);
+    // 10 Bytes /00000.MP3
+    std::stringstream filePathBuild;
+    filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(_nextPlay.file) << "*MP3";
+    const std::string filePath = filePathBuild.str();
+
+    // 14 = 4 CMD + 10 PATH
+    uint8_t data[14] = {0xAA, 0x08, 11 /* len + 1 */, 0x02};
+    uint8_t pos = 4;
+    for (char const &c : filePath)
+    {
+        data[pos] = c;
+        pos++;
+    }
+    sendData(data, 14);
 }
 
 void SoundPlayerHardware::requestStatus()
@@ -205,23 +217,5 @@ void SoundPlayerHardware::configureRepeats(uint16_t repeats)
     data2[3] = repeats >> 8;
     data2[4] = repeats & 0xff;
     sendData(data2, 5);
-}
-
-void SoundPlayerHardware::playFileNumber(uint16_t file)
-{
-    // 10 Bytes /00000.MP3
-    std::stringstream filePathBuild;
-    filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(file) << "*MP3";
-    const std::string filePath = filePathBuild.str();
-
-    // 14 = 4 CMD + 10 PATH
-    uint8_t data[14] = {0xAA, 0x08, 11 /* len + 1 */, 0x02};
-    uint8_t pos = 4;
-    for (char const &c : filePath)
-    {
-        data[pos] = c;
-        pos++;
-    }
-    sendData(data, 14);
 }
 #endif
