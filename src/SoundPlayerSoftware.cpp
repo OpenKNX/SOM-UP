@@ -7,7 +7,7 @@ void SoundPlayerSoftware::playNextPlay()
 {
     _audioOutput->SetVolume(_nextPlay.volume);
 
-        // 10 Bytes /00000.MP3
+    // 10 Bytes /00000.MP3
     std::stringstream filePathBuild;
     filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(_nextPlay.file) << ".MP3";
     const std::string filePath = filePathBuild.str();
@@ -37,7 +37,9 @@ void SoundPlayerSoftware::playNextPlay()
         AudioGeneratorMP3 *currentAudioGenerator = new AudioGeneratorMP3();
         AudioFileSourceLittleFS *currentAudioSource = new AudioFileSourceLittleFS(filePath.c_str());
 
+    #ifdef OPENKNX_DEBUG
         currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)logPrefix().c_str());
+    #endif
 
         _audioSource = currentAudioSource;
         _audioGenerator = currentAudioGenerator;
