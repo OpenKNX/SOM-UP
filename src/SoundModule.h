@@ -30,6 +30,7 @@ class SoundModule : public OpenKNX::Module
     void processInputKo(GroupObject &ko) override;
     void processBeforeRestart() override;
     void processBeforeTablesUnload() override;
+    void showInformations() override;
     void showHelp() override;
     void savePower() override;
     bool restorePower() override;

@@ -113,7 +113,7 @@ void SoundModule::stop()
  */
 void SoundModule::stopped()
 {
-    if(!_status) return;
+    if (!_status) return;
     if (!knx.configured()) return;
 
     logInfoP("stopped");
@@ -411,6 +411,15 @@ void SoundModule::showHelp()
     openknx.console.printHelpLine("play XXX", "Manually play the file");
     openknx.console.printHelpLine("stop", "Stop playing immediately");
     openknx.console.printHelpLine("vol XXX", "Change the default volume");
+}
+
+void SoundModule::showInformations()
+{
+#ifdef HARDWARE_PLAYER
+    openknx.logger.logWithPrefix("Player", "Hardware (DY-SV17F)");
+#else
+    openknx.logger.logWithPrefix("Player", "Software (I2S)");
+#endif
 }
 
 SoundModule SoundModule::instance;
