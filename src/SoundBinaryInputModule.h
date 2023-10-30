@@ -22,3 +22,5 @@ class SoundBinaryInputModule : public OpenKNX::Module
         new BinaryInputChannel(2),
         new BinaryInputChannel(3)};
 };
+
+extern SoundBinaryInputModule openknxSoundBinaryInputModule;

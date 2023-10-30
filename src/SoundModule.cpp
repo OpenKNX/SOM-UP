@@ -422,4 +422,4 @@ void SoundModule::showInformations()
 #endif
 }
 
-SoundModule SoundModule::instance;
+SoundModule openknxSoundModule;

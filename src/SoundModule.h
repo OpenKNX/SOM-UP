@@ -15,9 +15,7 @@
 class SoundModule : public OpenKNX::Module
 {
 
-  public:
-    static SoundModule instance;
-    
+  public:    
     void loop(bool configured) override;
     void setup(bool configured) override;
 #ifdef OPENKNX_DUALCORE
@@ -71,3 +69,5 @@ class SoundModule : public OpenKNX::Module
     uint8_t _externalVolume = 0;
     uint8_t _externalPriority = 0;
 };
+
+extern SoundModule openknxSoundModule;

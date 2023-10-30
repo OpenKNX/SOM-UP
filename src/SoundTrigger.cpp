@@ -129,7 +129,7 @@ void SoundTrigger::play()
     }
     logInfoP("play");
     logIndentUp();
-    setStatus(SoundModule::instance.play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
+    setStatus(openknxSoundModule.play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
     logIndentDown();
 }
 
@@ -140,7 +140,7 @@ void SoundTrigger::stop()
 
     logInfoP("stop");
     setStatus(false);
-    SoundModule::instance.stop();
+    openknxSoundModule.stop();
 }
 
 void SoundTrigger::stopped()

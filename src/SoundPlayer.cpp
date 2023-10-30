@@ -72,7 +72,7 @@ void SoundPlayer::play(uint16_t file, uint8_t volume, uint32_t repeats, uint32_t
     if (_powerSave)
     {
         logTraceP("no play - powerSave mode");
-        SoundModule::instance.stopped();
+        openknxSoundModule.stopped();
         return;
     }
 
@@ -104,7 +104,7 @@ void SoundPlayer::processStatusStopped()
     _stopping = false;
     _currentPlay = SoundPlayer::Play();
 
-    if (_nextPlay.file == 0) SoundModule::instance.stopped();
+    if (_nextPlay.file == 0) openknxSoundModule.stopped();
 }
 
 void SoundPlayer::processStatusPlaying()
@@ -157,7 +157,7 @@ void SoundPlayer::processCheckCurrentPlay(uint16_t delay)
     {
         logErrorP("playback could not be started. file probably not found");
         logIndentUp();
-        SoundModule::instance.stopped();
+        openknxSoundModule.stopped();
         logIndentDown();
         _currentPlay = SoundPlayer::Play();
     }

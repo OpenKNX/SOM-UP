@@ -13,9 +13,9 @@ void setup()
     smartmf.init();
 
     openknx.addModule(1, new Logic());
-    openknx.addModule(2, &SoundModule::instance);
+    openknx.addModule(2, &openknxSoundModule);
     openknx.addModule(3, new VirtualButtonModule());
-    openknx.addModule(4, new SoundBinaryInputModule());
+    openknx.addModule(4, &openknxSoundBinaryInputModule);
     openknx.addModule(9, new FileTransferModule());
     openknx.setup();
 }

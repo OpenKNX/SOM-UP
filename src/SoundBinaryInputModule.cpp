@@ -65,3 +65,5 @@ void SoundBinaryInputModule::processHardwareInputs()
 #endif
     _lastHardwareQuery = millis();
 }
+
+SoundBinaryInputModule openknxSoundBinaryInputModule;
