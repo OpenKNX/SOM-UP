@@ -1,17 +1,5 @@
 #include "SoundModule.h"
 
-SoundModule *SoundModule::_instance = nullptr;
-
-SoundModule::SoundModule()
-{
-    SoundModule::_instance = this;
-}
-
-SoundModule *SoundModule::instance()
-{
-    return SoundModule::_instance;
-}
-
 const std::string SoundModule::name()
 {
     return "Sound";
@@ -425,4 +413,4 @@ void SoundModule::showHelp()
     openknx.console.printHelpLine("vol XXX", "Change the default volume");
 }
 
-SoundModule soundModule;
+SoundModule SoundModule::instance;

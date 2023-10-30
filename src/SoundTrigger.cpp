@@ -34,8 +34,7 @@ void SoundTrigger::setup()
 
 void SoundTrigger::processInputKo(GroupObject &ko)
 {
-    if (!ParamSOM_TriggerState)
-        return;
+    if (!ParamSOM_TriggerState) return;
 
     switch (SOM_KoCalcIndex(ko.asap()))
     {
@@ -90,8 +89,7 @@ void SoundTrigger::processInputKoLock(GroupObject &ko)
 
 void SoundTrigger::lock()
 {
-    if (ParamSOM_TriggerLock == 0 || _currentLocked)
-        return;
+    if (ParamSOM_TriggerLock == 0 || _currentLocked) return;
 
     _currentLocked = true;
     stop();
@@ -101,8 +99,7 @@ void SoundTrigger::lock()
 
 void SoundTrigger::unlock()
 {
-    if (ParamSOM_TriggerLock == 0 || !_currentLocked)
-        return;
+    if (ParamSOM_TriggerLock == 0 || !_currentLocked) return;
 
     _currentLocked = false;
     KoSOM_TriggerLock.value(_currentLocked, DPT_Switch);
@@ -132,19 +129,18 @@ void SoundTrigger::play()
     }
     logInfoP("play");
     logIndentUp();
-    setStatus(SoundModule::instance()->play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
+    setStatus(SoundModule::instance.play(_currentFile, _currentVolume, ParamSOM_TriggerPriority, ParamSOM_TriggerRepeats, ParamSOM_TriggerDurationTimeMS, _channelIndex));
     logIndentDown();
 }
 
 void SoundTrigger::stop()
 {
     // skip if not playing
-    if (!_status)
-        return;
+    if (!_status) return;
 
     logInfoP("stop");
     setStatus(false);
-    SoundModule::instance()->stop();
+    SoundModule::instance.stop();
 }
 
 void SoundTrigger::stopped()
