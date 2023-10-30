@@ -26,6 +26,8 @@ class SoundPlayerSoftware : public SoundPlayer
     void setup() override;
     void loop() override;
 
+    #ifdef OPENKNX_DEBUG
     static void callbackStatus(void *cbData, int code, const char *string);
+    #endif
 };
 #endif

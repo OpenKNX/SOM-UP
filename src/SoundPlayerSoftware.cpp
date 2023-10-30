@@ -38,7 +38,7 @@ void SoundPlayerSoftware::playNextPlay()
         AudioFileSourceLittleFS *currentAudioSource = new AudioFileSourceLittleFS(filePath.c_str());
 
     #ifdef OPENKNX_DEBUG
-        currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)logPrefix().c_str());
+        currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void*)"");
     #endif
 
         _audioSource = currentAudioSource;
@@ -68,17 +68,12 @@ void SoundPlayerSoftware::setup()
     logIndentDown();
 }
 
+    #ifdef OPENKNX_DEBUG
 void SoundPlayerSoftware::callbackStatus(void *cbData, int code, const char *data)
 {
-    const char *ptr = reinterpret_cast<const char *>(cbData);
-    // Note that the string may be in PROGMEM, so copy it to RAM for printf
-    // char s1[64];
-    // strncpy_P(s1, string, sizeof(s1));
-    // s1[sizeof(s1) - 1] = 0;
-    // Serial.printf("STATUS(%s) '%d' = '%s'\n", ptr, code, s1);
-    // Serial.flush();
-    logInfo("ESP8266", "Status: %s (%i)", data, code);
+    logDebug("ESP8266", "%s (%i)", data, code);
 }
+    #endif
 
 void SoundPlayerSoftware::loop()
 {
