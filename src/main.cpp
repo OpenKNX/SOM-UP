@@ -11,12 +11,11 @@ void setup()
     const uint8_t firmwareRevision = 1;
     openknx.init(firmwareRevision);
     smartmf.init();
-
     openknx.addModule(1, new Logic());
-    openknx.addModule(2, &openknxSoundModule);
-    openknx.addModule(3, new VirtualButtonModule());
-    openknx.addModule(4, &openknxSoundBinaryInputModule);
-    openknx.addModule(9, new FileTransferModule());
+    openknx.addModule(2, openknxSoundModule);
+    openknx.addModule(4, openknxSoundBinaryInputModule);
+    openknx.addModule(3, openknxVirtualButtonModule);
+    openknx.addModule(9, openknxFileTransferModule);
     openknx.setup();
 }
 
