@@ -15,6 +15,8 @@
     #define KNX_UART_TX_PIN 16
     #define PLAYER_UART_RX_PIN 9
     #define PLAYER_UART_TX_PIN 8
+    #define PLAYER_I2S_BCLK_PIN 8
+    #define PLAYER_I2S_DATA_PIN 20
     #define BINARY_INPUT_PULSE_PIN 5
     #define BINARY_INPUT_A_PIN 2
     #define BINARY_INPUT_B_PIN 4

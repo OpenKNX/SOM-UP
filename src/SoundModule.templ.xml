@@ -1,166 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/50" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
   <ManufacturerData>
     <Manufacturer>
       <ApplicationPrograms>
         <ApplicationProgram>
           <Static>
             <Parameters>
-              <Parameter Id="%AID%_P-%T%%CCC%000" Name="Trigger%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
-              <Parameter Id="%AID%_P-%T%%CCC%010" Name="Trigger%C%VolumeDivergent" ParameterType="%AID%_PT-OnOffYesNo" Text="Abweichende Lautstärke" Value="0" />
-              <Parameter Id="%AID%_P-%T%%CCC%005" Name="Trigger%C%Repeat" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiederholungen" Value="0" />
-              <Parameter Id="%AID%_P-%T%%CCC%006" Name="Trigger%C%Duration" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiedergabedauer begrenzen" Value="0" />
+              <Parameter Id="%AID%_P-%TT%%CC%000" Name="Trigger%C%Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
+              <Parameter Id="%AID%_P-%TT%%CC%010" Name="Trigger%C%VolumeDivergent" ParameterType="%AID%_PT-OnOffYesNo" Text="Abweichende Lautstärke" Value="0" />
+              <Parameter Id="%AID%_P-%TT%%CC%005" Name="Trigger%C%Repeat" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiederholungen" Value="0" />
+              <Parameter Id="%AID%_P-%TT%%CC%006" Name="Trigger%C%Duration" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiedergabedauer begrenzen" Value="0" />
 
               <!-- Bitfield settings (once per channel) -->
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%001" Name="Trigger%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Trigger aktiv" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%002" Name="Trigger%C%Lock" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMLock" Text="Sperrobjekt" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%003" Name="Trigger%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht-Objekt" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%004" Name="Trigger%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
-                <Parameter Id="%AID%_UP-%T%%CCC%007" Name="Trigger%C%Control" Offset="1" BitOffset="3" ParameterType="%AID%_PT-SOMControl" Text="Steuerung" Value="2" />
+                <Parameter Id="%AID%_UP-%TT%%CC%001" Name="Trigger%C%State" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Trigger aktiv" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%002" Name="Trigger%C%Lock" Offset="0" BitOffset="2" ParameterType="%AID%_PT-SOMLock" Text="Sperrobjekt" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%003" Name="Trigger%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht-Objekt" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%004" Name="Trigger%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
+                <Parameter Id="%AID%_UP-%TT%%CC%007" Name="Trigger%C%Control" Offset="1" BitOffset="3" ParameterType="%AID%_PT-SOMControl" Text="Steuerung" Value="2" />
               </Union>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="2" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%091" Name="Trigger%C%DurationBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%092" Name="Trigger%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="60" />
+                <Parameter Id="%AID%_UP-%TT%%CC%091" Name="Trigger%C%DurationBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%092" Name="Trigger%C%DurationTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="60" />
               </Union>
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%101" Name="Trigger%C%FileDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
-                <Parameter Id="%AID%_UP-%T%%CCC%102" Name="Trigger%C%FileNight" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%101" Name="Trigger%C%FileDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%102" Name="Trigger%C%FileNight" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SOMFile" Text="Datei" Value="1" />
               </Union>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%201" Name="Trigger%C%VolumeDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="25" />
-                <Parameter Id="%AID%_UP-%T%%CCC%211" Name="Trigger%C%VolumeDayInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
-                <Parameter Id="%AID%_UP-%T%%CCC%202" Name="Trigger%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="20" />
-                <Parameter Id="%AID%_UP-%T%%CCC%212" Name="Trigger%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
+                <Parameter Id="%AID%_UP-%TT%%CC%201" Name="Trigger%C%VolumeDay" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="25" />
+                <Parameter Id="%AID%_UP-%TT%%CC%211" Name="Trigger%C%VolumeDayInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
+                <Parameter Id="%AID%_UP-%TT%%CC%202" Name="Trigger%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="20" />
+                <Parameter Id="%AID%_UP-%TT%%CC%212" Name="Trigger%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
               </Union>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="10" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%080" Name="Trigger%C%Repeats" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMRepeats" Text="" Value="1" SuffixText="x" />
-                <Parameter Id="%AID%_UP-%T%%CCC%081" Name="Trigger%C%RepeatsInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt7" Text="" Value="0" Access="None" DefaultUnionParameter="true"/>
+                <Parameter Id="%AID%_UP-%TT%%CC%080" Name="Trigger%C%Repeats" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMRepeats" Text="" Value="1" SuffixText="x" />
+                <Parameter Id="%AID%_UP-%TT%%CC%081" Name="Trigger%C%RepeatsInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt7" Text="" Value="0" Access="None" DefaultUnionParameter="true"/>
               </Union>
             </Parameters>
             <ParameterRefs>
-              <ParameterRef Id="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_P-%T%%CCC%000" />
-              <ParameterRef Id="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" RefId="%AID%_P-%T%%CCC%010" />
-              <ParameterRef Id="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_P-%T%%CCC%005" />
-              <ParameterRef Id="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601" RefId="%AID%_P-%T%%CCC%006" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_UP-%T%%CCC%001" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_UP-%T%%CCC%002" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_UP-%T%%CCC%003" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_UP-%T%%CCC%004" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701" RefId="%AID%_UP-%T%%CCC%007" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" RefId="%AID%_UP-%T%%CCC%080" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" RefId="%AID%_UP-%T%%CCC%091" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" RefId="%AID%_UP-%T%%CCC%092" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="%AID%_UP-%T%%CCC%101" Text="Datei" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10102" RefId="%AID%_UP-%T%%CCC%101" Text="Datei (Tag)" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" RefId="%AID%_UP-%T%%CCC%102" Text="Datei (Nacht)" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" RefId="%AID%_UP-%T%%CCC%201" Text="Lautstärke" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20102" RefId="%AID%_UP-%T%%CCC%201" Text="Lautstärke (Tag)" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" RefId="%AID%_UP-%T%%CCC%202" Text="Lautstärke (Nacht)" />
+              <ParameterRef Id="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" RefId="%AID%_P-%TT%%CC%000" />
+              <ParameterRef Id="%AID%_P-%TT%%CC%010_R-%TT%%CC%01000" RefId="%AID%_P-%TT%%CC%010" />
+              <ParameterRef Id="%AID%_P-%TT%%CC%005_R-%TT%%CC%00501" RefId="%AID%_P-%TT%%CC%005" />
+              <ParameterRef Id="%AID%_P-%TT%%CC%006_R-%TT%%CC%00601" RefId="%AID%_P-%TT%%CC%006" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%001_R-%TT%%CC%00101" RefId="%AID%_UP-%TT%%CC%001" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%002_R-%TT%%CC%00201" RefId="%AID%_UP-%TT%%CC%002" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301" RefId="%AID%_UP-%TT%%CC%003" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401" RefId="%AID%_UP-%TT%%CC%004" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" RefId="%AID%_UP-%TT%%CC%007" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001" RefId="%AID%_UP-%TT%%CC%080" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%091_R-%TT%%CC%09101" RefId="%AID%_UP-%TT%%CC%091" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%092_R-%TT%%CC%09201" RefId="%AID%_UP-%TT%%CC%092" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101" RefId="%AID%_UP-%TT%%CC%101" Text="Datei" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10102" RefId="%AID%_UP-%TT%%CC%101" Text="Datei (Tag)" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%102_R-%TT%%CC%10201" RefId="%AID%_UP-%TT%%CC%102" Text="Datei (Nacht)" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20101" RefId="%AID%_UP-%TT%%CC%201" Text="Lautstärke" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20102" RefId="%AID%_UP-%TT%%CC%201" Text="Lautstärke (Tag)" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%202_R-%TT%%CC%20201" RefId="%AID%_UP-%TT%%CC%202" Text="Lautstärke (Nacht)" />
             </ParameterRefs>
             <ComObjectTable>
-              <ComObject Id="%AID%_O-%T%%CCC%000" Name="Trigger%C%Trigger" Number="%K000%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%%CCC%001" Name="Trigger%C%Status" Number="%K001%" Text="" ObjectSize="1 Bit" FunctionText="Auslöser %C%, Status" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
-              <ComObject Id="%AID%_O-%T%%CCC%002" Name="Trigger%C%Lock" Number="%K002%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%%CCC%003" Name="Trigger%C%DayNight" Number="%K003%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-24" />
+              <ComObject Id="%AID%_O-%TT%%CC%000" Name="Trigger%C%Trigger" Number="%K000%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%%CC%001" Name="Trigger%C%Status" Number="%K001%" Text="" ObjectSize="1 Bit" FunctionText="Auslöser %C%, Status" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
+              <ComObject Id="%AID%_O-%TT%%CC%002" Name="Trigger%C%Lock" Number="%K002%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%TT%%CC%003" Name="Trigger%C%DayNight" Number="%K003%" Text="" ObjectSize="1 Bit" FunctionText="" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-24" />
             </ComObjectTable>
             <ComObjectRefs>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_O-%T%%CCC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" FunctionText="Auslöser %C%, Schalten" DatapointType="DPST-1-10"/>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00002" RefId="%AID%_O-%T%%CCC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" FunctionText="Auslöser %C%, Trigger" DatapointType="DPST-1-17"/>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_O-%T%%CCC%001" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_O-%T%%CCC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=1 / Entsperre=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" RefId="%AID%_O-%T%%CCC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=0 / Entsperre=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001"/>
-              <ComObjectRef Id="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_O-%T%%CCC%003" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%003_R-%T%%CCC%00302" RefId="%AID%_O-%T%%CCC%003" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%000_R-%TT%%CC%00001" RefId="%AID%_O-%TT%%CC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" FunctionText="Auslöser %C%, Schalten" DatapointType="DPST-1-10"/>
+              <ComObjectRef Id="%AID%_O-%TT%%CC%000_R-%TT%%CC%00002" RefId="%AID%_O-%TT%%CC%000" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" FunctionText="Auslöser %C%, Trigger" DatapointType="DPST-1-17"/>
+              <ComObjectRef Id="%AID%_O-%TT%%CC%001_R-%TT%%CC%00101" RefId="%AID%_O-%TT%%CC%001" Text="Auslöser: {{0:Auslöser %C%}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001"/>
+              <ComObjectRef Id="%AID%_O-%TT%%CC%002_R-%TT%%CC%00201" RefId="%AID%_O-%TT%%CC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=1 / Entsperre=0" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001"/>
+              <ComObjectRef Id="%AID%_O-%TT%%CC%002_R-%TT%%CC%00202" RefId="%AID%_O-%TT%%CC%002" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Sperre=0 / Entsperre=1" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001"/>
+              <ComObjectRef Id="%AID%_O-%TT%%CC%003_R-%TT%%CC%00301" RefId="%AID%_O-%TT%%CC%003" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%003_R-%TT%%CC%00302" RefId="%AID%_O-%TT%%CC%003" Text="Auslöser: {{0:Auslöser %C%}}" FunctionText="Auslöser %C%, Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
             <ChannelIndependentBlock> 
               <!-- START INCLUDE HERE -->
-              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" Icon="play-circle-outline" HelpContext="Empty">
-                <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
-                  <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="SOM%C%Wrapper" Inline="true">
+              <ParameterBlock Id="%AID%_PB-%C%1" Name="SOM%C%Page" Text="Auslöser %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="play-circle-outline" HelpContext="Empty">
+                <Channel Id="%AID%_CH-SOM%CC%" Name="f%CC%SOM" Number="SOM%CC%" Text="Auslöser %CC%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001">
+                  <ParameterBlock Id="%AID%_PB-%TT%%CC%01" Name="SOM%C%Wrapper" Inline="true">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslösekonfiguration" UIHint="Headline" />
                     <!-- Name -->
-                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" Icon="tag-outline" HelpContext="SOM-TriggerName"/>
+                    <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="tag-outline" HelpContext="SOM-TriggerName"/>
                     <!-- Status -->
-                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" Icon="power-cycle" HelpContext="SOM-TriggerStatus" />
-                    <choose ParamRefId="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101">
+                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%001_R-%TT%%CC%00101" Icon="power-cycle" HelpContext="SOM-TriggerStatus" />
+                    <choose ParamRefId="%AID%_UP-%TT%%CC%001_R-%TT%%CC%00101">
                       <when test="1">
                         <!-- Aktiv -->
-                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                        <ComObjectRefRef RefId="%AID%_O-%TT%%CC%001_R-%TT%%CC%00101" />
                                                 
                         <!-- Sperre -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" Icon="volume-off" HelpContext="SOM-TriggerLock"/>
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201">
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%002_R-%TT%%CC%00201" Icon="volume-off" HelpContext="SOM-TriggerLock"/>
+                        <choose ParamRefId="%AID%_UP-%TT%%CC%002_R-%TT%%CC%00201">
                           <when test="1">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%002_R-%TT%%CC%00201" />
                           </when>
                           <when test="2">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%002_R-%TT%%CC%00202" />
                           </when>
                         </choose>
 
                         <!-- Prio -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" Icon="swap-vertical" HelpContext="SOM-TriggerPriority"/>
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401" Icon="swap-vertical" HelpContext="SOM-TriggerPriority"/>
 
                         <!-- Control -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701" Icon="gesture-tap" HelpContext="SOM-TriggerControl"/>
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" Icon="gesture-tap" HelpContext="SOM-TriggerControl"/>
+                        <choose ParamRefId="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701">
                           <when test="0 1">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00002" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%000_R-%TT%%CC%00002" />
                           </when>
                           <when test="2">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%000_R-%TT%%CC%00001" />
                           </when>
                         </choose>
 
                         <!-- Tag/Nacht -->
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301" Icon="theme-light-dark" HelpContext="SOM-TriggerDayNight" /> 
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301" Icon="theme-light-dark" HelpContext="SOM-TriggerDayNight" /> 
+                        <choose ParamRefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301">
                           <when test="1">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%003_R-%TT%%CC%00301" />
                           </when>
                           <when test="2">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00302" />
+                            <ComObjectRefRef RefId="%AID%_O-%TT%%CC%003_R-%TT%%CC%00302" />
                           </when>
                         </choose>
 
                         <!-- Datai -->
-                        <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
+                        <choose ParamRefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301">
                             <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" Icon="file-outline" HelpContext="SOM-TriggerFile" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101" Icon="file-outline" HelpContext="SOM-TriggerFile" />
                             </when>
                             <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10102" Icon="file-outline" HelpContext="SOM-TriggerFile" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" Icon="file" HelpContext="SOM-TriggerFile" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10102" Icon="file-outline" HelpContext="SOM-TriggerFile" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%102_R-%TT%%CC%10201" Icon="file" HelpContext="SOM-TriggerFile" />
                             </when>
                         </choose>
 
                         <!-- Lautstärke -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000" Icon="volume-source" HelpContext="SOM-Volume" />
-                        <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01000">
+                        <ParameterRefRef RefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01000" Icon="volume-source" HelpContext="SOM-Volume" />
+                        <choose ParamRefId="%AID%_P-%TT%%CC%010_R-%TT%%CC%01000">
                           <when test=">0">
                             <!-- Abweichend -->
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%003_R-%T%%CCC%00301">
+                            <choose ParamRefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301">
                               <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" Icon="volume-high" HelpContext="SOM-Volume" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20101" Icon="volume-high" HelpContext="SOM-Volume" />
                               </when>
                               <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20102" Icon="volume-high" HelpContext="SOM-Volume" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%202_R-%T%%CCC%20201" Icon="volume-medium" HelpContext="SOM-Volume" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%201_R-%TT%%CC%20102" Icon="volume-high" HelpContext="SOM-Volume" />
+                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%202_R-%TT%%CC%20201" Icon="volume-medium" HelpContext="SOM-Volume" />
                               </when>
                               <when test="1">
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%%CC%003_R-%TT%%CC%00301" />
                               </when>
                               <when test="2">
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%003_R-%T%%CCC%00302" />
+                                <ComObjectRefRef RefId="%AID%_O-%TT%%CC%003_R-%TT%%CC%00302" />
                               </when>
                             </choose>
 
@@ -168,16 +168,16 @@
                         </choose>
 
                         <!-- Repeat -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501" Icon="repeat" HelpContext="SOM-TriggerRepeat" />
-                        <choose ParamRefId="%AID%_P-%T%%CCC%005_R-%T%%CCC%00501">
+                        <ParameterRefRef RefId="%AID%_P-%TT%%CC%005_R-%TT%%CC%00501" Icon="repeat" HelpContext="SOM-TriggerRepeat" />
+                        <choose ParamRefId="%AID%_P-%TT%%CC%005_R-%TT%%CC%00501">
                           <when test="1">
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" />
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001" />
                           </when>
                         </choose>
 
                         <!-- Dauer -->
-                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601" Icon="timer-sand" HelpContext="SOM-TriggerDurartion" />
-                        <choose ParamRefId="%AID%_P-%T%%CCC%006_R-%T%%CCC%00601">
+                        <ParameterRefRef RefId="%AID%_P-%TT%%CC%006_R-%TT%%CC%00601" Icon="timer-sand" HelpContext="SOM-TriggerDurartion" />
+                        <choose ParamRefId="%AID%_P-%TT%%CC%006_R-%TT%%CC%00601">
                           <when test="1">
                             <ParameterBlock Id="%AID%_PB-nnn" Name="Trigger%C%DurationGrid" Inline="true" Layout="Grid">
                               <Rows>
@@ -188,8 +188,8 @@
                                 <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
                                 <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                               </Columns>
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" Cell="1,2" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" Cell="1,3" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%092_R-%TT%%CC%09201" Cell="1,2" />
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%091_R-%TT%%CC%09101" Cell="1,3" />
                             </ParameterBlock>
                           </when>
                         </choose>

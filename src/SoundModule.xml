@@ -1,164 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
-  <ManufacturerData>
-    <Manufacturer RefId="M-00FA">
-      <Catalog>
-        <CatalogSection Id="M-00FA_CS-OpenKNX" Name="OpenKNX" Number="OpenKNX" DefaultLanguage="de">
-          <CatalogItem Id="%CatalogItemId%" Name="OpenKNX: SoundModule-Beta" Number="1" ProductRefId="%ProductId%" Hardware2ProgramRefId="%Hardware2ProgramId%" DefaultLanguage="de" />
-        </CatalogSection>
-      </Catalog>
-      <ApplicationPrograms>
-        <!-- Each increase of AppliationVersion FORCES the Enduser to update according firmware, too -->
-        <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
-        <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
-        <op:version OpenKnxId="0xA2" ApplicationNumber="40" ApplicationVersion="8" ReplacesVersions="4 5 6 7" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="OpenKNX-SoundModule-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
-          <Static>
-            <Code>
-              <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
-            </Code>
-            <op:define prefix="BI" header="SoundModule.h" NumChannels="4" KoOffset="41" ModuleType="4" />
-            <op:define prefix="SOM" header="SoundModule.h" NumChannels="10" KoOffset="50" ModuleType="2" />
-            <op:define prefix="LOG" header="SoundModule.h" NumChannels="30" KoOffset="100" ModuleType="1">
-              <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="32" />
-            </op:define>
-            <op:define prefix="BTN" header="SoundModule.h" NumChannels="20" KoOffset="200" ModuleType="3">
-              <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="3" />
-            </op:define>
-            <ParameterTypes>
-              <!-- generic parameter types from logicmodule -->
-              <op:include href="SoundModule.share.xml" xpath="//ParameterTypes/ParameterType" prefix="SOM" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BI" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ParameterTypes/ParameterType" prefix="BTN" />
-            </ParameterTypes>
-            <Parameters>
-              <!-- Standard parameter in any of our devices -->
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="LOG" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="LOG" />
-              <op:include href="SoundModule.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="SOM" />
-              <op:include href="SoundModule.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="SOM" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BI" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BI" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="parameter" prefix="BTN" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//Parameters/Parameter|//Parameters/Union" type="template" prefix="BTN" />
-            </Parameters>
-            <ParameterRefs>
-              <!-- General -->
-              <op:include href="SoundModule.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="SOM" />
-              <op:include href="SoundModule.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="SOM" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BI" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BI" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="LOG" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="LOG" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ParameterRefs/ParameterRef" prefix="BTN" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ParameterRefs/ParameterRef" type="template" prefix="BTN" />
-            </ParameterRefs>
-            <ComObjectTable>
-              <op:include href="SoundModule.share.xml" xpath="//ComObjectTable/ComObject" prefix="SOM" />
-              <op:include href="SoundModule.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="SOM" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ComObjectTable/ComObject" prefix="BI" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BI" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectTable/ComObject" prefix="LOG" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="LOG" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ComObjectTable/ComObject" type="template" prefix="BTN" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ComObjectTable/ComObject" prefix="BTN" />
-            </ComObjectTable>
-            <ComObjectRefs>
-              <op:include href="SoundModule.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="SOM" />
-              <op:include href="SoundModule.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="SOM" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BI" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BI" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="LOG" />
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ComObjectRefs/ComObjectRef" prefix="BTN" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="BTN" />
-            </ComObjectRefs>
-            <AddressTable MaxEntries="2047" />
-            <AssociationTable MaxEntries="2047" />
-            <LoadProcedures>
-              <LoadProcedure MergeId="1">
-                <LdCtrlCompareProp InlineData="%VersionCheck%" ObjIdx="0" PropId="78">
-                  <OnError Cause="CompareMismatch" MessageRef="%AID%_M-1" />
-                </LdCtrlCompareProp>
-              </LoadProcedure>
-              <LoadProcedure MergeId="2">
-                <LdCtrlRelSegment LsmIdx="4" Size="%MemorySize%" Mode="1" Fill="0" AppliesTo="full" />
-                <LdCtrlRelSegment LsmIdx="4" Size="%MemorySize%" Mode="0" Fill="0" AppliesTo="par" />
-              </LoadProcedure>
-              <LoadProcedure MergeId="4">
-                <LdCtrlWriteRelMem ObjIdx="4" Offset="0" Size="%MemorySize%" Verify="true" AppliesTo="full,par" />
-              </LoadProcedure>
-              <LoadProcedure MergeId="7">
-                <LdCtrlLoadImageProp ObjIdx="1" PropId="27" />
-                <LdCtrlLoadImageProp ObjIdx="2" PropId="27" />
-                <LdCtrlLoadImageProp ObjIdx="3" PropId="27" />
-                <LdCtrlLoadImageProp ObjIdx="4" PropId="27" />
-              </LoadProcedure>
-            </LoadProcedures>
-            <Extension>
-              <Baggage RefId="%BAGGAGES%" />
-            </Extension>
-            <Messages>
-              <Message Id="%AID%_M-1" Name="VersionMismatch" Text="Diese Applikaiton und die Firmware passen nicht zusammen" />
-            </Messages>
-            <Options />
-          </Static>
-          <Dynamic>
-            <ChannelIndependentBlock>
-              <!-- ChannelIndependentBlock is a composition of different parts of different modules -->
-              <ParameterBlock Id="%AID%_PB-1" Name="General" Text="Allgemeine Parameter" Icon="application-cog-outline" HelpContext="Empty">
-                <!-- <op:include href="SoundModule.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Init']/*" prefix="SOM" /> -->
-                <op:include href="../lib/OFM-LogicModule/src/Logikmodul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='General']/*" prefix="LOG" />
-                <!-- <op:include href="SoundModule.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Hardware']/*" prefix="SOM" /> -->
-                <op:include href="../lib/OFM-LogicModule/src/Logikmodul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Diagnose']/*" prefix="LOG" />
-              </ParameterBlock>
-            </ChannelIndependentBlock>
-            <Channel Id="%AID%_CH-4" Name="SOMS" Number="4" Text="Sound" Icon="speaker">
-              <!-- SOM channel independent settings -->
-              <op:include href="SoundModule.share.xml" xpath="//Dynamic/Channel/*" prefix="SOM" />
-              <!-- SOM channel settings -->
-              <op:include href="SoundModule.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" />
-            </Channel>
-            <Channel Name="BI" Text="Binäreingänge" Number="7" Id="%AID%_CH-7" Icon="arrow-right-circle-outline">
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//Dynamic/Channel/*" prefix="BI" />
-              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BI" />
-            </Channel>
-            <Channel Name="BTN" Text="Virtuelle Taster" Number="6" Id="%AID%_CH-6" Icon="button-pointer">
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//Dynamic/Channel/*" prefix="BTN" />
-              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="BTN" />
-            </Channel>
-            <Channel Name="Logikkanaele" Text="Logikkanäle" Number="5" Id="%AID%_CH-5" Icon="router">
-              <!-- compose logicmodule channel from some static blocks... -->
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//Dynamic/Channel/*" prefix="LOG" />
-              <!-- followed by all logic channels -->
-              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="LOG" />
-            </Channel>
-          </Dynamic>
-        </ApplicationProgram>
-      </ApplicationPrograms>
-      <Baggages>
-        <op:include href="SoundModule.share.xml" xpath="//Baggages/*" prefix="SOM" />
-        <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//Baggages/*" prefix="LOG" />
-        <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//Baggages/*" prefix="BI" />
-        <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//Baggages/*" prefix="BTN" />
-      </Baggages>
-      <Hardware>
-        <Hardware Id="%HardwareId%" Name="OpenKNX-SoundModule" SerialNumber="0xA228" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
-          <Products>
-            <Product Id="%ProductId%" Text="OpenKNX: SoundModule" OrderNumber="SOM-UP" IsRailMounted="false" DefaultLanguage="de">
-              <RegistrationInfo RegistrationStatus="Registered" />
-            </Product>
-          </Products>
-          <Hardware2Programs>
-            <Hardware2Program Id="%Hardware2ProgramId%" MediumTypes="MT-0">
-              <ApplicationProgramRef RefId="%AID%" />
-              <RegistrationInfo RegistrationStatus="Registered" RegistrationNumber="0001/11" />
-            </Hardware2Program>
-          </Hardware2Programs>
-        </Hardware>
-      </Hardware>
-    </Manufacturer>
-  </ManufacturerData>
+  <op:ETS
+    OpenKnxId="0xA2"
+    ApplicationNumber="0x29"
+    ApplicationVersion="2"
+    ReplacesVersions="0"
+    ApplicationRevision="0"
+    ProductName="Soundmodul"
+    BusCurrent="30"
+    BuildSuffix="-Dev"
+    BuildSuffixText=" (Dev)"
+    OrderNumber="SOM-UP" />
+
+  <op:define prefix="BASE"
+    share="../lib/OGM-Common/src/Common.share.xml"
+    ModuleType="10" />
+
+  <op:define prefix="SOM"
+    share="SoundModule.share.xml"
+    template="SoundModule.templ.xml"
+    NumChannels="10" 
+    KoOffset="50" 
+    ModuleType="2" />
+
+  <op:define prefix="BI"
+    share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
+    template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
+    NumChannels="4" KoOffset="41" ModuleType="4" />
+
+  <op:define prefix="BTN"
+    share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
+    template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
+    NumChannels="20" KoOffset="200" ModuleType="3">
+    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="3" /> 
+  </op:define>
+
+  <op:define prefix="LOG"
+    share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
+    template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
+    NumChannels="30" KoOffset="100" ModuleType="10">
+    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="2.0" /> 
+  </op:define>
+
+  <generate />
 </KNX>

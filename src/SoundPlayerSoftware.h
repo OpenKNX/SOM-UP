@@ -1,12 +1,11 @@
 #pragma once
 
-#ifndef HARDWARE_PLAYER
-    #include "AudioFileSourceFunction.h"
-    #include "AudioFileSourceLittleFS.h"
-    #include "AudioGeneratorMP3.h"
-    #include "AudioGeneratorWAV.h"
-    #include "AudioOutputSOM.h"
-    #include "SoundPlayer.h"
+#include "AudioFileSourceFunction.h"
+#include "AudioFileSourceLittleFS.h"
+#include "AudioGeneratorMP3.h"
+#include "AudioGeneratorWAV.h"
+#include "AudioOutputSOM.h"
+#include "SoundPlayer.h"
 
 class SoundPlayerSoftware : public SoundPlayer
 {
@@ -25,9 +24,9 @@ class SoundPlayerSoftware : public SoundPlayer
   public:
     void setup() override;
     void loop() override;
+    const char* playTypeName() override;
 
-    #ifdef OPENKNX_DEBUG
+#ifdef OPENKNX_DEBUG
     static void callbackStatus(void *cbData, int code, const char *string);
-    #endif
-};
 #endif
+};

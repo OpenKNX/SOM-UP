@@ -1,11 +1,8 @@
 #pragma once
 #include "SoundTrigger.h"
 
-#ifdef HARDWARE_PLAYER
-    #include "SoundPlayerHardware.h"
-#else
-    #include "SoundPlayerSoftware.h"
-#endif
+#include "SoundPlayerHardware.h"
+#include "SoundPlayerSoftware.h"
 
 #define SOM_SceneActionStart 1
 #define SOM_SceneActionStop 2
@@ -15,7 +12,7 @@
 class SoundModule : public OpenKNX::Module
 {
 
-  public:    
+  public:
     void loop(bool configured) override;
     void setup(bool configured) override;
 #ifdef OPENKNX_DUALCORE
@@ -32,6 +29,7 @@ class SoundModule : public OpenKNX::Module
     void showHelp() override;
     void savePower() override;
     bool restorePower() override;
+    void init() override;
     bool processCommand(const std::string cmd, bool diagnoseKo) override;
     bool play(uint16_t file, uint8_t volume = 0, uint8_t priority = 3, uint32_t repeats = 0, uint32_t duration = 0, uint8_t trigger = 0);
     void stop();
@@ -49,13 +47,9 @@ class SoundModule : public OpenKNX::Module
     void processInputKoExternalPriority(GroupObject &ko);
     void processInputKoExternalFile(GroupObject &ko);
     void setDefaultVolume();
+    void detectedPlayer();
 
-#ifdef HARDWARE_PLAYER
-    SoundPlayerHardware _player;
-#else
-    SoundPlayerSoftware _player;
-#endif
-
+    SoundPlayer *_player;
     SoundTrigger *_triggers[SOM_ChannelCount];
     bool _status = false;
     bool _currentNight = false;

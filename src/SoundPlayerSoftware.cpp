@@ -1,7 +1,6 @@
-#ifndef HARDWARE_PLAYER
-    #include "SoundPlayerSoftware.h"
-    #include "OpenKNX/Log/VirtualSerial.h"
-    #include "SoundModule.h"
+#include "SoundPlayerSoftware.h"
+#include "OpenKNX/Log/VirtualSerial.h"
+#include "SoundModule.h"
 
 void SoundPlayerSoftware::playNextPlay()
 {
@@ -37,9 +36,9 @@ void SoundPlayerSoftware::playNextPlay()
         AudioGeneratorMP3 *currentAudioGenerator = new AudioGeneratorMP3();
         AudioFileSourceLittleFS *currentAudioSource = new AudioFileSourceLittleFS(filePath.c_str());
 
-    #ifdef OPENKNX_DEBUG
-        currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void*)"");
-    #endif
+#ifdef OPENKNX_DEBUG
+        currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)"");
+#endif
 
         _audioSource = currentAudioSource;
         _audioGenerator = currentAudioGenerator;
@@ -53,9 +52,9 @@ void SoundPlayerSoftware::setup()
     logInfoP("init software player");
     logIndentUp();
 
-    #ifdef LOG_ESP8266AUDIO
+#ifdef LOG_ESP8266AUDIO
     audioLogger = new OpenKNX::Log::VirtualSerial("ESP8266Audio");
-    #endif
+#endif
 
     SoundPlayer::setup();
     powerOff(); // will turn on only during play back
@@ -68,12 +67,12 @@ void SoundPlayerSoftware::setup()
     logIndentDown();
 }
 
-    #ifdef OPENKNX_DEBUG
+#ifdef OPENKNX_DEBUG
 void SoundPlayerSoftware::callbackStatus(void *cbData, int code, const char *data)
 {
     logDebug("ESP8266", "%s (%i)", data, code);
 }
-    #endif
+#endif
 
 void SoundPlayerSoftware::loop()
 {
@@ -122,4 +121,8 @@ void SoundPlayerSoftware::processStatusStopped()
     SoundPlayer::processStatusStopped();
     powerOff();
 }
-#endif
+
+const char* SoundPlayerSoftware::playTypeName()
+{
+    return "Software (I2S)";
+}

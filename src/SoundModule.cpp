@@ -14,19 +14,24 @@ const std::string SoundModule::version()
 #ifdef OPENKNX_DUALCORE
 void SoundModule::loop1(bool configured)
 {
-    _player.loop();
+    _player->loop();
 };
 
 void SoundModule::setup1(bool configured)
 {
-    _player.setup();
+    _player->setup();
 };
 #endif
+
+void SoundModule::init()
+{
+    detectedPlayer();
+}
 
 void SoundModule::setup(bool configured)
 {
 #ifndef OPENKNX_DUALCORE
-    _player.setup();
+    _player->setup();
 #endif
     _currentDefaultVolume = 10;
 
@@ -82,7 +87,7 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
     logIndentUp();
 
     // play music
-    _player.play(file, volume, repeats, duration);
+    _player->play(file, volume, repeats, duration);
 
     // send ko
     if (knx.configured())
@@ -105,7 +110,7 @@ bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t
 void SoundModule::stop()
 {
     logInfoP("stop");
-    _player.stop();
+    _player->stop();
 }
 
 /*
@@ -132,7 +137,7 @@ void SoundModule::stopped()
 void SoundModule::loop(bool configured)
 {
 #ifndef OPENKNX_DUALCORE
-    _player.loop();
+    _player->loop();
 #endif
 
     if (configured)
@@ -347,27 +352,27 @@ void SoundModule::setDefaultVolume()
         _currentDefaultVolume = ParamSOM_VolumeDay;
 
     // update _currentDefaultVolume
-    _player.setInitialVolume(_currentDefaultVolume);
+    _player->setInitialVolume(_currentDefaultVolume);
 }
 
 void SoundModule::processBeforeRestart()
 {
-    _player.stop();
+    _player->stop();
 }
 
 void SoundModule::processBeforeTablesUnload()
 {
-    _player.stop();
+    _player->stop();
 }
 
 void SoundModule::savePower()
 {
-    _player.savePower();
+    _player->savePower();
 }
 
 bool SoundModule::restorePower()
 {
-    _player.restorePower();
+    _player->restorePower();
     return true;
 }
 
@@ -399,7 +404,7 @@ bool SoundModule::processCommand(const std::string cmd, bool diagnoseKo)
     }
     else if (cmd == "stop")
     {
-        _player.stop();
+        _player->stop();
         return true;
     }
 
@@ -415,11 +420,21 @@ void SoundModule::showHelp()
 
 void SoundModule::showInformations()
 {
-#ifdef HARDWARE_PLAYER
-    openknx.logger.logWithPrefix("Player", "Hardware (DY-SV17F)");
-#else
-    openknx.logger.logWithPrefix("Player", "Software (I2S)");
-#endif
+    openknx.logger.logWithPrefix("Player", _player->playTypeName());
+}
+
+void SoundModule::detectedPlayer()
+{
+    pinMode(PLAYER_I2S_DATA_PIN, INPUT_PULLUP);
+
+    const bool mode = digitalRead(PLAYER_I2S_DATA_PIN);
+
+    if (mode)
+        _player = new SoundPlayerHardware();
+    else
+        _player = new SoundPlayerSoftware();
+
+    pinMode(PLAYER_I2S_DATA_PIN, OUTPUT);
 }
 
 SoundModule openknxSoundModule;

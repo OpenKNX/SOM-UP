@@ -1,6 +1,5 @@
-#ifdef HARDWARE_PLAYER
-    #include "SoundPlayerHardware.h"
-    #include "SoundModule.h"
+#include "SoundPlayerHardware.h"
+#include "SoundModule.h"
 
 void SoundPlayerHardware::powerOn()
 {
@@ -58,7 +57,7 @@ void SoundPlayerHardware::loop()
 {
     if (_powerSave) return;
 
-    processCheckCurrentPlay(600);
+    processCheckCurrentPlay(800);
     processDuration();
     processStopping();
     requestStatus();
@@ -218,4 +217,8 @@ void SoundPlayerHardware::configureRepeats(uint16_t repeats)
     data2[4] = repeats & 0xff;
     sendData(data2, 5);
 }
-#endif
+
+const char* SoundPlayerHardware::playTypeName()
+{
+    return "Hardware (DY-SV17F)";
+}

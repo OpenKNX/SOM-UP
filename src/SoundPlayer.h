@@ -1,9 +1,9 @@
 #pragma once
 #include <Arduino.h>
-#include <string>
 #include <cstring>
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 class SoundPlayer
 {
@@ -30,7 +30,7 @@ class SoundPlayer
 
     virtual void powerOff();
     virtual void powerOn();
-    
+
     virtual void processDuration();
     virtual void playNextPlay() = 0;
     virtual void stopCurrentPlay() = 0;
@@ -48,6 +48,7 @@ class SoundPlayer
     virtual void stop();
     virtual void setInitialVolume(uint8_t volume) { (void)volume; };
     virtual void play(uint16_t sound, uint8_t volume, uint32_t repeats = 0, uint32_t duration = 0);
+    virtual const char* playTypeName();
 
     virtual void processStatusStopped();
     virtual void processStatusPlaying();
