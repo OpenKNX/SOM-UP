@@ -20,19 +20,17 @@
   <op:define prefix="SOM"
     share="SoundModule.share.xml"
     template="SoundModule.templ.xml"
-    NumChannels="10" 
-    KoOffset="50" 
-    ModuleType="2" />
+    NumChannels="10" KoOffset="50" ModuleType="20" />
 
   <op:define prefix="BI"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="4" KoOffset="41" ModuleType="4" />
+    NumChannels="4" KoOffset="41" ModuleType="21" />
 
   <op:define prefix="BTN"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="20" KoOffset="200" ModuleType="3">
+    NumChannels="20" KoOffset="200" ModuleType="22">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="3" /> 
   </op:define>
 

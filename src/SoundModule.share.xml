@@ -295,8 +295,8 @@
               <ComObjectRef Id="%AID%_O-%TT%00030_R-%TT%0003001" RefId="%AID%_O-%TT%00030" />
               <ComObjectRef Id="%AID%_O-%TT%00031_R-%TT%0003101" RefId="%AID%_O-%TT%00031" />
               <ComObjectRef Id="%AID%_O-%TT%00032_R-%TT%0003201" RefId="%AID%_O-%TT%00032" />
-              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002701" RefId="%AID%_O-%TT%00027" FunctionText="Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
-              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002702" RefId="%AID%_O-%TT%00027" FunctionText="Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002701" RefId="%AID%_O-%TT%00027" FunctionText="Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
+              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002702" RefId="%AID%_O-%TT%00027" FunctionText="Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
             </ComObjectRefs>
             <Extension>
               <Baggage RefId="%FILE-HELP-de%" />
@@ -309,7 +309,7 @@
           <Dynamic>
 
             <Channel Name="MainChannel" Text="Sound" Number="%TT%" Id="%AID%_CH-%TT%" Icon="speaker">
-              <ParameterBlock Id="%AID%_PB-5" Name="SOMDocumentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
+              <ParameterBlock Id="%AID%_PB-5" Name="Documentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Sounddatei" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Sounddatei wird über eine Zahl gesteuert. Dazu müssen die Sounddateien auf dem Speicher im Format 00001.MP3 (5stellig) und im MP3-Format gespeichert werden." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 1: Um den Überblick zu behalten, legt eine weitere Datei wie folgt an: „00001 Klingel 1.txt“ oder „00002 Innensierene.txt“." />
@@ -332,7 +332,7 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Jetzt kannst du direkt diverse Meldungen wie „Wäsche ist fertig“ auslösen. Somit brauchst du keinen Umweg über die begrenzen 1bit-Auslöser zu gehen." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp: Auf der Seite ttsmp3.com kannst du dir schnell passende Statusmeldungen als MP3 erstellen lassen." />
               </ParameterBlock>
-              <ParameterBlock Id="%AID%_PB-6" Name="SOMBasic" Text="Basiseinstellung" Icon="cog-outline" HelpContext="Empty">
+              <ParameterBlock Id="%AID%_PB-6" Name="Basic" Text="Basiseinstellung" Icon="cog-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
 
                 <!-- Tag/Nacht -->
@@ -384,7 +384,7 @@
               <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                 <when test="1">
                   <ComObjectRefRef RefId="%AID%_O-%TT%00028_R-%TT%0002801" />
-                  <ParameterBlock Id="%AID%_PB-7" Name="SOMScenes" Text="Szenensteuerung" Icon="list-box-outline">
+                  <ParameterBlock Id="%AID%_PB-7" Name="Scenes" Text="Szenensteuerung" Icon="list-box-outline">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
                     <ParameterBlock Id="%AID%_PB-8" Name="Table1Scenes" Text="#" Inline="true" Layout="Table">
                       <Rows>
@@ -699,8 +699,8 @@
                 </when>
               </choose>
 
-              <ParameterBlock Id="%AID%_PB-8" Name="SOMExternalPage" Text="Extern" Inline="true">
-                <Channel Id="%AID%_CH-SM" Name="SOMExternalChannel" Number="2" Text="Externe Logik">
+              <ParameterBlock Id="%AID%_PB-8" Name="ExternalPage" Text="Extern" Inline="true">
+                <Channel Id="%AID%_CH-SM" Name="ExternalChannel" Number="2" Text="Externe Logik">
                   <choose ParamRefId="%AID%_UP-%TT%00008_R-%TT%0000801">
                     <when test=">0">
                       <ComObjectRefRef RefId="%AID%_O-%TT%00030_R-%TT%0003001" />
