@@ -3,14 +3,14 @@
 <KNX xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
   <op:ETS
     OpenKnxId="0xA2"
-    ApplicationNumber="0x29"
-    ApplicationVersion="10"
-    ReplacesVersions="9 8 7 6 5 4 3 2 1"
+    ApplicationNumber="0x28"
+    ApplicationVersion="9"
+    ReplacesVersions="4 5 6 7 8"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"
-    BuildSuffix="-Dev"
-    BuildSuffixText=" (Dev)"
+    BuildSuffix="-Beta"
+    BuildSuffixText=" (Beta)"
     OrderNumber="SOM-UP" />
 
   <op:define prefix="BASE" ModuleType="10"
@@ -29,14 +29,14 @@
   <op:define prefix="BTN" ModuleType="30"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="10" KoOffset="100">
+    NumChannels="20" KoOffset="100">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="3" /> 
   </op:define>
 
   <op:define prefix="LOG" ModuleType="10"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="10" KoOffset="350">
+    NumChannels="99" KoOffset="350">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="2.0" /> 
   </op:define>
 

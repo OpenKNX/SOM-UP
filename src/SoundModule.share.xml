@@ -2,9 +2,9 @@
 <?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
   <ManufacturerData>
-    <Manufacturer RefId="M-00FA">
+    <Manufacturer>
       <ApplicationPrograms>
-        <ApplicationProgram Id="%AID%" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SOM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
+        <ApplicationProgram>
           <Static>
             <ParameterTypes>
               <ParameterType Id="%AID%_PT-SOMRepeats" Name="SOMRepeats">
@@ -301,19 +301,24 @@
             <Extension>
               <Baggage RefId="%FILE-HELP-de%" />
               <Baggage RefId="%FILE-ICONS%" />
-              <Baggage RefId="%FILE-openknx%" />
-              <Baggage RefId="%FILE-pics-and%" />
-              <Baggage RefId="%FILE-pics-or%" />
             </Extension>
           </Static>
           <Dynamic>
 
             <Channel Name="MainChannel" Text="Sound" Number="%TT%" Id="%AID%_CH-%TT%" Icon="speaker">
               <ParameterBlock Id="%AID%_PB-5" Name="Documentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Player" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Das SOM-UP gibt es in zwei verschiedenen Versionen. Einmal mit einem externen Hardware- und als Software-Player." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Hardwarevariante nutzt einen eigenen externen MP3-Player (DY-SV17F) inkl. eigenem Flashspeicher. Dieser bietet eine hohe Kompatibilität beim Abspielen der MP3." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Softwarevariante spielt hingegen die MP3 selbst ab und gibt das Signal per I2S an einen externen DAC. Hierdurch kann der interne Speicher sowie ein Ton-Generator genutzt werden." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Sounddatei" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Sounddatei wird über eine Zahl gesteuert. Dazu müssen die Sounddateien auf dem Speicher im Format 00001.MP3 (5stellig) und im MP3-Format gespeichert werden." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Um die Sounddateien abspielen zu können, müssen sie im 5-stelligen Format 00001.MP3 (Großbuchstaben) und im MP3-Format gespeichert sein." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Dabei ist aber nur 00001-09999 erlaubt, da die >10000 reserviert sind für spätere generierte Töne. Wenn ein SW-Player (I2S) verbaut wurde, sind auch Dateien im WAV-Format erlaubt." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 1: Um den Überblick zu behalten, legt eine weitere Datei wie folgt an: „00001 Klingel 1.txt“ oder „00002 Innensierene.txt“." />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 2: Optimiert die Datei zuvor in Audacity. Hier kann man die Lautstärke aufs Maximum verstärken, den Ton auf Mono runtermischen sowie unnötige MP3 Tags entfernen." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp 2: Um optimale Ergebnisse zu erzielen, können Sie die Sounddatei vorher in Audacity (Kostenfrei) bearbeiten." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="- Lautstärke verstärken (bei HW-Player relevant, da dieser recht leise ist) um die maximale Lautstärke zu erreichen (auf Kosten der Dynamik und Qualität)" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="- Beim SW-Player (I2S) ist es je nach MP3 nötig, die Samplerate und/oder Bitrate zu reduzieren, da die CPU Leistung nur sehr schwach ist." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="- Exportiere als Mono und entferne MP3-Tags um Speicherplatz zu sparen." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Auslöser" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Es gibt 10 verschiede Auslöser, um diverse Sounds abzuspielen. Dabei wird über ein Schaltobjekt (EIN) das Soundfile abgespielt und kann aber auch frühzeitig beendet werden (AUS)." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Je Auslöser können mittels „Tag/Nacht“-Objekt auch unterschiedliche Sounds in unterschiedlichen Lautstärken abgespielt werden." />

@@ -19,13 +19,10 @@ void SoundPlayerSoftware::playNextPlay()
     if (_nextPlay.file == 10000)
     {
         AudioGeneratorWAV *currentAudioGenerator = new AudioGeneratorWAV();
-        AudioFileSourceFunction *currentAudioSource = new AudioFileSourceFunction(5.);
+        AudioFileSourceFunction *currentAudioSource = new AudioFileSourceFunction(1.1, 1, 16000); // 8khz
 
-        currentAudioSource->addAudioGenerators([&](const float time) {
-            float v = sin(TWO_PI * 5000 * time); // generate sine wave
-            v *= fmod(time, 1.f);                // change linear
-            v *= 0.5;                            // scale
-            return v;
+        currentAudioSource->addAudioGenerators([this](const float time) {
+            return this->generateTone(time);
         });
 
         _audioSource = currentAudioSource;
@@ -122,7 +119,13 @@ void SoundPlayerSoftware::processStatusStopped()
     powerOff();
 }
 
-const char* SoundPlayerSoftware::playTypeName()
+const char *SoundPlayerSoftware::playTypeName()
 {
     return "Software (I2S)";
+}
+
+float SoundPlayerSoftware::generateTone(const float time)
+{
+    if ((uint16_t)(time * 10) % (toneOn + toneOff) >= toneOn) return 0.0;
+    return sin(TWO_PI * toneHz * time); // generate sine wave
 }

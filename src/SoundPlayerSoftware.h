@@ -20,11 +20,16 @@ class SoundPlayerSoftware : public SoundPlayer
     void stopCurrentPlay();
 
     void processStatusStopped() override;
+    inline float generateTone(const float time);
+
+    uint8_t toneOn = 3;
+    uint8_t toneOff = 1;
+    uint16_t toneHz = 4000;
 
   public:
     void setup() override;
     void loop() override;
-    const char* playTypeName() override;
+    const char *playTypeName() override;
 
 #ifdef OPENKNX_DEBUG
     static void callbackStatus(void *cbData, int code, const char *string);
