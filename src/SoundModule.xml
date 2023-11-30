@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<KNX xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
+<Builder xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x29"
-    ApplicationVersion="10"
-    ReplacesVersions="9 8 7 6 5 4 3 2 1"
+    ApplicationVersion="13"
+    ReplacesVersions="12 11 10 9 8 7 6 5 4 3 2 1"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"

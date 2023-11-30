@@ -306,7 +306,7 @@
           <Dynamic>
 
             <Channel Name="MainChannel" Text="Sound" Number="%TT%" Id="%AID%_CH-%TT%" Icon="speaker">
-              <ParameterBlock Id="%AID%_PB-5" Name="Documentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Documentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Player" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Das SOM-UP gibt es in zwei verschiedenen Versionen. Einmal mit einem externen Hardware- und als Software-Player." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Hardwarevariante nutzt einen eigenen externen MP3-Player (DY-SV17F) inkl. eigenem Flashspeicher. Dieser bietet eine hohe Kompatibilität beim Abspielen der MP3." />
@@ -337,7 +337,7 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Jetzt kannst du direkt diverse Meldungen wie „Wäsche ist fertig“ auslösen. Somit brauchst du keinen Umweg über die begrenzen 1bit-Auslöser zu gehen." />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tipp: Auf der Seite ttsmp3.com kannst du dir schnell passende Statusmeldungen als MP3 erstellen lassen." />
               </ParameterBlock>
-              <ParameterBlock Id="%AID%_PB-6" Name="Basic" Text="Basiseinstellung" Icon="cog-outline" HelpContext="Empty">
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Basic" Text="Basiseinstellung" Icon="cog-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
 
                 <!-- Tag/Nacht -->
@@ -389,35 +389,35 @@
               <choose ParamRefId="%AID%_UP-%TT%00006_R-%TT%0000601">
                 <when test="1">
                   <ComObjectRefRef RefId="%AID%_O-%TT%00028_R-%TT%0002801" />
-                  <ParameterBlock Id="%AID%_PB-7" Name="Scenes" Text="Szenensteuerung" Icon="list-box-outline">
+                  <ParameterBlock Id="%AID%_PB-nnn" Name="Scenes" Text="Szenensteuerung" Icon="list-box-outline">
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
-                    <ParameterBlock Id="%AID%_PB-8" Name="Table1Scenes" Text="#" Inline="true" Layout="Table">
+                    <ParameterBlock Id="%AID%_PB-nnn" Name="Table1Scenes" Text="#" Inline="true" Layout="Table">
                       <Rows>
-                        <Row Id="%AID%_PB-8_R-1" Name="Row1" Text="1" />
-                        <Row Id="%AID%_PB-8_R-2" Name="Row2" Text="2" />
-                        <Row Id="%AID%_PB-8_R-3" Name="Row3" Text="3" />
-                        <Row Id="%AID%_PB-8_R-4" Name="Row4" Text="4" />
-                        <Row Id="%AID%_PB-8_R-5" Name="Row5" Text="5" />
-                        <Row Id="%AID%_PB-8_R-6" Name="Row6" Text="6" />
-                        <Row Id="%AID%_PB-8_R-7" Name="Row7" Text="7" />
-                        <Row Id="%AID%_PB-8_R-8" Name="Row8" Text="8" />
-                        <Row Id="%AID%_PB-8_R-9" Name="Row9" Text="9" />
-                        <Row Id="%AID%_PB-8_R-10" Name="Row10" Text="10" />
-                        <Row Id="%AID%_PB-8_R-11" Name="Row11" Text="11" />
-                        <Row Id="%AID%_PB-8_R-12" Name="Row12" Text="12" />
-                        <Row Id="%AID%_PB-8_R-13" Name="Row13" Text="13" />
-                        <Row Id="%AID%_PB-8_R-14" Name="Row14" Text="14" />
-                        <Row Id="%AID%_PB-8_R-15" Name="Row15" Text="15" />
-                        <Row Id="%AID%_PB-8_R-16" Name="Row16" Text="16" />
-                        <Row Id="%AID%_PB-8_R-17" Name="Row17" Text="17" />
-                        <Row Id="%AID%_PB-8_R-18" Name="Row18" Text="18" />
-                        <Row Id="%AID%_PB-8_R-19" Name="Row19" Text="19" />
-                        <Row Id="%AID%_PB-8_R-20" Name="Row20" Text="20" />
+                        <Row Id="%AID%_PB-nnn_R-1" Name="Row1" Text="1" />
+                        <Row Id="%AID%_PB-nnn_R-2" Name="Row2" Text="2" />
+                        <Row Id="%AID%_PB-nnn_R-3" Name="Row3" Text="3" />
+                        <Row Id="%AID%_PB-nnn_R-4" Name="Row4" Text="4" />
+                        <Row Id="%AID%_PB-nnn_R-5" Name="Row5" Text="5" />
+                        <Row Id="%AID%_PB-nnn_R-6" Name="Row6" Text="6" />
+                        <Row Id="%AID%_PB-nnn_R-7" Name="Row7" Text="7" />
+                        <Row Id="%AID%_PB-nnn_R-8" Name="Row8" Text="8" />
+                        <Row Id="%AID%_PB-nnn_R-9" Name="Row9" Text="9" />
+                        <Row Id="%AID%_PB-nnn_R-10" Name="Row10" Text="10" />
+                        <Row Id="%AID%_PB-nnn_R-11" Name="Row11" Text="11" />
+                        <Row Id="%AID%_PB-nnn_R-12" Name="Row12" Text="12" />
+                        <Row Id="%AID%_PB-nnn_R-13" Name="Row13" Text="13" />
+                        <Row Id="%AID%_PB-nnn_R-14" Name="Row14" Text="14" />
+                        <Row Id="%AID%_PB-nnn_R-15" Name="Row15" Text="15" />
+                        <Row Id="%AID%_PB-nnn_R-16" Name="Row16" Text="16" />
+                        <Row Id="%AID%_PB-nnn_R-17" Name="Row17" Text="17" />
+                        <Row Id="%AID%_PB-nnn_R-18" Name="Row18" Text="18" />
+                        <Row Id="%AID%_PB-nnn_R-19" Name="Row19" Text="19" />
+                        <Row Id="%AID%_PB-nnn_R-20" Name="Row20" Text="20" />
                       </Rows>
                       <Columns>
-                        <Column Id="%AID%_PB-8_C-1" Name="Col1" Text="Szene" Width="25%" />
-                        <Column Id="%AID%_PB-8_C-2" Name="Col2" Text="Funktion" Width="50%" />
-                        <Column Id="%AID%_PB-8_C-3" Name="Col3" Text="Ziel" Width="25%" />
+                        <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Text="Szene" Width="25%" />
+                        <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Text="Funktion" Width="50%" />
+                        <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Text="Ziel" Width="25%" />
                       </Columns>
                       <ParameterRefRef RefId="%AID%_UP-%TT%00100_R-%TT%0010001" Cell="1,1" />
                       <ParameterRefRef RefId="%AID%_UP-%TT%00101_R-%TT%0010101" Cell="2,1" />
@@ -704,7 +704,7 @@
                 </when>
               </choose>
 
-              <ParameterBlock Id="%AID%_PB-8" Name="ExternalPage" Text="Extern" Inline="true">
+              <ParameterBlock Id="%AID%_PB-nnn" Name="ExternalPage" Text="Extern" Inline="true">
                 <Channel Id="%AID%_CH-SM" Name="ExternalChannel" Number="2" Text="Externe Logik">
                   <choose ParamRefId="%AID%_UP-%TT%00008_R-%TT%0000801">
                     <when test=">0">
