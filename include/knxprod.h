@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 0
+#define MAIN_ApplicationVersion 5
 #define MAIN_ParameterSize 1641
 #define MAIN_MaxKoNumber 379
 #define MAIN_OrderNumber "SOM-UP"
@@ -217,9 +217,9 @@
 #define SOM_SceneTargetB17                      76      // 8 Bits, Bit 7-0
 #define SOM_SceneTargetB18                      77      // 8 Bits, Bit 7-0
 #define SOM_SceneTargetB19                      78      // 8 Bits, Bit 7-0
-#define SOM_TonSequence1Active                  99      // 1 Bit, Bit 7
-#define     SOM_TonSequence1ActiveMask 0x80
-#define     SOM_TonSequence1ActiveShift 7
+#define SOM_TonSequence1Mode                    99      // 2 Bits, Bit 7-6
+#define     SOM_TonSequence1ModeMask 0xC0
+#define     SOM_TonSequence1ModeShift 6
 #define SOM_TonSequence1Repeats                 100      // uint8_t
 #define SOM_TonSequence1RepeatsInactive         100      // uint16_t
 #define SOM_TonSequence1RepeatPause             101      // uint8_t
@@ -414,15 +414,15 @@
 #define ParamSOM_SceneTargetB18                      (knx.paramByte(SOM_SceneTargetB18))
 // SceneTargetB9
 #define ParamSOM_SceneTargetB19                      (knx.paramByte(SOM_SceneTargetB19))
-// Sequenz aktiv
-#define ParamSOM_TonSequence1Active                  ((bool)(knx.paramByte(SOM_TonSequence1Active) & SOM_TonSequence1ActiveMask))
+// Modus
+#define ParamSOM_TonSequence1Mode                    ((knx.paramByte(SOM_TonSequence1Mode) & SOM_TonSequence1ModeMask) >> SOM_TonSequence1ModeShift)
 // 
 #define ParamSOM_TonSequence1Repeats                 (knx.paramByte(SOM_TonSequence1Repeats))
 // 
 #define ParamSOM_TonSequence1RepeatsInactive         (knx.paramWord(SOM_TonSequence1RepeatsInactive))
 // Pause zwischen der Wiederholung
 #define ParamSOM_TonSequence1RepeatPause             (knx.paramByte(SOM_TonSequence1RepeatPause))
-// 
+// Dauer
 #define ParamSOM_TonSequence1Duration1               (knx.paramByte(SOM_TonSequence1Duration1))
 // 
 #define ParamSOM_TonSequence1Duration2               (knx.paramByte(SOM_TonSequence1Duration2))
@@ -440,7 +440,7 @@
 #define ParamSOM_TonSequence1Duration8               (knx.paramByte(SOM_TonSequence1Duration8))
 // 
 #define ParamSOM_TonSequence1Duration9               (knx.paramByte(SOM_TonSequence1Duration9))
-// 
+// Frequenz
 #define ParamSOM_TonSequence1Frequency1              (knx.paramWord(SOM_TonSequence1Frequency1))
 // 
 #define ParamSOM_TonSequence1Frequency2              (knx.paramWord(SOM_TonSequence1Frequency2))

@@ -11,7 +11,8 @@ void SoundPlayerSoftware::loadToneGenerator(uint8_t sequenz)
     toneSequenceRepeatPause = ParamSOM_TonSequence1RepeatPause;
 
     uint16_t time = 0;
-    for (size_t i = 0; i < 9; i++)
+    uint8_t max = (ParamSOM_TonSequence1Mode == 1) ? 1 : 9;
+    for (size_t i = 0; i < max; i++)
     {
         uint8_t seqTime = knx.paramByte(SOM_TonSequence1Duration1 + i);
         uint16_t seqFreq = knx.paramWord(SOM_TonSequence1Frequency1 + (i * 2));
@@ -62,7 +63,7 @@ void SoundPlayerSoftware::playNextPlay()
             toneSequence[9] = 0;
             toneSequence[16] = 4200;
         }
-        else if (_nextPlay.file == 10001)
+        else if (_nextPlay.file == 10001 && ParamSOM_TonSequence1Mode > 0)
         {
             loadToneGenerator(1);
         }

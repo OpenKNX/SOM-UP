@@ -4,8 +4,8 @@
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x29"
-    ApplicationVersion="0"
-    ReplacesVersions="0"
+    ApplicationVersion="5"
+    ReplacesVersions="4 3 2 1 0"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"
