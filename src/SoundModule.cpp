@@ -59,6 +59,10 @@ void SoundModule::setup(bool configured)
             _triggers[i]->setup();
         }
     }
+
+#ifdef FUNC1_BUTTON_PIN
+    openknx.func1Button.onShortClick([this] { openknx.logger.log("1");this->play(10000); });
+#endif
 }
 
 bool SoundModule::play(uint16_t file, uint8_t volume, uint8_t priority, uint32_t repeats, uint32_t duration, uint8_t trigger)

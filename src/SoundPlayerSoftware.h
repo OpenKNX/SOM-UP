@@ -6,6 +6,7 @@
 #include "AudioGeneratorWAV.h"
 #include "AudioOutputSOM.h"
 #include "SoundPlayer.h"
+#include <map>
 
 class SoundPlayerSoftware : public SoundPlayer
 {
@@ -22,9 +23,13 @@ class SoundPlayerSoftware : public SoundPlayer
     void processStatusStopped() override;
     inline float generateTone(const float time);
 
-    uint8_t toneOn = 3;
-    uint8_t toneOff = 1;
-    uint16_t toneHz = 4000;
+    uint8_t toneSequenceRepeats = 0;
+    uint8_t toneSequenceRepeatPause = 0;
+    uint16_t toneSequenceDuration = 0;
+    std::map<uint16_t, uint16_t> toneSequence = {};
+
+    void loadToneGenerator(uint8_t sequenz);
+    void calcToneGeneratorDuration();
 
   public:
     void setup() override;

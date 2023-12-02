@@ -35,7 +35,7 @@
     #define INFO1_LED_PIN 29
     #define INFO1_LED_PIN_ACTIVE_ON HIGH
     #define PROG_BUTTON_PIN 0
-    #define PROG_BUTTON_PIN_INTERRUPT_ON FALLING
+    #define FUNC1_BUTTON_PIN 1
     #define SAVE_INTERRUPT_PIN 13
     #define KNX_UART_RX_PIN 17
     #define KNX_UART_TX_PIN 16

@@ -38,7 +38,7 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%202" Name="Trigger%C%VolumeNight" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="20" />
                 <Parameter Id="%AID%_UP-%TT%%CC%212" Name="Trigger%C%VolumeNightInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMVolume" Text="Lautstärke" Value="0" Access="None" DefaultUnionParameter="true"/>
               </Union>
-              <Union SizeInBit="16">
+              <Union SizeInBit="8">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="10" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%080" Name="Trigger%C%Repeats" Offset="0" BitOffset="0" ParameterType="%AID%_PT-SOMRepeats" Text="" Value="1" SuffixText="x" />
                 <Parameter Id="%AID%_UP-%TT%%CC%081" Name="Trigger%C%RepeatsInactive" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueDpt7" Text="" Value="0" Access="None" DefaultUnionParameter="true"/>
