@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+  <ManufacturerData>
+    <Manufacturer>
+      <ApplicationPrograms>
+        <ApplicationProgram>
+          <Static>
+            <ParameterTypes>
+              <ParameterType Id="%AID%_PT-TONEDuration" Name="TONEDuration">
+                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="0" maxInclusive="250" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-TONEFrequenz" Name="TONEFrequenz">
+                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="0" maxInclusive="8000" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-TONEMode" Name="TONEMode">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Deaktiviert" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Einfach" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Komplex" Value="2" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+            </ParameterTypes>
+            <Parameters>
+            </Parameters>
+            <ParameterRefs>
+            </ParameterRefs>
+          </Static>
+          <Dynamic>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

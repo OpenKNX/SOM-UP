@@ -2,20 +2,24 @@
 #include "OpenKNX/Log/VirtualSerial.h"
 #include "SoundModule.h"
 
-void SoundPlayerSoftware::loadToneGenerator(uint8_t sequenz)
+void SoundPlayerSoftware::buildToneSequence(uint8_t _channelIndex)
 {
-    logDebugP("loadToneGenerator %i", sequenz);
+    //if (!ParamTONE_ToneGeneratorMode) return;
+
+    logDebugP("loadToneGenerator %i", _channelIndex);
     logIndentUp();
-    toneSequence.clear();
-    toneSequenceRepeats = ParamSOM_TonSequence1Repeats;
-    toneSequenceRepeatPause = ParamSOM_TonSequence1RepeatPause;
+    toneSequenceRepeats = ParamTONE_ToneGeneratorRepeats;
+    toneSequenceRepeatPause = ParamTONE_ToneGeneratorRepeatPause;
+    logDebugP("ParamTONE_ToneGeneratorRepeats %i", ParamTONE_ToneGeneratorRepeats);
+    logDebugP("ParamTONE_ToneGeneratorRepeatPause %i", ParamTONE_ToneGeneratorRepeatPause);
+    logDebugP("ParamTONE_ToneGeneratorMode %i", ParamTONE_ToneGeneratorMode);
 
     uint16_t time = 0;
-    uint8_t max = (ParamSOM_TonSequence1Mode == 1) ? 1 : 9;
+    uint8_t max = (ParamTONE_ToneGeneratorMode == 1) ? 1 : 9;
     for (size_t i = 0; i < max; i++)
     {
-        uint8_t seqTime = knx.paramByte(SOM_TonSequence1Duration1 + i);
-        uint16_t seqFreq = knx.paramWord(SOM_TonSequence1Frequency1 + (i * 2));
+        uint8_t seqTime = knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration1 + i));
+        uint16_t seqFreq = knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency1 + i));
         if (seqTime > 0)
         {
             time += seqTime;
@@ -48,11 +52,15 @@ void SoundPlayerSoftware::playNextPlay()
     if (_audioGenerator != nullptr) free(_audioGenerator);
 
     // special handling for generated ton.
-    if (_nextPlay.file >= 10000 && _nextPlay.file <= 10009)
+    if (_nextPlay.file >= 10000 && _nextPlay.file <= (TONE_ChannelCount + 10000))
     {
+        // Reset
         toneSequence.clear();
         toneSequenceRepeats = 0;
         toneSequenceRepeatPause = 0;
+
+        uint8_t _channelIndex = _nextPlay.file - 10000 - 1;
+
         if (_nextPlay.file == 10000)
         {
             toneSequence[2] = 4000;
@@ -63,31 +71,9 @@ void SoundPlayerSoftware::playNextPlay()
             toneSequence[9] = 0;
             toneSequence[16] = 4200;
         }
-        else if (_nextPlay.file == 10001 && ParamSOM_TonSequence1Mode > 0)
+        else
         {
-            loadToneGenerator(1);
-        }
-        else if (_nextPlay.file == 10002)
-        {
-            toneSequence[5] = 4000;
-            toneSequence[10] = 3700;
-            toneSequence[15] = 4000;
-            toneSequence[20] = 3700;
-            toneSequence[25] = 4000;
-            toneSequence[30] = 3700;
-        }
-        else if (_nextPlay.file == 10003)
-        {
-            toneSequence[5] = 4000;
-            toneSequence[10] = 3700;
-            toneSequenceRepeats = 4;
-            toneSequenceRepeatPause = 0;
-        }
-        else if (_nextPlay.file == 10004)
-        {
-            toneSequence[5] = 4000;
-            toneSequenceRepeats = 2;
-            toneSequenceRepeatPause = 1;
+            buildToneSequence(_channelIndex);
         }
 
         calcToneGeneratorDuration();

@@ -30,6 +30,7 @@ void SoundTrigger::setup()
     logTraceP("paramFileDay: %i", ParamSOM_TriggerFileDay);
     logTraceP("paramFileNight: %i", ParamSOM_TriggerFileNight);
     logTraceP("paramDurationMS: %i", ParamSOM_TriggerDurationTimeMS);
+    logTraceP("paramReTrigger: %i", ParamSOM_TriggerReTrigger);
 }
 
 void SoundTrigger::processInputKo(GroupObject &ko)
@@ -125,6 +126,11 @@ void SoundTrigger::play()
     if (_currentLocked)
     {
         logInfoP("play ignored (locked)");
+        return;
+    }
+    if (_status && ParamSOM_TriggerReTrigger)
+    {
+        logInfoP("play ignored (retrigger protection)");
         return;
     }
     logInfoP("play");

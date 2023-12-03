@@ -20,6 +20,7 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%003" Name="Trigger%C%DayNight" Offset="0" BitOffset="4" ParameterType="%AID%_PT-SOMDayNight" Text="Tag/Nacht-Objekt" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%004" Name="Trigger%C%Priority" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMPriority" Text="Priorität" Value="3" />
                 <Parameter Id="%AID%_UP-%TT%%CC%007" Name="Trigger%C%Control" Offset="1" BitOffset="3" ParameterType="%AID%_PT-SOMControl" Text="Steuerung" Value="2" />
+                <Parameter Id="%AID%_UP-%TT%%CC%008" Name="Trigger%C%ReTrigger" Offset="1" BitOffset="5" ParameterType="%AID%_PT-CheckBox" Text="Retrigger-Schutz" Value="0" />
               </Union>
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="2" BitOffset="0" />
@@ -54,6 +55,7 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301" RefId="%AID%_UP-%TT%%CC%003" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401" RefId="%AID%_UP-%TT%%CC%004" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" RefId="%AID%_UP-%TT%%CC%007" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801" RefId="%AID%_UP-%TT%%CC%008" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001" RefId="%AID%_UP-%TT%%CC%080" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%091_R-%TT%%CC%09101" RefId="%AID%_UP-%TT%%CC%091" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%092_R-%TT%%CC%09201" RefId="%AID%_UP-%TT%%CC%092" />
@@ -193,6 +195,9 @@
                             </ParameterBlock>
                           </when>
                         </choose>
+
+                        <!-- Retrigger -->
+                        <ParameterRefRef RefId="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801" Icon="shield" HelpContext="SOM-TriggerRetrigger"/>
 
                       </when>
                     </choose>

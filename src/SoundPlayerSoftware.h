@@ -28,7 +28,7 @@ class SoundPlayerSoftware : public SoundPlayer
     uint16_t toneSequenceDuration = 0;
     std::map<uint16_t, uint16_t> toneSequence = {};
 
-    void loadToneGenerator(uint8_t sequenz);
+    void buildToneSequence(uint8_t _channelIndex);
     void calcToneGeneratorDuration();
 
   public:

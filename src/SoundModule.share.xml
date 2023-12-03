@@ -92,19 +92,6 @@
                   <Enumeration Text="Auslöser 10" Value="9" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-              <ParameterType Id="%AID%_PT-TonSequenceDuration" Name="TonSequenceDuration">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="0" maxInclusive="250" />
-              </ParameterType>
-              <ParameterType Id="%AID%_PT-TonSequenceFrequenz" Name="TonSequenceFrequenz">
-                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="0" maxInclusive="8000" />
-              </ParameterType>
-              <ParameterType Id="%AID%_PT-TonSequenceMode" Name="TonSequenceMode">
-                <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Deaktiviert" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Einfach" Value="1" Id="%ENID%" />
-                  <Enumeration Text="Komplex" Value="2" Id="%ENID%" />
-                </TypeRestriction>
-              </ParameterType>
             </ParameterTypes>
             <Parameters>
               <Union SizeInBit="32">
@@ -200,72 +187,9 @@
                 <Parameter Id="%AID%_UP-%TT%00179" Name="SceneTargetB19" Offset="59" BitOffset="0" ParameterType="%AID%_PT-SceneTargetB" Text="SceneTargetB9" Value="0" />
               </Union>
 
-              <!-- ToneGenerator 1 --> 
-              <Parameter Id="%AID%_P-%TT%00200" Name="TonSequence1Name" ParameterType="%AID%_PT-Text40Byte" Text="Beschreibung" Value="" />
-              <Parameter Id="%AID%_P-%TT%00205" Name="TonSequence1Repeat" ParameterType="%AID%_PT-OnOffYesNo" Text="Wiederholungen" Value="0" />
-
-              <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="85" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%00201" Name="TonSequence1Mode" Offset="0" BitOffset="0" ParameterType="%AID%_PT-TonSequenceMode" Text="Modus" Value="0" />
-
-                <Parameter Id="%AID%_UP-%TT%00202" Name="TonSequence1Repeats" Offset="1" BitOffset="0" ParameterType="%AID%_PT-SOMRepeats" Text="" Value="1" SuffixText="x" />
-                <Parameter Id="%AID%_UP-%TT%00203" Name="TonSequence1RepeatsInactive" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt7" Text="" Value="0" Access="None" DefaultUnionParameter="true" />
-                <Parameter Id="%AID%_UP-%TT%00204" Name="TonSequence1RepeatPause" Offset="2" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="Pause zwischen der Wiederholung" Value="5" SuffixText="x 0,1s"/>
-              </Union>              
-              <Union SizeInBit="72">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="90" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%00211" Name="TonSequence1Duration1" Offset="0" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="Dauer" Value="10" />
-                <Parameter Id="%AID%_UP-%TT%00212" Name="TonSequence1Duration2" Offset="1" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00213" Name="TonSequence1Duration3" Offset="2" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00214" Name="TonSequence1Duration4" Offset="3" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00215" Name="TonSequence1Duration5" Offset="4" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00216" Name="TonSequence1Duration6" Offset="5" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00217" Name="TonSequence1Duration7" Offset="6" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00218" Name="TonSequence1Duration8" Offset="7" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00219" Name="TonSequence1Duration9" Offset="8" BitOffset="0" ParameterType="%AID%_PT-TonSequenceDuration" Text="" Value="0" />
-              </Union>
-              <Union SizeInBit="128">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="99" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%00231" Name="TonSequence1Frequency1" Offset="0" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="Frequenz" Value="4000" />
-                <Parameter Id="%AID%_UP-%TT%00232" Name="TonSequence1Frequency2" Offset="2" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00233" Name="TonSequence1Frequency3" Offset="4" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00234" Name="TonSequence1Frequency4" Offset="6" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00235" Name="TonSequence1Frequency5" Offset="8" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00236" Name="TonSequence1Frequency6" Offset="10" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00237" Name="TonSequence1Frequency7" Offset="12" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00238" Name="TonSequence1Frequency8" Offset="14" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%00239" Name="TonSequence1Frequency9" Offset="16" BitOffset="0" ParameterType="%AID%_PT-TonSequenceFrequenz" Text="" Value="0" />
-              </Union>
             </Parameters>
             <ParameterRefs>
               
-              <ParameterRef Id="%AID%_P-%TT%00200_R-%TT%0020001" RefId="%AID%_P-%TT%00200" />
-              <ParameterRef Id="%AID%_UP-%TT%00201_R-%TT%0020101" RefId="%AID%_UP-%TT%00201" />
-              <ParameterRef Id="%AID%_UP-%TT%00202_R-%TT%0020201" RefId="%AID%_UP-%TT%00202" />
-              <ParameterRef Id="%AID%_UP-%TT%00204_R-%TT%0020401" RefId="%AID%_UP-%TT%00204" />
-              <ParameterRef Id="%AID%_P-%TT%00205_R-%TT%0020501" RefId="%AID%_P-%TT%00205" />
-              
-              <ParameterRef Id="%AID%_UP-%TT%00211_R-%TT%0021101" RefId="%AID%_UP-%TT%00211" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00211_R-%TT%0021102" RefId="%AID%_UP-%TT%00211" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00212_R-%TT%0021201" RefId="%AID%_UP-%TT%00212" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00213_R-%TT%0021301" RefId="%AID%_UP-%TT%00213" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00214_R-%TT%0021401" RefId="%AID%_UP-%TT%00214" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00215_R-%TT%0021501" RefId="%AID%_UP-%TT%00215" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00216_R-%TT%0021601" RefId="%AID%_UP-%TT%00216" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00217_R-%TT%0021701" RefId="%AID%_UP-%TT%00217" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00218_R-%TT%0021801" RefId="%AID%_UP-%TT%00218" SuffixText="x 0,1s" />
-              <ParameterRef Id="%AID%_UP-%TT%00219_R-%TT%0021901" RefId="%AID%_UP-%TT%00219" SuffixText="x 0,1s" />
-              
-              <ParameterRef Id="%AID%_UP-%TT%00231_R-%TT%0023101" RefId="%AID%_UP-%TT%00231" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00231_R-%TT%0023102" RefId="%AID%_UP-%TT%00231" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00232_R-%TT%0023201" RefId="%AID%_UP-%TT%00232" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00233_R-%TT%0023301" RefId="%AID%_UP-%TT%00233" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00234_R-%TT%0023401" RefId="%AID%_UP-%TT%00234" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00235_R-%TT%0023501" RefId="%AID%_UP-%TT%00235" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00236_R-%TT%0023601" RefId="%AID%_UP-%TT%00236" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00237_R-%TT%0023701" RefId="%AID%_UP-%TT%00237" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00238_R-%TT%0023801" RefId="%AID%_UP-%TT%00238" SuffixText="Hz" />
-              <ParameterRef Id="%AID%_UP-%TT%00239_R-%TT%0023901" RefId="%AID%_UP-%TT%00239" SuffixText="Hz"/>
 
 
 
@@ -800,98 +724,13 @@
               
               <ParameterBlock Id="%AID%_PB-nnn" Name="ToneGenerator" Text="Tongenerator" Icon="waveform">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Tongenerator" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Mittels dem Tongenerator können einfache Tonsequenzen generiert werden und über die Pseudodateinummern 10000 + x abespielt werden." />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Mittels des Tongenerators können einfache Tonsequenzen generiert werden und über die Pseudodateinummern 10000 + x Squenznummer abespielt werden." />
 
-                <ParameterBlock Id="%AID%_PB-nnn" Name="Sequence1" Text="Sequenz 1: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%00200_R-%TT%0020001" Icon="list-box-outline">
-                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Sequenz 1" UIHint="Headline" />
-                  <!-- Name -->
-                  <ParameterRefRef RefId="%AID%_P-%TT%00200_R-%TT%0020001" Icon="tag-outline" HelpContext="Base-ChannelName" />
-                  <!-- Mode -->
-                  <ParameterRefRef RefId="%AID%_UP-%TT%00201_R-%TT%0020101" Icon="shape" HelpContext="SOM-SequenceMode"/>
-                  <choose ParamRefId="%AID%_UP-%TT%00201_R-%TT%0020101">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00211_R-%TT%0021101" Icon="timer-outline" />
-                      <ParameterRefRef RefId="%AID%_UP-%TT%00231_R-%TT%0023101" Icon="sine-wave" />
-                    </when>
-                    <when test="2">
-                      <!-- Grid -->
-                      <ParameterBlock Id="%AID%_PB-nnn" Name="Table1Sequence" Text="#" Inline="true" Layout="Grid" HelpContext="SOM-SequenceMode">
-                        <Rows>
-                          <Row Id="%AID%_PB-nnn_R-1" Name="Row1" Text="1" />
-                          <Row Id="%AID%_PB-nnn_R-2" Name="Row2" Text="2" />
-                          <Row Id="%AID%_PB-nnn_R-3" Name="Row3" Text="3" />
-                          <Row Id="%AID%_PB-nnn_R-4" Name="Row4" Text="4" />
-                          <Row Id="%AID%_PB-nnn_R-5" Name="Row5" Text="5" />
-                          <Row Id="%AID%_PB-nnn_R-6" Name="Row6" Text="6" />
-                          <Row Id="%AID%_PB-nnn_R-7" Name="Row7" Text="7" />
-                          <Row Id="%AID%_PB-nnn_R-8" Name="Row8" Text="8" />
-                          <Row Id="%AID%_PB-nnn_R-9" Name="Row9" Text="9" />
-                          <Row Id="%AID%_PB-nnn_R-10" Name="Row10" Text="10" />
-                          <Row Id="%AID%_PB-nnn_R-11" Name="Row11" Text="11" />
-                          <Row Id="%AID%_PB-nnn_R-12" Name="Row12" Text="12" />
-                        </Rows>
-                        <Columns>
-                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="46%" />
-                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="6%" />
-                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          <Column Id="%AID%_PB-nnn_C-4" Name="Col4" Width="3%" />
-                          <Column Id="%AID%_PB-nnn_C-5" Name="Col5" Width="20%" />
-                        </Columns>
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer"    Cell="2,3" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Frequenz" Cell="2,5" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="1." Cell="3,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="2." Cell="4,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="3." Cell="5,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="4." Cell="6,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="5." Cell="7,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="6." Cell="8,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="7." Cell="9,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="8." Cell="10,2" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="9." Cell="11,2" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00211_R-%TT%0021101" Cell="3,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00212_R-%TT%0021201" Cell="4,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00213_R-%TT%0021301" Cell="5,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00214_R-%TT%0021401" Cell="6,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00215_R-%TT%0021501" Cell="7,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00216_R-%TT%0021601" Cell="8,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00217_R-%TT%0021701" Cell="9,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00218_R-%TT%0021801" Cell="10,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00219_R-%TT%0021901" Cell="11,3" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00231_R-%TT%0023101" Cell="3,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00232_R-%TT%0023201" Cell="4,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00233_R-%TT%0023301" Cell="5,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00234_R-%TT%0023401" Cell="6,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00235_R-%TT%0023501" Cell="7,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00236_R-%TT%0023601" Cell="8,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00237_R-%TT%0023701" Cell="9,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00238_R-%TT%0023801" Cell="10,5" />
-                        <ParameterRefRef RefId="%AID%_UP-%TT%00239_R-%TT%0023901" Cell="11,5" />
-                      </ParameterBlock>
-                    </when>
-                    <when test=">0">
-                      <!-- Repeat -->
-                      <ParameterRefRef RefId="%AID%_P-%TT%00205_R-%TT%0020501" Icon="repeat" HelpContext="SOM-SequenceRepeat" />
-                      <choose ParamRefId="%AID%_P-%TT%00205_R-%TT%0020501">
-                        <when test="1">
-                          <ParameterRefRef RefId="%AID%_UP-%TT%00202_R-%TT%0020201" HelpContext="SOM-SequenceRepeat" />
-                          <ParameterRefRef RefId="%AID%_UP-%TT%00204_R-%TT%0020401" Icon="timer-sand-paused" HelpContext="SOM-SequenceRepeat" />
-                        </when>
-                      </choose>
-                    </when>
-                  </choose>
-                </ParameterBlock>
-
-                <ParameterBlock Id="%AID%_PB-nnn" Name="Sequence2" Text="Sequenz 2" Icon="list-box-outline">
-                </ParameterBlock>
-
-                <ParameterBlock Id="%AID%_PB-nnn" Name="Sequence3" Text="Sequenz 3" Icon="list-box-outline">
-                </ParameterBlock>
-
-                
+                <op:include href="ToneGenerator.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="TONE" IsInner="true" />
               </ParameterBlock>
 
               <op:include href="SoundModule.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" IsInner="true" />
-            </Channel> 
+            </Channel>
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>

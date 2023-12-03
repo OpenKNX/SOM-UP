@@ -10,8 +10,8 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 19
-#define MAIN_ParameterSize 1641
+#define MAIN_ApplicationVersion 33
+#define MAIN_ParameterSize 1872
 #define MAIN_MaxKoNumber 379
 #define MAIN_OrderNumber "SOM-UP"
 #define BTN_ModuleVersion 3
@@ -217,30 +217,6 @@
 #define SOM_SceneTargetB17                      76      // 8 Bits, Bit 7-0
 #define SOM_SceneTargetB18                      77      // 8 Bits, Bit 7-0
 #define SOM_SceneTargetB19                      78      // 8 Bits, Bit 7-0
-#define SOM_TonSequence1Mode                    99      // 2 Bits, Bit 7-6
-#define     SOM_TonSequence1ModeMask 0xC0
-#define     SOM_TonSequence1ModeShift 6
-#define SOM_TonSequence1Repeats                 100      // uint8_t
-#define SOM_TonSequence1RepeatsInactive         100      // uint16_t
-#define SOM_TonSequence1RepeatPause             101      // uint8_t
-#define SOM_TonSequence1Duration1               104      // uint8_t
-#define SOM_TonSequence1Duration2               105      // uint8_t
-#define SOM_TonSequence1Duration3               106      // uint8_t
-#define SOM_TonSequence1Duration4               107      // uint8_t
-#define SOM_TonSequence1Duration5               108      // uint8_t
-#define SOM_TonSequence1Duration6               109      // uint8_t
-#define SOM_TonSequence1Duration7               110      // uint8_t
-#define SOM_TonSequence1Duration8               111      // uint8_t
-#define SOM_TonSequence1Duration9               112      // uint8_t
-#define SOM_TonSequence1Frequency1              113      // uint16_t
-#define SOM_TonSequence1Frequency2              115      // uint16_t
-#define SOM_TonSequence1Frequency3              117      // uint16_t
-#define SOM_TonSequence1Frequency4              119      // uint16_t
-#define SOM_TonSequence1Frequency5              121      // uint16_t
-#define SOM_TonSequence1Frequency6              123      // uint16_t
-#define SOM_TonSequence1Frequency7              125      // uint16_t
-#define SOM_TonSequence1Frequency8              127      // uint16_t
-#define SOM_TonSequence1Frequency9              129      // uint16_t
 
 // Externe Logik
 #define ParamSOM_External                            ((bool)(knx.paramByte(SOM_External) & SOM_ExternalMask))
@@ -414,50 +390,6 @@
 #define ParamSOM_SceneTargetB18                      (knx.paramByte(SOM_SceneTargetB18))
 // SceneTargetB9
 #define ParamSOM_SceneTargetB19                      (knx.paramByte(SOM_SceneTargetB19))
-// Modus
-#define ParamSOM_TonSequence1Mode                    ((knx.paramByte(SOM_TonSequence1Mode) & SOM_TonSequence1ModeMask) >> SOM_TonSequence1ModeShift)
-// 
-#define ParamSOM_TonSequence1Repeats                 (knx.paramByte(SOM_TonSequence1Repeats))
-// 
-#define ParamSOM_TonSequence1RepeatsInactive         (knx.paramWord(SOM_TonSequence1RepeatsInactive))
-// Pause zwischen der Wiederholung
-#define ParamSOM_TonSequence1RepeatPause             (knx.paramByte(SOM_TonSequence1RepeatPause))
-// Dauer
-#define ParamSOM_TonSequence1Duration1               (knx.paramByte(SOM_TonSequence1Duration1))
-// 
-#define ParamSOM_TonSequence1Duration2               (knx.paramByte(SOM_TonSequence1Duration2))
-// 
-#define ParamSOM_TonSequence1Duration3               (knx.paramByte(SOM_TonSequence1Duration3))
-// 
-#define ParamSOM_TonSequence1Duration4               (knx.paramByte(SOM_TonSequence1Duration4))
-// 
-#define ParamSOM_TonSequence1Duration5               (knx.paramByte(SOM_TonSequence1Duration5))
-// 
-#define ParamSOM_TonSequence1Duration6               (knx.paramByte(SOM_TonSequence1Duration6))
-// 
-#define ParamSOM_TonSequence1Duration7               (knx.paramByte(SOM_TonSequence1Duration7))
-// 
-#define ParamSOM_TonSequence1Duration8               (knx.paramByte(SOM_TonSequence1Duration8))
-// 
-#define ParamSOM_TonSequence1Duration9               (knx.paramByte(SOM_TonSequence1Duration9))
-// Frequenz
-#define ParamSOM_TonSequence1Frequency1              (knx.paramWord(SOM_TonSequence1Frequency1))
-// 
-#define ParamSOM_TonSequence1Frequency2              (knx.paramWord(SOM_TonSequence1Frequency2))
-// 
-#define ParamSOM_TonSequence1Frequency3              (knx.paramWord(SOM_TonSequence1Frequency3))
-// 
-#define ParamSOM_TonSequence1Frequency4              (knx.paramWord(SOM_TonSequence1Frequency4))
-// 
-#define ParamSOM_TonSequence1Frequency5              (knx.paramWord(SOM_TonSequence1Frequency5))
-// 
-#define ParamSOM_TonSequence1Frequency6              (knx.paramWord(SOM_TonSequence1Frequency6))
-// 
-#define ParamSOM_TonSequence1Frequency7              (knx.paramWord(SOM_TonSequence1Frequency7))
-// 
-#define ParamSOM_TonSequence1Frequency8              (knx.paramWord(SOM_TonSequence1Frequency8))
-// 
-#define ParamSOM_TonSequence1Frequency9              (knx.paramWord(SOM_TonSequence1Frequency9))
 
 #define SOM_KoStatus 20
 #define SOM_KoFile 21
@@ -488,7 +420,7 @@
 #define SOM_ChannelCount 10
 
 // Parameter per channel
-#define SOM_ParamBlockOffset 129
+#define SOM_ParamBlockOffset 99
 #define SOM_ParamBlockSize 11
 #define SOM_ParamCalcIndex(index) (index + SOM_ParamBlockOffset + _channelIndex * SOM_ParamBlockSize)
 
@@ -507,6 +439,9 @@
 #define SOM_TriggerControl                       1      // 2 Bits, Bit 4-3
 #define     SOM_TriggerControlMask 0x18
 #define     SOM_TriggerControlShift 3
+#define SOM_TriggerReTrigger                     1      // 1 Bit, Bit 2
+#define     SOM_TriggerReTriggerMask 0x04
+#define     SOM_TriggerReTriggerShift 2
 #define SOM_TriggerDurationBase                  2      // 2 Bits, Bit 7-6
 #define     SOM_TriggerDurationBaseMask 0xC0
 #define     SOM_TriggerDurationBaseShift 6
@@ -532,6 +467,8 @@
 #define ParamSOM_TriggerPriority                     ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerPriority)) & SOM_TriggerPriorityMask) >> SOM_TriggerPriorityShift)
 // Steuerung
 #define ParamSOM_TriggerControl                      ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerControl)) & SOM_TriggerControlMask) >> SOM_TriggerControlShift)
+// Retrigger-Schutz
+#define ParamSOM_TriggerReTrigger                    ((bool)(knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerReTrigger)) & SOM_TriggerReTriggerMask))
 // Zeitbasis
 #define ParamSOM_TriggerDurationBase                 ((knx.paramByte(SOM_ParamCalcIndex(SOM_TriggerDurationBase)) & SOM_TriggerDurationBaseMask) >> SOM_TriggerDurationBaseShift)
 // Zeit
@@ -579,10 +516,87 @@
 // 
 #define KoSOM_TriggerDayNight                     (knx.getGroupObject(SOM_KoCalcNumber(SOM_KoTriggerDayNight)))
 
+#define TONE_ChannelCount 9
+
+// Parameter per channel
+#define TONE_ParamBlockOffset 209
+#define TONE_ParamBlockSize 29
+#define TONE_ParamCalcIndex(index) (index + TONE_ParamBlockOffset + _channelIndex * TONE_ParamBlockSize)
+
+#define TONE_ToneGeneratorMode                    0      // 2 Bits, Bit 7-6
+#define     TONE_ToneGeneratorModeMask 0xC0
+#define     TONE_ToneGeneratorModeShift 6
+#define TONE_ToneGeneratorRepeats                 1      // uint8_t
+#define TONE_ToneGeneratorRepeatsInactive         1      // uint16_t
+#define TONE_ToneGeneratorRepeatPause             2      // uint8_t
+#define TONE_ToneGeneratorDuration1               4      // uint8_t
+#define TONE_ToneGeneratorDuration2               5      // uint8_t
+#define TONE_ToneGeneratorDuration3               6      // uint8_t
+#define TONE_ToneGeneratorDuration4               7      // uint8_t
+#define TONE_ToneGeneratorDuration5               8      // uint8_t
+#define TONE_ToneGeneratorDuration6               9      // uint8_t
+#define TONE_ToneGeneratorDuration7              10      // uint8_t
+#define TONE_ToneGeneratorDuration8              11      // uint8_t
+#define TONE_ToneGeneratorDuration9              12      // uint8_t
+#define TONE_ToneGeneratorFrequency1             13      // uint16_t
+#define TONE_ToneGeneratorFrequency2             15      // uint16_t
+#define TONE_ToneGeneratorFrequency3             17      // uint16_t
+#define TONE_ToneGeneratorFrequency4             19      // uint16_t
+#define TONE_ToneGeneratorFrequency5             21      // uint16_t
+#define TONE_ToneGeneratorFrequency6             23      // uint16_t
+#define TONE_ToneGeneratorFrequency7             25      // uint16_t
+#define TONE_ToneGeneratorFrequency8             27      // uint16_t
+#define TONE_ToneGeneratorFrequency9             29      // uint16_t
+
+// Modus
+#define ParamTONE_ToneGeneratorMode                   ((knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorMode)) & TONE_ToneGeneratorModeMask) >> TONE_ToneGeneratorModeShift)
+// 
+#define ParamTONE_ToneGeneratorRepeats                (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorRepeats)))
+// 
+#define ParamTONE_ToneGeneratorRepeatsInactive        (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorRepeatsInactive)))
+// Pause zwischen der Wiederholung
+#define ParamTONE_ToneGeneratorRepeatPause            (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorRepeatPause)))
+// Dauer
+#define ParamTONE_ToneGeneratorDuration1              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration1)))
+// 
+#define ParamTONE_ToneGeneratorDuration2              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration2)))
+// 
+#define ParamTONE_ToneGeneratorDuration3              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration3)))
+// 
+#define ParamTONE_ToneGeneratorDuration4              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration4)))
+// 
+#define ParamTONE_ToneGeneratorDuration5              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration5)))
+// 
+#define ParamTONE_ToneGeneratorDuration6              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration6)))
+// 
+#define ParamTONE_ToneGeneratorDuration7              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration7)))
+// 
+#define ParamTONE_ToneGeneratorDuration8              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration8)))
+// 
+#define ParamTONE_ToneGeneratorDuration9              (knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration9)))
+// Frequenz
+#define ParamTONE_ToneGeneratorFrequency1             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency1)))
+// 
+#define ParamTONE_ToneGeneratorFrequency2             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency2)))
+// 
+#define ParamTONE_ToneGeneratorFrequency3             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency3)))
+// 
+#define ParamTONE_ToneGeneratorFrequency4             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency4)))
+// 
+#define ParamTONE_ToneGeneratorFrequency5             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency5)))
+// 
+#define ParamTONE_ToneGeneratorFrequency6             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency6)))
+// 
+#define ParamTONE_ToneGeneratorFrequency7             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency7)))
+// 
+#define ParamTONE_ToneGeneratorFrequency8             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency8)))
+// 
+#define ParamTONE_ToneGeneratorFrequency9             (knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency9)))
+
 #define BI_ChannelCount 4
 
 // Parameter per channel
-#define BI_ParamBlockOffset 239
+#define BI_ParamBlockOffset 470
 #define BI_ParamBlockSize 4
 #define BI_ParamCalcIndex(index) (index + BI_ParamBlockOffset + _channelIndex * BI_ParamBlockSize)
 
@@ -638,9 +652,9 @@
 // 
 #define KoBI_ChannelOutput                       (knx.getGroupObject(BI_KoCalcNumber(BI_KoChannelOutput)))
 
-#define BTN_ReactionTimeMultiClick              255      // 8 Bits, Bit 7-0
-#define BTN_ReactionTimeLong                    256      // 8 Bits, Bit 7-0
-#define BTN_ReactionTimeExtraLong               257      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeMultiClick              486      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeLong                    487      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeExtraLong               488      // 8 Bits, Bit 7-0
 
 //   Mehrfach-Klick
 #define ParamBTN_ReactionTimeMultiClick              (knx.paramByte(BTN_ReactionTimeMultiClick))
@@ -652,7 +666,7 @@
 #define BTN_ChannelCount 10
 
 // Parameter per channel
-#define BTN_ParamBlockOffset 259
+#define BTN_ParamBlockOffset 490
 #define BTN_ParamBlockSize 51
 #define BTN_ParamCalcIndex(index) (index + BTN_ParamBlockOffset + _channelIndex * BTN_ParamBlockSize)
 
@@ -1210,124 +1224,124 @@
 // 
 #define KoBTN_ChannelOutput6                      (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoChannelOutput6)))
 
-#define LOG_BuzzerInstalled                     769      // 1 Bit, Bit 7
+#define LOG_BuzzerInstalled                     1000      // 1 Bit, Bit 7
 #define     LOG_BuzzerInstalledMask 0x80
 #define     LOG_BuzzerInstalledShift 7
-#define LOG_LedInstalled                        769      // 1 Bit, Bit 6
+#define LOG_LedInstalled                        1000      // 1 Bit, Bit 6
 #define     LOG_LedInstalledMask 0x40
 #define     LOG_LedInstalledShift 6
-#define LOG_VacationKo                          769      // 1 Bit, Bit 5
+#define LOG_VacationKo                          1000      // 1 Bit, Bit 5
 #define     LOG_VacationKoMask 0x20
 #define     LOG_VacationKoShift 5
-#define LOG_HolidayKo                           769      // 1 Bit, Bit 4
+#define LOG_HolidayKo                           1000      // 1 Bit, Bit 4
 #define     LOG_HolidayKoMask 0x10
 #define     LOG_HolidayKoShift 4
-#define LOG_VacationRead                        769      // 1 Bit, Bit 3
+#define LOG_VacationRead                        1000      // 1 Bit, Bit 3
 #define     LOG_VacationReadMask 0x08
 #define     LOG_VacationReadShift 3
-#define LOG_HolidaySend                         769      // 1 Bit, Bit 2
+#define LOG_HolidaySend                         1000      // 1 Bit, Bit 2
 #define     LOG_HolidaySendMask 0x04
 #define     LOG_HolidaySendShift 2
-#define LOG_Neujahr                             770      // 1 Bit, Bit 7
+#define LOG_Neujahr                             1001      // 1 Bit, Bit 7
 #define     LOG_NeujahrMask 0x80
 #define     LOG_NeujahrShift 7
-#define LOG_DreiKoenige                         770      // 1 Bit, Bit 6
+#define LOG_DreiKoenige                         1001      // 1 Bit, Bit 6
 #define     LOG_DreiKoenigeMask 0x40
 #define     LOG_DreiKoenigeShift 6
-#define LOG_Weiberfastnacht                     770      // 1 Bit, Bit 5
+#define LOG_Weiberfastnacht                     1001      // 1 Bit, Bit 5
 #define     LOG_WeiberfastnachtMask 0x20
 #define     LOG_WeiberfastnachtShift 5
-#define LOG_Rosenmontag                         770      // 1 Bit, Bit 4
+#define LOG_Rosenmontag                         1001      // 1 Bit, Bit 4
 #define     LOG_RosenmontagMask 0x10
 #define     LOG_RosenmontagShift 4
-#define LOG_Fastnachtsdienstag                  770      // 1 Bit, Bit 3
+#define LOG_Fastnachtsdienstag                  1001      // 1 Bit, Bit 3
 #define     LOG_FastnachtsdienstagMask 0x08
 #define     LOG_FastnachtsdienstagShift 3
-#define LOG_Aschermittwoch                      770      // 1 Bit, Bit 2
+#define LOG_Aschermittwoch                      1001      // 1 Bit, Bit 2
 #define     LOG_AschermittwochMask 0x04
 #define     LOG_AschermittwochShift 2
-#define LOG_Frauentag                           770      // 1 Bit, Bit 1
+#define LOG_Frauentag                           1001      // 1 Bit, Bit 1
 #define     LOG_FrauentagMask 0x02
 #define     LOG_FrauentagShift 1
-#define LOG_Gruendonnerstag                     770      // 1 Bit, Bit 0
+#define LOG_Gruendonnerstag                     1001      // 1 Bit, Bit 0
 #define     LOG_GruendonnerstagMask 0x01
 #define     LOG_GruendonnerstagShift 0
-#define LOG_Karfreitag                          771      // 1 Bit, Bit 7
+#define LOG_Karfreitag                          1002      // 1 Bit, Bit 7
 #define     LOG_KarfreitagMask 0x80
 #define     LOG_KarfreitagShift 7
-#define LOG_Ostersonntag                        771      // 1 Bit, Bit 6
+#define LOG_Ostersonntag                        1002      // 1 Bit, Bit 6
 #define     LOG_OstersonntagMask 0x40
 #define     LOG_OstersonntagShift 6
-#define LOG_Ostermontag                         771      // 1 Bit, Bit 5
+#define LOG_Ostermontag                         1002      // 1 Bit, Bit 5
 #define     LOG_OstermontagMask 0x20
 #define     LOG_OstermontagShift 5
-#define LOG_TagDerArbeit                        771      // 1 Bit, Bit 4
+#define LOG_TagDerArbeit                        1002      // 1 Bit, Bit 4
 #define     LOG_TagDerArbeitMask 0x10
 #define     LOG_TagDerArbeitShift 4
-#define LOG_Himmelfahrt                         771      // 1 Bit, Bit 3
+#define LOG_Himmelfahrt                         1002      // 1 Bit, Bit 3
 #define     LOG_HimmelfahrtMask 0x08
 #define     LOG_HimmelfahrtShift 3
-#define LOG_Pfingstsonntag                      771      // 1 Bit, Bit 2
+#define LOG_Pfingstsonntag                      1002      // 1 Bit, Bit 2
 #define     LOG_PfingstsonntagMask 0x04
 #define     LOG_PfingstsonntagShift 2
-#define LOG_Pfingstmontag                       771      // 1 Bit, Bit 1
+#define LOG_Pfingstmontag                       1002      // 1 Bit, Bit 1
 #define     LOG_PfingstmontagMask 0x02
 #define     LOG_PfingstmontagShift 1
-#define LOG_Fronleichnam                        771      // 1 Bit, Bit 0
+#define LOG_Fronleichnam                        1002      // 1 Bit, Bit 0
 #define     LOG_FronleichnamMask 0x01
 #define     LOG_FronleichnamShift 0
-#define LOG_Friedensfest                        772      // 1 Bit, Bit 7
+#define LOG_Friedensfest                        1003      // 1 Bit, Bit 7
 #define     LOG_FriedensfestMask 0x80
 #define     LOG_FriedensfestShift 7
-#define LOG_MariaHimmelfahrt                    772      // 1 Bit, Bit 6
+#define LOG_MariaHimmelfahrt                    1003      // 1 Bit, Bit 6
 #define     LOG_MariaHimmelfahrtMask 0x40
 #define     LOG_MariaHimmelfahrtShift 6
-#define LOG_DeutscheEinheit                     772      // 1 Bit, Bit 5
+#define LOG_DeutscheEinheit                     1003      // 1 Bit, Bit 5
 #define     LOG_DeutscheEinheitMask 0x20
 #define     LOG_DeutscheEinheitShift 5
-#define LOG_Nationalfeiertag                    773      // 1 Bit, Bit 1
+#define LOG_Nationalfeiertag                    1004      // 1 Bit, Bit 1
 #define     LOG_NationalfeiertagMask 0x02
 #define     LOG_NationalfeiertagShift 1
-#define LOG_Reformationstag                     772      // 1 Bit, Bit 4
+#define LOG_Reformationstag                     1003      // 1 Bit, Bit 4
 #define     LOG_ReformationstagMask 0x10
 #define     LOG_ReformationstagShift 4
-#define LOG_Allerheiligen                       772      // 1 Bit, Bit 3
+#define LOG_Allerheiligen                       1003      // 1 Bit, Bit 3
 #define     LOG_AllerheiligenMask 0x08
 #define     LOG_AllerheiligenShift 3
-#define LOG_BussBettag                          772      // 1 Bit, Bit 2
+#define LOG_BussBettag                          1003      // 1 Bit, Bit 2
 #define     LOG_BussBettagMask 0x04
 #define     LOG_BussBettagShift 2
-#define LOG_MariaEmpfaengnis                    773      // 1 Bit, Bit 0
+#define LOG_MariaEmpfaengnis                    1004      // 1 Bit, Bit 0
 #define     LOG_MariaEmpfaengnisMask 0x01
 #define     LOG_MariaEmpfaengnisShift 0
-#define LOG_Advent1                             772      // 1 Bit, Bit 1
+#define LOG_Advent1                             1003      // 1 Bit, Bit 1
 #define     LOG_Advent1Mask 0x02
 #define     LOG_Advent1Shift 1
-#define LOG_Advent2                             772      // 1 Bit, Bit 0
+#define LOG_Advent2                             1003      // 1 Bit, Bit 0
 #define     LOG_Advent2Mask 0x01
 #define     LOG_Advent2Shift 0
-#define LOG_Advent3                             773      // 1 Bit, Bit 7
+#define LOG_Advent3                             1004      // 1 Bit, Bit 7
 #define     LOG_Advent3Mask 0x80
 #define     LOG_Advent3Shift 7
-#define LOG_Advent4                             773      // 1 Bit, Bit 6
+#define LOG_Advent4                             1004      // 1 Bit, Bit 6
 #define     LOG_Advent4Mask 0x40
 #define     LOG_Advent4Shift 6
-#define LOG_Heiligabend                         773      // 1 Bit, Bit 5
+#define LOG_Heiligabend                         1004      // 1 Bit, Bit 5
 #define     LOG_HeiligabendMask 0x20
 #define     LOG_HeiligabendShift 5
-#define LOG_Weihnachtstag1                      773      // 1 Bit, Bit 4
+#define LOG_Weihnachtstag1                      1004      // 1 Bit, Bit 4
 #define     LOG_Weihnachtstag1Mask 0x10
 #define     LOG_Weihnachtstag1Shift 4
-#define LOG_Weihnachtstag2                      773      // 1 Bit, Bit 3
+#define LOG_Weihnachtstag2                      1004      // 1 Bit, Bit 3
 #define     LOG_Weihnachtstag2Mask 0x08
 #define     LOG_Weihnachtstag2Shift 3
-#define LOG_Silvester                           773      // 1 Bit, Bit 2
+#define LOG_Silvester                           1004      // 1 Bit, Bit 2
 #define     LOG_SilvesterMask 0x04
 #define     LOG_SilvesterShift 2
-#define LOG_BuzzerSilent                        774      // uint16_t
-#define LOG_BuzzerNormal                        776      // uint16_t
-#define LOG_BuzzerLoud                          778      // uint16_t
-#define LOG_LedMapping                          780      // 3 Bits, Bit 7-5
+#define LOG_BuzzerSilent                        1005      // uint16_t
+#define LOG_BuzzerNormal                        1007      // uint16_t
+#define LOG_BuzzerLoud                          1009      // uint16_t
+#define LOG_LedMapping                          1011      // 3 Bits, Bit 7-5
 #define     LOG_LedMappingMask 0xE0
 #define     LOG_LedMappingShift 5
 
@@ -1436,7 +1450,7 @@
 #define LOG_ChannelCount 10
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 781
+#define LOG_ParamBlockOffset 1012
 #define LOG_ParamBlockSize 86
 #define LOG_ParamCalcIndex(index) (index + LOG_ParamBlockOffset + _channelIndex * LOG_ParamBlockSize)
 
@@ -3039,7 +3053,7 @@
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 1641
+#define BASE_KommentarModuleParamOffset 1872
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 
