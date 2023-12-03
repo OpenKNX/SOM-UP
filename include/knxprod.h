@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 5
+#define MAIN_ApplicationVersion 19
 #define MAIN_ParameterSize 1641
 #define MAIN_MaxKoNumber 379
 #define MAIN_OrderNumber "SOM-UP"
