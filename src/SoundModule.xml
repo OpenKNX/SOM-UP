@@ -4,8 +4,8 @@
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x29"
-    ApplicationVersion="2.1"
-    ReplacesVersions="2.0 1.15 1.14 1.13 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0"
+    ApplicationVersion="0.3"
+    ReplacesVersions="0.2 0.1 0"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"
@@ -34,14 +34,14 @@
   <op:define prefix="BTN" ModuleType="30"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="10" KoOffset="100">
+    NumChannels="20" KoOffset="100">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="3" /> 
   </op:define>
 
   <op:define prefix="LOG" ModuleType="10"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="10" KoOffset="350">
+    NumChannels="20" KoOffset="340">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="2.0" /> 
   </op:define>
 

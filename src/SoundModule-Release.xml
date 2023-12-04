@@ -21,6 +21,11 @@
     template="SoundModule.templ.xml"
     NumChannels="10" KoOffset="50" />
 
+    <op:define prefix="TONE" ModuleType="21"
+    share="ToneGenerator.share.xml"
+    template="ToneGenerator.templ.xml"
+    NumChannels="9" />
+
   <op:define prefix="BI" ModuleType="40"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
@@ -36,7 +41,7 @@
   <op:define prefix="LOG" ModuleType="10"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="99" KoOffset="350">
+    NumChannels="99" KoOffset="340">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="2.0" /> 
   </op:define>
 

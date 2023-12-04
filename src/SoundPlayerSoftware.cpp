@@ -19,7 +19,7 @@ void SoundPlayerSoftware::buildToneSequence(uint8_t _channelIndex)
     for (size_t i = 0; i < max; i++)
     {
         uint8_t seqTime = knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorDuration1 + i));
-        uint16_t seqFreq = knx.paramByte(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency1 + i));
+        uint16_t seqFreq = knx.paramWord(TONE_ParamCalcIndex(TONE_ToneGeneratorFrequency1 + i));
         if (seqTime > 0)
         {
             time += seqTime;
