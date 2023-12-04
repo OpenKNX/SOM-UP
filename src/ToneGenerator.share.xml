@@ -27,9 +27,13 @@
             </ParameterRefs>
           </Static>
           <Dynamic>
-            <Channel Name="MainChannel" Text="Tongenerator" Number="%TT%" Id="%AID%_CH-%TT%" Icon="waveform">
-              <op:include href="ToneGenerator.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="TONE" IsInner="true" />
-            </Channel>
+            <choose ParamRefId="%AID%_P-2000001_R-200000101">
+              <when test="0">
+                <Channel Name="MainChannel" Text="Tongenerator" Number="%TT%" Id="%AID%_CH-%TT%" Icon="waveform">
+                  <op:include href="ToneGenerator.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="TONE" IsInner="true" />
+                </Channel>
+              </when>
+            </choose>
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>

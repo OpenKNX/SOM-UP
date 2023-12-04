@@ -10,6 +10,12 @@
               <ParameterType Id="%AID%_PT-SOMRepeats" Name="SOMRepeats">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="255" />
               </ParameterType>
+              <ParameterType Id="%AID%_PT-PlayerVariant" Name="PlayerVariant">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Software (I2S)" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Hardware (DY-SV17F)" Value="1" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
                   <Enumeration Text="Externes KO" Value="0" Id="%ENID%" />
@@ -27,7 +33,7 @@
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMVolume" Name="SOMVolume">
-                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="30" UIHint="Slider" />
+                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="1" maxInclusive="255" UIHint="Slider" />
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMFile" Name="SOMFile">
                 <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="1" maxInclusive="65535" />
@@ -94,6 +100,7 @@
               </ParameterType>
             </ParameterTypes>
             <Parameters>
+              <Parameter Id="%AID%_P-%TT%00001" Name="PlayerVariant" ParameterType="%AID%_PT-PlayerVariant" Text="Player-Variante" Value="0" />
               <Union SizeInBit="32">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%00008" Name="External" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Externe Logik" Value="0" />
@@ -189,11 +196,7 @@
 
             </Parameters>
             <ParameterRefs>
-              
-
-
-
-
+              <ParameterRef Id="%AID%_P-%TT%00001_R-%TT%0000101" RefId="%AID%_P-%TT%00001" />
               <ParameterRef Id="%AID%_UP-%TT%00002_R-%TT%0000201" RefId="%AID%_UP-%TT%00002" Text="Lautsärke" />
               <ParameterRef Id="%AID%_UP-%TT%00002_R-%TT%0000202" RefId="%AID%_UP-%TT%00002" Text="Lautsärke (Tag)" />
               <ParameterRef Id="%AID%_UP-%TT%00003_R-%TT%0000301" RefId="%AID%_UP-%TT%00003" Text="Lautsärke (Nacht)" />
@@ -301,8 +304,8 @@
               <ComObjectRef Id="%AID%_O-%TT%00030_R-%TT%0003001" RefId="%AID%_O-%TT%00030" />
               <ComObjectRef Id="%AID%_O-%TT%00031_R-%TT%0003101" RefId="%AID%_O-%TT%00031" />
               <ComObjectRef Id="%AID%_O-%TT%00032_R-%TT%0003201" RefId="%AID%_O-%TT%00032" />
-              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002701" RefId="%AID%_O-%TT%00027" FunctionText="Tag=1 / Nacht=0" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
-              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002702" RefId="%AID%_O-%TT%00027" FunctionText="Tag=0 / Nacht=1" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" />
+              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002701" RefId="%AID%_O-%TT%00027" FunctionText="Tag=1 / Nacht=0" />
+              <ComObjectRef Id="%AID%_O-%TT%00027_R-%TT%0002702" RefId="%AID%_O-%TT%00027" FunctionText="Tag=0 / Nacht=1" />
             </ComObjectRefs>
             <Extension>
               <Baggage RefId="%FILE-HELP-de%" />
@@ -346,6 +349,8 @@
               <ParameterBlock Id="%AID%_PB-nnn" Name="Basic" Text="Basiseinstellung" Icon="cog-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellung" UIHint="Headline" />
 
+                <!-- Player-Variante -->
+                <ParameterRefRef RefId="%AID%_P-%TT%00001_R-%TT%0000101" Icon="play-box-outline" HelpContext="SOM-PlayerVariant" /> 
                 <!-- Tag/Nacht -->
                 <ParameterRefRef RefId="%AID%_UP-%TT%00007_R-%TT%0000701" Icon="theme-light-dark" HelpContext="SOM-DayNight" /> 
                 <choose ParamRefId="%AID%_UP-%TT%00007_R-%TT%0000701">
