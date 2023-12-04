@@ -12,7 +12,7 @@
                 "--Debug",
                 "-h",
                 "include/knxprod.h",
-                "src/SoundModule"
+                "src/SoundModule-Dev"
             ],
             "problemMatcher": [],
             "group": "test"
@@ -101,10 +101,11 @@
             "group": "test"
         },
         {
-            "label": "Build-Beta",
+            "label": "Build-Dev",
             "type": "shell",
             "command": "scripts/Build-Release.ps1",
             "args": [
+                "Dev"
             ],
             "problemMatcher": [],
             "group": "test"
