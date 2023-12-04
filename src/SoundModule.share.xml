@@ -311,7 +311,7 @@
           </Static>
           <Dynamic>
 
-            <Channel Name="MainChannel" Text="Sound" Number="%TT%" Id="%AID%_CH-%TT%" Icon="speaker">
+            <Channel Name="MainChannel" Text="Tonausgabe" Number="%TT%" Id="%AID%_CH-%TT%" Icon="speaker">
               <ParameterBlock Id="%AID%_PB-nnn" Name="Documentation" Text="Dokumentation" Icon="information-outline" HelpContext="Empty">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Player" UIHint="Headline" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Das SOM-UP gibt es in zwei verschiedenen Versionen. Einmal mit einem externen Hardware- und als Software-Player." />
@@ -722,13 +722,6 @@
                 </Channel> 
               </ParameterBlock>
               
-              <ParameterBlock Id="%AID%_PB-nnn" Name="ToneGenerator" Text="Tongenerator" Icon="waveform">
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tongenerator" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Mittels des Tongenerators können einfache Tonsequenzen generiert werden und über die Pseudodateinummern 10000 + x Squenznummer abespielt werden." />
-
-                <op:include href="ToneGenerator.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="TONE" IsInner="true" />
-              </ParameterBlock>
-
               <op:include href="SoundModule.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="SOM" IsInner="true" />
             </Channel>
           </Dynamic>
