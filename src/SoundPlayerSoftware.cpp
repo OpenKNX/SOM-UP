@@ -4,7 +4,7 @@
 
 void SoundPlayerSoftware::buildToneSequence(uint8_t _channelIndex)
 {
-    //if (!ParamTONE_ToneGeneratorMode) return;
+    if (!ParamTONE_ToneGeneratorMode) return;
 
     logDebugP("loadToneGenerator %i", _channelIndex);
     logIndentUp();
@@ -41,11 +41,6 @@ void SoundPlayerSoftware::calcToneGeneratorDuration()
 void SoundPlayerSoftware::playNextPlay()
 {
     _audioOutput->SetVolume(_nextPlay.volume);
-
-    // 10 Bytes /00000.MP3
-    std::stringstream filePathBuild;
-    filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(_nextPlay.file) << ".MP3";
-    const std::string filePath = filePathBuild.str();
 
     powerOn();
 
@@ -90,17 +85,24 @@ void SoundPlayerSoftware::playNextPlay()
     }
     else
     {
-        AudioGeneratorMP3 *currentAudioGenerator = new AudioGeneratorMP3();
+        // 10 Bytes /00000.MP3
+        std::stringstream filePathBuild;
+        filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(_nextPlay.file) << ".MP3";
+        const std::string filePath = filePathBuild.str();
+
+        AudioGenerator *currentAudioGenerator = new AudioGeneratorMP3();
         AudioFileSourceLittleFS *currentAudioSource = new AudioFileSourceLittleFS(filePath.c_str());
 
 #ifdef OPENKNX_DEBUG
-        currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)"");
+        // currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)"");
 #endif
 
         _audioSource = currentAudioSource;
         _audioGenerator = currentAudioGenerator;
     }
 
+
+    set_sys_clock_khz(160000, true);
     _audioGenerator->begin(_audioSource, _audioOutput);
 }
 
@@ -175,6 +177,7 @@ void SoundPlayerSoftware::stopCurrentPlay()
 
 void SoundPlayerSoftware::processStatusStopped()
 {
+    set_sys_clock_khz(133000, true);
     SoundPlayer::processStatusStopped();
     powerOff();
 }
