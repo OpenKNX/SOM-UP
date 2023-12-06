@@ -39,7 +39,7 @@ void SoundPlayerHardware::setup()
 void SoundPlayerHardware::configureVolume(uint8_t volume)
 {
     // invalid volume
-    if (volume < 1 || volume > 30) return;
+    if (volume > 30) return;
 
     // volume already set
     if (volume == _currentVolume) return;

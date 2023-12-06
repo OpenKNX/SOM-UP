@@ -163,6 +163,7 @@ void SoundPlayer::processCheckCurrentPlay(uint16_t delay)
     }
 }
 
-const char * SoundPlayer::playTypeName() {
+const char *SoundPlayer::playTypeName()
+{
     return "Unknown";
 }

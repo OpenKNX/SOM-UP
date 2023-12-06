@@ -46,8 +46,15 @@ void SoundPlayerSoftware::playNextPlay()
 
     if (_audioGenerator != nullptr) free(_audioGenerator);
 
+    // Demo
+    if (_nextPlay.file == 10000)
+    {
+        const char demo[] PROGMEM = "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b,p";
+        _audioSource = new AudioFileSourcePROGMEM(demo, strlen_P(demo));
+        _audioGenerator = new AudioGeneratorRTTTL();
+    }
     // special handling for generated ton.
-    if (_nextPlay.file >= 10000 && _nextPlay.file <= (TONE_ChannelCount + 10000))
+    else if (_nextPlay.file >= 10000 && _nextPlay.file <= (TONE_ChannelCount + 10000))
     {
         // Reset
         toneSequence.clear();
@@ -56,54 +63,36 @@ void SoundPlayerSoftware::playNextPlay()
 
         uint8_t _channelIndex = _nextPlay.file - 10000 - 1;
 
-        if (_nextPlay.file == 10000)
-        {
-            toneSequence[2] = 4000;
-            toneSequence[3] = 0;
-            toneSequence[5] = 4000;
-            toneSequence[6] = 0;
-            toneSequence[8] = 4000;
-            toneSequence[9] = 0;
-            toneSequence[16] = 4200;
-        }
-        else
-        {
-            buildToneSequence(_channelIndex);
-        }
-
+        buildToneSequence(_channelIndex);
         calcToneGeneratorDuration();
-        AudioGeneratorWAV *currentAudioGenerator = new AudioGeneratorWAV();
 
         AudioFileSourceFunction *currentAudioSource = new AudioFileSourceFunction(((float)toneSequenceDuration / 10), 1, 16000); // 8khz
-
         currentAudioSource->addAudioGenerators([this](const float time) {
             return this->generateTone(time);
         });
 
         _audioSource = currentAudioSource;
-        _audioGenerator = currentAudioGenerator;
+        _audioGenerator = new AudioGeneratorWAV();
     }
     else
     {
-        // 10 Bytes /00000.MP3
-        std::stringstream filePathBuild;
-        filePathBuild << "/" << std::setfill('0') << std::setw(5) << std::to_string(_nextPlay.file) << ".MP3";
-        const std::string filePath = filePathBuild.str();
-
-        AudioGenerator *currentAudioGenerator = new AudioGeneratorMP3();
-        AudioFileSourceLittleFS *currentAudioSource = new AudioFileSourceLittleFS(filePath.c_str());
+        char name[11] = {};
+        if(findFile(_nextPlay.file, name)) {
+            logInfoP("File %s found for sound %i", name, _nextPlay.file);
+        } else {
+            logErrorP("No file found for sound %i", _nextPlay.file);
+        }
+        _audioSource = new AudioFileSourceLittleFS(name);
 
 #ifdef OPENKNX_DEBUG
         // currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)"");
 #endif
 
-        _audioSource = currentAudioSource;
-        _audioGenerator = currentAudioGenerator;
     }
 
-
     set_sys_clock_khz(160000, true);
-    _audioGenerator->begin(_audioSource, _audioOutput);
+    if(_audioGenerator != nullptr)
+        _audioGenerator->begin(_audioSource, _audioOutput);
 }
 
 void SoundPlayerSoftware::setup()
@@ -205,4 +194,36 @@ float SoundPlayerSoftware::generateTone(const float time)
         return sin(TWO_PI * it->second * time); // generate sine wave
     else
         return 0;
+}
+
+bool SoundPlayerSoftware::findFile(uint16_t sound, char *name)
+{
+    memset(name, 0, 11);
+    std::stringstream prefix;
+    prefix << "/" << std::setfill('0') << std::setw(5) << std::to_string(sound);
+    uint8_t prefixLen = prefix.str().size();
+
+    // Prefix
+    memcpy(name, prefix.str().c_str(), prefixLen);
+
+    // Try suffixes
+    memcpy(name + prefixLen, ".RTT", 4);
+    if(LittleFS.exists(name)) {
+        _audioGenerator = new AudioGeneratorRTTTL();
+        return true;
+    }
+
+    memcpy(name + prefixLen, ".WAV", 4);
+    if(LittleFS.exists(name)) {
+        _audioGenerator = new AudioGeneratorWAV();
+        return true;
+    }
+
+    memcpy(name + prefixLen, ".MP3", 4);
+    if(LittleFS.exists(name)) {
+        _audioGenerator = new AudioGeneratorMP3();
+        return true;
+    }
+
+    return false;
 }

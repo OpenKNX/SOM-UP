@@ -314,22 +314,16 @@ void SoundModule::processInputKoExternalVolume(GroupObject &ko)
 {
     uint8_t value = ko.value(DPT_DecimalFactor);
 
-    // invalid volume
-    if (value < 0 || value > 30)
-        value = 0;
-
-    _externalVolume = value;
+    // valid volume only
+    if (value > 0) _externalVolume = value;
 }
 
 void SoundModule::processInputKoExternalPriority(GroupObject &ko)
 {
     uint8_t value = ko.value(DPT_DecimalFactor);
 
-    // invalid volume
-    if (value < 1 || value > 5)
-        value = 3;
-
-    _externalPriority = value;
+    // valid priority only
+    if (value >= 1 || value <= 5) _externalPriority = value;
 }
 
 void SoundModule::processInputKoExternalFile(GroupObject &ko)

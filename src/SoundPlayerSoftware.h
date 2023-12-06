@@ -2,7 +2,9 @@
 
 #include "AudioFileSourceFunction.h"
 #include "AudioFileSourceLittleFS.h"
+#include "AudioFileSourcePROGMEM.h"
 #include "AudioGeneratorMP3.h"
+#include "AudioGeneratorRTTTL.h"
 #include "AudioGeneratorWAV.h"
 #include "AudioOutputSOM.h"
 #include "SoundPlayer.h"
@@ -30,6 +32,12 @@ class SoundPlayerSoftware : public SoundPlayer
 
     void buildToneSequence(uint8_t _channelIndex);
     void calcToneGeneratorDuration();
+
+    /*
+     * name must be 11 bytes long
+     * /00000.XXX
+     */
+    bool findFile(uint16_t sound, char *name);
 
   public:
     void setup() override;
