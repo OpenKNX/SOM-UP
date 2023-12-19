@@ -4,8 +4,8 @@
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x29"
-    ApplicationVersion="0.5"
-    ReplacesVersions="0.4 0.3 0.2 0.1 0"
+    ApplicationVersion="0.6"
+    ReplacesVersions="0.5 0.4 0.3 0.2 0.1 0"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"
@@ -22,9 +22,9 @@
     NumChannels="10" KoOffset="50" />
 
   <op:define prefix="TONE" ModuleType="21"
-      share="ToneGenerator.share.xml"
-      template="ToneGenerator.templ.xml"
-      NumChannels="9" />
+    share="ToneGenerator.share.xml"
+    template="ToneGenerator.templ.xml"
+    NumChannels="9" />
 
   <op:define prefix="BI" ModuleType="40"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
@@ -42,7 +42,7 @@
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
     NumChannels="20" KoOffset="340">
-    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="2.0" /> 
+    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="48" /> 
   </op:define>
 
   <generate />

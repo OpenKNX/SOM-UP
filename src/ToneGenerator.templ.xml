@@ -80,7 +80,7 @@
               <ParameterBlock Id="%AID%_PB-nnn" Name="Sequence%C%" Text="Sequenz %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="format-list-bulleted">
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Sequenz %C%" UIHint="Headline" />
                 <!-- Name -->
-                <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="tag-outline" HelpContext="Base-ChannelName" />
+                <ParameterRefRef RefId="%AID%_P-%TT%%CC%000_R-%TT%%CC%00001" Icon="tag-outline" HelpContext="BASE-ChannelName" />
                 <!-- Mode -->
                 <ParameterRefRef RefId="%AID%_UP-%TT%%CC%001_R-%TT%%CC%00101" Icon="shape" HelpContext="SOM-SequenceMode"/>
                 <choose ParamRefId="%AID%_UP-%TT%%CC%001_R-%TT%%CC%00101">
