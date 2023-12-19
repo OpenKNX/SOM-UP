@@ -10,9 +10,9 @@
                                              
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 6
+#define MAIN_ApplicationVersion 10
 #define MAIN_ParameterSize 3243
-#define MAIN_MaxKoNumber 399
+#define MAIN_MaxKoNumber 639
 #define MAIN_OrderNumber "SOM-UP"
 #define BTN_ModuleVersion 3
 #define LOG_ModuleVersion 48
@@ -1182,10 +1182,10 @@
 #define ParamBTN_ChannelStatusFallbackTimeMS         (paramDelay(knx.paramWord(BTN_ParamCalcIndex(BTN_ChannelStatusFallbackTime))))
 
 // deprecated
-#define BTN_KoOffset 100
+#define BTN_KoOffset 400
 
 // Communication objects per channel (multiple occurrence)
-#define BTN_KoBlockOffset 100
+#define BTN_KoBlockOffset 400
 #define BTN_KoBlockSize 12
 
 #define BTN_KoCalcNumber(index) (index + BTN_KoBlockOffset + _channelIndex * BTN_KoBlockSize)
@@ -3033,10 +3033,10 @@
 #define ParamLOG_fE2OtherKO                          (knx.paramWord(LOG_ParamCalcIndex(LOG_fE2OtherKO)) & LOG_fE2OtherKOMask)
 
 // deprecated
-#define LOG_KoOffset 340
+#define LOG_KoOffset 100
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoBlockOffset 340
+#define LOG_KoBlockOffset 100
 #define LOG_KoBlockSize 3
 
 #define LOG_KoCalcNumber(index) (index + LOG_KoBlockOffset + _channelIndex * LOG_KoBlockSize)
