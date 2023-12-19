@@ -9,11 +9,13 @@
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
 #define MAIN_OpenKnxId 0xA2
-#define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 10
-#define MAIN_ParameterSize 3243
+#define MAIN_ApplicationNumber 40
+#define MAIN_ApplicationVersion 9
+#define MAIN_ParameterSize 10037
 #define MAIN_MaxKoNumber 639
 #define MAIN_OrderNumber "SOM-UP"
+#define BASE_ModuleVersion 16
+#define BI_ModuleVersion 0
 #define BTN_ModuleVersion 3
 #define LOG_ModuleVersion 48
 // Parameter with single occurrence
@@ -1455,7 +1457,7 @@
 // Buzzer sperren
 #define KoLOG_BuzzerLock                          (knx.getGroupObject(LOG_KoBuzzerLock))
 
-#define LOG_ChannelCount 20
+#define LOG_ChannelCount 99
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 1523
@@ -3057,11 +3059,11 @@
 
 // Header generation for Module 'BASE_KommentarModule'
 
-#define BASE_KommentarModuleCount 20
+#define BASE_KommentarModuleCount 99
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 3243
+#define BASE_KommentarModuleParamOffset 10037
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 

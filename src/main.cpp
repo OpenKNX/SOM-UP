@@ -9,10 +9,10 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 2;
+    const uint8_t firmwareRevision = 0;
     openknx.init(firmwareRevision);
     smartmf.init();
-    openknx.addModule(1, new Logic());
+    openknx.addModule(1, openknxLogic);
     openknx.addModule(2, openknxSoundModule);
     openknx.addModule(4, openknxSoundBinaryInputModule);
     openknx.addModule(3, openknxVirtualButtonModule);
@@ -32,11 +32,8 @@ void setup1()
     openknx.setup1();
 }
 
-uint32_t debugLoop1 = 0;
 void loop1()
 {
-    uint32_t start = micros();
     openknx.loop1();
-    debugLoop1 = micros() - start;
 }
 #endif

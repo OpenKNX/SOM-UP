@@ -4,8 +4,8 @@
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x29"
-    ApplicationVersion="10"
-    ReplacesVersions="9 8 7 6 5 4 3 2 1"
+    ApplicationVersion="11"
+    ReplacesVersions="10 9 8 7 6 5 4 3 2 1"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"
@@ -14,7 +14,9 @@
     OrderNumber="SOM-UP" />
 
   <op:define prefix="BASE" ModuleType="10"
-    share="../lib/OGM-Common/src/Common.share.xml" />
+    share="../lib/OGM-Common/src/Common.share.xml">
+    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="16" /> 
+  </op:define>
 
   <op:define prefix="SOM" ModuleType="20"
     share="SoundModule.share.xml"
@@ -29,7 +31,9 @@
   <op:define prefix="BI" ModuleType="40"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="4" KoOffset="41" />
+    NumChannels="4" KoOffset="41" >
+    <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0" /> 
+  </op:define>
 
   <op:define prefix="BTN" ModuleType="30"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
