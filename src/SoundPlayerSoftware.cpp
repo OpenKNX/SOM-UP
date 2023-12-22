@@ -42,7 +42,7 @@ void SoundPlayerSoftware::playNextPlay()
 {
     _audioOutput->SetVolume(_nextPlay.volume);
 
-    powerOn();
+    // powerOn();
 
     if (_audioGenerator != nullptr) free(_audioGenerator);
 
@@ -105,7 +105,7 @@ void SoundPlayerSoftware::setup()
 #endif
 
     SoundPlayer::setup();
-    powerOff(); // will turn on only during play back
+    //powerOff(); // will turn on only during play back
 
     _audioOutput = new AudioOutputSOM();
     _audioOutput->SetVolume(0);
@@ -168,7 +168,7 @@ void SoundPlayerSoftware::processStatusStopped()
 {
     set_sys_clock_khz(133000, true);
     SoundPlayer::processStatusStopped();
-    powerOff();
+    // powerOff();
 }
 
 const char *SoundPlayerSoftware::playTypeName()
