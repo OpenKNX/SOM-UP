@@ -7,6 +7,7 @@
 **/*.knxprod
 **/*.debug.xml
 release/*
+releases/*
 src/*.baggages
 compile_commands.json
 include/versions.h
