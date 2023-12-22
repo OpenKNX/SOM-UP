@@ -6,8 +6,7 @@
 .vscode/ipch
 **/*.knxprod
 **/*.debug.xml
-release/*
-releases/*
+release*/*
 src/*.baggages
 compile_commands.json
 include/versions.h
