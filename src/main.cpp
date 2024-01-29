@@ -9,7 +9,7 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 1;
+    const uint8_t firmwareRevision = 0;
     openknx.init(firmwareRevision);
     smartmf.init();
     openknx.addModule(1, openknxLogic);
