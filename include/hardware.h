@@ -1,4 +1,6 @@
 #pragma once
+#include "OpenKNXHardware.h"
+
 #define BINARY_INPUT_PULSE_PAUSE_TIME 5  // MS
 #define BINARY_INPUT_PULSE_WAIT_TIME 250 // US
 
