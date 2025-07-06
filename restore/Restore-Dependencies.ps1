@@ -361,11 +361,16 @@ function CloneRepository($projectFilesGitInfo, $dependedProjects, $CloneDir, $Cl
           #Invoke-RestMethod -Uri $GitClone -Method Head -ErrorAction Stop;
           if($Verbose) { $GitCmd= "git clone '$($GitClone)' '$($CloneTarget.ToString())'" 
           } else { $GitCmd= "git clone -q '$($GitClone)' '$($CloneTarget.ToString())'" }
-          Invoke-Expression $($GitCmd)
+          $exitCode = Invoke-Expression $($GitCmd+';$?')
+          if (!$exitCode) {
+            Write-Host "- CloneRepository - Failed Cloning "$dependedProject.ProjectName": '$GitClone' to '$CloneTarget' "([Char]0x2717) -ForegroundColor Red
+            # exit 1 expected, but error-handling should be consistent
+            # TODO: extend restore script error-handling and check for possible side-effects
+          }
           #git clone -q '$GitClone' '$CloneTarget.ToString()'
         }
         
-        if($true) { Write-Host "- CloneRepository - Cloning "$dependedProject.ProjectName": '$GitClone' to '$CloneTarget' Done"([Char]0x221A) -ForegroundColor Green }
+        if($true) { Write-Host "- CloneRepository - Cloned "$dependedProject.ProjectName": '$GitClone' to '$CloneTarget' "([Char]0x221A) -ForegroundColor Green }
       }
       # If the repository does not exist, catch the error
       catch {
@@ -425,7 +430,7 @@ function CloneRepository($projectFilesGitInfo, $dependedProjects, $CloneDir, $Cl
       catch {
         if($Verbose) {
           $checkoutTarget = if ($CloneModeHash) {  "Hash '$($dependedProject.Hash)'" } else { "Branch '$($dependedProject.Branch)'" }
-          Write-Host "- CloneRepository - $($dependedProject.ProjectName) - Checkout Error! Cannot checkout $($checkoutTarget) Checked out."([Char]0x2717) -ForegroundColor Red }
+          Write-Host "- CloneRepository - $($dependedProject.ProjectName) - Checkout Error! Cannot checkout $($checkoutTarget)."([Char]0x2717) -ForegroundColor Red }
       }
     }
 
