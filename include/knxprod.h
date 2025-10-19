@@ -8,13 +8,23 @@
             (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : \
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
+#define ETS_ModuleId_NONE 0
+#define ETS_ModuleId_BASE 1
+#define ETS_ModuleId_UCT 2
+#define ETS_ModuleId_SOM 3
+#define ETS_ModuleId_BI 4
+#define ETS_ModuleId_BTN 5
+#define ETS_ModuleId_LOG 6
+#define MAIN_FirmwareName "Soundmodul"
 #define MAIN_OpenKnxId 0xA2
 #define MAIN_ApplicationNumber 40
-#define MAIN_ApplicationVersion 17
-#define MAIN_ParameterSize 13093
+#define MAIN_ApplicationVersion 18
+#define MAIN_FirmwareRevision 0
+#define MAIN_ApplicationEncoding iso-8859-15
+#define MAIN_ParameterSize 13097
 #define MAIN_MaxKoNumber 639
 #define MAIN_OrderNumber "SOM-UP"
-#define BASE_ModuleVersion 20
+#define BASE_ModuleVersion 21
 #define UCT_ModuleVersion 4
 #define BI_ModuleVersion 2
 #define BTN_ModuleVersion 5
@@ -75,6 +85,21 @@
 #define     BASE_ManualSaveShift 0
 #define BASE_PeriodicSave                        79      // 8 Bits, Bit 7-0
 #define BASE_Dummy                               109      // uint8_t
+#define BASE_ModuleEnabled_UCT                   110      // 1 Bit, Bit 6
+#define     BASE_ModuleEnabled_UCTMask 0x40
+#define     BASE_ModuleEnabled_UCTShift 6
+#define BASE_ModuleEnabled_SOM                   110      // 1 Bit, Bit 5
+#define     BASE_ModuleEnabled_SOMMask 0x20
+#define     BASE_ModuleEnabled_SOMShift 5
+#define BASE_ModuleEnabled_BI                    110      // 1 Bit, Bit 4
+#define     BASE_ModuleEnabled_BIMask 0x10
+#define     BASE_ModuleEnabled_BIShift 4
+#define BASE_ModuleEnabled_BTN                   110      // 1 Bit, Bit 3
+#define     BASE_ModuleEnabled_BTNMask 0x08
+#define     BASE_ModuleEnabled_BTNShift 3
+#define BASE_ModuleEnabled_LOG                   110      // 1 Bit, Bit 2
+#define     BASE_ModuleEnabled_LOGMask 0x04
+#define     BASE_ModuleEnabled_LOGShift 2
 
 // Zeitbasis
 #define ParamBASE_StartupDelayBase                    ((knx.paramByte(BASE_StartupDelayBase) & BASE_StartupDelayBaseMask) >> BASE_StartupDelayBaseShift)
@@ -122,6 +147,16 @@
 #define ParamBASE_PeriodicSave                        (knx.paramByte(BASE_PeriodicSave))
 // 
 #define ParamBASE_Dummy                               (knx.paramByte(BASE_Dummy))
+// UCT
+#define ParamBASE_ModuleEnabled_UCT                   ((bool)(knx.paramByte(BASE_ModuleEnabled_UCT) & BASE_ModuleEnabled_UCTMask))
+// SOM
+#define ParamBASE_ModuleEnabled_SOM                   ((bool)(knx.paramByte(BASE_ModuleEnabled_SOM) & BASE_ModuleEnabled_SOMMask))
+// BI
+#define ParamBASE_ModuleEnabled_BI                    ((bool)(knx.paramByte(BASE_ModuleEnabled_BI) & BASE_ModuleEnabled_BIMask))
+// BTN
+#define ParamBASE_ModuleEnabled_BTN                   ((bool)(knx.paramByte(BASE_ModuleEnabled_BTN) & BASE_ModuleEnabled_BTNMask))
+// LOG
+#define ParamBASE_ModuleEnabled_LOG                   ((bool)(knx.paramByte(BASE_ModuleEnabled_LOG) & BASE_ModuleEnabled_LOGMask))
 
 #define BASE_KoHeartbeat 1
 #define BASE_KoTime 2
@@ -148,307 +183,307 @@
 
 
 
-#define SOM_External                            111      // 1 Bit, Bit 7
+#define SOM_External                            115      // 1 Bit, Bit 7
 #define     SOM_ExternalMask 0x80
 #define     SOM_ExternalShift 7
-#define SOM_Scenes                              111      // 1 Bit, Bit 6
+#define SOM_Scenes                              115      // 1 Bit, Bit 6
 #define     SOM_ScenesMask 0x40
 #define     SOM_ScenesShift 6
-#define SOM_VolumeDay                           112      // uint8_t
-#define SOM_VolumeNight                         113      // uint8_t
-#define SOM_Lock                                114      // 2 Bits, Bit 7-6
+#define SOM_VolumeDay                           116      // uint8_t
+#define SOM_VolumeNight                         117      // uint8_t
+#define SOM_Lock                                118      // 2 Bits, Bit 7-6
 #define     SOM_LockMask 0xC0
 #define     SOM_LockShift 6
-#define SOM_DayNight                            114      // 2 Bits, Bit 5-4
+#define SOM_DayNight                            118      // 2 Bits, Bit 5-4
 #define     SOM_DayNightMask 0x30
 #define     SOM_DayNightShift 4
-#define SOM_Scene0                              115      // 8 Bits, Bit 7-0
-#define SOM_Scene1                              116      // 8 Bits, Bit 7-0
-#define SOM_Scene2                              117      // 8 Bits, Bit 7-0
-#define SOM_Scene3                              118      // 8 Bits, Bit 7-0
-#define SOM_Scene4                              119      // 8 Bits, Bit 7-0
-#define SOM_Scene5                              120      // 8 Bits, Bit 7-0
-#define SOM_Scene6                              121      // 8 Bits, Bit 7-0
-#define SOM_Scene7                              122      // 8 Bits, Bit 7-0
-#define SOM_Scene8                              123      // 8 Bits, Bit 7-0
-#define SOM_Scene9                              124      // 8 Bits, Bit 7-0
-#define SOM_Scene10                             125      // 8 Bits, Bit 7-0
-#define SOM_Scene11                             126      // 8 Bits, Bit 7-0
-#define SOM_Scene12                             127      // 8 Bits, Bit 7-0
-#define SOM_Scene13                             128      // 8 Bits, Bit 7-0
-#define SOM_Scene14                             129      // 8 Bits, Bit 7-0
-#define SOM_Scene15                             130      // 8 Bits, Bit 7-0
-#define SOM_Scene16                             131      // 8 Bits, Bit 7-0
-#define SOM_Scene17                             132      // 8 Bits, Bit 7-0
-#define SOM_Scene18                             133      // 8 Bits, Bit 7-0
-#define SOM_Scene19                             134      // 8 Bits, Bit 7-0
-#define SOM_SceneAction0                        135      // 8 Bits, Bit 7-0
-#define SOM_SceneAction1                        136      // 8 Bits, Bit 7-0
-#define SOM_SceneAction2                        137      // 8 Bits, Bit 7-0
-#define SOM_SceneAction3                        138      // 8 Bits, Bit 7-0
-#define SOM_SceneAction4                        139      // 8 Bits, Bit 7-0
-#define SOM_SceneAction5                        140      // 8 Bits, Bit 7-0
-#define SOM_SceneAction6                        141      // 8 Bits, Bit 7-0
-#define SOM_SceneAction7                        142      // 8 Bits, Bit 7-0
-#define SOM_SceneAction8                        143      // 8 Bits, Bit 7-0
-#define SOM_SceneAction9                        144      // 8 Bits, Bit 7-0
-#define SOM_SceneAction10                       145      // 8 Bits, Bit 7-0
-#define SOM_SceneAction11                       146      // 8 Bits, Bit 7-0
-#define SOM_SceneAction12                       147      // 8 Bits, Bit 7-0
-#define SOM_SceneAction13                       148      // 8 Bits, Bit 7-0
-#define SOM_SceneAction14                       149      // 8 Bits, Bit 7-0
-#define SOM_SceneAction15                       150      // 8 Bits, Bit 7-0
-#define SOM_SceneAction16                       151      // 8 Bits, Bit 7-0
-#define SOM_SceneAction17                       152      // 8 Bits, Bit 7-0
-#define SOM_SceneAction18                       153      // 8 Bits, Bit 7-0
-#define SOM_SceneAction19                       154      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA0                       155      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA1                       156      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA2                       157      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA3                       158      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA4                       159      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA5                       160      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA6                       161      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA7                       162      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA8                       163      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA9                       164      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA10                      165      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA11                      166      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA12                      167      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA13                      168      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA14                      169      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA15                      170      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA16                      171      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA17                      172      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA18                      173      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetA19                      174      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB0                       155      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB1                       156      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB2                       157      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB3                       158      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB4                       159      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB5                       160      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB6                       161      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB7                       162      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB8                       163      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB9                       164      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB10                      165      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB11                      166      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB12                      167      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB13                      168      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB14                      169      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB15                      170      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB16                      171      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB17                      172      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB18                      173      // 8 Bits, Bit 7-0
-#define SOM_SceneTargetB19                      174      // 8 Bits, Bit 7-0
-#define SOM_TG1Mode                             195      // 2 Bits, Bit 7-6
+#define SOM_Scene0                              119      // 8 Bits, Bit 7-0
+#define SOM_Scene1                              120      // 8 Bits, Bit 7-0
+#define SOM_Scene2                              121      // 8 Bits, Bit 7-0
+#define SOM_Scene3                              122      // 8 Bits, Bit 7-0
+#define SOM_Scene4                              123      // 8 Bits, Bit 7-0
+#define SOM_Scene5                              124      // 8 Bits, Bit 7-0
+#define SOM_Scene6                              125      // 8 Bits, Bit 7-0
+#define SOM_Scene7                              126      // 8 Bits, Bit 7-0
+#define SOM_Scene8                              127      // 8 Bits, Bit 7-0
+#define SOM_Scene9                              128      // 8 Bits, Bit 7-0
+#define SOM_Scene10                             129      // 8 Bits, Bit 7-0
+#define SOM_Scene11                             130      // 8 Bits, Bit 7-0
+#define SOM_Scene12                             131      // 8 Bits, Bit 7-0
+#define SOM_Scene13                             132      // 8 Bits, Bit 7-0
+#define SOM_Scene14                             133      // 8 Bits, Bit 7-0
+#define SOM_Scene15                             134      // 8 Bits, Bit 7-0
+#define SOM_Scene16                             135      // 8 Bits, Bit 7-0
+#define SOM_Scene17                             136      // 8 Bits, Bit 7-0
+#define SOM_Scene18                             137      // 8 Bits, Bit 7-0
+#define SOM_Scene19                             138      // 8 Bits, Bit 7-0
+#define SOM_SceneAction0                        139      // 8 Bits, Bit 7-0
+#define SOM_SceneAction1                        140      // 8 Bits, Bit 7-0
+#define SOM_SceneAction2                        141      // 8 Bits, Bit 7-0
+#define SOM_SceneAction3                        142      // 8 Bits, Bit 7-0
+#define SOM_SceneAction4                        143      // 8 Bits, Bit 7-0
+#define SOM_SceneAction5                        144      // 8 Bits, Bit 7-0
+#define SOM_SceneAction6                        145      // 8 Bits, Bit 7-0
+#define SOM_SceneAction7                        146      // 8 Bits, Bit 7-0
+#define SOM_SceneAction8                        147      // 8 Bits, Bit 7-0
+#define SOM_SceneAction9                        148      // 8 Bits, Bit 7-0
+#define SOM_SceneAction10                       149      // 8 Bits, Bit 7-0
+#define SOM_SceneAction11                       150      // 8 Bits, Bit 7-0
+#define SOM_SceneAction12                       151      // 8 Bits, Bit 7-0
+#define SOM_SceneAction13                       152      // 8 Bits, Bit 7-0
+#define SOM_SceneAction14                       153      // 8 Bits, Bit 7-0
+#define SOM_SceneAction15                       154      // 8 Bits, Bit 7-0
+#define SOM_SceneAction16                       155      // 8 Bits, Bit 7-0
+#define SOM_SceneAction17                       156      // 8 Bits, Bit 7-0
+#define SOM_SceneAction18                       157      // 8 Bits, Bit 7-0
+#define SOM_SceneAction19                       158      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA0                       159      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA1                       160      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA2                       161      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA3                       162      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA4                       163      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA5                       164      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA6                       165      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA7                       166      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA8                       167      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA9                       168      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA10                      169      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA11                      170      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA12                      171      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA13                      172      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA14                      173      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA15                      174      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA16                      175      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA17                      176      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA18                      177      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetA19                      178      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB0                       159      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB1                       160      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB2                       161      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB3                       162      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB4                       163      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB5                       164      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB6                       165      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB7                       166      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB8                       167      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB9                       168      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB10                      169      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB11                      170      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB12                      171      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB13                      172      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB14                      173      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB15                      174      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB16                      175      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB17                      176      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB18                      177      // 8 Bits, Bit 7-0
+#define SOM_SceneTargetB19                      178      // 8 Bits, Bit 7-0
+#define SOM_TG1Mode                             199      // 2 Bits, Bit 7-6
 #define     SOM_TG1ModeMask 0xC0
 #define     SOM_TG1ModeShift 6
-#define SOM_TG1Repeats                          196      // uint8_t
-#define SOM_TG1RepeatPause                      197      // uint8_t
-#define SOM_TG1Duration1                        199      // uint8_t
-#define SOM_TG1Duration2                        200      // uint8_t
-#define SOM_TG1Duration3                        201      // uint8_t
-#define SOM_TG1Duration4                        202      // uint8_t
-#define SOM_TG1Duration5                        203      // uint8_t
-#define SOM_TG1Duration6                        204      // uint8_t
-#define SOM_TG1Duration7                        205      // uint8_t
-#define SOM_TG1Duration8                        206      // uint8_t
-#define SOM_TG1Duration9                        207      // uint8_t
-#define SOM_TG1Frequency1                       208      // uint16_t
-#define SOM_TG1Frequency2                       210      // uint16_t
-#define SOM_TG1Frequency3                       212      // uint16_t
-#define SOM_TG1Frequency4                       214      // uint16_t
-#define SOM_TG1Frequency5                       216      // uint16_t
-#define SOM_TG1Frequency6                       218      // uint16_t
-#define SOM_TG1Frequency7                       220      // uint16_t
-#define SOM_TG1Frequency8                       222      // uint16_t
-#define SOM_TG1Frequency9                       224      // uint16_t
-#define SOM_TG2Mode                             226      // 2 Bits, Bit 7-6
+#define SOM_TG1Repeats                          200      // uint8_t
+#define SOM_TG1RepeatPause                      201      // uint8_t
+#define SOM_TG1Duration1                        203      // uint8_t
+#define SOM_TG1Duration2                        204      // uint8_t
+#define SOM_TG1Duration3                        205      // uint8_t
+#define SOM_TG1Duration4                        206      // uint8_t
+#define SOM_TG1Duration5                        207      // uint8_t
+#define SOM_TG1Duration6                        208      // uint8_t
+#define SOM_TG1Duration7                        209      // uint8_t
+#define SOM_TG1Duration8                        210      // uint8_t
+#define SOM_TG1Duration9                        211      // uint8_t
+#define SOM_TG1Frequency1                       212      // uint16_t
+#define SOM_TG1Frequency2                       214      // uint16_t
+#define SOM_TG1Frequency3                       216      // uint16_t
+#define SOM_TG1Frequency4                       218      // uint16_t
+#define SOM_TG1Frequency5                       220      // uint16_t
+#define SOM_TG1Frequency6                       222      // uint16_t
+#define SOM_TG1Frequency7                       224      // uint16_t
+#define SOM_TG1Frequency8                       226      // uint16_t
+#define SOM_TG1Frequency9                       228      // uint16_t
+#define SOM_TG2Mode                             230      // 2 Bits, Bit 7-6
 #define     SOM_TG2ModeMask 0xC0
 #define     SOM_TG2ModeShift 6
-#define SOM_TG2Repeats                          227      // uint8_t
-#define SOM_TG2RepeatPause                      228      // uint8_t
-#define SOM_TG2Duration1                        230      // uint8_t
-#define SOM_TG2Duration2                        231      // uint8_t
-#define SOM_TG2Duration3                        232      // uint8_t
-#define SOM_TG2Duration4                        233      // uint8_t
-#define SOM_TG2Duration5                        234      // uint8_t
-#define SOM_TG2Duration6                        235      // uint8_t
-#define SOM_TG2Duration7                        236      // uint8_t
-#define SOM_TG2Duration8                        237      // uint8_t
-#define SOM_TG2Duration9                        238      // uint8_t
-#define SOM_TG2Frequency1                       239      // uint16_t
-#define SOM_TG2Frequency2                       241      // uint16_t
-#define SOM_TG2Frequency3                       243      // uint16_t
-#define SOM_TG2Frequency4                       245      // uint16_t
-#define SOM_TG2Frequency5                       247      // uint16_t
-#define SOM_TG2Frequency6                       249      // uint16_t
-#define SOM_TG2Frequency7                       251      // uint16_t
-#define SOM_TG2Frequency8                       253      // uint16_t
-#define SOM_TG2Frequency9                       255      // uint16_t
-#define SOM_TG3Mode                             257      // 2 Bits, Bit 7-6
+#define SOM_TG2Repeats                          231      // uint8_t
+#define SOM_TG2RepeatPause                      232      // uint8_t
+#define SOM_TG2Duration1                        234      // uint8_t
+#define SOM_TG2Duration2                        235      // uint8_t
+#define SOM_TG2Duration3                        236      // uint8_t
+#define SOM_TG2Duration4                        237      // uint8_t
+#define SOM_TG2Duration5                        238      // uint8_t
+#define SOM_TG2Duration6                        239      // uint8_t
+#define SOM_TG2Duration7                        240      // uint8_t
+#define SOM_TG2Duration8                        241      // uint8_t
+#define SOM_TG2Duration9                        242      // uint8_t
+#define SOM_TG2Frequency1                       243      // uint16_t
+#define SOM_TG2Frequency2                       245      // uint16_t
+#define SOM_TG2Frequency3                       247      // uint16_t
+#define SOM_TG2Frequency4                       249      // uint16_t
+#define SOM_TG2Frequency5                       251      // uint16_t
+#define SOM_TG2Frequency6                       253      // uint16_t
+#define SOM_TG2Frequency7                       255      // uint16_t
+#define SOM_TG2Frequency8                       257      // uint16_t
+#define SOM_TG2Frequency9                       259      // uint16_t
+#define SOM_TG3Mode                             261      // 2 Bits, Bit 7-6
 #define     SOM_TG3ModeMask 0xC0
 #define     SOM_TG3ModeShift 6
-#define SOM_TG3Repeats                          258      // uint8_t
-#define SOM_TG3RepeatPause                      259      // uint8_t
-#define SOM_TG3Duration1                        261      // uint8_t
-#define SOM_TG3Duration2                        262      // uint8_t
-#define SOM_TG3Duration3                        263      // uint8_t
-#define SOM_TG3Duration4                        264      // uint8_t
-#define SOM_TG3Duration5                        265      // uint8_t
-#define SOM_TG3Duration6                        266      // uint8_t
-#define SOM_TG3Duration7                        267      // uint8_t
-#define SOM_TG3Duration8                        268      // uint8_t
-#define SOM_TG3Duration9                        269      // uint8_t
-#define SOM_TG3Frequency1                       270      // uint16_t
-#define SOM_TG3Frequency2                       272      // uint16_t
-#define SOM_TG3Frequency3                       274      // uint16_t
-#define SOM_TG3Frequency4                       276      // uint16_t
-#define SOM_TG3Frequency5                       278      // uint16_t
-#define SOM_TG3Frequency6                       280      // uint16_t
-#define SOM_TG3Frequency7                       282      // uint16_t
-#define SOM_TG3Frequency8                       284      // uint16_t
-#define SOM_TG3Frequency9                       286      // uint16_t
-#define SOM_TG4Mode                             288      // 2 Bits, Bit 7-6
+#define SOM_TG3Repeats                          262      // uint8_t
+#define SOM_TG3RepeatPause                      263      // uint8_t
+#define SOM_TG3Duration1                        265      // uint8_t
+#define SOM_TG3Duration2                        266      // uint8_t
+#define SOM_TG3Duration3                        267      // uint8_t
+#define SOM_TG3Duration4                        268      // uint8_t
+#define SOM_TG3Duration5                        269      // uint8_t
+#define SOM_TG3Duration6                        270      // uint8_t
+#define SOM_TG3Duration7                        271      // uint8_t
+#define SOM_TG3Duration8                        272      // uint8_t
+#define SOM_TG3Duration9                        273      // uint8_t
+#define SOM_TG3Frequency1                       274      // uint16_t
+#define SOM_TG3Frequency2                       276      // uint16_t
+#define SOM_TG3Frequency3                       278      // uint16_t
+#define SOM_TG3Frequency4                       280      // uint16_t
+#define SOM_TG3Frequency5                       282      // uint16_t
+#define SOM_TG3Frequency6                       284      // uint16_t
+#define SOM_TG3Frequency7                       286      // uint16_t
+#define SOM_TG3Frequency8                       288      // uint16_t
+#define SOM_TG3Frequency9                       290      // uint16_t
+#define SOM_TG4Mode                             292      // 2 Bits, Bit 7-6
 #define     SOM_TG4ModeMask 0xC0
 #define     SOM_TG4ModeShift 6
-#define SOM_TG4Repeats                          289      // uint8_t
-#define SOM_TG4RepeatPause                      290      // uint8_t
-#define SOM_TG4Duration1                        292      // uint8_t
-#define SOM_TG4Duration2                        293      // uint8_t
-#define SOM_TG4Duration3                        294      // uint8_t
-#define SOM_TG4Duration4                        295      // uint8_t
-#define SOM_TG4Duration5                        296      // uint8_t
-#define SOM_TG4Duration6                        297      // uint8_t
-#define SOM_TG4Duration7                        298      // uint8_t
-#define SOM_TG4Duration8                        299      // uint8_t
-#define SOM_TG4Duration9                        300      // uint8_t
-#define SOM_TG4Frequency1                       301      // uint16_t
-#define SOM_TG4Frequency2                       303      // uint16_t
-#define SOM_TG4Frequency3                       305      // uint16_t
-#define SOM_TG4Frequency4                       307      // uint16_t
-#define SOM_TG4Frequency5                       309      // uint16_t
-#define SOM_TG4Frequency6                       311      // uint16_t
-#define SOM_TG4Frequency7                       313      // uint16_t
-#define SOM_TG4Frequency8                       315      // uint16_t
-#define SOM_TG4Frequency9                       317      // uint16_t
-#define SOM_TG5Mode                             319      // 2 Bits, Bit 7-6
+#define SOM_TG4Repeats                          293      // uint8_t
+#define SOM_TG4RepeatPause                      294      // uint8_t
+#define SOM_TG4Duration1                        296      // uint8_t
+#define SOM_TG4Duration2                        297      // uint8_t
+#define SOM_TG4Duration3                        298      // uint8_t
+#define SOM_TG4Duration4                        299      // uint8_t
+#define SOM_TG4Duration5                        300      // uint8_t
+#define SOM_TG4Duration6                        301      // uint8_t
+#define SOM_TG4Duration7                        302      // uint8_t
+#define SOM_TG4Duration8                        303      // uint8_t
+#define SOM_TG4Duration9                        304      // uint8_t
+#define SOM_TG4Frequency1                       305      // uint16_t
+#define SOM_TG4Frequency2                       307      // uint16_t
+#define SOM_TG4Frequency3                       309      // uint16_t
+#define SOM_TG4Frequency4                       311      // uint16_t
+#define SOM_TG4Frequency5                       313      // uint16_t
+#define SOM_TG4Frequency6                       315      // uint16_t
+#define SOM_TG4Frequency7                       317      // uint16_t
+#define SOM_TG4Frequency8                       319      // uint16_t
+#define SOM_TG4Frequency9                       321      // uint16_t
+#define SOM_TG5Mode                             323      // 2 Bits, Bit 7-6
 #define     SOM_TG5ModeMask 0xC0
 #define     SOM_TG5ModeShift 6
-#define SOM_TG5Repeats                          320      // uint8_t
-#define SOM_TG5RepeatPause                      321      // uint8_t
-#define SOM_TG5Duration1                        323      // uint8_t
-#define SOM_TG5Duration2                        324      // uint8_t
-#define SOM_TG5Duration3                        325      // uint8_t
-#define SOM_TG5Duration4                        326      // uint8_t
-#define SOM_TG5Duration5                        327      // uint8_t
-#define SOM_TG5Duration6                        328      // uint8_t
-#define SOM_TG5Duration7                        329      // uint8_t
-#define SOM_TG5Duration8                        330      // uint8_t
-#define SOM_TG5Duration9                        331      // uint8_t
-#define SOM_TG5Frequency1                       332      // uint16_t
-#define SOM_TG5Frequency2                       334      // uint16_t
-#define SOM_TG5Frequency3                       336      // uint16_t
-#define SOM_TG5Frequency4                       338      // uint16_t
-#define SOM_TG5Frequency5                       340      // uint16_t
-#define SOM_TG5Frequency6                       342      // uint16_t
-#define SOM_TG5Frequency7                       344      // uint16_t
-#define SOM_TG5Frequency8                       346      // uint16_t
-#define SOM_TG5Frequency9                       348      // uint16_t
-#define SOM_TG6Mode                             350      // 2 Bits, Bit 7-6
+#define SOM_TG5Repeats                          324      // uint8_t
+#define SOM_TG5RepeatPause                      325      // uint8_t
+#define SOM_TG5Duration1                        327      // uint8_t
+#define SOM_TG5Duration2                        328      // uint8_t
+#define SOM_TG5Duration3                        329      // uint8_t
+#define SOM_TG5Duration4                        330      // uint8_t
+#define SOM_TG5Duration5                        331      // uint8_t
+#define SOM_TG5Duration6                        332      // uint8_t
+#define SOM_TG5Duration7                        333      // uint8_t
+#define SOM_TG5Duration8                        334      // uint8_t
+#define SOM_TG5Duration9                        335      // uint8_t
+#define SOM_TG5Frequency1                       336      // uint16_t
+#define SOM_TG5Frequency2                       338      // uint16_t
+#define SOM_TG5Frequency3                       340      // uint16_t
+#define SOM_TG5Frequency4                       342      // uint16_t
+#define SOM_TG5Frequency5                       344      // uint16_t
+#define SOM_TG5Frequency6                       346      // uint16_t
+#define SOM_TG5Frequency7                       348      // uint16_t
+#define SOM_TG5Frequency8                       350      // uint16_t
+#define SOM_TG5Frequency9                       352      // uint16_t
+#define SOM_TG6Mode                             354      // 2 Bits, Bit 7-6
 #define     SOM_TG6ModeMask 0xC0
 #define     SOM_TG6ModeShift 6
-#define SOM_TG6Repeats                          351      // uint8_t
-#define SOM_TG6RepeatPause                      352      // uint8_t
-#define SOM_TG6Duration1                        354      // uint8_t
-#define SOM_TG6Duration2                        355      // uint8_t
-#define SOM_TG6Duration3                        356      // uint8_t
-#define SOM_TG6Duration4                        357      // uint8_t
-#define SOM_TG6Duration5                        358      // uint8_t
-#define SOM_TG6Duration6                        359      // uint8_t
-#define SOM_TG6Duration7                        360      // uint8_t
-#define SOM_TG6Duration8                        361      // uint8_t
-#define SOM_TG6Duration9                        362      // uint8_t
-#define SOM_TG6Frequency1                       363      // uint16_t
-#define SOM_TG6Frequency2                       365      // uint16_t
-#define SOM_TG6Frequency3                       367      // uint16_t
-#define SOM_TG6Frequency4                       369      // uint16_t
-#define SOM_TG6Frequency5                       371      // uint16_t
-#define SOM_TG6Frequency6                       373      // uint16_t
-#define SOM_TG6Frequency7                       375      // uint16_t
-#define SOM_TG6Frequency8                       377      // uint16_t
-#define SOM_TG6Frequency9                       379      // uint16_t
-#define SOM_TG7Mode                             381      // 2 Bits, Bit 7-6
+#define SOM_TG6Repeats                          355      // uint8_t
+#define SOM_TG6RepeatPause                      356      // uint8_t
+#define SOM_TG6Duration1                        358      // uint8_t
+#define SOM_TG6Duration2                        359      // uint8_t
+#define SOM_TG6Duration3                        360      // uint8_t
+#define SOM_TG6Duration4                        361      // uint8_t
+#define SOM_TG6Duration5                        362      // uint8_t
+#define SOM_TG6Duration6                        363      // uint8_t
+#define SOM_TG6Duration7                        364      // uint8_t
+#define SOM_TG6Duration8                        365      // uint8_t
+#define SOM_TG6Duration9                        366      // uint8_t
+#define SOM_TG6Frequency1                       367      // uint16_t
+#define SOM_TG6Frequency2                       369      // uint16_t
+#define SOM_TG6Frequency3                       371      // uint16_t
+#define SOM_TG6Frequency4                       373      // uint16_t
+#define SOM_TG6Frequency5                       375      // uint16_t
+#define SOM_TG6Frequency6                       377      // uint16_t
+#define SOM_TG6Frequency7                       379      // uint16_t
+#define SOM_TG6Frequency8                       381      // uint16_t
+#define SOM_TG6Frequency9                       383      // uint16_t
+#define SOM_TG7Mode                             385      // 2 Bits, Bit 7-6
 #define     SOM_TG7ModeMask 0xC0
 #define     SOM_TG7ModeShift 6
-#define SOM_TG7Repeats                          382      // uint8_t
-#define SOM_TG7RepeatPause                      383      // uint8_t
-#define SOM_TG7Duration1                        385      // uint8_t
-#define SOM_TG7Duration2                        386      // uint8_t
-#define SOM_TG7Duration3                        387      // uint8_t
-#define SOM_TG7Duration4                        388      // uint8_t
-#define SOM_TG7Duration5                        389      // uint8_t
-#define SOM_TG7Duration6                        390      // uint8_t
-#define SOM_TG7Duration7                        391      // uint8_t
-#define SOM_TG7Duration8                        392      // uint8_t
-#define SOM_TG7Duration9                        393      // uint8_t
-#define SOM_TG7Frequency1                       394      // uint16_t
-#define SOM_TG7Frequency2                       396      // uint16_t
-#define SOM_TG7Frequency3                       398      // uint16_t
-#define SOM_TG7Frequency4                       400      // uint16_t
-#define SOM_TG7Frequency5                       402      // uint16_t
-#define SOM_TG7Frequency6                       404      // uint16_t
-#define SOM_TG7Frequency7                       406      // uint16_t
-#define SOM_TG7Frequency8                       408      // uint16_t
-#define SOM_TG7Frequency9                       410      // uint16_t
-#define SOM_TG8Mode                             412      // 2 Bits, Bit 7-6
+#define SOM_TG7Repeats                          386      // uint8_t
+#define SOM_TG7RepeatPause                      387      // uint8_t
+#define SOM_TG7Duration1                        389      // uint8_t
+#define SOM_TG7Duration2                        390      // uint8_t
+#define SOM_TG7Duration3                        391      // uint8_t
+#define SOM_TG7Duration4                        392      // uint8_t
+#define SOM_TG7Duration5                        393      // uint8_t
+#define SOM_TG7Duration6                        394      // uint8_t
+#define SOM_TG7Duration7                        395      // uint8_t
+#define SOM_TG7Duration8                        396      // uint8_t
+#define SOM_TG7Duration9                        397      // uint8_t
+#define SOM_TG7Frequency1                       398      // uint16_t
+#define SOM_TG7Frequency2                       400      // uint16_t
+#define SOM_TG7Frequency3                       402      // uint16_t
+#define SOM_TG7Frequency4                       404      // uint16_t
+#define SOM_TG7Frequency5                       406      // uint16_t
+#define SOM_TG7Frequency6                       408      // uint16_t
+#define SOM_TG7Frequency7                       410      // uint16_t
+#define SOM_TG7Frequency8                       412      // uint16_t
+#define SOM_TG7Frequency9                       414      // uint16_t
+#define SOM_TG8Mode                             416      // 2 Bits, Bit 7-6
 #define     SOM_TG8ModeMask 0xC0
 #define     SOM_TG8ModeShift 6
-#define SOM_TG8Repeats                          413      // uint8_t
-#define SOM_TG8RepeatPause                      414      // uint8_t
-#define SOM_TG8Duration1                        416      // uint8_t
-#define SOM_TG8Duration2                        417      // uint8_t
-#define SOM_TG8Duration3                        418      // uint8_t
-#define SOM_TG8Duration4                        419      // uint8_t
-#define SOM_TG8Duration5                        420      // uint8_t
-#define SOM_TG8Duration6                        421      // uint8_t
-#define SOM_TG8Duration7                        422      // uint8_t
-#define SOM_TG8Duration8                        423      // uint8_t
-#define SOM_TG8Duration9                        424      // uint8_t
-#define SOM_TG8Frequency1                       425      // uint16_t
-#define SOM_TG8Frequency2                       427      // uint16_t
-#define SOM_TG8Frequency3                       429      // uint16_t
-#define SOM_TG8Frequency4                       431      // uint16_t
-#define SOM_TG8Frequency5                       433      // uint16_t
-#define SOM_TG8Frequency6                       435      // uint16_t
-#define SOM_TG8Frequency7                       437      // uint16_t
-#define SOM_TG8Frequency8                       439      // uint16_t
-#define SOM_TG8Frequency9                       441      // uint16_t
-#define SOM_TG9Mode                             443      // 2 Bits, Bit 7-6
+#define SOM_TG8Repeats                          417      // uint8_t
+#define SOM_TG8RepeatPause                      418      // uint8_t
+#define SOM_TG8Duration1                        420      // uint8_t
+#define SOM_TG8Duration2                        421      // uint8_t
+#define SOM_TG8Duration3                        422      // uint8_t
+#define SOM_TG8Duration4                        423      // uint8_t
+#define SOM_TG8Duration5                        424      // uint8_t
+#define SOM_TG8Duration6                        425      // uint8_t
+#define SOM_TG8Duration7                        426      // uint8_t
+#define SOM_TG8Duration8                        427      // uint8_t
+#define SOM_TG8Duration9                        428      // uint8_t
+#define SOM_TG8Frequency1                       429      // uint16_t
+#define SOM_TG8Frequency2                       431      // uint16_t
+#define SOM_TG8Frequency3                       433      // uint16_t
+#define SOM_TG8Frequency4                       435      // uint16_t
+#define SOM_TG8Frequency5                       437      // uint16_t
+#define SOM_TG8Frequency6                       439      // uint16_t
+#define SOM_TG8Frequency7                       441      // uint16_t
+#define SOM_TG8Frequency8                       443      // uint16_t
+#define SOM_TG8Frequency9                       445      // uint16_t
+#define SOM_TG9Mode                             447      // 2 Bits, Bit 7-6
 #define     SOM_TG9ModeMask 0xC0
 #define     SOM_TG9ModeShift 6
-#define SOM_TG9Repeats                          444      // uint8_t
-#define SOM_TG9RepeatPause                      445      // uint8_t
-#define SOM_TG9Duration1                        447      // uint8_t
-#define SOM_TG9Duration2                        448      // uint8_t
-#define SOM_TG9Duration3                        449      // uint8_t
-#define SOM_TG9Duration4                        450      // uint8_t
-#define SOM_TG9Duration5                        451      // uint8_t
-#define SOM_TG9Duration6                        452      // uint8_t
-#define SOM_TG9Duration7                        453      // uint8_t
-#define SOM_TG9Duration8                        454      // uint8_t
-#define SOM_TG9Duration9                        455      // uint8_t
-#define SOM_TG9Frequency1                       456      // uint16_t
-#define SOM_TG9Frequency2                       458      // uint16_t
-#define SOM_TG9Frequency3                       460      // uint16_t
-#define SOM_TG9Frequency4                       462      // uint16_t
-#define SOM_TG9Frequency5                       464      // uint16_t
-#define SOM_TG9Frequency6                       466      // uint16_t
-#define SOM_TG9Frequency7                       468      // uint16_t
-#define SOM_TG9Frequency8                       470      // uint16_t
-#define SOM_TG9Frequency9                       472      // uint16_t
+#define SOM_TG9Repeats                          448      // uint8_t
+#define SOM_TG9RepeatPause                      449      // uint8_t
+#define SOM_TG9Duration1                        451      // uint8_t
+#define SOM_TG9Duration2                        452      // uint8_t
+#define SOM_TG9Duration3                        453      // uint8_t
+#define SOM_TG9Duration4                        454      // uint8_t
+#define SOM_TG9Duration5                        455      // uint8_t
+#define SOM_TG9Duration6                        456      // uint8_t
+#define SOM_TG9Duration7                        457      // uint8_t
+#define SOM_TG9Duration8                        458      // uint8_t
+#define SOM_TG9Duration9                        459      // uint8_t
+#define SOM_TG9Frequency1                       460      // uint16_t
+#define SOM_TG9Frequency2                       462      // uint16_t
+#define SOM_TG9Frequency3                       464      // uint16_t
+#define SOM_TG9Frequency4                       466      // uint16_t
+#define SOM_TG9Frequency5                       468      // uint16_t
+#define SOM_TG9Frequency6                       470      // uint16_t
+#define SOM_TG9Frequency7                       472      // uint16_t
+#define SOM_TG9Frequency8                       474      // uint16_t
+#define SOM_TG9Frequency9                       476      // uint16_t
 
 // Externe Logik
 #define ParamSOM_External                            ((bool)(knx.paramByte(SOM_External) & SOM_ExternalMask))
@@ -1030,7 +1065,7 @@
 #define SOM_ChannelCount 10
 
 // Parameter per channel
-#define SOM_ParamBlockOffset 474
+#define SOM_ParamBlockOffset 478
 #define SOM_ParamBlockSize 11
 #define SOM_ParamCalcIndex(index) (index + SOM_ParamBlockOffset + _channelIndex * SOM_ParamBlockSize)
 
@@ -1123,7 +1158,7 @@
 #define BI_ChannelCount 4
 
 // Parameter per channel
-#define BI_ParamBlockOffset 584
+#define BI_ParamBlockOffset 588
 #define BI_ParamBlockSize 4
 #define BI_ParamCalcIndex(index) (index + BI_ParamBlockOffset + _channelIndex * BI_ParamBlockSize)
 
@@ -1180,10 +1215,10 @@
 // 
 #define KoBI_ChannelOutput                       (knx.getGroupObject(BI_KoCalcNumber(BI_KoChannelOutput)))
 
-#define BTN_ReactionTimeMultiClick              600      // 8 Bits, Bit 7-0
-#define BTN_ReactionTimeLong                    601      // 8 Bits, Bit 7-0
-#define BTN_ReactionTimeExtraLong               602      // 8 Bits, Bit 7-0
-#define BTN_VisibleChannels                     603      // uint8_t
+#define BTN_ReactionTimeMultiClick              604      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeLong                    605      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeExtraLong               606      // 8 Bits, Bit 7-0
+#define BTN_VisibleChannels                     607      // uint8_t
 
 // Mehrfach-Klick
 #define ParamBTN_ReactionTimeMultiClick              (knx.paramByte(BTN_ReactionTimeMultiClick))
@@ -1197,7 +1232,7 @@
 #define BTN_ChannelCount 20
 
 // Parameter per channel
-#define BTN_ParamBlockOffset 604
+#define BTN_ParamBlockOffset 608
 #define BTN_ParamBlockSize 53
 #define BTN_ParamCalcIndex(index) (index + BTN_ParamBlockOffset + _channelIndex * BTN_ParamBlockSize)
 
@@ -1713,254 +1748,254 @@
 // 
 #define KoBTN_Out6                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut6)))
 
-#define LOG_BuzzerInstalled                     1664      // 1 Bit, Bit 7
+#define LOG_BuzzerInstalled                     1668      // 1 Bit, Bit 7
 #define     LOG_BuzzerInstalledMask 0x80
 #define     LOG_BuzzerInstalledShift 7
-#define LOG_LedInstalled                        1664      // 1 Bit, Bit 6
+#define LOG_LedInstalled                        1668      // 1 Bit, Bit 6
 #define     LOG_LedInstalledMask 0x40
 #define     LOG_LedInstalledShift 6
-#define LOG_VacationKo                          1664      // 1 Bit, Bit 5
+#define LOG_VacationKo                          1668      // 1 Bit, Bit 5
 #define     LOG_VacationKoMask 0x20
 #define     LOG_VacationKoShift 5
-#define LOG_HolidayKo                           1664      // 1 Bit, Bit 4
+#define LOG_HolidayKo                           1668      // 1 Bit, Bit 4
 #define     LOG_HolidayKoMask 0x10
 #define     LOG_HolidayKoShift 4
-#define LOG_VacationRead                        1664      // 1 Bit, Bit 3
+#define LOG_VacationRead                        1668      // 1 Bit, Bit 3
 #define     LOG_VacationReadMask 0x08
 #define     LOG_VacationReadShift 3
-#define LOG_HolidaySend                         1664      // 1 Bit, Bit 2
+#define LOG_HolidaySend                         1668      // 1 Bit, Bit 2
 #define     LOG_HolidaySendMask 0x04
 #define     LOG_HolidaySendShift 2
-#define LOG_Neujahr                             1665      // 1 Bit, Bit 7
+#define LOG_Neujahr                             1669      // 1 Bit, Bit 7
 #define     LOG_NeujahrMask 0x80
 #define     LOG_NeujahrShift 7
-#define LOG_DreiKoenige                         1665      // 1 Bit, Bit 6
+#define LOG_DreiKoenige                         1669      // 1 Bit, Bit 6
 #define     LOG_DreiKoenigeMask 0x40
 #define     LOG_DreiKoenigeShift 6
-#define LOG_Weiberfastnacht                     1665      // 1 Bit, Bit 5
+#define LOG_Weiberfastnacht                     1669      // 1 Bit, Bit 5
 #define     LOG_WeiberfastnachtMask 0x20
 #define     LOG_WeiberfastnachtShift 5
-#define LOG_Rosenmontag                         1665      // 1 Bit, Bit 4
+#define LOG_Rosenmontag                         1669      // 1 Bit, Bit 4
 #define     LOG_RosenmontagMask 0x10
 #define     LOG_RosenmontagShift 4
-#define LOG_Fastnachtsdienstag                  1665      // 1 Bit, Bit 3
+#define LOG_Fastnachtsdienstag                  1669      // 1 Bit, Bit 3
 #define     LOG_FastnachtsdienstagMask 0x08
 #define     LOG_FastnachtsdienstagShift 3
-#define LOG_Aschermittwoch                      1665      // 1 Bit, Bit 2
+#define LOG_Aschermittwoch                      1669      // 1 Bit, Bit 2
 #define     LOG_AschermittwochMask 0x04
 #define     LOG_AschermittwochShift 2
-#define LOG_Frauentag                           1665      // 1 Bit, Bit 1
+#define LOG_Frauentag                           1669      // 1 Bit, Bit 1
 #define     LOG_FrauentagMask 0x02
 #define     LOG_FrauentagShift 1
-#define LOG_Gruendonnerstag                     1665      // 1 Bit, Bit 0
+#define LOG_Gruendonnerstag                     1669      // 1 Bit, Bit 0
 #define     LOG_GruendonnerstagMask 0x01
 #define     LOG_GruendonnerstagShift 0
-#define LOG_Karfreitag                          1666      // 1 Bit, Bit 7
+#define LOG_Karfreitag                          1670      // 1 Bit, Bit 7
 #define     LOG_KarfreitagMask 0x80
 #define     LOG_KarfreitagShift 7
-#define LOG_Ostersonntag                        1666      // 1 Bit, Bit 6
+#define LOG_Ostersonntag                        1670      // 1 Bit, Bit 6
 #define     LOG_OstersonntagMask 0x40
 #define     LOG_OstersonntagShift 6
-#define LOG_Ostermontag                         1666      // 1 Bit, Bit 5
+#define LOG_Ostermontag                         1670      // 1 Bit, Bit 5
 #define     LOG_OstermontagMask 0x20
 #define     LOG_OstermontagShift 5
-#define LOG_TagDerArbeit                        1666      // 1 Bit, Bit 4
+#define LOG_TagDerArbeit                        1670      // 1 Bit, Bit 4
 #define     LOG_TagDerArbeitMask 0x10
 #define     LOG_TagDerArbeitShift 4
-#define LOG_Himmelfahrt                         1666      // 1 Bit, Bit 3
+#define LOG_Himmelfahrt                         1670      // 1 Bit, Bit 3
 #define     LOG_HimmelfahrtMask 0x08
 #define     LOG_HimmelfahrtShift 3
-#define LOG_Pfingstsonntag                      1666      // 1 Bit, Bit 2
+#define LOG_Pfingstsonntag                      1670      // 1 Bit, Bit 2
 #define     LOG_PfingstsonntagMask 0x04
 #define     LOG_PfingstsonntagShift 2
-#define LOG_Pfingstmontag                       1666      // 1 Bit, Bit 1
+#define LOG_Pfingstmontag                       1670      // 1 Bit, Bit 1
 #define     LOG_PfingstmontagMask 0x02
 #define     LOG_PfingstmontagShift 1
-#define LOG_Fronleichnam                        1666      // 1 Bit, Bit 0
+#define LOG_Fronleichnam                        1670      // 1 Bit, Bit 0
 #define     LOG_FronleichnamMask 0x01
 #define     LOG_FronleichnamShift 0
-#define LOG_Friedensfest                        1667      // 1 Bit, Bit 7
+#define LOG_Friedensfest                        1671      // 1 Bit, Bit 7
 #define     LOG_FriedensfestMask 0x80
 #define     LOG_FriedensfestShift 7
-#define LOG_MariaHimmelfahrt                    1667      // 1 Bit, Bit 6
+#define LOG_MariaHimmelfahrt                    1671      // 1 Bit, Bit 6
 #define     LOG_MariaHimmelfahrtMask 0x40
 #define     LOG_MariaHimmelfahrtShift 6
-#define LOG_DeutscheEinheit                     1667      // 1 Bit, Bit 5
+#define LOG_DeutscheEinheit                     1671      // 1 Bit, Bit 5
 #define     LOG_DeutscheEinheitMask 0x20
 #define     LOG_DeutscheEinheitShift 5
-#define LOG_Reformationstag                     1667      // 1 Bit, Bit 4
+#define LOG_Reformationstag                     1671      // 1 Bit, Bit 4
 #define     LOG_ReformationstagMask 0x10
 #define     LOG_ReformationstagShift 4
-#define LOG_Allerheiligen                       1667      // 1 Bit, Bit 3
+#define LOG_Allerheiligen                       1671      // 1 Bit, Bit 3
 #define     LOG_AllerheiligenMask 0x08
 #define     LOG_AllerheiligenShift 3
-#define LOG_BussBettag                          1667      // 1 Bit, Bit 2
+#define LOG_BussBettag                          1671      // 1 Bit, Bit 2
 #define     LOG_BussBettagMask 0x04
 #define     LOG_BussBettagShift 2
-#define LOG_Advent1                             1667      // 1 Bit, Bit 1
+#define LOG_Advent1                             1671      // 1 Bit, Bit 1
 #define     LOG_Advent1Mask 0x02
 #define     LOG_Advent1Shift 1
-#define LOG_Advent2                             1667      // 1 Bit, Bit 0
+#define LOG_Advent2                             1671      // 1 Bit, Bit 0
 #define     LOG_Advent2Mask 0x01
 #define     LOG_Advent2Shift 0
-#define LOG_Advent3                             1668      // 1 Bit, Bit 7
+#define LOG_Advent3                             1672      // 1 Bit, Bit 7
 #define     LOG_Advent3Mask 0x80
 #define     LOG_Advent3Shift 7
-#define LOG_Advent4                             1668      // 1 Bit, Bit 6
+#define LOG_Advent4                             1672      // 1 Bit, Bit 6
 #define     LOG_Advent4Mask 0x40
 #define     LOG_Advent4Shift 6
-#define LOG_Heiligabend                         1668      // 1 Bit, Bit 5
+#define LOG_Heiligabend                         1672      // 1 Bit, Bit 5
 #define     LOG_HeiligabendMask 0x20
 #define     LOG_HeiligabendShift 5
-#define LOG_Weihnachtstag1                      1668      // 1 Bit, Bit 4
+#define LOG_Weihnachtstag1                      1672      // 1 Bit, Bit 4
 #define     LOG_Weihnachtstag1Mask 0x10
 #define     LOG_Weihnachtstag1Shift 4
-#define LOG_Weihnachtstag2                      1668      // 1 Bit, Bit 3
+#define LOG_Weihnachtstag2                      1672      // 1 Bit, Bit 3
 #define     LOG_Weihnachtstag2Mask 0x08
 #define     LOG_Weihnachtstag2Shift 3
-#define LOG_Silvester                           1668      // 1 Bit, Bit 2
+#define LOG_Silvester                           1672      // 1 Bit, Bit 2
 #define     LOG_SilvesterMask 0x04
 #define     LOG_SilvesterShift 2
-#define LOG_Nationalfeiertag                    1668      // 1 Bit, Bit 1
+#define LOG_Nationalfeiertag                    1672      // 1 Bit, Bit 1
 #define     LOG_NationalfeiertagMask 0x02
 #define     LOG_NationalfeiertagShift 1
-#define LOG_MariaEmpfaengnis                    1668      // 1 Bit, Bit 0
+#define LOG_MariaEmpfaengnis                    1672      // 1 Bit, Bit 0
 #define     LOG_MariaEmpfaengnisMask 0x01
 #define     LOG_MariaEmpfaengnisShift 0
-#define LOG_NationalfeiertagSchweiz             1669      // 1 Bit, Bit 7
+#define LOG_NationalfeiertagSchweiz             1673      // 1 Bit, Bit 7
 #define     LOG_NationalfeiertagSchweizMask 0x80
 #define     LOG_NationalfeiertagSchweizShift 7
-#define LOG_Totensonntag                        1669      // 1 Bit, Bit 6
+#define LOG_Totensonntag                        1673      // 1 Bit, Bit 6
 #define     LOG_TotensonntagMask 0x40
 #define     LOG_TotensonntagShift 6
-#define LOG_Weltkindertag                       1669      // 1 Bit, Bit 5
+#define LOG_Weltkindertag                       1673      // 1 Bit, Bit 5
 #define     LOG_WeltkindertagMask 0x20
 #define     LOG_WeltkindertagShift 5
-#define LOG_BuzzerSilent                        1670      // uint16_t
-#define LOG_BuzzerNormal                        1672      // uint16_t
-#define LOG_BuzzerLoud                          1674      // uint16_t
-#define LOG_VisibleChannels                     1676      // uint8_t
-#define LOG_LedMapping                          1677      // 3 Bits, Bit 7-5
+#define LOG_BuzzerSilent                        1674      // uint16_t
+#define LOG_BuzzerNormal                        1676      // uint16_t
+#define LOG_BuzzerLoud                          1678      // uint16_t
+#define LOG_VisibleChannels                     1680      // uint8_t
+#define LOG_LedMapping                          1681      // 3 Bits, Bit 7-5
 #define     LOG_LedMappingMask 0xE0
 #define     LOG_LedMappingShift 5
-#define LOG_UserFormula1                        1678      // char*, 99 Byte
-#define LOG_UserFormula1Active                  1777      // 1 Bit, Bit 7
+#define LOG_UserFormula1                        1682      // char*, 99 Byte
+#define LOG_UserFormula1Active                  1781      // 1 Bit, Bit 7
 #define     LOG_UserFormula1ActiveMask 0x80
 #define     LOG_UserFormula1ActiveShift 7
-#define LOG_UserFormula2                        1778      // char*, 99 Byte
-#define LOG_UserFormula2Active                  1877      // 1 Bit, Bit 7
+#define LOG_UserFormula2                        1782      // char*, 99 Byte
+#define LOG_UserFormula2Active                  1881      // 1 Bit, Bit 7
 #define     LOG_UserFormula2ActiveMask 0x80
 #define     LOG_UserFormula2ActiveShift 7
-#define LOG_UserFormula3                        1878      // char*, 99 Byte
-#define LOG_UserFormula3Active                  1977      // 1 Bit, Bit 7
+#define LOG_UserFormula3                        1882      // char*, 99 Byte
+#define LOG_UserFormula3Active                  1981      // 1 Bit, Bit 7
 #define     LOG_UserFormula3ActiveMask 0x80
 #define     LOG_UserFormula3ActiveShift 7
-#define LOG_UserFormula4                        1978      // char*, 99 Byte
-#define LOG_UserFormula4Active                  2077      // 1 Bit, Bit 7
+#define LOG_UserFormula4                        1982      // char*, 99 Byte
+#define LOG_UserFormula4Active                  2081      // 1 Bit, Bit 7
 #define     LOG_UserFormula4ActiveMask 0x80
 #define     LOG_UserFormula4ActiveShift 7
-#define LOG_UserFormula5                        2078      // char*, 99 Byte
-#define LOG_UserFormula5Active                  2177      // 1 Bit, Bit 7
+#define LOG_UserFormula5                        2082      // char*, 99 Byte
+#define LOG_UserFormula5Active                  2181      // 1 Bit, Bit 7
 #define     LOG_UserFormula5ActiveMask 0x80
 #define     LOG_UserFormula5ActiveShift 7
-#define LOG_UserFormula6                        2178      // char*, 99 Byte
-#define LOG_UserFormula6Active                  2277      // 1 Bit, Bit 7
+#define LOG_UserFormula6                        2182      // char*, 99 Byte
+#define LOG_UserFormula6Active                  2281      // 1 Bit, Bit 7
 #define     LOG_UserFormula6ActiveMask 0x80
 #define     LOG_UserFormula6ActiveShift 7
-#define LOG_UserFormula7                        2278      // char*, 99 Byte
-#define LOG_UserFormula7Active                  2377      // 1 Bit, Bit 7
+#define LOG_UserFormula7                        2282      // char*, 99 Byte
+#define LOG_UserFormula7Active                  2381      // 1 Bit, Bit 7
 #define     LOG_UserFormula7ActiveMask 0x80
 #define     LOG_UserFormula7ActiveShift 7
-#define LOG_UserFormula8                        2378      // char*, 99 Byte
-#define LOG_UserFormula8Active                  2477      // 1 Bit, Bit 7
+#define LOG_UserFormula8                        2382      // char*, 99 Byte
+#define LOG_UserFormula8Active                  2481      // 1 Bit, Bit 7
 #define     LOG_UserFormula8ActiveMask 0x80
 #define     LOG_UserFormula8ActiveShift 7
-#define LOG_UserFormula9                        2478      // char*, 99 Byte
-#define LOG_UserFormula9Active                  2577      // 1 Bit, Bit 7
+#define LOG_UserFormula9                        2482      // char*, 99 Byte
+#define LOG_UserFormula9Active                  2581      // 1 Bit, Bit 7
 #define     LOG_UserFormula9ActiveMask 0x80
 #define     LOG_UserFormula9ActiveShift 7
-#define LOG_UserFormula10                       2578      // char*, 99 Byte
-#define LOG_UserFormula10Active                 2677      // 1 Bit, Bit 7
+#define LOG_UserFormula10                       2582      // char*, 99 Byte
+#define LOG_UserFormula10Active                 2681      // 1 Bit, Bit 7
 #define     LOG_UserFormula10ActiveMask 0x80
 #define     LOG_UserFormula10ActiveShift 7
-#define LOG_UserFormula11                       2678      // char*, 99 Byte
-#define LOG_UserFormula11Active                 2777      // 1 Bit, Bit 7
+#define LOG_UserFormula11                       2682      // char*, 99 Byte
+#define LOG_UserFormula11Active                 2781      // 1 Bit, Bit 7
 #define     LOG_UserFormula11ActiveMask 0x80
 #define     LOG_UserFormula11ActiveShift 7
-#define LOG_UserFormula12                       2778      // char*, 99 Byte
-#define LOG_UserFormula12Active                 2877      // 1 Bit, Bit 7
+#define LOG_UserFormula12                       2782      // char*, 99 Byte
+#define LOG_UserFormula12Active                 2881      // 1 Bit, Bit 7
 #define     LOG_UserFormula12ActiveMask 0x80
 #define     LOG_UserFormula12ActiveShift 7
-#define LOG_UserFormula13                       2878      // char*, 99 Byte
-#define LOG_UserFormula13Active                 2977      // 1 Bit, Bit 7
+#define LOG_UserFormula13                       2882      // char*, 99 Byte
+#define LOG_UserFormula13Active                 2981      // 1 Bit, Bit 7
 #define     LOG_UserFormula13ActiveMask 0x80
 #define     LOG_UserFormula13ActiveShift 7
-#define LOG_UserFormula14                       2978      // char*, 99 Byte
-#define LOG_UserFormula14Active                 3077      // 1 Bit, Bit 7
+#define LOG_UserFormula14                       2982      // char*, 99 Byte
+#define LOG_UserFormula14Active                 3081      // 1 Bit, Bit 7
 #define     LOG_UserFormula14ActiveMask 0x80
 #define     LOG_UserFormula14ActiveShift 7
-#define LOG_UserFormula15                       3078      // char*, 99 Byte
-#define LOG_UserFormula15Active                 3177      // 1 Bit, Bit 7
+#define LOG_UserFormula15                       3082      // char*, 99 Byte
+#define LOG_UserFormula15Active                 3181      // 1 Bit, Bit 7
 #define     LOG_UserFormula15ActiveMask 0x80
 #define     LOG_UserFormula15ActiveShift 7
-#define LOG_UserFormula16                       3178      // char*, 99 Byte
-#define LOG_UserFormula16Active                 3277      // 1 Bit, Bit 7
+#define LOG_UserFormula16                       3182      // char*, 99 Byte
+#define LOG_UserFormula16Active                 3281      // 1 Bit, Bit 7
 #define     LOG_UserFormula16ActiveMask 0x80
 #define     LOG_UserFormula16ActiveShift 7
-#define LOG_UserFormula17                       3278      // char*, 99 Byte
-#define LOG_UserFormula17Active                 3377      // 1 Bit, Bit 7
+#define LOG_UserFormula17                       3282      // char*, 99 Byte
+#define LOG_UserFormula17Active                 3381      // 1 Bit, Bit 7
 #define     LOG_UserFormula17ActiveMask 0x80
 #define     LOG_UserFormula17ActiveShift 7
-#define LOG_UserFormula18                       3378      // char*, 99 Byte
-#define LOG_UserFormula18Active                 3477      // 1 Bit, Bit 7
+#define LOG_UserFormula18                       3382      // char*, 99 Byte
+#define LOG_UserFormula18Active                 3481      // 1 Bit, Bit 7
 #define     LOG_UserFormula18ActiveMask 0x80
 #define     LOG_UserFormula18ActiveShift 7
-#define LOG_UserFormula19                       3478      // char*, 99 Byte
-#define LOG_UserFormula19Active                 3577      // 1 Bit, Bit 7
+#define LOG_UserFormula19                       3482      // char*, 99 Byte
+#define LOG_UserFormula19Active                 3581      // 1 Bit, Bit 7
 #define     LOG_UserFormula19ActiveMask 0x80
 #define     LOG_UserFormula19ActiveShift 7
-#define LOG_UserFormula20                       3578      // char*, 99 Byte
-#define LOG_UserFormula20Active                 3677      // 1 Bit, Bit 7
+#define LOG_UserFormula20                       3582      // char*, 99 Byte
+#define LOG_UserFormula20Active                 3681      // 1 Bit, Bit 7
 #define     LOG_UserFormula20ActiveMask 0x80
 #define     LOG_UserFormula20ActiveShift 7
-#define LOG_UserFormula21                       3678      // char*, 99 Byte
-#define LOG_UserFormula21Active                 3777      // 1 Bit, Bit 7
+#define LOG_UserFormula21                       3682      // char*, 99 Byte
+#define LOG_UserFormula21Active                 3781      // 1 Bit, Bit 7
 #define     LOG_UserFormula21ActiveMask 0x80
 #define     LOG_UserFormula21ActiveShift 7
-#define LOG_UserFormula22                       3778      // char*, 99 Byte
-#define LOG_UserFormula22Active                 3877      // 1 Bit, Bit 7
+#define LOG_UserFormula22                       3782      // char*, 99 Byte
+#define LOG_UserFormula22Active                 3881      // 1 Bit, Bit 7
 #define     LOG_UserFormula22ActiveMask 0x80
 #define     LOG_UserFormula22ActiveShift 7
-#define LOG_UserFormula23                       3878      // char*, 99 Byte
-#define LOG_UserFormula23Active                 3977      // 1 Bit, Bit 7
+#define LOG_UserFormula23                       3882      // char*, 99 Byte
+#define LOG_UserFormula23Active                 3981      // 1 Bit, Bit 7
 #define     LOG_UserFormula23ActiveMask 0x80
 #define     LOG_UserFormula23ActiveShift 7
-#define LOG_UserFormula24                       3978      // char*, 99 Byte
-#define LOG_UserFormula24Active                 4077      // 1 Bit, Bit 7
+#define LOG_UserFormula24                       3982      // char*, 99 Byte
+#define LOG_UserFormula24Active                 4081      // 1 Bit, Bit 7
 #define     LOG_UserFormula24ActiveMask 0x80
 #define     LOG_UserFormula24ActiveShift 7
-#define LOG_UserFormula25                       4078      // char*, 99 Byte
-#define LOG_UserFormula25Active                 4177      // 1 Bit, Bit 7
+#define LOG_UserFormula25                       4082      // char*, 99 Byte
+#define LOG_UserFormula25Active                 4181      // 1 Bit, Bit 7
 #define     LOG_UserFormula25ActiveMask 0x80
 #define     LOG_UserFormula25ActiveShift 7
-#define LOG_UserFormula26                       4178      // char*, 99 Byte
-#define LOG_UserFormula26Active                 4277      // 1 Bit, Bit 7
+#define LOG_UserFormula26                       4182      // char*, 99 Byte
+#define LOG_UserFormula26Active                 4281      // 1 Bit, Bit 7
 #define     LOG_UserFormula26ActiveMask 0x80
 #define     LOG_UserFormula26ActiveShift 7
-#define LOG_UserFormula27                       4278      // char*, 99 Byte
-#define LOG_UserFormula27Active                 4377      // 1 Bit, Bit 7
+#define LOG_UserFormula27                       4282      // char*, 99 Byte
+#define LOG_UserFormula27Active                 4381      // 1 Bit, Bit 7
 #define     LOG_UserFormula27ActiveMask 0x80
 #define     LOG_UserFormula27ActiveShift 7
-#define LOG_UserFormula28                       4378      // char*, 99 Byte
-#define LOG_UserFormula28Active                 4477      // 1 Bit, Bit 7
+#define LOG_UserFormula28                       4382      // char*, 99 Byte
+#define LOG_UserFormula28Active                 4481      // 1 Bit, Bit 7
 #define     LOG_UserFormula28ActiveMask 0x80
 #define     LOG_UserFormula28ActiveShift 7
-#define LOG_UserFormula29                       4478      // char*, 99 Byte
-#define LOG_UserFormula29Active                 4577      // 1 Bit, Bit 7
+#define LOG_UserFormula29                       4482      // char*, 99 Byte
+#define LOG_UserFormula29Active                 4581      // 1 Bit, Bit 7
 #define     LOG_UserFormula29ActiveMask 0x80
 #define     LOG_UserFormula29ActiveShift 7
-#define LOG_UserFormula30                       4578      // char*, 99 Byte
-#define LOG_UserFormula30Active                 4677      // 1 Bit, Bit 7
+#define LOG_UserFormula30                       4582      // char*, 99 Byte
+#define LOG_UserFormula30Active                 4681      // 1 Bit, Bit 7
 #define     LOG_UserFormula30ActiveMask 0x80
 #define     LOG_UserFormula30ActiveShift 7
 
@@ -2197,7 +2232,7 @@
 #define LOG_ChannelCount 99
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 4678
+#define LOG_ParamBlockOffset 4682
 #define LOG_ParamBlockSize 85
 #define LOG_ParamCalcIndex(index) (index + LOG_ParamBlockOffset + _channelIndex * LOG_ParamBlockSize)
 
@@ -4062,8 +4097,18 @@
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 13093
+#define BASE_KommentarModuleParamOffset 13097
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 
 
+#ifdef MAIN_FirmwareRevision
+#ifndef FIRMWARE_REVISION
+#define FIRMWARE_REVISION MAIN_FirmwareRevision
+#endif
+#endif
+#ifdef MAIN_FirmwareName
+#ifndef FIRMWARE_NAME
+#define FIRMWARE_NAME MAIN_FirmwareName
+#endif
+#endif

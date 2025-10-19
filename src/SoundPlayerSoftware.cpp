@@ -51,8 +51,17 @@ void SoundPlayerSoftware::playNextPlay()
     _audioOutput->SetVolume(_nextPlay.volume);
 
     // powerOn();
-
-    if (_audioGenerator != nullptr) free(_audioGenerator);
+    logInfoP("--- playNextPlay %i", _nextPlay.file);
+    if (_audioGenerator != nullptr)
+    {
+        free(_audioGenerator);
+        _audioGenerator = nullptr;
+    }
+    if (_audioSource != nullptr)
+    {
+        free(_audioSource);
+        _audioSource = nullptr;
+    }
 
     // Demo
     if (_nextPlay.file == 10000)
@@ -88,19 +97,21 @@ void SoundPlayerSoftware::playNextPlay()
         if (findFile(_nextPlay.file, name))
         {
             logInfoP("File %s found for sound %i", name, _nextPlay.file);
+            _audioSource = new AudioFileSourceLittleFS(name);
         }
         else
         {
             logErrorP("No file found for sound %i", _nextPlay.file);
         }
-        _audioSource = new AudioFileSourceLittleFS(name);
 
 #ifdef OPENKNX_DEBUG
         // currentAudioGenerator->RegisterStatusCB(SoundPlayerSoftware::callbackStatus, (void *)"");
 #endif
     }
 
-    set_sys_clock_khz(160000, true);
+    if(_audioSource == nullptr) return;
+
+    set_sys_clock_khz(200000, true);
     if (_audioGenerator != nullptr)
         _audioGenerator->begin(_audioSource, _audioOutput);
 }
@@ -176,7 +187,7 @@ void SoundPlayerSoftware::stopCurrentPlay()
 
 void SoundPlayerSoftware::processStatusStopped()
 {
-    set_sys_clock_khz(133000, true);
+    set_sys_clock_khz(F_CPU / 1000, true);
     SoundPlayer::processStatusStopped();
     // powerOff();
 }

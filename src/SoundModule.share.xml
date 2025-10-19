@@ -26,11 +26,10 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
-                  <Enumeration Text="Externes KO" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang A" Value="41" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang B" Value="42" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang C" Value="43" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang D" Value="44" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang A" Value="41" Id="%ENID%" DisplayOrder="1" />
+                  <Enumeration Text="Binäreingang B" Value="42" Id="%ENID%" DisplayOrder="2" />
+                  <Enumeration Text="Binäreingang C" Value="43" Id="%ENID%" DisplayOrder="3" />
+                  <Enumeration Text="Binäreingang D" Value="44" Id="%ENID%" DisplayOrder="4" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SOMControl" Name="SOMControl">

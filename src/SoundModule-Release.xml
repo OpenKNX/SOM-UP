@@ -7,8 +7,9 @@
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x28"
-    ApplicationVersion="1.1"
-    ReplacesVersions="1.0 0.12"
+    ApplicationVersion="1.2.0"
+    UpdateLibraryJson="true"
+    ReplacesVersions="1.1 1.0 0.12"
     ApplicationRevision="0"
     ProductName="Soundmodul"
     BusCurrent="30"
@@ -18,7 +19,7 @@
 
   <op:define prefix="BASE" ModuleType="10"
     share="../lib/OGM-Common/src/Common.share.xml">
-    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.4" /> 
+    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.5" /> 
   </op:define>
 
   <op:define prefix="UCT" ModuleType="19"
@@ -29,7 +30,8 @@
   <op:define prefix="SOM" ModuleType="20"
     share="SoundModule.share.xml"
     template="SoundModule.templ.xml"
-    NumChannels="10" KoOffset="50" />
+    NumChannels="10" KoOffset="50"
+    useApplicationVersion="true" />
 
   <op:define prefix="BI" ModuleType="40"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"

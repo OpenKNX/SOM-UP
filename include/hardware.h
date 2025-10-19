@@ -1,8 +1,6 @@
 #pragma once
 #include "HardwareConfig.h"
 
-#define FIRMWARE_NAME "Soundmodul"
-
 #define OPENKNX_BI_PULSE_PAUSE_TIME 5  // MS
 #define OPENKNX_BI_PULSE_WAIT_TIME 250 // US
 
