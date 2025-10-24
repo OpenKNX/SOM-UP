@@ -7,7 +7,7 @@
   <op:ETS
     OpenKnxId="0xA2"
     ApplicationNumber="0x28"
-    ApplicationVersion="1.2.0"
+    ApplicationVersion="1.2.3"
     UpdateLibraryJson="true"
     ReplacesVersions="1.1 1.0 0.12"
     ApplicationRevision="0"
